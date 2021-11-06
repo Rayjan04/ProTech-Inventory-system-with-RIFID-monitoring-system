@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shorcut icon" type="image" href="img/logo.jpg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin - Product List</title>
+
+   <!-- DataTables -->
+   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="css/adminlte.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script src="logout.js"></script>
+</head>
+
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <h5 onload="RealtimeClocks()" id="Time" class="nav-link"></h5>
+      </li>
+    
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+     
+
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span >0</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-header">No Notifications</span>
+          <div class="dropdown-divider"></div>
+        
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <!-- logout Button-->
+      <li class="logout">
+        <a class="nav-link"  role="button">
+          <button onclick="logout()" class="btn btn-default btn-sm">Logout</button>
+        </a>
+      </li>
+
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="img/logo.jpg"  class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">ProTech Admin</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="img/jorge_user.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Admin</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Module
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Admin.html" class="nav-link a">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+
+                  <!--Category -->
+             <li class="nav-item">
+              <a href="Category.html" class="nav-link">
+                <i class="fas fa-list"></i>
+                <p>Category</p>
+              </a>
+            </li>
+              <!--Category-->
+
+              
+            <!--Manufacturers-->
+            <li class="nav-item menu">
+              <a href="#" class="nav-link  ">
+                <i class="fas fa-city"></i>
+                <p>
+                  Client
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="Manufacture_Info.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Manage Client</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="add_Manufacture.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Client</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--Manufacturers-->
+
+            <!--Product-->
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link active ">
+                <i class="fas fa-boxes"></i>
+                <p>
+                  Products
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item ">
+                  <a href="#" class="nav-link active ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Manage Products</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="Add_product.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Products</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+             <!--Product-->
+
+             <!--Tool-->
+            <li class="nav-item menu">
+              <a href="#" class="nav-link ">
+                <i class="fas fa-tools"></i>
+                <p>
+                  Tools
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="Tool_List.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tool List</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="Add_tool.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add tool</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+             <!--Tool-->
+
+           
+                         <!--Employee Masterlist-->
+                         <li class="nav-item">
+                          <a href="Employee_Masterlist.html" class="nav-link ">
+                            <i class="fas fa-id-card"></i>
+                            <p>
+                              Manage RFID
+                             
+                            </p>
+                          </a>
+                          
+                        </li>
+
+              
+
+                  <!--Manage Account-->
+                  <li class="nav-item menu">
+                    <a href="#" class="nav-link ">
+                      <i class="fas fa-user-circle"></i>
+                      <p>
+                        User Management
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="#" class="nav-link ">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Manage User</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="CustodianAccount.html" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Add Account</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                   <!--Manage Account-->
+
+                      <!--Trash-->
+                      <li class="nav-item menu">
+                        <a href="#" class="nav-link">
+                          <i class="fas fa-trash"></i>
+                          <p>
+                            Archiving
+                            <i class="right fas fa-angle-left"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="Trash.html" class="nav-link  ">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Product</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="Trash_Manufacture.html" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Client</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="Archive_Employee.html" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Employee</p>
+                              </a>
+                            </li>
+                        </ul>
+                      </li>
+                      <!--Trash-->
+      
+               <!--calendar-->
+                <li class="nav-item">
+                  <a href="Calendar.html" class="nav-link">
+                    <i class="nav-icon far fa-calendar-alt"></i>
+                    <p>Calendar</p>
+                  </a>
+                </li>
+                <!--calendar-->
+
+               <!--reports-->
+               <li class="nav-item">
+                <a href="Report.html" class="nav-link">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>Reports</p>
+                </a>
+              </li>
+                <!--reports-->
+
+               
+
+
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+      <!--sidemenu-->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+       <!-- <h1 style="color: red;">*Managed Product module is not working properly. it will be updated soon!*</h1>-->  
+        </div>
+  </section>
+              
+<!-- Main Content-->
+ <!-- Main Content-->
+
+<section class="content" id = "sample">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+
+            <!--Buttons-->
+            
+             
+          <!-- /.card-header -->
+          <div >
+          <table class="table text-nowrap table-striped table-bordered table-sm"  id="table" width="100%">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th> Batch#</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Manufacturer</th>
+                <th>Supply date</th>
+                <th>Expiration</th>
+                <th>Unit Per Box</th>
+                <th>Boxes</th>
+                <th>Total Qty</th>
+                <th>Status</th>
+                <th >Action</th>
+               </tr>   
+            </thead> 
+            <tbody id="tbody">
+           
+             <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+              <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+              <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+           
+    
+            </tbody>
+
+      </table>
+    </div>
+      
+      </div>
+     
+          <!-- /.card-body -->
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+
+<!-----------------------------------------------------------------Edit Confirmation------------------------------------------------------>
+<div class="modal fade" id="EditConfirmation">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="text-align: center;">Confirm</h4>
+        
+      </div>
+            <div class="modal-body">
+              <p>Are you sure you want to Edit this item ?</p>
+            </div>
+
+      <div class="modal-footer justify-content-between">
+        <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button onclick="Confirm()" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+        
+   
+
+     <!---------------------------------------------------------Delete Confirmation ------------------------------->
+     <div class="modal fade" id="modal-danger">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Delete</h4> 
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete this item ?</p>
+          </div>       
+          <div class="modal-footer justify-content-between">
+            <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button onclick="Delete()" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+<!------------------------------------------------------------Edit Modal------------------------------------------------->
+
+<div class="modal fade" id="Edit">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Products</h4>
+      </div>
+      
+      <div class="card-body">
+        <form id="quickForm1" >
+
+          <div class="row">
+
+          <div class="col-6">
+            <div class="form-group">  
+              <label for="Batch">Batch number</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker" >
+                  <div class="input-group-text"><i class="fas fa-hashtag"></i></div>
+              </div>
+                <input type="number" name="Batch" class="form-control" id="Batch1"  disabled >
+                </div> 
+            </div>
+            </div>
+            
+             
+            <div class="col-6">
+               <div class="form-group">
+                  <label class="selectpicker" for="exampleInputPassword1">Product Category</label>
+               <select id="category" onchange="run1()" class="form-control select2" style="width: 100%;">
+                         
+                </select>
+
+            </div>
+              </div>
+         
+
+            </div>
+        
+          <!---------------------------------------------------------------------------------------------------->  
+
+         <div class="row">  
+             <div class="col-6">
+               <div class="form-group">
+            <label for="exampleInputPassword1">Product Brand</label>
+            <div class="input-group inputdefault">
+              <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+              
+            </div>
+            <select id="product" onchange="run3()" class="form-control select2" style="width: 100%;">
+              <option value="" >----Select Product Brand----</option> 
+              </select>
+           
+            <datalist id="browsers"></datalist>
+          </div>
+          </div>
+          </div>
+
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Manufacturer</label>
+              <div class="input-group inputdefault">
+              <select id="manufacturer" onchange="run2()" class="form-control select2" style="width: 100%;">
+             
+                </select>
+            </div>               
+          </div>
+          </div>
+          </div>
+       <!---------------------------------------------------------------------------------------------------->
+          
+       <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+              <label for="exampleInputPassword1">Supply Date</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+              </div>
+            <input type="date" required=""  class="form-control" id="Date1" >
+          </div>
+           </div>
+
+        </div>
+
+        <div class="col-6">
+          <div class="form-group">
+           <label for="exampleInputPassword1">Expiration Date</label>
+            <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+              </div>
+            <input  type="date" name="Exdate"required="" type="text"class="form-control" id="Exdate1" placeholder="dd/mm/yyyy"> 
+          </div>
+        </div>
+        </div>
+        </div>
+
+        
+        <!---------------------------------------------------------------------------------------------------->
+             
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Unit per Box</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fas fa-boxes"></i></div>
+              </div>
+            <input type="number" name="Pcs" required="" class="form-control" id="PerBox1" placeholder="0" onkeyup="Calculating1()">
+            </div>    
+          </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Number of Boxes</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fas fa-box-open"></i></div>
+              </div>
+            <input type="number" name= "Qty" required="" class="form-control" id="Box1" placeholder="0" onkeyup="Calculating()" >  
+            </div>
+              </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Total Quantity</label>
+              
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fas fa-equals"></i></div>
+              </div>
+            <input type="number" name= "Qty" required="" class="form-control" id="Total2" placeholder="0" disabled>  
+            </div>
+              </div>
+          </div>
+
+          </div>
+
+          
+          
+         
+            <div class="modal-footer justify-content-between">
+              <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              <button onclick="Checking()" class="btn btn-success" >Save Change</button>
+            </div>
+     
+
+
+     
+        <!-- /.card-body -->
+   </form>
+  </div>
+
+      
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal --> 
+
+  <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+<!--===============================Save Last==========================-->
+<input type="hidden" required="" class="form-control" id="Category2" placeholder="">
+<input type="hidden" required="" class="form-control" id="Product2" >  
+<input type="hidden" required="" class="form-control" id="Manufacture2" placeholder="Enter Manufacture">
+<input type="hidden" required="" class="form-control" id="Date2" placeholder="">
+
+<input type="hidden" required="" class="form-control" id="Exdate2" placeholder="Enter Manufacture">
+
+<input type="hidden" required="" class="form-control" id="Perbox2" placeholder="Enter Product Item">
+
+<input type="hidden" required="" class="form-control" id="Box2" placeholder="">
+
+<input type="hidden" required="" class="form-control" id="Total3" placeholder="Enter Manufacture">
+<!--=========================================================-->
+  
+  <input type="hidden" required="" class="form-control" id="Batch" >  
+  <input type="hidden" required="" class="form-control" id="Category1" placeholder="">
+
+  <input type="hidden" required="" class="form-control" id="Manufacture1" placeholder="Enter Manufacture">
+  
+  <input type="hidden" required="" class="form-control" id="Product" placeholder="Enter Product Item">
+
+  <input type="hidden" required="" class="form-control" id="Category" placeholder="">
+
+  <input type="hidden" required="" class="form-control" id="Manufacture" placeholder="Enter Manufacture">
+
+  <input type="hidden" required="" class="form-control" id="Date" placeholder="dd/mm/yyyy">
+
+  <input  type="hidden" required="" type="text"class="form-control" id="Exdate" placeholder="dd/mm/yyyy">
+
+  <input type="hidden" required="" class="form-control" id="Unit" placeholder="Unit">
+  <input type="hidden" required="" class="form-control" id="Box" placeholder="Box">
+  <input type="hidden" required="" class="form-control" id="Total1" placeholder="Tota2">
+
+ <input type="hidden" style="font-weight: bold;" class="form-control" id="status" >
+
+
+<input type="hidden" style="font-weight: bold;" class="form-control" id="total" placeholder="total" >
+  <input type="hidden" style="font-weight: bold;" class="form-control" id="available" placeholder="Available" >
+  <input type="hidden" style="font-weight: bold;" class="form-control" id="notavailable" placeholder="Available" >
+  <!------------------------------------------------------------------------------------------------->
+  <input type="hidden" style="font-weight: bold;" class="form-control" id="Status" placeholder="Available" >
+  <!-------------------------------------------------Safety Stock------------------------------>
+  <input type="hidden"  class="form-control" id="SafetyStock">
+  <input type="hidden"  class="form-control" id="MinSafetyStock">
+  <!-----------------------------------------------------Graph--------------------------------->
+  <input type="hidden"  class="form-control" id="Graph">
+
+  <input type="hidden" name="Brand" required="" class="form-control" id="Product1" placeholder="Enter Product Item" list="browsers"> 
+</div>
+</div>
+
+<!-- /.card -->
+
+
+                
+
+
+
+<!-- REQUIRED SCRIPTS -->
+
+<!--Time-->
+<script src="time.js"></script>
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jquery-validation -->
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="plugins/jquery-validation/additional-methods.min.js"></script>
+<!--datatable-->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+</body>
+<script>
+var database = firebase.database()
+//------------------------------Safety Stock value----------------
+database.ref('Safety_Stock/').on('value',function(snapshot){
+document.getElementById('SafetyStock').value = snapshot.val().SafetyStock;
+document.getElementById('MinSafetyStock').value = snapshot.val().MinSafetyStock;
+});
+//-------------------------------------------------------------
+function SafetyStockV(){
+  SafetyStock = document.getElementById('SafetyStock').value;
+  MinSafetyStock = document.getElementById('MinSafetyStock').value;
+}
+//=================================================
+database.ref('Categories').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list = '';
+         snapshot.forEach(function(data){
+            var val = data.val();
+            vehi_list += '<option value="' + val.Value + '">' + val.Value + '</option>';
+         });
+
+            $('#category').append(vehi_list);
+
+}
+});
+database.ref('Manufacture').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list1 = '';
+         snapshot.forEach(function(data){
+            var val1 = data.val();
+            vehi_list1 += '<option value="' + val1.Company_Name + '">' + val1.Company_Name + '</option>';
+         });
+
+            $('#manufacturer').append(vehi_list1);
+
+}
+});
+//--------------------------------------------------
+database.ref('ClientOfferd').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list2 = '';
+         snapshot.forEach(function(data){
+            var val2 = data.val();
+            vehi_list2 += '<option value="' + val2.value + '">' + val2.value + '</option>';
+         });
+
+            $('#product').append(vehi_list2);
+
+}
+});
+//==================================================
+  function SelectAllData(){
+    database.ref('Item').once('value',
+    function(AllRecord){
+      AllRecord.forEach(
+        function(CurrentRecord){
+          var batch = CurrentRecord.val().Batch;
+          var Category = CurrentRecord.val().Category;
+          var products = CurrentRecord.val().Brand;
+          var manufacture = CurrentRecord.val().Manufacture;
+          var supplydate = CurrentRecord.val().Date;
+          var exdate = CurrentRecord.val().Exdate;
+          var status = CurrentRecord.val().Status;
+          var PerBox = CurrentRecord.val().PerBox;
+          var Box  = CurrentRecord.val().Box;
+          var Total = CurrentRecord.val().Total;
+
+          AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,status,PerBox,Box,Total);
+        }
+      );
+    });
+  }
+ window.onload = SelectAllData;
+ var batchNumber = 0
+ function AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,status,PerBox,Box,Total){
+   var tbody = document.getElementById('tbody');
+   var trow = document.createElement('tr');
+   var td1 = document.createElement('td');
+   var td2 = document.createElement('td');
+   var td3 = document.createElement('td');
+   var td4 = document.createElement('td');
+   var td5 = document.createElement('td');
+   var td6 = document.createElement('td');
+   var td7 = document.createElement('td');
+   var td8 = document.createElement('td');
+   var td9 = document.createElement('td');
+   var td10 = document.createElement('td');
+   var td11 = document.createElement('td');
+   var td12 = document.createElement('td');
+
+
+
+   td1.innerHTML = ++ batchNumber;
+   td2.innerHTML = batch;
+   td3.innerHTML = Category;
+   td4.innerHTML = products;
+   td5.innerHTML = manufacture;
+   td6.innerHTML = supplydate;
+   td7.innerHTML = exdate;
+   td8.innerHTML = PerBox;
+   td9.innerHTML = Box;
+   td10.innerHTML = Total;
+   //------------------------------Status-----------------------------
+ SafetyStockV();
+ if(Number(SafetyStock) <= Number(Box) ){
+  td11.innerHTML = '<span id=""class="badge badge-success">' + 'In Stock' + '</span>';
+ }
+
+ if(Number(SafetyStock) >= Number(Box) ){
+  td11.innerHTML = '<span id=""class="badge badge-info">' + 'Safety Stock' + '</span>';
+ }
+
+ if(Number(MinSafetyStock) >= Number(Box) ){
+  td11.innerHTML = '<span id=""class="badge badge-warning">' + 'Critical Stock' + '</span>';
+ }
+
+ if(Box  == 0){
+  td11.innerHTML = '<span id=""class="badge badge-danger" >' + 'Out of Stock' + '</span>';
+ }
+   td12.innerHTML = '<button type="button" onclick="Edit()"  class="btn btn-success" data-toggle="modal" data-target="#Edit"><i class="far fa-edit"></i></button>  <button type="button" onclick="Open()"  class="btn btn-danger" data-toggle="modal" data-target="#modal-danger"><i class="fas fa-trash-alt"></i></button>'
+ 
+    trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);trow.appendChild(td11);trow.appendChild(td12);
+    tbody.appendChild(trow);
+ }
+
+
+ 
+
+ var BatchV, productV, ManufactureV, DateV, Exdate, StatusV;
+
+function Ready(){
+        BatchV = document.getElementById("Batch").value;
+        ProductV = document.getElementById("Product").value;
+        ManufactureV = document.getElementById("Manufacture").value;
+        DateV = document.getElementById("Date").value;
+        ExdateV = document.getElementById("Exdate").value;
+        StatusV = document.getElementById("status").value;
+        Unit = document.getElementById("Unit").value;
+        Box = document.getElementById("Box").value;
+        Total = document.getElementById("Total1").value;
+        Statuss = document.getElementById("Status").value;
+
+     
+
+}
+function Ready2(){
+          Batch1 = document.getElementById("Batch1").value;
+          Category1 = document.getElementById("Category1").value;
+          Product1 = document.getElementById("Product1").value;
+          Manufacture1 = document.getElementById("Manufacture1").value;
+          Date1 = document.getElementById("Date1").value;
+          Exdate1 = document.getElementById("Exdate1").value;
+          PerBox1 = document.getElementById("PerBox1").value;
+          Box1 = document.getElementById("Box1").value;
+          Total2 = document.getElementById("Total2").value;
+  
+}
+function LastSave(){
+          Category2 = document.getElementById("Category2").value;
+          Product2 = document.getElementById("Product2").value;
+          Manufacture2 = document.getElementById("Manufacture2").value;
+          Date2 = document.getElementById("Date2").value;
+          Exdate2 = document.getElementById("Exdate2").value;
+          PerBox2 = document.getElementById("Perbox2").value;
+          Box2 = document.getElementById("Box2").value;
+          Total3 = document.getElementById("Total3").value;
+  
+}
+  //----------------------------------Auto Total Quantity----------------------------------------------
+  function Calculating(){
+
+ 
+
+var num1 =   document.getElementById("PerBox1").value;
+var num2 = document.getElementById("Box1").value;  
+var total = num1 * num2;
+document.getElementById('Total2').value = total;
+
+}
+function Calculating1(){
+
+var num1 =   document.getElementById("PerBox1").value;
+var num2 = document.getElementById("Box1").value;  
+var total = num1 * num2;
+document.getElementById('Total2').value = total;
+
+}
+
+//=====================================================Edit Open==============================================>
+
+function Edit(){
+        var table2 = document.getElementById('table');
+      for(var b = 0; b < table2.rows.length; b++){
+
+      table2.rows[b].onclick = function(){
+            document.getElementById('Batch1').value = this.cells[1].innerHTML;
+      b1 =  document.getElementById('Category1').value = this.cells[2].innerHTML;
+      c1  = document.getElementById('Product1').value = this.cells[3].innerHTML;
+      d1 =  document.getElementById('Manufacture1').value = this.cells[4].innerHTML;
+            document.getElementById('Date1').value = this.cells[5].innerHTML;
+            document.getElementById('Exdate1').value = this.cells[6].innerHTML;
+            document.getElementById('PerBox1').value = this.cells[7].innerHTML;
+            document.getElementById('Box1').value = this.cells[8].innerHTML;
+            document.getElementById('Total2').value = this.cells[9].innerHTML;
+            document.getElementById('Status').value = this.cells[10].innerHTML;
+//------------------------------------------------------------------------------
+    $("#product").val(c1);
+    $("#category").val(b1);
+    $("#manufacturer").val(d1);
+ 
+
+           document.getElementById('Category2').value = this.cells[2].innerHTML;
+            document.getElementById('Product2').value = this.cells[3].innerHTML;
+            document.getElementById('Manufacture2').value = this.cells[4].innerHTML;
+            document.getElementById('Date2').value = this.cells[5].innerHTML;
+            document.getElementById('Exdate2').value = this.cells[6].innerHTML;
+            document.getElementById('Perbox2').value = this.cells[7].innerHTML;
+            document.getElementById('Box2').value = this.cells[8].innerHTML;
+            document.getElementById('Total3').value = this.cells[9].innerHTML;
+
+    
+      };
+      }  
+      
+//------------------------------------------------------------------------------
+  
+
+
+}
+//====================================================Checking========================================================>
+function Checking(){
+Ready2();
+LastSave();
+
+if(Product1 == "" || Date1 == "" || Exdate1 == "" || PerBox1 == "" || Box1 == "" || Total2 == 0|| Category1 == Category2 && Product1 == Product2 && Manufacture1 == Manufacture2 && Date1 == Date2 && Exdate1 == Exdate2 && PerBox1 == PerBox2 && Box1 == Box2 && Total2 == Total2){
+  if (Product1 == ""){
+
+  }
+  if(Date1 == ""){
+
+  }
+  if(Exdate1 == ""){
+
+  }
+  if(PerBox1 == 0){
+
+  }
+  if(Box1 == 0){
+   
+  }
+  if(Total2 == 0){
+    $(document).Toasts('create',{
+         class: 'bg-danger',
+         body: 'Cannot Edit this batch because Quantity is not Valid',
+         title: '<h5><i class="fas fa-times"></i> Error  </h5>',
+         autohide: true,
+         delay: 5000,
+         }) 
+    
+}
+if(Category1 == Category2 && Product1 == Product2 && Manufacture1 == Manufacture2 && Date1 == Date2 && Exdate1 == Exdate2 && PerBox1 == PerBox2 && Box1 == Box2 && Total2 == Total2){
+  
+}
+}
+
+
+
+else{
+  $('#EditConfirmation').modal('show');
+  $('#Edit').modal('hide');
+}
+}
+//====================================================Edit Saving========================================================>
+function Confirm(){
+ Ready2();
+ Ready();
+ $('#EditConfirmation').modal('hide');
+
+
+ if(Statuss != '<span id="" class="badge badge-danger">Out of Stock</span>'){
+  database.ref('Item/' + Batch1).update({
+            Brand : Product1,
+            Category : Category1,
+            Manufacture : Manufacture1,
+            Date : Date1,
+            Exdate: Exdate1,
+            PerBox: PerBox1,
+            Box : Box1,
+            Total : Total2,
+            })
+ }
+ if(Statuss == '<span id="" class="badge badge-danger">Out of Stock</span>'){
+  database.ref('Item/' + Batch1).update({
+            Brand : Product1,
+            Category : Category1,
+            Manufacture : Manufacture1,
+            Date : Date1,
+            Exdate: Exdate1,
+            PerBox: PerBox1,
+            Box : Box1,
+            Total : Total2,
+            
+            })
+            //update dashboard
+                     NotavailableItem = --notavailable;
+                    AvailableItem = ++available;
+
+                    database.ref('Dashboard/').update({
+                    NotAvailable_Item: NotavailableItem,
+                    Available_Item: AvailableItem
+                    })
+ }
+
+
+
+            
+           // notification 
+           $(document).Toasts('create', {
+                      class: 'bg-success',
+                    body: 'The Batch '+ Batch1 +' has been successfuly Change',
+                    title: '<h5><i class="far fa-check-circle"></i> Success </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    })
+                    setTimeout(function(){
+                     window.location.reload();
+                     },2000) 
+
+
+}
+
+
+//====================================================start load=====================================
+database.ref('Dashboard/').on('value',function(snapshot){
+                   total = document.getElementById('total').value= snapshot.val().Total_Item;
+                   available = document.getElementById('available').value= snapshot.val().Available_Item;
+                   notavailable = document.getElementById('notavailable').value= snapshot.val().NotAvailable_Item;
+                    });
+
+//========================================================delete=====================================
+function Open(){
+  Ready();
+
+var table1 = document.getElementById('table');
+for(var i = 0; i < table1.rows.length; i++){
+
+                        table1.rows[i].onclick = function(){
+                        a = document.getElementById('Batch').value = this.cells[1].innerHTML;
+                        b = document.getElementById('Category').value= this.cells[2].innerHTML;
+                        c = document.getElementById('Product').value= this.cells[3].innerHTML;
+                        d = document.getElementById('Manufacture').value= this.cells[4].innerHTML;
+                        e = document.getElementById('Date').value= this.cells[5].innerHTML;
+                        f = document.getElementById('Exdate').value= this.cells[6].innerHTML;
+                        g = document.getElementById('Unit').value= this.cells[7].innerHTML;
+                        h = document.getElementById('Box').value= this.cells[8].innerHTML;
+                        ii = document.getElementById('Total1').value= this.cells[9].innerHTML;
+                        j = document.getElementById('status').value= this.cells[10].innerHTML;
+                        database.ref('Item/'+ a ).on('value',function(snapshot){
+                        r = document.getElementById('Graph').value= snapshot.val().GraphRelease;
+                        });
+
+
+};
+}
+}
+
+function Delete(){
+  Ready();
+  $('#modal-danger').modal('hide');
+  database.ref('Deleted_Item/' + a).set({
+                          Batch : a,
+                          Category : b,
+                          Brand : c,
+                          Manufacture : d,
+                          Date : e,
+                          Exdate: f,     
+                          PerBox : g,
+                          Box : h,
+                          Total: ii,
+                          GraphRelease : r
+            });  
+
+            //Delete total item
+                    
+                if(j == '<span id="" class="badge badge-info">Safety Stock</span>' || j== '<span id="" class="badge badge-warning">Critical Stock</span>' || j == '<span id="" class="badge badge-success">In Stock</span>'){
+                    TotalItem =  --total;
+                    AvailableItem = --available;
+
+                    database.ref('Dashboard/').update({
+                    Total_Item : TotalItem,
+                    Available_Item: AvailableItem
+                    })
+                    
+                    }
+                    if(j == '<span id="" class="badge badge-danger">Out of Stock</span>'){
+                     TotalItem = --total;
+                     NotavailableItem = --notavailable;
+
+                     database.ref('Dashboard/').update({
+                      Total_Item : TotalItem,
+                      NotAvailable_Item: NotavailableItem
+                       })
+                     }
+
+            database.ref('Item/' + a).remove();
+            
+            // notification 
+            $(document).Toasts('create', {
+                      class: 'bg-success',
+                    body: 'The Product '+ a +' has been successfuly delete',
+                    title: '<h5><i class="far fa-check-circle"></i> Success </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    })
+                    setTimeout(function(){
+                     window.location.reload();
+                     },2000) 
+
+
+}
+
+
+function logout()
+{
+    firebase.auth().signOut().then(() => {
+    // Sign-out successful.
+  }).catch((error) => {
+    // An error happened.
+  });
+
+
+}
+firebase.auth().onAuthStateChanged(function(user) {
+    var Not =document.getElementById("not-login")
+    var yes =document.getElementById("login")
+    if (user) {
+    
+    }
+     else {
+       window.location.href ="index.html";
+   
+    }
+  });
+
+  //========================================Select Function=========================================
+  function run1() {
+                        document.getElementById("Category1").value = document.getElementById("category").value;
+                
+                                  
+              }
+                   function run2() {
+                        document.getElementById("Manufacture1").value = document.getElementById("manufacturer").value;
+                        
+              }
+              function run3() {
+                        document.getElementById("Product1").value = document.getElementById("product").value;
+                        
+              }
+            
+
+            
+</script>
+ 
+<script type="text/javascript">
+  //Search function
+  
+  $(document).ready(function(){
+  $('#search').keyup(function(){
+    search_table($(this).val());
+  })
+   function search_table(value){
+     $('#tbody tr').each(function(){
+       var found = 'false';
+       $(this).each(function(){
+         if($(this).text().toLowerCase().indexOf(value.toLowerCase())>=0)
+         {
+           found = 'true';
+         }
+       });
+       if(found == 'true'){
+         $(this).show();
+         //alert('g')
+       }
+       else{
+        $(this).hide();
+       }
+     });
+   }
+  
+  });
+  </script>
+  <script>
+   setTimeout(function(){
+        $(document).ready(function () {
+          $('#table').DataTable({
+          "scrollX": true,
+          "scrollY": 400,
+          });
+          $('.dataTables_length').addClass('bs-select');
+          });    
+    },3000)
+      
+    </script>
+    
+<script>
+ //<!------------------------------------------------------- Edit Validation Script------------------------------------------------>
+
+ $(function () {
+  $.validator.setDefaults({
+    submitHandler: function () {
+      if(Total2 == 0){
+    document.getElementById("PerBox1").className = "form-control is-invalid";
+    document.getElementById("Box1").className = "form-control is-invalid";
+  }
+                  
+ }
+  });
+  $('#quickForm1').validate({
+    //rules
+    rules: {
+      Batch: {
+        required: true,
+        
+      },
+    
+    },
+    //message
+    messages: {
+      Batch: {
+        required: "Please enter a Category",
+      },
+     
+    },
+    //error
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+});
+</script>
+</html>

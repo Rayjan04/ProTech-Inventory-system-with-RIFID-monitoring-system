@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shorcut icon" type="image" href="img/logo.jpg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin - Employee Masterlist</title>
+ 
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="css/adminlte.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+
+  <script src="logout.js"></script>
+</head>
+
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <h5 id="Time" class="nav-link"></h5>
+      </li>
+   
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span >0</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-header">No Notifications</span>
+          <div class="dropdown-divider"></div>
+        
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <!-- logout Button-->
+      <li class="logout">
+        <a class="nav-link"   role="button">
+          <button onclick="logout()" class="btn btn-default btn-sm">Logout</button>
+        </a>
+      </li>
+
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="img/logo.jpg"  class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">ProTech Admin</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="img/jorge_user.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Admin</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Module
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Admin.html" class="nav-link a">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+
+              <!--Category -->
+             <li class="nav-item">
+              <a href="Category.html" class="nav-link">
+                <i class="fas fa-list"></i>
+                <p>Category</p>
+              </a>
+            </li>
+              <!--Category-->
+
+
+            <!--Manufacturers-->
+            <li class="nav-item menu">
+              <a href="#" class="nav-link  ">
+                <i class="fas fa-city"></i>
+                <p>
+                  Client
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="Manufacture_Info.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Manage Client</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="add_Manufacture.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Client</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--Manufacturers-->
+
+             <!--Product-->
+             <li class="nav-item menu">
+              <a href="#" class="nav-link ">
+                <i class="fas fa-boxes"></i>
+                <p>
+                  Products
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="Manage_Product.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Manage Products</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="Add_product.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Products</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+             <!--Product-->
+
+             <!--Tool-->
+            <li class="nav-item menu">
+              <a href="#" class="nav-link ">
+                <i class="fas fa-tools"></i>
+                <p>
+                  Tools
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="Tool_List.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tool List</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="Add_tool.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add tool</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+             <!--Tool-->
+
+               <!--Employee Masterlist-->
+               <li class="nav-item">
+                <a href="#" class="nav-link active ">
+                  <i class="fas fa-id-card"></i>
+                  <p>
+                    Manage RFID
+                   
+                  </p>
+                </a>
+                
+              </li>
+              
+
+               
+
+               <!--Manage Account-->
+               <li class="nav-item menu">
+                <a href="#" class="nav-link ">
+                  <i class="fas fa-user-circle"></i>
+                  <p>
+                    Manage Account
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link ">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Admin Account</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="CustodianAccount.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Custodian Account</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+               <!--Manage Account-->
+
+                        <!--Trash-->
+                        <li class="nav-item menu">
+                          <a href="#" class="nav-link">
+                            <i class="fas fa-trash"></i>
+                            <p>
+                              Archiving
+                              <i class="right fas fa-angle-left"></i>
+                            </p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                              <a href="Trash.html" class="nav-link  ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Product</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="Trash_Manufacture.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Client</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Archive_Employee.html" class="nav-link ">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Employee</p>
+                                </a>
+                              </li>
+                          </ul>
+                        </li>
+                        <!--Trash-->
+        
+
+               <!--calendar-->
+                <li class="nav-item">
+                  <a href="Calendar.html" class="nav-link">
+                    <i class="nav-icon far fa-calendar-alt"></i>
+                    <p>Calendar</p>
+                  </a>
+                </li>
+                <!--calendar-->
+
+               <!--reports-->
+               <li class="nav-item">
+                <a href="Report.html" class="nav-link">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>Reports</p>
+                </a>
+              </li>
+                <!--reports-->
+
+               
+
+
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+      <!--sidemenu-->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+
+      <div class="form-group float-right">  
+         <button class="btn btn-secondary " data-toggle="modal" data-target="#Position" onclick="Position()">Create Position</button>
+        <button class="btn btn-success " data-toggle="modal" data-target="#CreateNew" onclick="Create()">Create New </button>
+     
+      </div>
+      
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>RFID Masterlist</h1>
+        </div>
+  </section>
+              
+
+
+              <!-- Main Content-->
+              <section class="content">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-header">
+                        <!-- /.card-header -->
+                      
+                        
+                        <table class="table text-nowrap table-striped table-bordered table-sm"  id="table" width="100%">
+                          <thead>
+                            <tr>
+                              <th>RFID Tag</th>
+                              <th>LastName</th>
+                              <th>FirstName</th>
+                              <th>Mobile Number</th>
+                              <th>Position</th>
+                              <th>Birth Date</th>
+                              <th>Address</th>  
+                              <th>Email</th>                           
+                              <th >Action</th>
+                             </tr>   
+                          </thead> 
+                          <tbody id="tbody">
+                         
+                           <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+                            <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+                            <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+                         
+                  
+                          </tbody>
+              
+                    </table>
+                        <!-- /.card-body -->
+                      </div>
+                      
+<!-------------------------------------------------Create new Position------------------------------------>                             
+<div class="modal fade" id="Position">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!--ditolalagay-->
+     
+        <div class="card-header">
+          <h3 class="card-title"></h3>
+          <h1 style="text-align: center;"><i class="far fa-id-badge"></i></i></i></h1>
+        </div>
+        <!-- /.card-header -->
+
+        <!-- form start -->
+        <div class="card-body">
+          <form id="quickForm1" >
+  
+            
+  
+            
+              <div class="form-group">  
+                <label for="Batch">Add Position</label>
+                <div class="input-group inputdefault">
+                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker" >
+                    <div class="input-group-text"><i class="fas fa-id-card"></i></div>
+                </div>
+                  <input type="text" name="Position" class="form-control" id="Position1">
+                  </div> 
+              </div>
+              
+              <table class="table text-nowrap table-striped table-bordered table-sm"  id="table1" width="100%">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Positions</th>
+                    <th>Action</th>
+                   </tr>   
+                </thead> 
+                <tbody id="tbody1">
+               
+                 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+                  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+                  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+               
+        
+                </tbody>
+    
+          </table>
+            <!---------------------------------------------------------------------------------------------------->  
+  
+              
+              <div class="modal-footer justify-content-between">
+                <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button onclick="SavePosition()" class="btn btn-success">Add</button>
+              </div>
+       
+  
+  
+       
+          <!-- /.card-body -->
+     </form>
+    </div>
+  
+          
+        <!-- /.modal-content -->
+      </div>
+    </div>
+    </div>
+
+<!----------------------------------------------------------Delete Position Modal--------------------------------------------------->
+
+     <div class="modal fade" id="DeletePosition">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Delete</h4> 
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete this item ?</p>
+          </div>       
+          <div class="modal-footer justify-content-between">
+            <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button onclick="DeletePos()" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+<!----------------------------------------------------------Edit Position Modal--------------------------------------------------->
+
+<div class="modal fade" id="EditPosition">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit</h4> 
+      </div>
+      <div class="modal-body">
+        <input type="text" name="Rfid" class="form-control" id="PositionEdit" >
+      </div>       
+      <div class="modal-footer justify-content-between">
+        <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button onclick="EditPos()" class="btn btn-success">Save Change</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!----------------------------------------------------------Delete Employee Modal--------------------------------------------------->
+
+<div class="modal fade" id="Confirmation">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete</h4> 
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this item ?</p>
+      </div>       
+      <div class="modal-footer justify-content-between">
+        <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button onclick="DeleteEmployee()" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+         
+<!-------------------------------------------------Edit Employee------------------------------------>                             
+<div class="modal fade" id="EditEmployee">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!--ditolalagay-->
+     
+        <div class="card-header">
+          <h3 class="card-title"></h3>
+          <h1 style="text-align: center;"><i class="fas fa-user-tie"></i></i></h1>
+
+        </div>
+        <!-- /.card-header -->
+
+        <!-- form start -->
+        <div class="card-body">
+          <form id="quickForm" >
+  
+            <div class="row">
+  
+            <div class="col-6">
+              <div class="form-group">  
+                <label for="Batch">Rfid Tag*</label>
+                <div class="input-group inputdefault">
+                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker" >
+                    <div class="input-group-text"><i class="fas fa-id-card"></i></div>
+                </div>
+                  <input type="number" name="Rfid" class="form-control" id="Rfid4"  placeholder="Scan RFID"  disabled  >
+                  </div> 
+              </div>
+              </div>
+              
+               
+              <div class="col-6">
+                 <div class="form-group">
+                    <label class="selectpicker" for="exampleInputPassword1">Position</label>
+                 <select id="position4" onchange="run1()" class="form-control select2" style="width: 100%;">
+                  <option value ="">---Select Position----</option>
+                           
+                  </select>
+  
+              </div>
+                </div>
+           
+  
+              </div>
+          
+            <!---------------------------------------------------------------------------------------------------->  
+  
+           <div class="row">  
+               <div class="col-6">
+                 <div class="form-group">
+              <label for="exampleInputPassword1">LastName</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fas fa-boxes"></i></div>
+              </div>
+              <input type="text" name="Lname" required="" class="form-control" id="LastName4" placeholder="Enter Lastname" list="browsers"> 
+              <datalist id="browsers"></datalist>
+            </div>
+            </div>
+            </div>
+  
+  
+            <div class="col-6">
+              <div class="form-group">
+                <label for="exampleInputPassword1">FirstName</label>
+                <div class="input-group inputdefault">
+                <input type="text" name="Fname" required="" class="form-control" id="FirstName4" placeholder="Enter  Firstname" list="browsers"> 
+              </div>               
+            </div>
+            </div>
+            </div>
+         <!---------------------------------------------------------------------------------------------------->
+            
+         <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Mobile Number</label>
+                <div class="input-group inputdefault">
+                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fas fa-address-book"></i></i></div>
+                </div>
+              <input type="Number" name="Number"  class="form-control" id="Mobile4" placeholder="Enter  Mobile number" >
+            </div>
+             </div>
+  
+          </div>
+  
+          <div class="col-6">
+            <div class="form-group">
+             <label for="exampleInputPassword1">Birth Date</label>
+              <div class="input-group inputdefault">
+                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+              <input  type="date" name="Exdate"required="" type="text"class="form-control" id="Bday4" placeholder="dd/mm/yyyy"> 
+            </div>
+          </div>
+          </div>
+          </div>
+  
+          
+          <!---------------------------------------------------------------------------------------------------->
+               
+          <div class="row">
+            <div class="col-7">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Email</label>
+                <div class="input-group inputdefault">
+                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fas fa-at"></i></div>
+                </div>
+              <input type="Text" name="Email" required="" class="form-control" id="Email4" placeholder="Enter Email" >
+              </div>    
+            </div>
+
+
+            </div>
+
+            <div class="col-12">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Address</label>
+                <div class="input-group inputdefault">
+                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                </div>
+              <input type="Text" name="Pcs" required="" class="form-control" id="Address4" placeholder="Enter address" >
+              </div>    
+            </div>
+
+            
+            </div>
+
+  
+      
+      
+  
+            </div>
+  
+            
+            
+           
+              <div class="modal-footer justify-content-between">
+                <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button onclick="SaveEEdit()" class="btn btn-success" id ="save4">Save</button>
+              </div>
+       
+  
+  
+       
+          <!-- /.card-body -->
+     </form>
+    </div>
+                      <!-- /.card -->
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                      </section>
+          
+<!-------------------------------------------------Create new Employee------------------------------------>                             
+              <div class="modal fade" id="CreateNew">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <!--ditolalagay-->
+                   
+                      <div class="card-header">
+                        <h3 class="card-title"></h3>
+                        <h1 style="text-align: center;"><i class="fas fa-user-tie"></i></i></h1>
+                        <div id ="note">
+                        <p style="text-align: center; color: red">*Please Scan the RFID card*</p>
+                      </div>
+                      </div>
+                      <!-- /.card-header -->
+              
+                      <!-- form start -->
+                      <div class="card-body">
+                        <form id="quickForm" >
+                
+                          <div class="row">
+                
+                          <div class="col-6">
+                            <div class="form-group">  
+                              <label for="Batch">Rfid Tag*</label>
+                              <div class="input-group inputdefault">
+                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker" >
+                                  <div class="input-group-text"><i class="fas fa-id-card"></i></div>
+                              </div>
+                                <input type="number" name="Rfid" class="form-control" id="Rfid"  placeholder="Scan RFID"  disabled  >
+                                </div> 
+                            </div>
+                            </div>
+                            
+                             
+                            <div class="col-6">
+                               <div class="form-group">
+                                  <label class="selectpicker" for="exampleInputPassword1">Position</label>
+                               <select id="position" onchange="run()" class="form-control select2" style="width: 100%;">
+                                <option value ="">---Select Position----</option>
+                                         
+                                </select>
+                
+                            </div>
+                              </div>
+                         
+                
+                            </div>
+                        
+                          <!---------------------------------------------------------------------------------------------------->  
+                
+                         <div class="row">  
+                             <div class="col-6">
+                               <div class="form-group">
+                            <label for="exampleInputPassword1">LastName</label>
+                            <div class="input-group inputdefault">
+                              <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fas fa-boxes"></i></div>
+                            </div>
+                            <input type="text" name="Lname" required="" class="form-control" id="LastName" placeholder="Enter Lastname" list="browsers"> 
+                            <datalist id="browsers"></datalist>
+                          </div>
+                          </div>
+                          </div>
+                
+                
+                          <div class="col-6">
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">FirstName</label>
+                              <div class="input-group inputdefault">
+                              <input type="text" name="Fname" required="" class="form-control" id="FirstName" placeholder="Enter  Firstname" list="browsers"> 
+                            </div>               
+                          </div>
+                          </div>
+                          </div>
+                       <!---------------------------------------------------------------------------------------------------->
+                          
+                       <div class="row">
+                        <div class="col-6">
+                          <div class="form-group">
+                              <label for="exampleInputPassword1">Mobile Number</label>
+                              <div class="input-group inputdefault">
+                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                  <div class="input-group-text"><i class="fas fa-address-book"></i></i></div>
+                              </div>
+                            <input type="Number" name="Number"  class="form-control" id="Mobile" placeholder="Enter  Mobile number" >
+                          </div>
+                           </div>
+                
+                        </div>
+                
+                        <div class="col-6">
+                          <div class="form-group">
+                           <label for="exampleInputPassword1">Birth Date</label>
+                            <div class="input-group inputdefault">
+                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                              </div>
+                            <input  type="date" name="Exdate"required="" type="text"class="form-control" id="Bday" placeholder="dd/mm/yyyy"> 
+                          </div>
+                        </div>
+                        </div>
+                        </div>
+                
+                        
+                        <!---------------------------------------------------------------------------------------------------->
+                             
+                        <div class="row">
+                          <div class="col-7">
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Email</label>
+                              <div class="input-group inputdefault">
+                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                  <div class="input-group-text"><i class="fas fa-at"></i></div>
+                              </div>
+                            <input type="Text" name="Email" required="" class="form-control" id="Email" placeholder="Enter Email" >
+                            </div>    
+                          </div>
+
+
+                          </div>
+
+                          <div class="col-12">
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Address</label>
+                              <div class="input-group inputdefault">
+                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                  <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                              </div>
+                            <input type="Text" name="Pcs" required="" class="form-control" id="Address" placeholder="Enter address" >
+                            </div>    
+                          </div>
+
+                          
+                          </div>
+
+                
+                    
+                    
+                
+                          </div>
+                
+                          
+                          
+                         
+                            <div class="modal-footer justify-content-between">
+                              <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                              <button onclick="Save()" class="btn btn-success" id ="save">Save</button>
+                            </div>
+                     
+                
+                
+                     
+                        <!-- /.card-body -->
+                   </form>
+                  </div>
+                
+                        
+                      <!-- /.modal-content -->
+                    </div>
+                  </div>
+                  </div>
+
+                            
+
+
+                  <input type="number" name="" id="CheckRfid" style="opacity: 0"> 
+                  <input type="text" name="" id="Scan"  style="opacity: 0"> 
+                  <input type="hidden" name="" id="position2"> 
+                  <input type="hidden" name="" id="position3"> 
+                  <input type="hidden" name="" id="PositionEdit1"> 
+                  <input type="hidden" name="" id="positions">
+<!----------------------------------------------------------Delete Employee-->
+                    <input type="hidden" name="" id="Rfid1"> 
+                    <input type="hidden" name="" id="position21"> 
+                    <input type="hidden" name="" id="LastName1"> 
+                    <input type="hidden" name="" id="FirstName1"> 
+                    <input type="hidden" name="" id="Mobile1"> 
+                    <input type="hidden" name="" id="Bday1"> 
+                    <input type="hidden" name="" id="Email1"> 
+                    <input type="hidden" name="" id="Address1"> 
+<!-- REQUIRED SCRIPTS -->
+
+<!--Time-->
+<script src="time.js"></script>
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jquery-validation -->
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="plugins/jquery-validation/additional-methods.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+
+<script>
+   var database = firebase.database();
+
+   function SelectAllData(){
+  database.ref('RFID').once('value',
+  function(AllRecord1){
+    AllRecord1.forEach(
+      function(CurrentRecord){
+        var Rfidv = CurrentRecord.val().RfidNum;   
+        var LastNamev = CurrentRecord.val().LastName;  
+        var FirstNamev  = CurrentRecord.val().FirstName;  
+        var Mobilev  = CurrentRecord.val().Mobile;  
+        var Positionv = CurrentRecord.val().Position;  
+        var Bdayv = CurrentRecord.val().Bday;  
+        var Addressv = CurrentRecord.val().Address;  
+        var Emailv = CurrentRecord.val().Email;  
+        AddItemsToTable1(Rfidv,LastNamev,FirstNamev,Mobilev,Positionv,Bdayv,Addressv,Emailv);
+      }
+    );
+  });
+//----------------------------------------------
+database.ref('Position').once('value',
+  function(AllRecord){
+    AllRecord.forEach(
+      function(CurrentRecord){
+        var Position = CurrentRecord.val().Value;   
+        AddItemsToTable(Position);
+      }
+    );
+  });
+
+}
+window.onload = SelectAllData;
+function AddItemsToTable1(Rfidv,LastNamev,FirstNamev,Mobilev,Positionv,Bdayv,Addressv,Emailv){
+ var tbody1 = document.getElementById('tbody');
+ var trow1 = document.createElement('tr');
+ var td11 = document.createElement('td');
+ var td21 = document.createElement('td');
+ var td31 = document.createElement('td');
+ var td41 = document.createElement('td');
+ var td51 = document.createElement('td');
+ var td61 = document.createElement('td');
+ var td71 = document.createElement('td');
+ var td81 = document.createElement('td');
+ var td91 = document.createElement('td');
+
+
+
+
+ td11.innerHTML = Rfidv;
+ td21.innerHTML = LastNamev;
+ td31.innerHTML = FirstNamev;
+ td41.innerHTML = Mobilev;
+ td51.innerHTML = Positionv;
+ td61.innerHTML = Bdayv;
+ td71.innerHTML = Addressv;
+ td81.innerHTML = Emailv;
+ td91.innerHTML = '<button type="button" onclick="EditOpen()"  class="btn btn-success" data-toggle="modal" data-target="#EditEmployee"><i class="far fa-edit"></i></button>  <button type="button" onclick="DeleteOpen()"  class="btn btn-danger" data-toggle="modal" data-target="#Confirmation"><i class="fas fa-trash-alt"></i></button>';
+
+ 
+ 
+  trow1.appendChild(td11);trow1.appendChild(td21);trow1.appendChild(td31);trow1.appendChild(td41);trow1.appendChild(td51);trow1.appendChild(td61);trow1.appendChild(td71);trow1.appendChild(td81);trow1.appendChild(td91);
+  tbody1.appendChild(trow1);
+}
+//--------------------For Position table--------------------------------
+
+var batchNumber = 0
+function AddItemsToTable(Position){
+ var tbody = document.getElementById('tbody1');
+ var trow = document.createElement('tr');
+ var td1 = document.createElement('td');
+ var td2 = document.createElement('td');
+ var td3 = document.createElement('td');
+
+
+
+ td1.innerHTML = ++ batchNumber;
+ td2.innerHTML = Position;
+ td3.innerHTML = '<button type="button" onclick="EditPosition()"  class="btn btn-success" data-toggle="modal" data-target="#EditPosition"><i class="far fa-edit"></i></button>  <button type="button" onclick="DeletePosition()"  class="btn btn-danger" data-toggle="modal" data-target="#DeletePosition"><i class="fas fa-trash-alt"></i></button>';
+
+ 
+ 
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);
+  tbody.appendChild(trow);
+}
+//---------------------------------------Select--------------
+database.ref('Position').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list = '';
+         snapshot.forEach(function(data){
+            var val = data.val();
+            vehi_list += '<option value="' + val.Value + '">' + val.Value + '</option>';
+         });
+
+            $('#position').append(vehi_list);
+
+}
+});
+//--------------------------------
+database.ref('Position').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list1 = '';
+         snapshot.forEach(function(data){
+            var val = data.val();
+            vehi_list1 += '<option value="' + val.Value + '">' + val.Value + '</option>';
+         });
+
+            $('#position4').append(vehi_list1);
+
+}
+});
+
+  //---------------------------Create Variable----------------------------
+  function Ready(){
+
+        Rfid = document.getElementById("Rfid").value;
+       Position1 = document.getElementById("position2").value;
+       LastName = document.getElementById("LastName").value;
+       FirstName = document.getElementById("FirstName").value;       
+       Mobile = document.getElementById("Mobile").value;
+       Bday = document.getElementById("Bday").value;
+       Email = document.getElementById("Email").value;
+       Address = document.getElementById("Address").value;
+       //-----------------for edit--------------
+       Rfid4 = document.getElementById("Rfid4").value;
+       Position4 = document.getElementById("positions").value;
+       LastName4 = document.getElementById("LastName4").value;
+       FirstName4 = document.getElementById("FirstName4").value;       
+       Mobile4 = document.getElementById("Mobile4").value;
+       Bday4 = document.getElementById("Bday4").value;
+       Email4 = document.getElementById("Email4").value;
+       Address4 = document.getElementById("Address4").value;
+       //---------------hide---------------
+       CheckRFID =  document.getElementById("CheckRfid").value;
+       //-------------Position
+       Position =  document.getElementById("Position1").value;
+       //---------------positin Edit--------------
+       PostEdit =  document.getElementById("PositionEdit").value;
+       PostEdit1 =  document.getElementById("PositionEdit1").value;
+       
+}
+//---------------------------Scan Rfid----------------------------------
+function auto1(){
+             Ready();
+                database.ref('RFID/'+ Rfid ).on('value',function(snapshot){
+                check = document.getElementById('CheckRfid').value= snapshot.val().RfidNum;
+                document.getElementById('LastName').value= snapshot.val().LastName;
+                document.getElementById('FirstName').value= snapshot.val().FirstName;
+                document.getElementById('Mobile').value= snapshot.val().Mobile;
+                document.getElementById('Bday').value= snapshot.val().Bday;
+                document.getElementById('Email').value= snapshot.val().Email;
+           p =  document.getElementById('Position').value= snapshot.val().Position;
+                document.getElementById('Address').value= snapshot.val().Address;
+                $("#position").val(p);
+              });     
+                             if(Rfid == CheckRFID){    
+
+                                    $('#note').show();
+                                    document.getElementById("note").innerHTML =  '<p style="text-align: center; color: red">*Please Scan Available RFID card*</p>';  
+                                    document.getElementById("Rfid").className = "form-control is-invalid";
+                                    $("#position").attr("disabled", true);
+                                    $("#LastName").attr("disabled", true);
+                                    $("#FirstName").attr("disabled", true);
+                                    $("#Mobile").attr("disabled", true);
+                                    $("#Bday").attr("disabled", true);
+                                    $("#Email").attr("disabled", true);
+                                    $("#Address").attr("disabled", true);
+                                    $("#save").attr("disabled", true);
+                                  
+                                  }
+                            if(Rfid != CheckRFID){  
+                                    
+                              document.getElementById("note").innerHTML =    '<p style="text-align: center; color: green">*This RFID card is Available*</p>';           
+                              document.getElementById("Rfid").className = "form-control invalid";
+                                    $("#position").attr("disabled", false);
+                                    $("#LastName").attr("disabled", false);
+                                    $("#FirstName").attr("disabled", false);
+                                    $("#Mobile").attr("disabled", false);
+                                    $("#Bday").attr("disabled", false);
+                                    $("#Email").attr("disabled", false);
+                                    $("#Address").attr("disabled", false);
+                                    $("#save").attr("disabled", false);
+                                  
+                                    
+                                  }
+                                  
+                       
+                                
+                        }
+ setInterval(auto1, 200);
+//--------------------------------------Rfid For Focus--------------------------
+
+//---------------------------Create Function----------------------------------
+function Create(){
+
+                                 
+ 
+                    //focus to rfid
+                    setTimeout(function(){
+                     $('#Scan').focus();
+                     },200)
+
+                     $('#Scan').keydown(function(){
+                    if($(this).val().length >= 10){
+                      Ready();
+
+                     
+                      document.getElementById('Rfid').value = document.getElementById('Scan').value;
+                      
+                             
+
+                                    document.getElementById('LastName').value= "";
+                                    document.getElementById('FirstName').value= "";
+                                    document.getElementById('Mobile').value= "";
+                                    document.getElementById('Bday').value= "";
+                                    document.getElementById('Email').value= "";
+                                    document.getElementById('Position').value= "";
+                                    document.getElementById('Address').value= "";
+                                     $(this).val('');
+                    }
+                  });
+                  
+               
+}
+//----------------------------Save function---------------------------
+function Save(){
+    Ready();
+                  if(Rfid == ""){
+                    document.getElementById("Rfid").className = "form-control is-invalid";
+                    $('#Scan').focus();
+                    return false;
+                  }
+                  if(LastName == ""){
+                   
+                    return false;
+                  }
+                  if(FirstName == ""){
+                    
+                    return false;
+                  }
+                  if(Mobile == ""){
+                    
+                    return false;
+                  }
+                  if(Bday == ""){
+                    
+                    return false;
+                  }
+                  if(Email == ""){
+                   
+                    return false;
+                  }
+                  if(Address == ""){
+                    
+                    return false;
+                  }
+                  if(Position1 == ""){
+                    
+                    return false;
+                  }
+                  
+        else{
+          Ready();
+            
+                database.ref('RFID/'+ Rfid).set({
+                  RfidNum: Rfid,
+                  FirstName: FirstName,
+                  LastName: LastName,
+                  Mobile : Mobile,
+                  Position : Position1,
+                  Bday : Bday,
+                  Email: Email,
+                  Address: Address,
+
+                 })
+                 $(document).Toasts('create', {
+                    class: 'bg-success',
+                    body: 'Sucessfully Create',
+                    title: '<h5><i class="far fa-check-circle"></i> Success </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    }) 
+
+                    setTimeout(function(){
+                     window.location.reload();
+                     },2000)
+        }
+                
+
+}
+//------------------------------------------------Function for SavePosition------------------------
+function SavePosition(){
+      Ready();
+          if(Position == ""){
+          
+            return false;
+          }
+
+          else{
+                    $(document).Toasts('create', {
+                    class: 'bg-success',
+                    body: 'Sucessfully Create',
+                    title: '<h5><i class="far fa-check-circle"></i> Success </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    }) 
+
+                     database.ref('Position/'+ Position).set({
+                        Value: Position
+                        })
+              
+                    
+
+                    setTimeout(function(){
+                     window.location.reload();
+                     },2000)
+                            
+          }
+}
+//-------------------------------------------Delete function for Delete Employee---------------------
+function DeleteOpen(){
+            var table2 = document.getElementById('table');
+            for(var i = 0; i < table2.rows.length; i++){
+
+            table2.rows[i].onclick = function(){
+           
+          A1 =  document.getElementById("Rfid1").value = this.cells[0].innerHTML;
+          B1 =  document.getElementById("position21").value = this.cells[4].innerHTML;
+          C1 =  document.getElementById("LastName1").value = this.cells[1].innerHTML;
+          D1 =  document.getElementById("FirstName1").value = this.cells[2].innerHTML;       
+          E1 =  document.getElementById("Mobile1").value = this.cells[3].innerHTML;
+          F1 =  document.getElementById("Bday1").value = this.cells[5].innerHTML;
+          G1 =  document.getElementById("Email1").value = this.cells[6].innerHTML;
+          H1 =  document.getElementById("Address1").value = this.cells[7].innerHTML;
+        };
+      }  
+    }
+//------------------------------------------
+function DeleteEmployee(){
+  $('#Confirmation').modal('hide');
+  database.ref('RFID/' + A1).remove();
+          
+         database.ref('Deleted_RFID/'+ A1).set({
+                  RfidNum: A1,
+                  FirstName: D1,
+                  LastName: C1,
+                  Mobile : E1,
+                  Position : B1,
+                  Bday : F1,
+                  Email: G1,
+                  Address: H1,
+
+                 })
+                     // notification 
+                    $(document).Toasts('create', {
+                    class: 'bg-success',
+                    body: 'The Item '+ A1 +' has been successfuly delete',
+                    title: '<h5><i class="far fa-check-circle"></i> Success </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    })
+                    setTimeout(function(){
+                     window.location.reload();
+                     },2000) 
+
+                  
+
+}
+//-----------------------------------------Edit function for Employee------------------------------------
+function EditOpen(){
+  var table3 = document.getElementById('table');
+            for(var i = 0; i < table3.rows.length; i++){
+
+            table3.rows[i].onclick = function(){
+           
+          document.getElementById("Rfid4").value = this.cells[0].innerHTML;
+       B2 =   document.getElementById("positions").value = this.cells[4].innerHTML;
+          document.getElementById("LastName4").value = this.cells[1].innerHTML;
+          document.getElementById("FirstName4").value = this.cells[2].innerHTML;       
+          document.getElementById("Mobile4").value = this.cells[3].innerHTML;
+          document.getElementById("Bday4").value = this.cells[5].innerHTML;
+          document.getElementById("Email4").value = this.cells[7].innerHTML;
+          document.getElementById("Address4").value = this.cells[6].innerHTML;
+
+          $("#position4").val(B2);
+        };
+      }  
+}
+//--------------------------------------------------
+ function SaveEEdit(){
+   Ready();
+                  if(Rfid4 == ""){
+                    document.getElementById("Rfid").className = "form-control is-invalid";
+                  
+                    return false;
+                  }
+                  if(LastName4 == ""){
+                         
+                    return false;
+                  }
+                  if(FirstName4 == ""){
+                    
+                    return false;
+                  }
+                  if(Mobile4 == ""){
+                    
+                    return false;
+                  }
+                  if(Bday4 == ""){
+                    
+                    return false;
+                  }
+                  if(Email4 == ""){
+                   
+                    return false;
+                  }
+                  if(Address4 == ""){
+                    
+                    return false;
+                  }
+                  if(Position4 == ""){
+                    
+                    return false;
+                  }
+                  else{
+                    
+                  
+          $(document).Toasts('create', {
+                            class: 'bg-success',
+                            body: 'Sucessfully Create',
+                            title: '<h5><i class="far fa-check-circle"></i> Success </h5>',
+                            autohide: true,
+                            delay: 2000,
+                            }) 
+
+                            setTimeout(function(){
+                            window.location.reload();
+                            },2000)
+
+              database.ref('RFID/'+ Rfid4 ).update({
+                              RfidNum: Rfid4,
+                              FirstName: FirstName4,
+                              LastName: LastName4,
+                              Mobile : Mobile4,
+                              Position : Position4,
+                              Bday : Bday4,
+                              Email:  Email4,
+                              Address: Address4,
+                            })
+                     }
+ }
+//---------------------------------------Delete Function for SavePosition----------------------------------
+function DeletePosition(){
+                  
+                  var table1 = document.getElementById('table1');
+                  for(var i = 0; i < table1.rows.length; i++){
+
+                  table1.rows[i].onclick = function(){
+                  a = document.getElementById('position3').value = this.cells[1].innerHTML;
+
+                  };
+                }
+                             
+ }
+ //--------------------------------------------
+ function DeletePos(){
+            $('#DeletePosition').modal('hide');
+                    database.ref('Position/' + a).remove();
+                  
+                    // notification 
+                    $(document).Toasts('create', {
+                      class: 'bg-success',
+                    body: 'The Item '+ a +' has been successfuly delete',
+                    title: '<h5><i class="far fa-check-circle"></i> Success </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    })
+                    setTimeout(function(){
+                     window.location.reload();
+                     },2000) 
+
+
+ }
+//--------------------------------Edit function for SavePosition-----------------------------
+function EditPosition(){
+                  var table = document.getElementById('table1');
+                  for(var i = 0; i < table.rows.length; i++){
+
+                  table.rows[i].onclick = function(){
+                    document.getElementById('PositionEdit').value = this.cells[1].innerHTML;
+                     document.getElementById('PositionEdit1').value = this.cells[1].innerHTML;
+
+                  };
+                }
+}
+//------------------------------------------
+function EditPos(){
+  Ready();
+                  if(PostEdit == PostEdit1){
+                       document.getElementById("PositionEdit").className = "form-control is-invalid";
+   
+                  }
+                if(PostEdit != PostEdit1){
+                  $('#EditPosition').modal('hide');
+
+                      database.ref('Position/' + PostEdit1).remove();
+                      database.ref('Position/' + PostEdit).update({
+                      Value :PostEdit ,
+                      })
+                                            // notification 
+                                            $(document).Toasts('create', {
+                                            class: 'bg-success',
+                                            body: 'The Batch '+ Position +' has been successfuly Change',
+                                            title: '<h5><i class="far fa-check-circle"></i> Success </h5>',
+                                            autohide: true,
+                                            delay: 2000,
+                                            })
+                                            setTimeout(function(){
+                                            window.location.reload();
+                                            },2000) 
+
+                                          }
+               
+}
+
+  //-----------------------------------------------------------Validation Input------------------------------
+  $(function () {
+    $.validator.setDefaults({
+      submitHandler: function () {
+     
+
+        //wala nakalagay
+      }
+    });
+    $('#quickForm').validate({
+      //rules
+      rules: {
+        Rfid: {
+          required: true,
+          minlength: 10,
+          maxlength: 10
+        
+        },
+        Number: {
+          required: true,
+          minlength: 11,
+        
+        },
+        Email: {
+          email: true,
+          
+        
+        },
+
+
+       
+      },
+      //message
+      messages: {
+        Rfid: {
+          required: "Please scan a RFID",
+          minLength:"must be at  10 digit long",
+        },
+        Number: {
+          required: "Please Enter a mobile number",
+          minlength: "must be at  11 digit long",  
+        },
+        Email: {
+          email: "Please enter a email address",
+         
+        },
+       
+      
+      },
+      //error
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+//----------------------------------------validation for position-------------------------------
+$(function () {
+    $.validator.setDefaults({
+      submitHandler: function () {
+     
+
+        //wala nakalagay
+      }
+    });
+    $('#quickForm1').validate({
+      //rules
+      rules: {
+        Position: {
+          required: true,
+
+        },      
+      },
+      //message
+      messages: {
+        Position: {
+          required: "Please Enter a Position",
+          
+        },
+    
+       
+      
+      },
+      //error
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+  //------------------------------------------------function for select-------------
+  function run() {
+                        document.getElementById("position2").value = document.getElementById("position").value;
+                
+                                  
+              }
+   function run1() {
+                        document.getElementById("positions").value = document.getElementById("position4").value;
+                
+                                  
+        }
+</script>
+</body>
+</html>

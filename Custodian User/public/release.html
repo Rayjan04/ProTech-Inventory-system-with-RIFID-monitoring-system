@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shorcut icon" type="image" href="img/logo.jpg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Custodian - Release Item</title>
+ 
+
+     <!-- DataTables -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="css/adminlte.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+
+  <script src="app.js"></script>
+</head>
+
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <h5 id="Time" class="nav-link"></h5>
+      </li>
+
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+
+
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span>0</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-header">No Notifications</span>
+          <div class="dropdown-divider"></div>
+        
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <!-- logout Button-->
+      <li class="logout">
+        <a class="nav-link"    href="logout.html" role="button">
+          <button onclick="logout()" class="btn btn-default btn-sm">Logout</button>
+        </a>
+      </li>
+
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="img/logo.jpg"  class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Inventory Custodian</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="img/Custodian_profile.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Custodian</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Dashboard.html" class="nav-link">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              </ul>
+
+                 <!--Category-->
+                 <li class="nav-item">
+                  <a href="Category.html" class="nav-link ">
+                      <i class="fas fa-list"></i>
+                    <p>Category</p>
+                  </a>
+                </li>
+  
+
+              <!--Product-->
+              <li class="nav-item ">
+                <a href="Product.html" class="nav-link ">
+                  <i class="fas fa-boxes"></i>
+                  <p>Product</p>
+                </a>
+              </li>
+              <!--Product-->
+             
+                 <!--Item-->
+                 <li class="nav-item menu-open">
+                  <a href="#" class="nav-link active">
+                    <i class="fas fa-dolly"></i>
+                    <p>
+                      Issued/Return
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="release.html" class="nav-link active ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Release Item</p>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="Return_Item.html" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Return Item</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>       
+                <!--Item-->
+
+                 <!--Trash-->
+                 <li class="nav-item menu">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-trash"></i>
+                    <p>
+                      Archiving
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="product_deleted.html" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Product</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>       
+                <!--Trash-->
+
+               <!--calendar-->
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon far fa-calendar-alt"></i>
+                    <p>Calendar</p>
+                  </a>
+                </li>
+                <!--calendar-->
+
+         <!--Safety Stock Module-->
+         <li class="nav-item">
+          <a href="Safety_Stock.html" class="nav-link">
+            <i class="fas fa-cubes"></i>
+            <p>Safety Stock</p>
+          </a>
+        </li>
+        <!--Safety Stock Module-->
+
+
+       <!--reports-->
+       <li class="nav-item menu">
+        <a href="#" class="nav-link ">
+          <i class="nav-icon fas fa-copy"></i>
+          <p>
+            Reports
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="Report.html" class="nav-link ">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Issued/Return Reports</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="Stock_Report.html" class="nav-link ">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Stock Reports</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="Fast_and slow-moving_Item.html" class="nav-link ">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Fast and Slow-moving Item Reports</p>
+            </a>
+          </li>
+
+        </ul>
+      </li>  
+        <!--reports-->             
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+      <!--sidemenu-->
+      
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Release Item</h1>
+        </div>
+  </section>
+              
+<!------------------------------------------------------------------------ Main Content----------------------------------------------------------------------->
+<div class="col-12 col-sm-12">
+  <div class="card card-success card-tabs">
+    <div class="card-header p-0 pt-1">
+      <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Release</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Edit Release</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Release Tools</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="tab-content" id="custom-tabs-one-tabContent">
+        <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+              
+        <div class="row">
+
+            
+             
+          <div class="col-6">
+          
+            <div class="form-group">
+              <label for="exampleInputPassword1">Product Name</label>
+              <input type="text"  class="form-control" id="Product" placeholder="" disabled>
+            </div>
+
+            </div>
+
+            <div class="col-3">
+           
+              <div class="form-group">
+                <label for="exampleInputPassword1">Category</label>
+                <input type="text" class="form-control" id="Category" placeholder="" disabled>
+              </div>
+    
+              </div>
+       
+
+          </div>
+<!---------------------------------------------------------------------------------------------------->
+            <div class="row">
+
+              
+                
+                
+                <div class="col-5">
+                 
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Manufacturer</label>
+                    <input type="text" class="form-control" id="Manufacture" placeholder="" disabled>
+                  </div>
+                  
+                  </div>
+
+                  <div class="col-2">
+                 
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Unit per Box</label>
+                      <input type="text" class="form-control" id="PerBox" placeholder="" disabled>
+                    </div>
+                    
+                    </div>
+
+                    <div class="col-2">
+                 
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Boxes</label>
+                        <input type="text" class="form-control" id="Box" placeholder="" disabled>
+                      </div>
+                      
+                      </div>
+                      
+                       <div class="col-2">
+                 
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total Quantity</label>
+                          <input type="text" class="form-control" id="Total" placeholder="" disabled>
+                        </div>
+                        
+                        </div>
+
+                </div>
+                <div class="card-header">
+                  <!-- /.card-header -->
+                  <!--Dito Lalagay-->
+                   <form id="quickForm">
+        
+                  <div class="row">
+        
+                   
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label >Batch</label> 
+                         <div class="input-group mb-3">
+                        <input type="number"  name ="Batch" onkeyup="BatchSearch()" class="form-control" id="Batch" placeholder="Enter Batch Number" >
+                        <div class="input-group-append">
+                          <span class="input-group-text"><i type="button" class="far fa-plus-square" data-toggle="modal" data-target="#Add"></i></span>
+                        </div>
+                      </div>
+                     </div>
+                      </div>
+                      
+                       
+                      <div class="col-5">
+                      
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Project</label>
+                            <input name ="Project" type="text" class="form-control" id="Project" placeholder="">
+                            
+                          </div>
+        
+                        </div>
+        
+                        <div class="col-2">
+                      
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Box Qty</label>
+                            <input type="number" name ="Qty" class="form-control" id="Qty" onkeyup="Compute()"placeholder="">
+                          </div>
+        
+                        </div>
+                    
+          
+                      </div>
+                      <!------------------------------------------------------------------------------------------>
+                      <div class="row">
+        
+                        <div class="col-6">
+                          
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Address</label>
+                            <input name ="Location" type="text" class="form-control" id="Address" placeholder="">
+                          </div>
+              
+                          </div>
+        
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Recieve By:</label>
+                            <input type="text" name ="Recipients" class="form-control" id="Recipients" placeholder="">
+                          </div>
+                       
+              
+                          </div>
+        
+               
+        
+        
+        
+                      <div class="card-footer">
+            
+            
+                        <button  onclick="Create()" data-toggle="modal" data-target="#modal-danger" class="btn btn-success float-right" >Create</button>
+                    
+                       
+                        </div>
+                    
+                       </form>  
+                 
+        
+                      
+                  <!--Dito Lalagay-->
+              </div>
+
+
+        </div>
+        <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+      // lagay mo dito tab2
+        </div>
+        <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+        // lagay mo dito tab3
+        </div>
+        <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+         // lagay mo dito tab4
+        </div>
+      </div>
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+
+
+
+
+<!------------------------------------------------------------Critical Alert Modal----------------------------------------------------------------------------------->
+
+<div class="modal fade" id="CriticalStock">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content bg-danger">
+      <div class="modal-header ">
+        <h4 class="modal-title">Critical Stock Alert</h4> 
+      </div>
+      <div class="modal-body">
+        <p id ="CriticalStockM"></p>
+      </div>       
+      <div class="modal-footer justify-content-between">
+        <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button onclick="Proceed1()" class="btn btn-success">Proceed</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!------------------------------------------------------------Safety Stock Alert Modal----------------------------------------------------------------------------------->
+
+          <div class="modal fade" id="SafetyStock">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content bg-warning ">
+                <div class="modal-header ">
+                  <h4 class="modal-title">Safety Stock Alert</h4> 
+                </div>
+                <div class="modal-body">
+                  <p id ="SafetyStockM"></p>
+                </div>       
+                <div class="modal-footer justify-content-between">
+                  <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button onclick="Proceed()" class="btn btn-success">Proceed</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          
+<!-------------------------------------------------Add Modal-------------------------------------------------->
+
+<div class="modal fade" id="Add">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+      </div>
+
+      
+      <div class="card-body">
+
+        <table class="table text-nowrap table-striped table-bordered table-sm" id="table" width="100%">
+          <thead>
+            <tr>
+                <th> Batch#</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Boxes</th>
+                <th>Total Qty</th>
+                <th>Status</th>
+                <th>Action</th>
+                
+            </tr>
+          </thead>
+          <tbody id="tbody" class="tbody">
+                
+  
+          </tbody> 
+                  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+                  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+                  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+ 
+            
+        </table>
+       
+
+
+     
+        <!-- /.card-body -->
+  
+  </div>
+
+      
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal --> 
+
+
+
+        <input type="hidden" class="form-control" id="Check"  placeholder="0">
+        <input type="hidden" class="form-control" id="Compute"  placeholder="0">
+        <input type="hidden" class="form-control" id="UpdateTotal"  placeholder="0">
+        <input type="hidden" class="form-control" id="UpdateBoxes"  placeholder="0">
+        <!------------------------------------------------------------------------->
+        <input type="hidden" class="form-control" id="Available"  placeholder="0">
+        <input type="hidden" class="form-control" id="NotAvailable"  placeholder="0">
+        <input type="hidden" class="form-control" id="Total1"  placeholder="0">
+        <!--------------------------------------------------Safety Stock--------------------------------------------------------------------->
+        <input type="hidden"  class="form-control" id="SafetyStock">
+        <input type="hidden"  class="form-control" id="MinSafetyStock">
+        <input type="hidden"  class="form-control" id="TotalSafe">
+        <!----------------------------------------------------STATUS---------------------------------------------------------------->
+        <input type="hidden" class="form-control" id="Status">
+        <!------------------------------------------------------DatePicker-------------------------------------------------------------------->
+        <input type="hidden" class="form-control" id="Date">
+        <!------------------------------------------------------DatePicker-------------------------------------------------------------------->
+        <input type="text" class="form-control" id="GraphRelease">
+        <input type="text" class="form-control" id="AddGraph">
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->
+
+  
+  
+
+
+  <!--Modals for add-->
+  <div class="modal fade" id="AddItem">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Select Product</h4>
+          
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <table class="table table-striped table-bordered table-sm" id = "table">
+                <thead>
+                      
+                      <th id="batch">Batch</th>
+                      <th>Category</th>
+                      <th>Brand</th>
+                      <th>Manufacturer</th>
+                      <th>Quantity</th>
+                      <th>Status</th>
+                      <th>add</th>
+                      
+                </thead>
+                <tbody id="tbody">
+                <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+               <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+               <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+                  
+                      
+               
+                </tbody> 
+                
+                
+          </table>
+    
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          
+        </div>
+  <!--Modals for add-->
+
+
+
+
+<!-- REQUIRED SCRIPTS -->
+<!--time-->
+<script src ="time.js"></script>
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jquery-validation -->
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="plugins/jquery-validation/additional-methods.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+</body>
+
+<script>
+var database = firebase.database()
+
+//------------------------------Safety Stock value----------------
+database.ref('Safety_Stock/').on('value',function(snapshot){
+document.getElementById('SafetyStock').value = snapshot.val().SafetyStock;
+document.getElementById('MinSafetyStock').value = snapshot.val().MinSafetyStock;
+});
+//-------------------------------------------------------------
+function SafetyStockV(){
+  SafetyStock = document.getElementById('SafetyStock').value;
+  MinSafetyStock = document.getElementById('MinSafetyStock').value;
+}
+function SelectAllData(){
+  database.ref('Item').once('value',
+  function(AllRecord){
+    AllRecord.forEach(
+      function(CurrentRecord){
+        var batch = CurrentRecord.val().Batch;
+        var Category = CurrentRecord.val().Category;
+        var products = CurrentRecord.val().Brand;
+        var manufacture = CurrentRecord.val().Manufacture;
+        var supplydate = CurrentRecord.val().Date;
+        var exdate = CurrentRecord.val().Exdate;
+        var status = CurrentRecord.val().Status;
+        var PerBox = CurrentRecord.val().PerBox;
+        var Box  = CurrentRecord.val().Box;
+        var Total = CurrentRecord.val().Total;
+
+        
+        AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,status,PerBox,Box,Total);
+      }
+    );
+  });
+}
+window.onload = SelectAllData;
+var batchNumber = 0
+function AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,status,PerBox,Box,Total){
+ var tbody = document.getElementById('tbody');
+ var trow = document.createElement('tr');
+ var td1 = document.createElement('td');
+ var td2 = document.createElement('td');
+ var td3 = document.createElement('td');
+ var td4 = document.createElement('td');
+ var td5 = document.createElement('td');
+ var td6 = document.createElement('td');
+ var td7 = document.createElement('td');
+
+
+
+ td1.innerHTML = batch;
+ td2.innerHTML = Category;
+ td3.innerHTML = products;
+ td4.innerHTML = Box;
+ td5.innerHTML = Total;
+//------------------------------Status-----------------------------
+SafetyStockV();
+ if(Number(SafetyStock) <= Number(Box) ){
+  td6.innerHTML = '<span id=""class="badge badge-success">' + 'In Stock' + '</span>';
+ }
+
+ if(Number(SafetyStock) >= Number(Box) ){
+  td6.innerHTML = '<span id=""class="badge badge-info">' + 'Safety Stock' + '</span>';
+ }
+
+ if(Number(MinSafetyStock) >= Number(Box) ){
+  td6.innerHTML = '<span id=""class="badge badge-warning">' + 'Critical Stock' + '</span>';
+ }
+
+ if(Box  == 0){
+  td6.innerHTML = '<span id=""class="badge badge-danger" >' + 'Out of Stock' + '</span>';
+ }
+ td7.innerHTML = '<button type="button" onclick="Select()"  class="btn btn-primary" data-toggle="modal" data-target="#Edit"><i  class="far fa-plus-square"></i></button>'
+ 
+ 
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);
+  tbody.appendChild(trow);
+}
+
+//-----------------------------------------------Ready()----------------------------------------
+function Ready(){
+
+         Batch = document.getElementById('Batch').value;
+         Recipients = document.getElementById('Recipients').value;
+         Qty = document.getElementById('Qty').value;
+         Address = document.getElementById('Address').value;
+         Category = document.getElementById('Category').value;
+         Project = document.getElementById('Project').value;
+         Date1 = document.getElementById('Date').value;
+       
+         //---------------------------------------------
+         Product = document.getElementById('Product').value;
+         Perbox = document.getElementById('PerBox').value;
+         Check = document.getElementById('Check').value;
+        Total =   document.getElementById('Compute').value
+          Box =  document.getElementById('Box').value
+        //-----------------------------------------------
+        totalQty = document.getElementById('UpdateTotal').value;
+        totalBox = document.getElementById('UpdateBoxes').value;
+        //-----------------------------------------------
+         Available = document.getElementById('Available').value;
+         NotAvailable = document.getElementById('NotAvailable').value;
+         Total1= document.getElementById('Total1').value;
+         //----------------------------------------------
+         Status = document.getElementById('Status').value;
+         //-----------------------------------------------
+         TotalSafe = document.getElementById('TotalSafe').value;
+         //----------------------------------------------
+         GraphRelease = document.getElementById('AddGraph').value;
+}
+//=============================================================
+function time1() {
+      Ready();
+      if(Batch != Check){
+      
+            document.getElementById('Product').value= "";
+            document.getElementById('Category').value= "";
+            document.getElementById('Manufacture').value= "";
+            document.getElementById('PerBox').value= "";
+            document.getElementById('Box').value= "";
+            document.getElementById('Total').value= "";
+
+        }
+
+                   
+      //--------------------------Date-----------------------
+      var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+     document.getElementById("Date").value = month+"-"+ date +"-"+ year;    
+
+
+  }
+  setInterval(time1, 10);
+//=============================================================
+function BatchSearch(){
+
+  Ready();   
+
+            database.ref('Item/'+ Batch ).on('value',function(snapshot){
+            document.getElementById('Check').value= snapshot.val().Batch;
+            document.getElementById('Product').value= snapshot.val().Brand;
+            document.getElementById('Category').value= snapshot.val().Category;
+            document.getElementById('Manufacture').value= snapshot.val().Manufacture;
+            document.getElementById('PerBox').value= snapshot.val().PerBox;
+            document.getElementById('Box').value= snapshot.val().Box;
+            document.getElementById('Total').value= snapshot.val().Total;
+            document.getElementById('GraphRelease').value= snapshot.val().GraphRelease;
+
+        });
+
+        database.ref('Dashboard/').on('value',function(snapshot){
+            document.getElementById('Available').value= snapshot.val().Available_Item;
+            document.getElementById('NotAvailable').value= snapshot.val().NotAvailable_Item;
+            document.getElementById('Total1').value= snapshot.val().Total_Item;
+
+        });
+
+}
+//========================================================Compute Quantity==================================
+function Compute(){
+
+  
+      var num1 = document.getElementById('PerBox').value;
+      var num2 = document.getElementById('Qty').value;
+      var num3 =  document.getElementById('Total').value;
+      var num4 =  document.getElementById('GraphRelease').value;
+
+      var total = num1 * num2;
+
+        document.getElementById('Compute').value = total;
+
+      var totalQty = num3 - total;
+
+      document.getElementById('UpdateTotal').value = totalQty;
+
+      var totalBox = totalQty / num1;
+
+      document.getElementById('UpdateBoxes').value = totalBox;
+
+
+      var AddGraph = Number(num2) + Number(num4);
+
+      document.getElementById('AddGraph').value = AddGraph;
+
+
+}
+//===========================================================Create Function===========================================
+function Create(){
+Ready();
+  if(Batch == "" || Recipients == "" || Qty == "" || Qty <= 0 || Address == "" || totalBox < 0){
+    
+    if(Batch == ""){
+
+    }
+    if(Recipients == ""){
+
+    }
+    if(Qty == ""){
+
+    }
+    if(Qty <= 0){
+      $(document).Toasts('create',{
+         class: 'bg-danger',
+         body: 'Invalid Box Quantity',
+         title: '<h5><i class="fas fa-times"></i> Error  </h5>',
+         autohide: true,
+         delay: 5000,
+         }) 
+
+    }
+    if(Address == ""){
+
+    }
+    if(totalBox < 0){
+      $(document).Toasts('create',{
+         class: 'bg-danger',
+         body: 'The available Box Qty of '+ Product +' is ' + Box,
+         title: '<h5><i class="fas fa-times"></i> Error  </h5>',
+         autohide: true,
+         delay: 5000,
+         }) 
+
+    }
+
+  }
+
+
+  else{
+    SafetyStockV();
+      Ready();
+      //-------------------------In Stock-------------------------------------
+      if(Status == '<span id="" class="badge badge-success">In Stock</span>'){
+
+    
+      
+              if(Number(MinSafetyStock) >= Number(totalBox) ){
+                $('#CriticalStock').modal('show');
+                document.getElementById('CriticalStockM').innerHTML = 'No available safety stock the total Qty left is ' + totalBox + '. are you sure you want to proceed?';
+                return 0;
+              }
+              if(Number(SafetyStock) >= Number(totalBox) ){
+                $('#SafetyStock').modal('show');
+                document.getElementById('SafetyStockM').innerHTML = 'You use safety stock the total Qty left is ' + totalBox + '. are you sure you want to proceed?';
+                return 0;          
+              }
+
+              if(Number(SafetyStock) <= Number(totalBox)){
+                          //to create release 
+                           var timeStamp = Date.now();
+                          database.ref('Realease_Item/Product/' + timeStamp).set({
+
+                                  Batch : Batch,
+                                  Product : Product,
+                                  Category : Category,
+                                  Recipients : Recipients,
+                                  Box : Qty,
+                                  Address : Address,
+                                  Total : Total,
+                                  Project: Project,
+                                  TimeStamp:timeStamp,
+                                  Date:Date1
+                                })
+                          //to create Projects
+                          database.ref('Realease_Item/Projects/' + Project).set({
+                                 ProjectName: Project,
+                                 Address: Address,
+                                 Recipients: Recipients,
+                                })
+                          
+                             //-----------------------Create Report--------------  
+                              database.ref('Report/' + timeStamp).set({
+                                            Batch : Batch,
+                                            Product : Product,
+                                            Category : Category,
+                                            Recipients : Recipients,
+                                            Box : Qty,
+                                            Address : Address,
+                                            Total : Total,
+                                            Project: Project,
+                                            TimeStamp:timeStamp,
+                                            Date:Date1,
+                                            Return: 0
+                                                
+                                              })
+                                
+                        //update Qty
+                        database.ref('Item/' + Batch).update({
+                              Box : totalBox ,
+                              Total : totalQty,
+                              //for graph
+                              GraphRelease : GraphRelease
+                               })                               
+                 
+                //notification success Add
+                 $(document).Toasts('create',{
+                    class: 'bg-success',
+                    body: 'sucessfully Create ',
+                    title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    }) 
+
+                    setTimeout(function(){
+                     window.location.reload();
+                     },2000)
+                     
+                }
+             
+
+      }
+      if(Status == '<span id="" class="badge badge-info">Safety Stock</span>'){
+        if(Number(MinSafetyStock) >= Number(totalBox) ){
+                $('#CriticalStock').modal('show');
+                document.getElementById('CriticalStockM').innerHTML = 'No available safety stock the total Qty left is ' + totalBox + '. are you sure you want to proceed?';
+                return 0;
+              }
+              if(Number(SafetyStock) >= Number(totalBox) ){
+                $('#SafetyStock').modal('show');
+                document.getElementById('SafetyStockM').innerHTML = 'You use safety stock the total Qty left is ' + totalBox + '. are you sure you want to proceed?';
+                return 0;          
+              }
+      }
+      if(Status == '<span id="" class="badge badge-warning">Critical Stock</span>'){
+        if(Number(MinSafetyStock) >= Number(totalBox) ){
+                $('#CriticalStock').modal('show');
+                document.getElementById('CriticalStockM').innerHTML = 'No available safety stock the total Qty left is ' + totalBox + '. are you sure you want to proceed?';
+                return 0;
+              }
+              if(Number(SafetyStock) >= Number(totalBox) ){
+                $('#SafetyStock').modal('show');
+                document.getElementById('SafetyStockM').innerHTML = 'You use safety stock the total Qty left is ' + totalBox + '. are you sure you want to proceed?';
+                return 0;          
+              }
+      }
+
+      
+      /*
+      database.ref('Realease_Item/' + Batch).set({
+                          Batch : Batch,
+                          Product : Product,
+                          Category : Category,
+                          Recipients : Recipients,
+                          Box : Qty,
+                          Address : Address,
+                          Total : Total
+                          
+                        })
+                //update Qty
+                database.ref('Item/' + Batch).update({
+                      Box : totalBox ,
+                      Total : totalQty,
+                })
+
+              if(totalQty <= 0){
+
+               //update DashBoard
+                    NotAvailable = ++NotAvailable;
+                    AvailableItem = --Available;
+
+                    database.ref('Dashboard/').update({
+                    NotAvailable_Item : NotAvailable,
+                    Available_Item: AvailableItem,
+                    
+                    })
+                //update Status
+                database.ref('Item/' + Batch).update({                    
+                          Status : "Out of Stock",
+                        })
+
+                      }
+        
+                 //notification success Add
+             
+                    $(document).Toasts('create',{
+                    class: 'bg-success',
+                    body: 'sucessfully Create ',
+                    title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    }) 
+
+                    setTimeout(function(){
+                     window.location.reload();
+                     },2000)*/
+                     
+  }
+}
+//-------------------------------Proceed for Safety stock-----------------------
+function Proceed(){
+  $('#SafetyStock').modal('hide');
+      database.ref('Realease_Item/' + Batch).set({
+                              Batch : Batch,
+                              Product : Product,
+                              Category : Category,
+                              Recipients : Recipients,
+                              Box : Qty,
+                              Address : Address,
+                              Total : Total,
+                             
+                              
+                            })
+                    //update Qty
+                    database.ref('Item/' + Batch).update({
+                          Box : totalBox ,
+                          Total : totalQty,
+                    })
+                    if(totalQty <= 0){
+
+                    //update DashBoard
+                        NotAvailable = ++NotAvailable;
+                        AvailableItem = --Available;
+
+                        database.ref('Dashboard/').update({
+                        NotAvailable_Item : NotAvailable,
+                        Available_Item: AvailableItem,
+                        
+                        })
+
+                          }
+                    //notification success Add
+             
+                    $(document).Toasts('create',{
+                    class: 'bg-success',
+                    body: 'sucessfully Create ',
+                    title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    }) 
+
+                    setTimeout(function(){
+                     window.location.reload();
+                     },2000)
+ }
+ //-------------------------------Proceed for critical stock-----------------------
+function Proceed1(){
+  $('#CriticalStock').modal('hide');
+  database.ref('Realease_Item/' + Batch).set({
+                          Batch : Batch,
+                          Product : Product,
+                          Category : Category,
+                          Recipients : Recipients,
+                          Box : Qty,
+                          Address : Address,
+                          Total : Total,
+                          
+                          
+                        })
+                //update Qty
+                database.ref('Item/' + Batch).update({
+                      Box : totalBox ,
+                      Total : totalQty,
+                })
+
+              if(totalQty <= 0){
+
+               //update DashBoard
+                    NotAvailable = ++NotAvailable;
+                    AvailableItem = --Available;
+
+                    database.ref('Dashboard/').update({
+                    NotAvailable_Item : NotAvailable,
+                    Available_Item: AvailableItem,
+                    
+                    })
+
+                      }
+        
+                 //notification success Add
+             
+                    $(document).Toasts('create',{
+                    class: 'bg-success',
+                    body: 'sucessfully Create ',
+                    title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    }) 
+
+                    setTimeout(function(){
+                     window.location.reload();
+                     },2000)
+                }
+//--------------------------------------------------Select Function------------------------------------------------->
+function Select(){
+Ready();
+
+        var table1 = document.getElementById('table');
+            for(var i = 0; i < table1.rows.length; i++){
+
+            table1.rows[i].onclick = function(){
+             document.getElementById('Batch').value = this.cells[0].innerHTML;
+             document.getElementById('Status').value = this.cells[5].innerHTML;
+             document.getElementById('Qty').value = "";
+
+            };
+            setTimeout(function(){
+                   
+              
+            //------------------------------------------------------------
+
+            database.ref('Item/'+Batch ).on('value',function(snapshot){
+            document.getElementById('Check').value= snapshot.val().Batch;
+            document.getElementById('Product').value= snapshot.val().Brand;
+            document.getElementById('Category').value= snapshot.val().Category;
+            document.getElementById('Manufacture').value= snapshot.val().Manufacture;
+            document.getElementById('PerBox').value= snapshot.val().PerBox;
+            document.getElementById('Box').value= snapshot.val().Box;
+            document.getElementById('Total').value= snapshot.val().Total;
+            document.getElementById('GraphRelease').value= snapshot.val().GraphRelease;
+               });
+
+          database.ref('Dashboard/').on('value',function(snapshot){
+              document.getElementById('Available').value= snapshot.val().Available_Item;
+              document.getElementById('NotAvailable').value= snapshot.val().NotAvailable_Item;
+              document.getElementById('Total1').value= snapshot.val().Total_Item;
+            
+               });
+        },1000)
+
+            }
+
+          
+          $('#Add').modal('hide');
+
+         
+
+        }
+</script>
+<!------------------------------------------------------------------------------------------------------------------>
+<script>
+  //------------------------------------------------------------Validation Input
+  $(function () {
+        $.validator.setDefaults({
+          submitHandler: function () {
+         
+ 
+          }
+        });
+        $('#quickForm').validate({
+          //rules
+          rules: {
+            Batch: {
+              required: true,
+           
+            },
+            Recipients:{
+              required: true,
+            },
+    
+            Qty :{
+
+              required: true,
+            },
+
+            Location:{
+                required: true,
+                },
+           
+          },
+          //message
+          messages: {
+            Batch: {
+              required: "Please enter a Batch number",
+            
+            
+            },
+            Recipients:{
+              required: "Please enter a Recipients",
+            },
+
+            Qty :{
+            required: "Please enter a Quantity",
+            },
+
+            Location:{
+                required: "Please enter a Address",
+                },
+
+          
+          },
+          //error
+          errorElement: 'span',
+          errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+          }
+        });
+      });
+  </script>
+</html>

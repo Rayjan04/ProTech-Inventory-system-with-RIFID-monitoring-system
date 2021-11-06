@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shorcut icon" type="image" href="img/logo.jpg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin - Record(Personnel logs)</title>
+  
+
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+   <!-- DataTables -->
+   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="css/adminlte.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+  <script src="logout.js"></script>
+</head>
+
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <h5 id="Time" class="nav-link"></h5>
+      </li>
+     
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+    
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span >0</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-header">No Notifications</span>
+          <div class="dropdown-divider"></div>
+        
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <!-- logout Button-->
+      <li class="logout">
+        <a class="nav-link"   role="button">
+          <button onclick="logout()" class="btn btn-default btn-sm">Logout</button>
+        </a>
+      </li>
+
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="img/logo.jpg" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">ProTech Admin</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="img/jorge_user.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Admin</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Module
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Admin.html" class="nav-link a">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+
+                  <!--Category -->
+             <li class="nav-item">
+              <a href="Category.html" class="nav-link">
+                <i class="fas fa-list"></i>
+                <p>Category</p>
+              </a>
+            </li>
+              <!--Category-->
+
+
+            <!--Manufacturers-->
+            <li class="nav-item menu">
+              <a href="#" class="nav-link ">
+                <i class="fas fa-city"></i>
+                <p>
+                  Client
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="Manufacture_Info.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Manage Client</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Client</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--Manufacturers-->
+
+             <!--Product-->
+             <li class="nav-item menu">
+              <a href="#" class="nav-link ">
+                <i class="fas fa-boxes"></i>
+                <p>
+                  Products
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="Manage_Product.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Manage Product</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="Add_product.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Products</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+             <!--Product-->
+
+             <!--Tool-->
+            <li class="nav-item menu">
+              <a href="#" class="nav-link ">
+                <i class="fas fa-tools"></i>
+                <p>
+                  Tools
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="Tool_List.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tool List</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="Tool_list.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add tool</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+             <!--Tool-->
+
+
+                         <!--Employee Masterlist-->
+                         <li class="nav-item">
+                          <a href="Employee_Masterlist.html" class="nav-link ">
+                            <i class="fas fa-id-card"></i>
+                            <p>
+                              Manage RFID               
+                            </p>
+                          </a>
+                          
+                        </li>
+
+               <!--Manage Account-->
+               <li class="nav-item menu">
+                <a href="#" class="nav-link ">
+                  <i class="fas fa-user-circle"></i>
+                  <p>
+                    User Management
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link ">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Manage User</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="CustodianAccount.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Account</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+               <!--Manage Account-->
+               
+                        <!--Trash-->
+                        <li class="nav-item menu">
+                          <a href="#" class="nav-link">
+                            <i class="fas fa-trash"></i>
+                            <p>
+                              Archiving
+                              <i class="right fas fa-angle-left"></i>
+                            </p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                              <a href="Trash.html" class="nav-link  ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Product</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="Trash_Manufacture.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Client</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Archive_Employee.html" class="nav-link ">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Employee</p>
+                                </a>
+                              </li>
+                          </ul>
+                        </li>
+                        <!--Trash-->
+        
+                
+               <!--calendar-->
+                <li class="nav-item">
+                  <a href="Calendar.html" class="nav-link">
+                    <i class="nav-icon far fa-calendar-alt"></i>
+                    <p>Calendar</p>
+                  </a>
+                </li>
+                <!--calendar-->
+
+             <!--reports-->
+             <li class="nav-item menu-open">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-copy"></i>
+                <p>
+                  Reports
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="Report.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Issued/Return Reports</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="Stock_Report.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Stock Reports</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="Fast_and_Slow.html" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Fast and Slow-moving Item Reports</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="#" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Records</p>
+                  </a>
+                </li>
+
+              </ul>
+            </li>  
+              <!--reports-->        
+
+               
+
+
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+      <!--sidemenu-->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="form-group">
+             <form class="form-inline float-right">
+              <label>Start date:</label>
+             <input id="startdate" class="date_range_filter" />
+             <label>End date:</label>
+             <input id="enddate" class="date_range_filter" />
+             <table id="staff"></table>
+             </form> 
+             <br>
+             </div>
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Records(RFID Logs)</h1>
+        </div>
+  </section>
+              
+<!-- Main Content-->
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            <!-- /.card-header -->
+            <table class="table table-striped table-bordered table-sm"  id="table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Full Name</th>
+                    <th>RFID Tag</th>        
+                    <th>Position</th>
+                    <th>Log In</th>
+                    <th>Log Out</th>            
+                   </tr>   
+                </thead> 
+                <tbody id="tbody">
+               
+                 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+                  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+                  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+               
+        
+                </tbody>
+     
+          </table>
+           
+  
+            <!-- /.card-body -->
+          </div>
+          
+         
+          <!-- /.card -->
+          </div>
+          </div>
+          </div>
+          </div>
+          </section>
+  <!-- Main Content--->
+  <input type="hidden" id="Number" >
+  <input type="hidden" id="Number1" >
+
+<!--Time-->
+<script src="time.js"></script>
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+
+<!-- DataTables  & Plugins -->
+
+<script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="application/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="application/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- Page specific script -->
+
+<script>
+     
+  var database = firebase.database()
+  function SelectAllData(){
+  database.ref('Records').once('value',
+  function(AllRecord){
+    document.getElementById('Number1').value = document.getElementById('Number').value;
+    AllRecord.forEach(
+      function(CurrentRecord){
+        var Date = CurrentRecord.val().Date;
+        var FullName = CurrentRecord.val().FullName;
+        var ID = CurrentRecord.val().ID;
+        var Login = CurrentRecord.val().Login;
+        var Logout = CurrentRecord.val().Logout; 
+        var Position = CurrentRecord.val().Position;
+    
+        AddItemsToTable(Date,FullName,ID,Login,Login,Logout,Position);
+      }
+    );
+  });
+  
+}
+window.onload = SelectAllData;
+function AddItemsToTable(Date,FullName,ID,Login,Login,Logout,Position){
+
+ var tbody = document.getElementById('tbody');
+ var trow = document.createElement('tr');
+ var td1 = document.createElement('td');
+ var td2 = document.createElement('td');
+ var td3 = document.createElement('td');
+ var td4 = document.createElement('td');
+ var td5 = document.createElement('td');
+ var td6 = document.createElement('td');
+
+
+
+
+
+
+
+ td1.innerHTML = Date;
+ td2.innerHTML = FullName;
+ td3.innerHTML = ID;
+ td4.innerHTML = Position;
+ td5.innerHTML = Login;
+ td6.innerHTML = Logout;
+ 
+
+
+
+ 
+ 
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);
+  tbody.appendChild(trow);
+
+}
+function Ready(){
+  n =  document.getElementById('Number').value
+  n1 = document.getElementById('Number1').value
+
+}
+database.ref('Autoload/').on('value',function(snapshot){
+document.getElementById('Number').value= snapshot.val().load;
+         });    
+function Auto(){
+    Ready();
+    
+       
+         if(n1 != n){
+           window.location.reload();
+             
+         }
+}
+setInterval(Auto, 1000);
+    
+ //----------------------------------------------------------                        
+$("#startdate").datepicker({
+  "dateFormat": "mm-dd-yy",
+  "onSelect": function(date) {  // This handler kicks off the filtering.
+    minDateFilter = new Date(date).getTime();
+    var myDataTable = $('#table').DataTable();  
+    myDataTable.draw(); // Redraw the table with the filtered data.
+  }
+}).keyup(function() {
+  minDateFilter = new Date(this.value).getTime();
+  var myDataTable = $('#table').DataTable();  
+  myDataTable.draw();
+});
+
+$("#enddate").datepicker({
+  "dateFormat": "mm-dd-yy",
+  "onSelect": function(date) {
+    maxDateFilter = new Date(date).getTime();
+    var myDataTable = $('#table').DataTable();  
+    myDataTable.draw();
+  }
+}).keyup(function() {
+  maxDateFilter = new Date(this.value).getTime();
+  var myDataTable = $('#table').DataTable();  
+  myDataTable.draw();
+});
+
+// The below code actually does the date filtering.
+minDateFilter = "";
+maxDateFilter = "";
+
+$.fn.dataTableExt.afnFiltering.push(
+  function(oSettings, aData, iDataIndex) {
+    if (typeof aData._date == 'undefined') {
+      aData._date = new Date(aData[0]).getTime(); // Your date column is 3, hence aData[3].
+    }
+
+    if (minDateFilter && !isNaN(minDateFilter)) {
+      if (aData._date < minDateFilter) {
+        return false;
+      }
+    }
+
+    if (maxDateFilter && !isNaN(maxDateFilter)) {
+      if (aData._date > maxDateFilter) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+);
+
+</script>
+
+</body>
+
+</html>

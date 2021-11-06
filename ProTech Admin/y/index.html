@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyC5HqUCIRL8XB5X-IGLYg9RiuWCbtiErpY",
+    authDomain: "protech-project-aef56.firebaseapp.com",
+    projectId: "protech-project-aef56",
+    storageBucket: "protech-project-aef56.appspot.com",
+    messagingSenderId: "611528722799",
+    appId: "1:611528722799:web:814c92195220387825009a",
+    measurementId: "G-9B3L95C56G"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+</head>
+<body oncontextmenu="return false;">
+    <div class="loginbox"> 
+        <img src="img/logo.jpg" class="logo">
+           <h1></h1>
+    
+           <form onsubmit="login(event)">
+    
+             <label for ="uname"><p>User ID</p></label>
+             <input type="text"  required="" id="email"> 
+    
+             <label for ="psw"><p>Passsword</p></label>
+             <input type="Password"  required="" id="password">
+    
+          
+             <input type="submit" name="" value="Log In as Admin" onclick="Login()" >
+           <a href="Rfid_Module.html">RFID Scanner</a>
+         
+             
+         
+
+            
+           </form>
+             
+        
+      </div>
+</body>
+<script src="app.js"></script>
+<script>
+ //----------------------------------------------------inspect Element Disable--------------------------
+ document.onkeydown = function(e){
+   if(event.keyCode ==  123){
+     return false;
+   }
+   if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+     return false;
+   }
+   if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+     return false;
+   }
+ } 
+
+
+</script>
+
+
+</html>

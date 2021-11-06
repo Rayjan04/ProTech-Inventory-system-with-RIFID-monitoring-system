@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+     <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+
+</head>
+<body onload="myFunction()">
+    
+</body>
+<script  >
+    var firebaseConfig = {
+    apiKey: "AIzaSyBVp91OTtGFltfM6h3aU1apgwJQAa0UJdg",
+    authDomain: "protect-custodian.firebaseapp.com",
+    projectId: "protect-custodian",
+    storageBucket: "protect-custodian.appspot.com",
+    messagingSenderId: "215437044081",
+    appId: "1:215437044081:web:9157259ccdb1dc5d572ed0",
+    measurementId: "G-1DKQ13N640"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+
+
+function myFunction() {
+firebase.auth().signOut().then(() => {
+// Sign-out successful.
+}).catch((error) => {
+  // An error happened.
+});
+
+}
+firebase.auth().onAuthStateChanged(function(user) {
+    var Not =document.getElementById("not-login")
+    var yes =document.getElementById("login")
+    if (user) {
+       
+    }
+    else{
+        window.location.href ="index.html";
+    }
+    
+  });
+
+    
+</script>
+</html>
