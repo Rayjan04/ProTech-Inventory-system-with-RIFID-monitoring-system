@@ -509,15 +509,27 @@
 
       
       <div class="card-body">
+        <!-----------------selection------------->
+       
+        <div class="form-group">
+          <label>Category</label>
+          <select id="Select1" class="select1" style="width: 25%;">
+           <option value="All">All</option>   
+         </select> 
+         
+       
+         <br>
+         </div>
 
-        <table class="table text-nowrap table-striped table-bordered table-sm" id="table" width="100%">
+        <div class="card-body table-responsive p-0" style="height: 480px;">
+        <table class="table table-striped table-bordered table-sm table-head-fixed text-nowrap" id="table" width="100%">
           <thead>
             <tr>
-                <th> Batch#</th>
+                <th>Batch#</th>
                 <th>Category</th>
                 <th>Brand</th>
                 <th>Boxes</th>
-                <th>Total Qty</th>
+                <th>Expiration</th>
                 <th>Status</th>
                 <th>Action</th>
                 
@@ -533,7 +545,7 @@
  
             
         </table>
-       
+       </div>
 
 
      
@@ -571,52 +583,7 @@
         <input type="text" class="form-control" id="GraphRelease">
         <input type="text" class="form-control" id="AddGraph">
 
-<!--------------------------------------------------------------------------------------------------------------------------------------->
 
-  
-  
-
-
-  <!--Modals for add-->
-  <div class="modal fade" id="AddItem">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Select Product</h4>
-          
-        </div>
-        <div class="modal-body">
-          <div class="card-body">
-            <table class="table table-striped table-bordered table-sm" id = "table">
-                <thead>
-                      
-                      <th id="batch">Batch</th>
-                      <th>Category</th>
-                      <th>Brand</th>
-                      <th>Manufacturer</th>
-                      <th>Quantity</th>
-                      <th>Status</th>
-                      <th>add</th>
-                      
-                </thead>
-                <tbody id="tbody">
-                <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
-               <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
-               <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
-                  
-                      
-               
-                </tbody> 
-                
-                
-          </table>
-    
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          
-        </div>
-  <!--Modals for add-->
 
 
 
@@ -625,6 +592,7 @@
 <!--time-->
 <script src ="time.js"></script>
 <!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- jquery-validation -->
 <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
@@ -664,9 +632,9 @@ function SafetyStockV(){
   MinSafetyStock = document.getElementById('MinSafetyStock').value;
 }
 function SelectAllData(){
-  database.ref('Item').once('value',
-  function(AllRecord){
-    AllRecord.forEach(
+  var database = firebase.database().ref('Item/');
+   database.orderByChild('Batch').once('value',function (snapshot){
+    snapshot.forEach(
       function(CurrentRecord){
         var batch = CurrentRecord.val().Batch;
         var Category = CurrentRecord.val().Category;
@@ -704,7 +672,7 @@ function AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,s
  td2.innerHTML = Category;
  td3.innerHTML = products;
  td4.innerHTML = Box;
- td5.innerHTML = Total;
+ td5.innerHTML = exdate;
 //------------------------------Status-----------------------------
 SafetyStockV();
  if(Number(SafetyStock) <= Number(Box) ){
@@ -720,6 +688,11 @@ SafetyStockV();
  }
 
  if(Box  == 0){
+        td1.innerHTML = batch;
+        td2.innerHTML = Category;
+        td3.innerHTML = products;
+        td4.innerHTML = Box;
+        td5.innerHTML = exdate;
   td6.innerHTML = '<span id=""class="badge badge-danger" >' + 'Out of Stock' + '</span>';
  }
  td7.innerHTML = '<button type="button" onclick="Select()"  class="btn btn-primary" data-toggle="modal" data-target="#Edit"><i  class="far fa-plus-square"></i></button>'
@@ -728,6 +701,43 @@ SafetyStockV();
   trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);
   tbody.appendChild(trow);
 }
+
+//<!------------------------------------------------Select option------------------------------------->
+database.ref('Categories').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list = '';
+         snapshot.forEach(function(data){
+            var val = data.val();
+            vehi_list += '<option value="' + val.Value + '">' + val.Value + '</option>';
+         });
+            $('#Select1').append(vehi_list);
+
+}
+});
+
+////<!---------------------------------------------------------datatable load Function---------------------------------------------------------->           
+setTimeout(function(){
+        $(document).ready(function () {
+          $('#table').DataTable({
+            "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
+            "ordering": true,  
+            "order": [[ 4, "asc" ]],
+         
+
+          });
+          });   
+
+        //table hide have the value of zero
+        var $rowsNo = $('#table tbody tr').filter(function() {
+        return $.trim($(this).find('td').eq(3).text()) === "0"
+         }).toggle();
+        //-----------------reserve for expiration hide--------
+        /*
+         var $rowsNo = $('#table tbody tr').filter(function() {
+        return $.trim($(this).find('td').eq(5).text()) === "Critical Stock"
+         }).toggle();
+         */
+    },3000)
 
 //-----------------------------------------------Ready()----------------------------------------
 function Ready(){
@@ -787,6 +797,7 @@ function time1() {
 
      document.getElementById("Date").value = month+"-"+ date +"-"+ year;    
 
+ 
 
   }
   setInterval(time1, 10);
@@ -841,7 +852,7 @@ function Compute(){
 
       document.getElementById('AddGraph').value = AddGraph;
 
-
+ 
 }
 //===========================================================Create Function===========================================
 function Create(){
@@ -928,12 +939,13 @@ Ready();
                           
                              //-----------------------Create Report--------------  
                               database.ref('Report/' + timeStamp).set({
+                                
                                             Batch : Batch,
                                             Product : Product,
                                             Category : Category,
                                             Recipients : Recipients,
-                                            Box : Qty,
-                                            Address : Address,
+                                            IssuedBox : Qty,
+                                            Location: Address,
                                             Total : Total,
                                             Project: Project,
                                             TimeStamp:timeStamp,
@@ -942,8 +954,8 @@ Ready();
                                                 
                                               })
                                 
-                        //update Qty
-                        database.ref('Item/' + Batch).update({
+                             //update Qty
+                             database.ref('Item/' + Batch).update({
                               Box : totalBox ,
                               Total : totalQty,
                               //for graph
@@ -1250,5 +1262,37 @@ Ready();
           }
         });
       });
+  </script>
+
+  <!-------------------------------------------Filter select funstion-------------->
+<script>
+  $('.content-wrapper').on("change", 'select', function() {
+    var Category = $('#Select1').val().toLowerCase()
+    
+  
+    var table = $("#tbody");
+    var trs = table.find('tr');
+    trs.hide();
+  
+    var filtered = trs.filter(function(index, elem) {
+      var tds = $(elem).find('td');
+      if (Category !== "all" && tds.eq(1).text().trim().toLowerCase() !== Category) {  
+        return false;
+      }
+
+      return true;
+      
+       
+    })
+  
+    filtered.show();
+  
+    if (filtered.length == 0) {
+     // alert("No Records Found!!!");
+
+     
+    }
+  
+  });
   </script>
 </html>
