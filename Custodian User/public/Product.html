@@ -827,8 +827,8 @@
               <textarea id="Readnote" class="form-control" rows="3" placeholder="" disabled></textarea>
             </div>
 
-      <div class="modal-footer justify-content-between">
-        <button type="button"  class="btn btn-default float-right" data-dismiss="modal">Close</button>
+      <div class="modal-footer">
+        <button type="button"  class="btn bg-gradient-danger btn-xs float-right" data-dismiss="modal" onclick="DeleteRead()">Delete</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -847,6 +847,7 @@
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <input type="hidden"  class="form-control" id="CheckBatch" value="Undefined">
 <!-------------------------------------------------------------------------------------------------------------------------------------------->
+<input type="text"  class="form-control" id="Batch3">
 <input type="hidden"  class="form-control" id="Batch2">
 <input type="hidden"  class="form-control" id="Category2">
 <input type="hidden"  class="form-control" id="Product2">
@@ -1078,7 +1079,7 @@ function AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,ex
  }
 
  if(Status == "Decline" ){
-  td11.innerHTML = '<button type="button" onclick="Read()"  class="btn btn-info" ><i class="far fa-clipboard"></i></button> <button type="button" onclick="DeleteN()"  class="btn btn-danger" ><i class="fas fa-trash-alt"></i></button>';
+  td11.innerHTML = '<button type="button" onclick="Read()"  class="btn btn-info" ><i class="far fa-clipboard"></i></button>';
  }
  
  
@@ -1634,7 +1635,7 @@ function Read(){
                 for(var i = 0; i < table3.rows.length; i++){
 
                   table3.rows[i].onclick = function(){
-                  a  = document.getElementById('Batch').value = this.cells[0].innerHTML;
+                  a  = document.getElementById('Batch3').value = this.cells[0].innerHTML;
                   database.ref('PendingItem/'+ a ).on('value',function(snapshot){
                    document.getElementById('Readnote').innerHTML= snapshot.val().Notes;
                         });
@@ -1644,7 +1645,10 @@ function Read(){
                   }
               
      }
-
+//---------------------------------------function for delete read-------------------------------------------->
+function DeleteRead(){
+  alert('working in progress')
+}
 ////<!---------------------------------------------------------Select Function------------------------------------------------------------------------------------------->
 function run1() {
                         document.getElementById("Category").value = document.getElementById("categories").value;
