@@ -28,7 +28,7 @@
 </head>
 
 
-<body class="hold-transition sidebar-mini">
+<body class="control-sidebar-slide-open text-sm sidebar-mini layout-fixed layout-navbar-fixed">
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -172,33 +172,17 @@
                 <!--Item-->
 
                  <!--Trash-->
-                 <li class="nav-item menu-open">
-                  <a href="#" class="nav-link active ">
+                 <li class="nav-item">
+                  <a href="#" class="nav-link active">
                     <i class="fas fa-trash"></i>
-                    <p>
-                      Archiving
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="product_deleted.html" class="nav-link active ">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Product</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>       
-                <!--Trash-->
-
-               <!--calendar-->
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon far fa-calendar-alt"></i>
-                    <p>Calendar</p>
+                    <p>Archiving</p>
                   </a>
                 </li>
-                <!--calendar-->
+                   
+            <!--Trash-->
+                <!--Trash-->
+
+      
   <!--Safety Stock Module-->
   <li class="nav-item">
     <a href="Safety_Stock.html" class="nav-link">
@@ -287,7 +271,6 @@
                   <th>Unit Per Box</th>
                   <th>Boxes</th>
                   <th>Total Qty</th>
-                  <th>Status</th>
                   <th>Action</th>
                   
             </thead>
@@ -303,7 +286,7 @@
       <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
 
-      <input type="hidden"  required=""  id="Batch" placeholder="Enter Batch number"  style="width: 30%;">
+      <input type="hidden"  required=""  id="Batch" placeholder="Enter Batch number" >
 
           <!-- /.card-body -->
         </div>
@@ -315,6 +298,14 @@
         </div>
         </div>
         </section>
+        </div>
+        </div>
+        <footer class="main-footer">
+          <div class="float-right d-none d-sm-block">
+            <strong>Copyright &copy; 2021 <a href="#">ProTech</a>.</strong> All rights reserved.
+          </div>
+          <b>.</b>
+          </footer>
 <!-- Main Content--->
 
 
@@ -344,7 +335,6 @@
       </div>
       <!-- /.modal -->
 
-      <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
       
     </div>
       <input type="hidden" required="" class="form-control" id="Product" placeholder="Enter Product Item">
@@ -374,7 +364,8 @@
     <!--------------------------------------------------Safety Stock--------------------------------------------------------------------->
     <input type="hidden"  class="form-control" id="SafetyStock">
     <input type="hidden"  class="form-control" id="MinSafetyStock">
-
+    <!--------------------------------------------------Time Stamp--------------------------------------------------------------------->
+    <input type="hidden"  class="form-control" id="TimeStamp">
    </select> </div>
    
    
@@ -409,18 +400,10 @@
 <script>
    var database = firebase.database()
  
-   //------------------------------Safety Stock value----------------
-database.ref('Safety_Stock/').on('value',function(snapshot){
-document.getElementById('SafetyStock').value = snapshot.val().SafetyStock;
-document.getElementById('MinSafetyStock').value = snapshot.val().MinSafetyStock;
-});
-//-------------------------------------------------------------
-function SafetyStockV(){
-  SafetyStock = document.getElementById('SafetyStock').value;
-  MinSafetyStock = document.getElementById('MinSafetyStock').value;
-}
+
+
   function SelectAllData(){
-    database.ref('Deleted_Item').once('value',
+    database.ref('PendingItemDelete/').once('value',
     function(AllRecord){
       AllRecord.forEach(
         function(CurrentRecord){
@@ -457,7 +440,7 @@ function SafetyStockV(){
    var td9 = document.createElement('td');
    var td10 = document.createElement('td');
    var td11 = document.createElement('td');
-   var td12 = document.createElement('td');
+
 
    
    
@@ -472,29 +455,13 @@ function SafetyStockV(){
    td8.innerHTML = PerBox;
    td9.innerHTML = Box;
    td10.innerHTML = Total;
-//------------------------------Status-----------------------------
- SafetyStockV();
- if(Number(SafetyStock) <= Number(Box) ){
-  td11.innerHTML = '<span id=""class="badge badge-success">' + 'In Stock' + '</span>';
- }
 
- if(Number(SafetyStock) >= Number(Box) ){
-  td11.innerHTML = '<span id=""class="badge badge-info">' + 'Safety Stock' + '</span>';
- }
-
- if(Number(MinSafetyStock) >= Number(Box) ){
-  td11.innerHTML = '<span id=""class="badge badge-warning">' + 'Critical Stock' + '</span>';
- }
-
- if(Box  == 0){
-  td11.innerHTML = '<span id=""class="badge badge-danger" >' + 'Out of Stock' + '</span>';
- }
-   td12.innerHTML = '<button  onclick="Restore()"  class="btn btn-success"><i class="fas fa-undo"></i></button>';
+   td11.innerHTML = '<button  onclick="Restore()"  class="btn btn-block btn-outline-success btn-xs"><i class="fas fa-trash-restore"></i></button>';
 
       
    
    
-    trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);trow.appendChild(td11);trow.appendChild(td12);
+    trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);trow.appendChild(td11);
     tbody.appendChild(trow);
 
 
@@ -520,41 +487,6 @@ var BatchV, productV, ManufactureV, DateV, Exdate, StatusV;
 }
   
 
-//Delete
-function Open(){
-
- var table1 = document.getElementById('table');
-     for(var i = 0; i < table1.rows.length; i++){
-
-      table1.rows[i].onclick = function(){
-
-      a = document.getElementById('Batch').value = this.cells[1].innerHTML;
-    
-    };
-  }
-
-}
-function Delete(){
-Ready();
-$('#modal-danger').modal('hide');
-$(document).Toasts('create', {
-                      class: 'bg-success',
-                    body: 'The batch '+ a +' is sucessfully Delete permanent in your invetory',
-                    title: '<h5><i class="fas fa-trash-alt"></i> Delete </h5>',
-                    autohide: true,
-                    delay: 2000,
-                    }) 
-                    setTimeout(function(){
-                     window.location.reload();
-                     },2000)
- database.ref('Deleted_Item/' + a).remove();
-
-   
-
-}
-
-
-
 //Restore
 function Restore(){
  Ready();
@@ -575,10 +507,11 @@ function Restore(){
                   j = document.getElementById('Total1').value= this.cells[9].innerHTML;
                   h = document.getElementById('status').value= this.cells[10].innerHTML;
 
-                  database.ref('Deleted_Item/'+ a ).on('value',function(snapshot){
+                  database.ref('PendingItemDelete/'+ a ).on('value',function(snapshot){
                  R = document.getElementById('Graph').value= snapshot.val().GraphRelease;
+                 R1 = document.getElementById('TimeStamp').value= snapshot.val().TimeStamp;
                        
-                 database.ref('Item/' + a).set({
+                 database.ref('PendingItem/' + a).set({
                               Batch : a,
                               Category : b,
                               Brand : c,
@@ -588,12 +521,15 @@ function Restore(){
                               PerBox : g,
                               Box : ii,
                               Total: j,
-                              GraphRelease : R         
+                              GraphRelease : R,
+                              TimeStamp:  R1,
+                              Status :"Pending",
+
                   });
                   });
                 
                 //Restore Total Dashboard
-                        
+                /*
                 if(h == '<span id="" class="badge badge-info">Safety Stock</span>' || h== '<span id="" class="badge badge-warning">Critical Stock</span>' || h == '<span id="" class="badge badge-success">In Stock</span>'){
                         TotalItem =  ++total;
                         AvailableItem = ++available;
@@ -613,17 +549,17 @@ function Restore(){
                           NotAvailable_Item: NotavailableItem
                           })
                         }
-
+             */
            $(document).Toasts('create', {
                       class: 'bg-success',
-                    body: 'The batch '+ a +' Product '+ c + ' is sucessfully Restore in your invetory',
+                    body: 'The batch '+ a +' Product '+ c + ' is sucessfully Restored',
                     title: '<h5><i class="fas fa-trash-restore"></i> Restore </h5>',
                     autohide: true,
                     delay: 1000,
                     }) 
                     setTimeout(function(){
-                      database.ref('Deleted_Item/' + a).remove() 
-                     window.location.reload();
+                     database.ref('PendingItemDelete/' + a).remove() 
+                   window.location.reload();
                      },1000)
            
        

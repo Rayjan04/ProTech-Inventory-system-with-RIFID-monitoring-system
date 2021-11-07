@@ -178,33 +178,15 @@
                 <!--Item-->
 
                  <!--Trash-->
-                 <li class="nav-item menu">
-                  <a href="#" class="nav-link">
+                 <li class="nav-item">
+                  <a href="product_deleted.html" class="nav-link ">
                     <i class="fas fa-trash"></i>
-                    <p>
-                      Archiving
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="product_deleted.html" class="nav-link ">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Product</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>       
-                <!--Trash-->
-
-               <!--calendar-->
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon far fa-calendar-alt"></i>
-                    <p>Calendar</p>
+                    <p>Archiving</p>
                   </a>
                 </li>
-                <!--calendar-->
+                   
+            <!--Trash-->
+    
 
          <!--Safety Stock Module-->
          <li class="nav-item">
@@ -488,6 +470,15 @@
     <!-- /.card -->
   </div>
 </div>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+  <div class="float-right d-none d-sm-block">
+    <strong>Copyright &copy; 2021 <a href="#">ProTech</a>.</strong> All rights reserved.
+  </div>
+  <b>.</b>
+  </footer>
 
 
 
@@ -1142,38 +1133,55 @@ Ready();
 //-------------------------------Proceed for Safety stock-----------------------
 function Proceed(){
   $('#SafetyStock').modal('hide');
-      database.ref('Realease_Item/' + Batch).set({
-                              Batch : Batch,
-                              Product : Product,
-                              Category : Category,
-                              Recipients : Recipients,
-                              Box : Qty,
-                              Address : Address,
-                              Total : Total,
-                             
-                              
-                            })
-                    //update Qty
-                    database.ref('Item/' + Batch).update({
-                          Box : totalBox ,
-                          Total : totalQty,
-                    })
-                    if(totalQty <= 0){
+            //to create release 
+            var timeStamp = Date.now();
+                          database.ref('Realease_Item/Product/' + timeStamp).set({
 
-                    //update DashBoard
-                        NotAvailable = ++NotAvailable;
-                        AvailableItem = --Available;
-
-                        database.ref('Dashboard/').update({
-                        NotAvailable_Item : NotAvailable,
-                        Available_Item: AvailableItem,
-                        
-                        })
-
-                          }
-                    //notification success Add
-             
-                    $(document).Toasts('create',{
+                                  Batch : Batch,
+                                  Product : Product,
+                                  Category : Category,
+                                  Recipients : Recipients,
+                                  Box : Qty,
+                                  Address : Address,
+                                  Total : Total,
+                                  Project: Project,
+                                  TimeStamp:timeStamp,
+                                  Date:Date1
+                                })
+                          //to create Projects
+                          database.ref('Realease_Item/Projects/' + Project).set({
+                                 ProjectName: Project,
+                                 Address: Address,
+                                 Recipients: Recipients,
+                                })
+                          
+                             //-----------------------Create Report--------------  
+                              database.ref('Report/' + timeStamp).set({
+                                
+                                            Batch : Batch,
+                                            Product : Product,
+                                            Category : Category,
+                                            Recipients : Recipients,
+                                            IssuedBox : Qty,
+                                            Location: Address,
+                                            Total : Total,
+                                            Project: Project,
+                                            TimeStamp:timeStamp,
+                                            Date:Date1,
+                                            Return: 0
+                                                
+                                              })
+                                
+                             //update Qty
+                             database.ref('Item/' + Batch).update({
+                              Box : totalBox ,
+                              Total : totalQty,
+                              //for graph
+                              GraphRelease : GraphRelease
+                               })                               
+                 
+                //notification success Add
+                 $(document).Toasts('create',{
                     class: 'bg-success',
                     body: 'sucessfully Create ',
                     title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
@@ -1188,40 +1196,55 @@ function Proceed(){
  //-------------------------------Proceed for critical stock-----------------------
 function Proceed1(){
   $('#CriticalStock').modal('hide');
-  database.ref('Realease_Item/' + Batch).set({
-                          Batch : Batch,
-                          Product : Product,
-                          Category : Category,
-                          Recipients : Recipients,
-                          Box : Qty,
-                          Address : Address,
-                          Total : Total,
+         //to create release 
+         var timeStamp = Date.now();
+                          database.ref('Realease_Item/Product/' + timeStamp).set({
+
+                                  Batch : Batch,
+                                  Product : Product,
+                                  Category : Category,
+                                  Recipients : Recipients,
+                                  Box : Qty,
+                                  Address : Address,
+                                  Total : Total,
+                                  Project: Project,
+                                  TimeStamp:timeStamp,
+                                  Date:Date1
+                                })
+                          //to create Projects
+                          database.ref('Realease_Item/Projects/' + Project).set({
+                                 ProjectName: Project,
+                                 Address: Address,
+                                 Recipients: Recipients,
+                                })
                           
-                          
-                        })
-                //update Qty
-                database.ref('Item/' + Batch).update({
-                      Box : totalBox ,
-                      Total : totalQty,
-                })
-
-              if(totalQty <= 0){
-
-               //update DashBoard
-                    NotAvailable = ++NotAvailable;
-                    AvailableItem = --Available;
-
-                    database.ref('Dashboard/').update({
-                    NotAvailable_Item : NotAvailable,
-                    Available_Item: AvailableItem,
-                    
-                    })
-
-                      }
-        
-                 //notification success Add
-             
-                    $(document).Toasts('create',{
+                             //-----------------------Create Report--------------  
+                              database.ref('Report/' + timeStamp).set({
+                                
+                                            Batch : Batch,
+                                            Product : Product,
+                                            Category : Category,
+                                            Recipients : Recipients,
+                                            IssuedBox : Qty,
+                                            Location: Address,
+                                            Total : Total,
+                                            Project: Project,
+                                            TimeStamp:timeStamp,
+                                            Date:Date1,
+                                            Return: 0
+                                                
+                                              })
+                                
+                             //update Qty
+                             database.ref('Item/' + Batch).update({
+                              Box : totalBox ,
+                              Total : totalQty,
+                              //for graph
+                              GraphRelease : GraphRelease
+                               })                               
+                 
+                //notification success Add
+                 $(document).Toasts('create',{
                     class: 'bg-success',
                     body: 'sucessfully Create ',
                     title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',

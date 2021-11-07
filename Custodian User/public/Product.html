@@ -178,33 +178,15 @@
                 <!--Item-->
 
                  <!--Trash-->
-                 <li class="nav-item menu">
-                  <a href="#" class="nav-link">
+                 <li class="nav-item">
+                  <a href="product_deleted.html" class="nav-link ">
                     <i class="fas fa-trash"></i>
-                    <p>
-                      Archiving
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="product_deleted.html" class="nav-link ">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Product</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>       
-                <!--Trash-->
-
-               <!--calendar-->
-                <li class="nav-item">
-                  <a href="Calendar.html" class="nav-link">
-                    <i class="nav-icon far fa-calendar-alt"></i>
-                    <p>Calendar</p>
+                    <p>Archiving</p>
                   </a>
                 </li>
-                <!--calendar-->
+                   
+            <!--Trash-->
+
 
                <!--Safety Stock Module-->
             <li class="nav-item">
@@ -310,7 +292,7 @@
               <option value="Critical Stock">Critical Stock</option>
               <option value="Out of Stock">Out Of Stock</option>
             </select>  
-             <button  class="btn btn-success float-right" data-toggle="modal" data-target="#add">Create Product</button>
+             <button  class="btn  bg-gradient-primary btn-xs float-right" data-toggle="modal" data-target="#add">Add Product</button>
              <br>
              </div>
 
@@ -327,7 +309,6 @@
              
               <thead>
                 <tr>
-                    <th>#</th>
                     <th> Batch#</th>
                     <th>Category</th>
                     <th>Brand</th>
@@ -427,13 +408,12 @@
 </div>
 
 
-  <!-- /.content-wrapper -->
 <footer class="main-footer">
-<div class="float-right d-none d-sm-block">
-<b>Version</b> 3.1.0
-</div>
-<strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-</footer>
+  <div class="float-right d-none d-sm-block">
+    <strong>Copyright &copy; 2021 <a href="#">ProTech</a>.</strong> All rights reserved.
+  </div>
+  <b>.</b>
+  </footer>
 
 
      
@@ -847,7 +827,7 @@
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <input type="hidden"  class="form-control" id="CheckBatch" value="Undefined">
 <!-------------------------------------------------------------------------------------------------------------------------------------------->
-<input type="text"  class="form-control" id="Batch3">
+<input type="hidden"  class="form-control" id="Batch3">
 <input type="hidden"  class="form-control" id="Batch2">
 <input type="hidden"  class="form-control" id="Category2">
 <input type="hidden"  class="form-control" id="Product2">
@@ -877,9 +857,10 @@
 <input type="hidden" name="Brand" required="" class="form-control" id="Product1" placeholder="Enter Product Item" list="browsers"> 
 <!-- Main Content-->
 <input type="hidden" name="Manufacture" required="" class="form-control" id="Batch" placeholder="Enter Manufacturer">
- 
+ <!--------------------------------------------------TimeStamp------------------->
+<input type="text" name="Brand" required="" class="form-control" id="TimeStamp" placeholder="Enter Product Item" list="browsers"> 
 
-  
+
 
 <!-- REQUIRED SCRIPTS -->
 <!--time-->
@@ -981,7 +962,7 @@ function SelectAllData(){
   });
 }
 window.onload = SelectAllData;
-var batchNumber = 0
+
 function AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,status,PerBox,Box,Total){
  var tbody = document.getElementById('tbody');
  var trow = document.createElement('tr');
@@ -995,42 +976,42 @@ function AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,s
  var td8 = document.createElement('td');
  var td9 = document.createElement('td');
  var td10 = document.createElement('td');
- var td11 = document.createElement('td');
 
 
 
- td1.innerHTML = ++ batchNumber;
- td2.innerHTML = batch;
- td3.innerHTML = Category;
- td4.innerHTML = products;
- td5.innerHTML = manufacture;
- td6.innerHTML = supplydate;
- td7.innerHTML = exdate;
- td8.innerHTML = PerBox;
- td9.innerHTML = Box;
- td10.innerHTML = Total;
+
+ 
+ td1.innerHTML = batch;
+ td2.innerHTML = Category;
+ td3.innerHTML = products;
+ td4.innerHTML = manufacture;
+ td5.innerHTML = supplydate;
+ td6.innerHTML = exdate;
+ td7.innerHTML = PerBox;
+ td8.innerHTML = Box;
+ td9.innerHTML = Total;
 
  //------------------------------Status-----------------------------
  SafetyStockV();
  if(Number(SafetyStock) <= Number(Box) ){
-  td11.innerHTML = '<span id=""class="badge badge-success">' + 'In Stock' + '</span>';
+  td10.innerHTML = '<span id=""class="badge badge-success">' + 'In Stock' + '</span>';
  }
 
  if(Number(SafetyStock) >= Number(Box) ){
-  td11.innerHTML = '<span id=""class="badge badge-info">' + 'Safety Stock' + '</span>';
+  td10.innerHTML = '<span id=""class="badge badge-info">' + 'Safety Stock' + '</span>';
  }
 
  if(Number(MinSafetyStock) >= Number(Box) ){
-  td11.innerHTML = '<span id=""class="badge badge-warning">' + 'Critical Stock' + '</span>';
+  td10.innerHTML = '<span id=""class="badge badge-warning">' + 'Critical Stock' + '</span>';
  }
 
  if(Box  == 0){
-  td11.innerHTML = '<span id=""class="badge badge-danger" >' + 'Out of Stock' + '</span>';
+  td10.innerHTML = '<span id=""class="badge badge-danger" >' + 'Out of Stock' + '</span>';
  }
  //td12.innerHTML = '<button type="button" onclick="Edit()"  class="btn btn-primary" data-toggle="modal" data-target="#Edit"><i class="fas fa-edit"></i></button> <button type="button" onclick="Open()"  class="btn btn-danger" data-toggle="modal" data-target="#modal-danger"><i class="fas fa-trash-alt"></i></button>'
  
  
-  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);trow.appendChild(td11);
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);
   tbody.appendChild(trow);
 }
 
@@ -1079,7 +1060,7 @@ function AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,ex
  }
 
  if(Status == "Decline" ){
-  td11.innerHTML = '<button type="button" onclick="Read()"  class="btn btn-info" ><i class="far fa-clipboard"></i></button>';
+  td11.innerHTML = '<button type="button" onclick="Read()"  class="btn btn-block bg-gradient-info btn-xs" ><i class="far fa-clipboard"></i></button>';
  }
  
  
@@ -1432,6 +1413,7 @@ function Open(){
                      j =  document.getElementById('status').value= this.cells[9].innerHTML;
                     database.ref('PendingItem/'+ a ).on('value',function(snapshot){
                  r = document.getElementById('Graph').value= snapshot.val().GraphRelease;
+                 r1 = document.getElementById('TimeStamp').value= snapshot.val().TimeStamp;
                         });
 
                     };
@@ -1450,10 +1432,12 @@ function Delete(){
                           PerBox : g,
                           Box : h,
                           Total: ii,
-                          GraphRelease : r
+                          GraphRelease : r,
+                          TimeStamp: r1,
+                          Status:"Pending",
           });  
                     //Delete total item
-                    
+                    /*
                     if(j == '<span id="" class="badge badge-info">Safety Stock</span>' || j== '<span id="" class="badge badge-warning">Critical Stock</span>' || j == '<span id="" class="badge badge-success">In Stock</span>'){
                     TotalItem =  --total;
                     AvailableItem = --available;
@@ -1473,20 +1457,20 @@ function Delete(){
                       NotAvailable_Item: NotavailableItem
                        })
                      }
-                   
+                   */
 
-          database.ref('PendingItem/' + a).remove();
-
+       
           //notification success Delete
                      $('#modal-danger').modal('hide');
                     $(document).Toasts('create', {
                       class: 'bg-success',
-                    body: 'The batch '+ a +' Product '+ c + ' is sucessfully Deleted in your invetory',
+                    body: 'The batch '+ a +' Product '+ c + ' is sucessfully Deleted',
                     title: '<h5><i class="fas fa-trash-alt"></i> Deleted </h5>',
                     autohide: true,
                     delay: 2000,
                     }) 
                     setTimeout(function(){
+                      database.ref('PendingItem/' + a).remove();
                      window.location.reload();
                      },2000)
 
@@ -1576,7 +1560,7 @@ function SaveEdit(){
     $('#Edit').modal('hide');
 
     if(status != '<span id="" class="badge badge-danger">Out of Stock</span>'){
-         database.ref('Item/' + Batchv).update({
+         database.ref('PendingItem/' + Batchv).update({
             Brand : Productv,
             Category : Categoryv,
             Manufacture : Manufacturev,
@@ -1589,7 +1573,7 @@ function SaveEdit(){
     }
  
     if(status == '<span id="" class="badge badge-danger">Out of Stock</span>'){
-            database.ref('Item/' + Batchv).update({
+            database.ref('PendingItem/' + Batchv).update({
             Brand : Productv,
             Category : Categoryv,
             Manufacture : Manufacturev,
@@ -1635,8 +1619,8 @@ function Read(){
                 for(var i = 0; i < table3.rows.length; i++){
 
                   table3.rows[i].onclick = function(){
-                  a  = document.getElementById('Batch3').value = this.cells[0].innerHTML;
-                  database.ref('PendingItem/'+ a ).on('value',function(snapshot){
+                  ax  = document.getElementById('Batch3').value = this.cells[0].innerHTML;
+                  database.ref('PendingItem/'+ ax ).on('value',function(snapshot){
                    document.getElementById('Readnote').innerHTML= snapshot.val().Notes;
                         });
                       
@@ -1647,7 +1631,20 @@ function Read(){
      }
 //---------------------------------------function for delete read-------------------------------------------->
 function DeleteRead(){
-  alert('working in progress')
+  $('#Read').modal('hide');
+          //notification success Delete
+          $('#modal-danger').modal('hide');
+                    $(document).Toasts('create', {
+                      class: 'bg-success',
+                    body: 'The batch '+ ax +'  is sucessfully Deleted',
+                    title: '<h5><i class="fas fa-trash-alt"></i> Deleted </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    }) 
+                    setTimeout(function(){
+                      database.ref('PendingItem/' + ax).remove();
+                     window.location.reload();
+                     },2000)
 }
 ////<!---------------------------------------------------------Select Function------------------------------------------------------------------------------------------->
 function run1() {
