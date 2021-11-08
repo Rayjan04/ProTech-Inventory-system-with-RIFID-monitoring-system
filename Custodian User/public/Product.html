@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Custodian - Product</title>
  
+  <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
    <!-- DataTables -->
    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
    <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -17,8 +20,9 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="css/adminlte.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
- 
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
   <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
 
@@ -267,10 +271,10 @@
             <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Pending</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Safety Stock</a>
+            <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Bad Order</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Bad Order</a>
+            <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Status Control</a>
           </li>
         </ul>
       </div>
@@ -292,7 +296,7 @@
               <option value="Critical Stock">Critical Stock</option>
               <option value="Out of Stock">Out Of Stock</option>
             </select>  
-             <button  class="btn  bg-gradient-primary btn-xs float-right" data-toggle="modal" data-target="#add">Add Product</button>
+             <button  class="btn  bg-gradient-primary btn-xs float-right" data-toggle="modal" data-target="#add">Add New Product</button>
              <br>
              </div>
 
@@ -391,10 +395,146 @@
           </div>
           </div>
           <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
-          // lagay mo dito tab3
-          </div>
+                <!-------------------------------------------------------------For Bad Orders Request-------------------->      
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Report Bad Orders</h3>
+        
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label>Select Batch Product</label>
+                          <select id="PrductSelection" class="form-control select2" style="width: 100%;">
+                            <option value="">--Select Batch---</option>
+                           
+                          </select>
+                        </div>
+                        
+                      <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <!------------------------------------------------->
+                    <div class="col-4">
+                 
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Product Name</label>
+                        <input type="text" class="form-control" id="" placeholder="" disabled>
+                      </div>
+                      
+                      </div>
+
+                      <div class="col-4">
+                 
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Manufacturer</label>
+                          <input type="text" class="form-control" id="" placeholder="" disabled>
+                        </div>
+                        
+                        </div>
+
+                    
+                    </div>
+
+                    <!----------------------------------------------------->
+
+                    <div class="row">
+        
+                      <div class="col-4">
+                        
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Description</label>
+                          <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        </div>
+            
+                        </div>
+                        <!----------------------------------------------------->
+                        
+                        <div class="col-2">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Qty by Box</label>
+                          <input type="number" name ="" class="form-control" id="" placeholder="Box">
+                        </div>
+                        </div>
+                     <!----------------------------------------------------->
+                        <div class="col-2">
+                          <div class="form-group">
+                          
+                            <label for="exampleInputPassword1">Qty by Pcs</label>
+                          <input type="number" name ="" class="form-control" id="" placeholder="PCS">
+                           
+                          </div>
+                          
+                        <!-- /.col -->
+                      </div>
+                        
+                        </div>
+                        <div class="card-footer">
+                          <button   type="submit" class="btn btn-info float-right" data-toggle="modal" data-target="" onclick="ReportBO()">Report</button>
+                        </div>
+                  </div>
+                  <!-- /.card-body -->
+           
+                </div>
+                </div>
+          
           <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
-           // lagay mo dito tab4
+                 <!----------------------------------------------------------Status Control---------------------------->
+                 <div class="col-md-5">
+                        
+                  <div class="card card-success ">
+                      <div class="card-header">
+                     
+                      </div>
+                      <!-- /.card-header -->
+                      <!-- form start -->
+                      <form id="quickForm3">
+                        <div class="card-body">
+                            <div class="form-group">
+                                
+                                <div class="row">
+
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Safety Stock</label>
+                                            <input type="text" class="form-control" id="SafetyStock1" placeholder="0" disabled>
+                                          </div>                      
+                                      </div>
+
+                                      <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Critical safety stock</label>
+                                            <input type="text" class="form-control" id="MinSafetyStock1" placeholder="0" disabled>
+                                          </div>                      
+                                      </div>
+                                      
+                                  
+                          
+                                      </div>
+
+                          
+                          
+                        </div>
+
+                      </form>
+
+                    </div>
+                <!-- /.card-body --> 
+              
+                        <div class="card-footer">
+                          <button   type="submit" class="btn btn-info float-right" data-toggle="modal" data-target="#EditStatus" onclick="EditStatus()">Edit</button>
+                        </div>
+              
+                </div>
+          
+      
+
+
+              <!-- /.card-body -->
+            </div>
           </div>
         </div>
       </div>
@@ -637,7 +777,7 @@
                <div class="form-group">
                   <label class="selectpicker" for="exampleInputPassword1">Product Category</label>
                <select id="categories" onchange="run1()" class="form-control select2" style="width: 100%;">
-                <option value="" >------Select Category------</option>                   
+                <option value="" selected hidden>------Select Category------</option>                   
                 </select>
 
             </div>
@@ -816,9 +956,47 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-   
-<!---------------------------------------------------------------------------------------------------------------------------------------------------->
+       <!-----------------------------------------------------------------Edit modal--------------------------------------->
+        
+       <div class="modal fade" id="EditStatus">
+        <div class="modal-dialog modal-default">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit</h4> 
+            </div>
+            <div class="modal-body">
+            
+                <div class="row">
 
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Safety Stock</label>
+                            <input type="number" class="form-control" id="SafetyStock2">
+                          </div>                      
+                      </div>
+
+                      <div class="col-6">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Critical safety stock</label>
+                            <input type="number" class="form-control" id="MinSafetyStock2"  >
+                          </div>                      
+                      </div>
+                      
+                   
+          
+                      </div>
+
+            </div>       
+            <div class="modal-footer justify-content-between">
+              <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button onclick="SaveStatus()" class="btn btn-success">Save Change</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------->
   <input type="hidden"   class="form-control" id="Category" placeholder="">
   <input type="hidden"  class="form-control" id="Manufacture">
 <!----------------------------------------------------------------------------------------------------------------------------------------->
@@ -852,13 +1030,14 @@
 <!--------------------------------------------------Safety Stock--------------------------------------------------------------------->
 <input type="hidden"  class="form-control" id="SafetyStock">
 <input type="hidden"  class="form-control" id="MinSafetyStock">
+
 <!--------------------------------------------------Product select add------------------->
 <input type="hidden" name="Brand" required="" class="form-control" id="Product" placeholder="Enter Product Item" list="browsers"> 
 <input type="hidden" name="Brand" required="" class="form-control" id="Product1" placeholder="Enter Product Item" list="browsers"> 
 <!-- Main Content-->
 <input type="hidden" name="Manufacture" required="" class="form-control" id="Batch" placeholder="Enter Manufacturer">
  <!--------------------------------------------------TimeStamp------------------->
-<input type="text" name="Brand" required="" class="form-control" id="TimeStamp" placeholder="Enter Product Item" list="browsers"> 
+<input type="hidden" name="Brand" required="" class="form-control" id="TimeStamp" placeholder="Enter Product Item" list="browsers"> 
 
 
 
@@ -868,6 +1047,8 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="plugins/jquery/jquery.min.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
 <!-- jquery-validation -->
 <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="plugins/jquery-validation/additional-methods.min.js"></script>
@@ -878,10 +1059,6 @@
 <!-- Toastr -->
 <script src="plugins/toastr/toastr.min.js"></script>
 <!-- DataTables  & Plugins -->
-
-
-
-
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -896,7 +1073,6 @@
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 
-
 </body>
 
 <script id=MainScript>
@@ -904,6 +1080,11 @@
 
       
 var database = firebase.database()
+//------------------------------Safety Stock value----------------
+database.ref('Safety_Stock/').on('value',function(snapshot){
+document.getElementById('SafetyStock1').value = snapshot.val().SafetyStock;
+document.getElementById('MinSafetyStock1').value = snapshot.val().MinSafetyStock;
+ });
 
 //------------------------------Safety Stock value----------------
 database.ref('Safety_Stock/').on('value',function(snapshot){
@@ -1060,7 +1241,7 @@ function AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,ex
  }
 
  if(Status == "Decline" ){
-  td11.innerHTML = '<button type="button" onclick="Read()"  class="btn btn-block bg-gradient-info btn-xs" ><i class="far fa-clipboard"></i></button>';
+  td11.innerHTML = '<button type="button" onclick="Read()"  class="btn  btn-info btn-sm" ><i class="far fa-clipboard"></i></button>';
  }
  
  
@@ -1162,6 +1343,19 @@ database.ref('ClientOfferd').once('value', function(snapshot){
 
 }
 });
+//--------------------------------Badorders edit select-----------------------
+database.ref('Item').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list2 = '';
+         snapshot.forEach(function(data){
+            var val2 = data.val();
+            vehi_list2 += '<option value="' + val2.Batch + '">' + val2.Brand +' #'+ val2.Batch+ '</option>';
+         });
+
+            $('#PrductSelection').append(vehi_list2);
+
+}
+});
 //<!---------------------------------------------------------------------------------------------------------------------------------------------------->
 
 
@@ -1195,6 +1389,8 @@ function Ready(){
           ExdateV = document.getElementById("Exdate").value;         
           Check  = document.getElementById("CheckBatch").value;
           Status1  = document.getElementById("Status1").value;
+          SafetyStock1 = document.getElementById('SafetyStock2').value; 
+          MinSafetyStock1 = document.getElementById('MinSafetyStock2').value;
 
 
 }
@@ -1331,13 +1527,13 @@ document.getElementById('Total1').value = total;
                       $(document).Toasts('create',{
                               class: 'bg-danger',
                               body: 'Cannot add the product because the Qunatity is 0',
-                              title: '<h5><i class="fas fa-times"></i> Error  </h5>',
+                              title: '<h5><i class="fas fa-times"></i> Error Invalid Value </h5>',
                               autohide: true,
                               delay: 5000,
                               })   
                   }
                   
-                    return false;
+                    return 0;
                   }
   
  
@@ -1646,6 +1842,57 @@ function DeleteRead(){
                      window.location.reload();
                      },2000)
 }
+
+//------------------------------------------Fuction for edit status control--------------------------------------------------------------------------------------->
+function EditStatus(){
+      document.getElementById('MinSafetyStock2').value = document.getElementById('MinSafetyStock').value;
+      document.getElementById('SafetyStock2').value = document.getElementById('SafetyStock').value;
+
+}
+//-----------------------------------------------save edit for status control---------------------------------------------------------------------------->
+function SaveStatus(){
+        Ready();
+ 
+          if(Number(SafetyStock1) <  Number(MinSafetyStock1) || SafetyStock1 == "" || MinSafetyStock1 == ""){
+            $(document).Toasts('create',{
+          class: 'bg-danger',
+          body: 'Invalid Input the value of Critical stock is greater than to  Safety Stock',
+          title: '<h5><i class="fas fa-times"></i> Error Invalid Input  </h5>',
+          autohide: true,
+          delay: 5000,
+          }) 
+          return 0;
+          }
+          
+          else{
+
+
+              database.ref('Safety_Stock/').update({
+                            SafetyStock : SafetyStock1,
+                            MinSafetyStock : MinSafetyStock1,                       
+                          })
+
+                      //notification success Add
+                      $('#Edit').modal('hide');
+                      $(document).Toasts('create',{
+                      class: 'bg-success',
+                      body: 'sucessfully Save Change',
+                      title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
+                      autohide: true,
+                      delay: 2000,
+                      }) 
+
+                      setTimeout(function(){
+                      window.location.reload();
+                      },2000)
+
+          }
+    }
+
+    //---------------------------------------Function for Reporting Bad Orders---------------------------------------------->
+    function ReportBO(){
+      alert("Working in progress")
+    }
 ////<!---------------------------------------------------------Select Function------------------------------------------------------------------------------------------->
 function run1() {
                         document.getElementById("Category").value = document.getElementById("categories").value;
@@ -1827,6 +2074,10 @@ setTimeout(function(){
 
           });
           });  
+
+          $('.select2').select2()
+
+   
     },3000)
 
 </script>
@@ -1843,10 +2094,10 @@ $('.content-wrapper').on("change", 'select', function() {
 
   var filtered = trs.filter(function(index, elem) {
     var tds = $(elem).find('td');
-    if (Category !== "all" && tds.eq(2).text().trim().toLowerCase() !== Category) {
+    if (Category !== "all" && tds.eq(1).text().trim().toLowerCase() !== Category) {
       return false;
     }
-    if (Status !== "all" && tds.eq(10).text().trim().toLowerCase() !== Status) {
+    if (Status !== "all" && tds.eq(9).text().trim().toLowerCase() !== Status) {
       return false;
     }
 

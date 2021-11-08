@@ -422,14 +422,14 @@
         </div>
         <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
                               
-                            <div class="form-group">
+                         <!--   <div class="form-group">
                               <label>Project</label>
-                              <select id="Project" class="select1" style="width: 25%;">
+                              <select id="Project" class="select" style="width: 25%;">
                               <option value="All">All</option>   
                             </select> 
                         
                             <br>
-                            </div>
+                            </div>-->
                     
                             <div class="card-body table-responsive p-0" style="height: 480px;">
                             <table class="table table-striped table-bordered table-sm table-head-fixed text-nowrap" id="table1" width="100%">
@@ -448,7 +448,7 @@
                                     
                                 </tr>
                               </thead>
-                              <tbody id="tbody1" class="tbody">
+                              <tbody id="tbody1" class="tbody1">
                                     
                       
                               </tbody> 
@@ -540,7 +540,7 @@
        
         <div class="form-group">
           <label>Category</label>
-          <select id="Select1" class="select1" style="width: 25%;">
+          <select id="Select" class="select1" style="width: 25%;">
            <option value="All">All</option>   
          </select> 
          
@@ -790,7 +790,7 @@ database.ref('Categories').once('value', function(snapshot){
             var val = data.val();
             vehi_list += '<option value="' + val.Value + '">' + val.Value + '</option>';
          });
-            $('#Select1').append(vehi_list);
+            $('#Select').append(vehi_list);
 
 }
 });
@@ -1372,8 +1372,8 @@ Ready();
 
   <!-------------------------------------------Filter select funstion-------------->
 <script>
-  $('.content-wrapper').on("change", 'select', function() {
-    var Category = $('#Select1').val().toLowerCase()
+  $('.modal-content').on("change", 'select', function() {
+    var Category = $('#Select').val().toLowerCase();
     
   
     var table = $("#tbody");

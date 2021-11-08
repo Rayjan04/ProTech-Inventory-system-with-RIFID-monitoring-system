@@ -270,8 +270,8 @@
                     <div class="col-3">
                     
                         <div class="form-group">
-                          <label for="exampleInputPassword1">Batch Number</label>
-                          <input type="number" name="Batch" class="form-control" id="Batch" onkeyup="Auto()" placeholder="Enter a Batchnumber">
+                          <label for="exampleInputPassword1">#</label>
+                          <input type="number" name="Batch" class="form-control" id="Batch" onkeyup="Auto()" placeholder="Select Item " disabled>
                         </div>
           
                         </div>
@@ -356,7 +356,7 @@
             <div class="card-header">
             <!-- /.card-header -->
 
-            <div class="card card-primary">
+            <div class="card card-success">
                 <div class="card-header">
                   <h3 class="card-title">Issued Item</h3>
                 </div>
@@ -375,6 +375,7 @@
                         <th>Recipients</th>
                         <th>Issued Box</th>
                         <th>Total Qty</th>
+                        <th>Action</th>
                         
                        </tr>   
                     </thead> 
@@ -388,6 +389,8 @@
                     </tbody>
                 
               </table>
+
+
         
                 </div>
                 <!-- /.card-body -->
@@ -413,7 +416,7 @@
             <b>.</b>
             </footer>
   <!-- Main Content--->
-
+              
   <input type="hidden"  class="form-control" id="BatchCheck" placeholder="" disabled>
   <input type="hidden"  class="form-control" id="Unit" placeholder="" disabled>
   <input type="hidden"  class="form-control" id="PerBox" placeholder="" disabled>
@@ -427,7 +430,6 @@
   <input type="hidden"  class="form-control" id="TotalBox" placeholder="TotalBox" disabled>
   <input type="hidden"  class="form-control" id="Date" placeholder="Date" disabled>
   <input type="hidden"  class="form-control" id="Number" placeholder="Number" disabled>
-  <input type="hidden"  class="form-control" id="Status" placeholder="Status" disabled>
   <input type="hidden"  class="form-control" id="TotalItem" placeholder="Total" disabled>
   <input type="hidden"  class="form-control" id="TotalItem1" placeholder="TotalItme" disabled>
   <input type="hidden"  class="form-control" id="AllTotalBox" placeholder="TotalItme" disabled>
@@ -438,7 +440,6 @@
   <!------------------------------------------------------------------>
   <input type="hidden" style="font-weight: bold;" class="form-control" id="GraphRelease" >
   <input type="hidden" style="font-weight: bold;" class="form-control" id="TotalGraph" >
-
   <!-- Main Content--->
 
 
@@ -512,6 +513,7 @@ function AddItemsToTable(Batch,Address,Product,Category,Recipient,Box,Total,Time
  var td7 = document.createElement('td');
  var td8 = document.createElement('td');
  var td9 = document.createElement('td');
+ var td10 = document.createElement('td');
 
 
 
@@ -525,11 +527,12 @@ function AddItemsToTable(Batch,Address,Product,Category,Recipient,Box,Total,Time
  td7.innerHTML = Recipient;
  td8.innerHTML = Box;
  td9.innerHTML = Total;
+ td10.innerHTML = '<button  onclick="Select()" data-toggle="modal" data-target="#" class="btn btn-info btn-xs" >Select</button> '
 
  
  
  
-  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);
   tbody.appendChild(trow);
 }
 
@@ -567,8 +570,6 @@ function Ready(){
         Recipient = document.getElementById("Recipent").value;
         //-----------------------------------------
         Number1 = document.getElementById("Number").value;
-        //-----------------------------------------
-         Status = document.getElementById("Status").value;
          //-----------------------------------------
       AllTotalBox = document.getElementById("AllTotalBox").value;
           //-----------------------------------------
@@ -677,7 +678,7 @@ function Auto(){
 Ready();
     database.ref('Realease_Item/Product/'+ Batch ).on('value',function(snapshot){
             document.getElementById('Product').value= snapshot.val().Product;
-            document.getElementById('BatchCheck').value= snapshot.val().Batch;
+      b1 =  document.getElementById('BatchCheck').value= snapshot.val().Batch;
             document.getElementById('IssuedBox').value= snapshot.val().Box;
             document.getElementById('Total').value= snapshot.val().Total;
            document.getElementById('Category').value= snapshot.val().Category;
@@ -688,9 +689,8 @@ Ready();
             //----------------------------
 
            
-        database.ref('Item/'+ Batch ).on('value',function(snapshot){
+        database.ref('Item/'+ b1 ).on('value',function(snapshot){
             document.getElementById('PerBox').value= snapshot.val().PerBox;  
-            document.getElementById('Status').value= snapshot.val().Status;
             document.getElementById('TotalItem').value= snapshot.val().Total;
             document.getElementById('AllTotalBox').value= snapshot.val().Box;
             document.getElementById('GraphRelease').value= snapshot.val().GraphRelease;
@@ -726,7 +726,7 @@ Ready();
 
 
 
-    if(Batch == "" || Product == "" || Check == "" || Check != Batch || TotalCalculation < 0 || ReturnBox == "" || ReturnPcs == "" || Number(PerBox) < Number(ReturnPcs) ){
+    if(Batch == "" || Product == "" || Check == "" ||  TotalCalculation < 0 || ReturnBox == "" || ReturnPcs == "" || Number(PerBox) < Number(ReturnPcs) ){
         if(Batch == ""){
 
         }
@@ -768,15 +768,8 @@ Ready();
         }
 
 
-        if(Check != Batch){
-          $(document).Toasts('create',{
-         class: 'bg-danger',
-         body: 'Batch number Not found',
-         title: '<h5><i class="fas fa-times"></i> Error  </h5>',
-         autohide: true,
-         delay: 5000,
-         }) 
-        }
+
+      return 0;
         
     }
 
@@ -785,9 +778,9 @@ Ready();
 
         //-----------------------Update Product--------------
 
-      
+   
         if( TotalBox <= 0){
-            database.ref('Item/' + Batch).update({                         
+            database.ref('Item/' +  Check).update({                         
                                       Box: TotalBox, 
                                       Total: TotalItem1,
                                       //for graph
@@ -797,7 +790,7 @@ Ready();
         }
         if(TotalBox > 0){
 
-          database.ref('Item/' + Batch).update({                         
+          database.ref('Item/' +  Check).update({                         
                                       Box: TotalBox, 
                                       Total: TotalItem1,
                                        //for graph
@@ -817,34 +810,19 @@ Ready();
             
         }
         
-        
-
-
-        //-----------------------create-num--------------------------
-          var no = ++ Number1;
-          database.ref('Num/').update({                         
-                          Number : no,     
-                        })
+      
         //-----------------------Create Report--------------  
            
-         database.ref('Report/' + no).set({
+         database.ref('Report/' + Batch).update({
                           
-                          Batch : Batch,
-                          Product : Product,
-                          Category : Category,
-                          Location : Address,
-                          Recipients : Recipient,
-                          IssuedBox : Issued,
                           Return : TotalQty,
                           Total :  TotalCalculation,
                           Date : Date1
                           
                         })
 
-        //--------------------delete release---------------------------
-         database.ref('Realease_Item/' + Batch).remove();
         //-----------------------------------------------
-                  $('#modal-danger').modal('hide');
+                 $('#modal-danger').modal('hide');
                     $(document).Toasts('create', {
                       class: 'bg-success',
                     body: 'sucessfully',
@@ -852,7 +830,10 @@ Ready();
                     autohide: true,
                     delay: 2000,
                     }) 
-                    setTimeout(function(){
+                  setTimeout(function(){
+                    
+        //--------------------delete release---------------------------
+         database.ref('Realease_Item/Product/' + Batch).remove();
                      window.location.reload();
                      },2000)
     
@@ -863,6 +844,22 @@ Ready();
 function run1() {
                  document.getElementById("Unit").value = document.getElementById("unit").value;                                 
               }
+
+
+//------------------------------------Select table  Function----------------->
+function Select(){
+
+  var table1 = document.getElementById('table');
+            for(var i = 0; i < table1.rows.length; i++){
+
+            table1.rows[i].onclick = function(){
+             document.getElementById('Batch').value = this.cells[0].innerHTML;
+             document.getElementById('BatchSelected').value = this.cells[4].innerHTML;
+
+            }
+  
+}
+}
 </script>
 
 
