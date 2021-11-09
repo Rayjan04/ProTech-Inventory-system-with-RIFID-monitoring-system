@@ -407,7 +407,7 @@
                       <div class="col-3">
                         <div class="form-group">
                           <label>Select Batch Product</label>
-                          <select id="PrductSelection" class="form-control select2" style="width: 100%;">
+                          <select id="PrductSelection" class="form-control select2" style="width: 100%;" onchange="Product()">
                             <option value="">--Select Batch---</option>
                            
                           </select>
@@ -422,7 +422,7 @@
                  
                       <div class="form-group">
                         <label for="exampleInputPassword1">Product Name</label>
-                        <input type="text" class="form-control" id="" placeholder="" disabled>
+                        <input type="text" class="form-control" id="ProductBO" placeholder="" disabled>
                       </div>
                       
                       </div>
@@ -431,7 +431,7 @@
                  
                         <div class="form-group">
                           <label for="exampleInputPassword1">Manufacturer</label>
-                          <input type="text" class="form-control" id="" placeholder="" disabled>
+                          <input type="text" class="form-control" id="ManufactureBO" placeholder="" disabled>
                         </div>
                         
                         </div>
@@ -609,7 +609,7 @@
             <div class="col-6">
                <div class="form-group">
                   <label class="selectpicker" for="exampleInputPassword1">Product Category</label>
-               <select id="category1" onchange="run3()" class="form-control select2" style="width: 100%;">
+               <select id="category1" onchange="run3()" class="form-control select" style="width: 100%;">
                          
                 </select>
 
@@ -628,8 +628,7 @@
             <div class="input-group inputdefault">
               <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
             </div>
-            <select id="product1" onchange="run6()" class="form-control select2" style="width: 100%;">
-              <option value="" >----Select Product Brand----</option> 
+            <select id="product1" onchange="run6()" class="form-control select" style="width: 100%;">
               </select>
           
             <datalist id="browsers"></datalist>
@@ -642,7 +641,7 @@
             <div class="form-group">
               <label for="exampleInputPassword1">Manufacturer</label>
               <div class="input-group inputdefault">
-              <select id="manufacturer1" onchange="run4()" class="form-control select2" style="width: 100%;">
+              <select id="manufacturer1" onchange="run4()" class="form-control select" style="width: 100%;">
              
                 </select>
             </div>               
@@ -1241,7 +1240,7 @@ function AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,ex
  }
 
  if(Status == "Decline" ){
-  td11.innerHTML = '<button type="button" onclick="Read()"  class="btn  btn-info btn-sm" ><i class="far fa-clipboard"></i></button>';
+  td11.innerHTML = '<button type="button" onclick="Read()"  class="btn btn-info" ><i class="far fa-clipboard"></i></button>';
  }
  
  
@@ -1349,7 +1348,7 @@ database.ref('Item').once('value', function(snapshot){
       var vehi_list2 = '';
          snapshot.forEach(function(data){
             var val2 = data.val();
-            vehi_list2 += '<option value="' + val2.Batch + '">' + val2.Brand +' #'+ val2.Batch+ '</option>';
+            vehi_list2 += '<option value="' + val2.Batch + '">'+'#' + val2.Batch +' '+ val2.Brand+ '</option>';
          });
 
             $('#PrductSelection').append(vehi_list2);
@@ -1922,6 +1921,14 @@ function run1() {
                         document.getElementById("Product1").value = document.getElementById("product1").value;
                        
               } 
+              function Product(){
+                        var BatchBO = document.getElementById("PrductSelection").value;
+
+                        database.ref('Item/'+ BatchBO).on('value',function(snapshot){
+                         document.getElementById('ManufactureBO').value = snapshot.val().Manufacture;
+                         document.getElementById('ProductBO').value = snapshot.val().Brand;
+                        });
+              }
               
 </script>
 <script>
