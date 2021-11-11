@@ -22,6 +22,7 @@ function time() {
      var months = ["Jan", "Feb", "Mar", "Apr", "May", "jun","jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
      Time = document.getElementById("Time").innerHTML = months[month]+" "+ date +", "+ year+" "+" " + hours + ":" + minutes + " " + AmPm;  
+     notification =  month +"/"+ date +"/"+ year;
 }
 
 setInterval(time, 200);
