@@ -232,6 +232,12 @@
                     </a>
                   </li>
 
+                  <li class="nav-item">
+                    <a href="Bad_Order_Report.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Bad order Reports</p>
+                    </a>
+                  </li>
                 </ul>
               </li>  
                 <!--reports-->        
@@ -249,9 +255,12 @@
     <div class="container-fluid">
       <div class="form-group">
         <select id="Select" onchange="run1()" class="select1" style="width: 15%;">
+       
          <option value="Out of Stock">Out of Stock</option>
          <option value="Safety Stock" >Safety Stock</option> 
          <option value="Critical Stock" >Crtitical Stock</option> 
+         <option value="Expired">Expired</option>
+         <option value="">All</option>
     
        </select>
        <br>
@@ -454,6 +463,21 @@ function AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,s
  var td4 = document.createElement('td');
  var td5 = document.createElement('td');
 
+ //--------------------------Date Expiration-----------------------
+ var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+   const  Dati =  year +"-"+month+"-"+ date ;  
+   const Today = new Date(Dati);
+   const  Expired =   new Date(exdate);
+    const oneDay = 24 * 60 * 60 * 1000;  
+    const diffDays = Math.round(((Expired - Today) / oneDay));
 
  td1.innerHTML = batch;
  td2.innerHTML = Category;
@@ -473,6 +497,9 @@ function AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,s
   td5.innerHTML = '<span id=""class="badge badge-warning">' + 'Critical Stock' + '</span>';
  }
 
+ if(new Date(exdate) <= new Date(Dati)){
+  td5.innerHTML = '<span id=""class="badge badge-danger">' + 'Expired' + '</span>';
+ }
  if(Box  == 0){
   td5.innerHTML = '<span id=""class="badge badge-danger" >' + 'Out of Stock' + '</span>';
  }
@@ -607,7 +634,23 @@ function time1() {
 
 
 
+<script>
+  ////<!---------------------------------------------------------datatable load Function------------------------------------------------------------------------------------------->           
+setTimeout(function(){
+        $(document).ready(function () {
+          $('#table').DataTable({
+            "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
+            "ordering": true,  
+            "order": [[ 4, "asc" ]],
+            "searching": false,
 
+          });
+          }); 
+          
+
+   
+    },3000)
+</script>
 </body>
 
 

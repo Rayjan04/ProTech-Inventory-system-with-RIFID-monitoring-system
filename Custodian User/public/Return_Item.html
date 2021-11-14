@@ -221,6 +221,13 @@
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a href="Bad_Order_Report.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bad order Reports</p>
+                </a>
+              </li>
+
             </ul>
           </li>  
             <!--reports-->        
@@ -282,7 +289,7 @@
                      
                         <div class="form-group">
                           <label for="exampleInputPassword1">Returned Box</label>
-                          <input type="number" name="ReturnedQty" class="form-control" onkeyup="Calculate()"id="ReturnBox" placeholder="0" >
+                          <input type="number" name="ReturnedQty" class="form-control" onkeyup="Calculate()"id="ReturnBox" placeholder="0" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
 
                           
                         </div>
@@ -294,7 +301,7 @@
                      
                         <div class="form-group">
                             <label for="exampleInputPassword1">Return by Pcs</label>
-                            <input type="number" name="ReturnedPcs" class="form-control" onkeyup="Calculate1()" id="ReturnPcs" placeholder="0" >
+                            <input type="number" name="ReturnedPcs" class="form-control" onkeyup="Calculate1()" id="ReturnPcs" placeholder="0" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                            
                               
                           
@@ -397,6 +404,30 @@
           </div>
           </div>
           </div>
+            <!-- Main Content--->
+  <input type="hidden"  class="form-control" id="BatchCheck" placeholder="" disabled>
+  <input type="hidden"  class="form-control" id="Unit" placeholder="" disabled>
+  <input type="hidden"  class="form-control" id="PerBox" placeholder="" disabled>
+  <input type="hidden"  class="form-control" id="Category" placeholder="" disabled>
+  <input type="hidden"  class="form-control" id="Recipent" placeholder="undefined" >
+  <input type="hidden"  class="form-control" id="Address" placeholder="" disabled>
+  <!-----------------------------------Total--------------------------->
+  <input type="text"  class="form-control" id="TotalCalculation" placeholder="0" disabled>
+  <input type="text"  class="form-control" id="IssuedBox" placeholder="Issued" disabled>
+  <input type="text"  class="form-control" id="Total" placeholder="Total" disabled>
+  <input type="text"  class="form-control" id="TotalBox" placeholder="TotalBox" disabled>
+  <input type="text"  class="form-control" id="Date" placeholder="Date" disabled>
+  <input type="hidden"  class="form-control" id="Number" placeholder="Number" disabled>
+  <input type="hidden"  class="form-control" id="TotalItem" placeholder="Total" disabled>
+  <input type="text"  class="form-control" id="TotalItem1" placeholder="TotalItme" disabled>
+  <input type="text"  class="form-control" id="AllTotalBox" placeholder="TotalItme" disabled>
+  <!--------------------------------------------------------------------->
+  <input type="text" style="font-weight: bold;" class="form-control" id="total" placeholder="total" >
+  <input type="hidden" style="font-weight: bold;" class="form-control" id="available" placeholder="Available" >
+  <input type="hidden" style="font-weight: bold;" class="form-control" id="notavailable" placeholder="Available" >
+  <!------------------------------------------------------------------>
+  <input type="hidden" style="font-weight: bold;" class="form-control" id="GraphRelease" >
+  <input type="hidden" style="font-weight: bold;" class="form-control" id="TotalGraph" >
           </section>
           </div>
           </div>
@@ -449,30 +480,7 @@
 <input class="form-control form-control-sm" id="search" type="hidden" placeholder="Search" aria-label="Search" >     
 <!--Expiration notification-->
 
-  <!-- Main Content--->
-  <input type="hidden"  class="form-control" id="BatchCheck" placeholder="" disabled>
-  <input type="hidden"  class="form-control" id="Unit" placeholder="" disabled>
-  <input type="hidden"  class="form-control" id="PerBox" placeholder="" disabled>
-  <input type="hidden"  class="form-control" id="Category" placeholder="" disabled>
-  <input type="hidden"  class="form-control" id="Recipent" placeholder="undefined" >
-  <input type="hidden"  class="form-control" id="Address" placeholder="" disabled>
-  <!-----------------------------------Total--------------------------->
-  <input type="hidden"  class="form-control" id="TotalCalculation" placeholder="0" disabled>
-  <input type="hidden"  class="form-control" id="IssuedBox" placeholder="Issued" disabled>
-  <input type="hidden"  class="form-control" id="Total" placeholder="Total" disabled>
-  <input type="hidden"  class="form-control" id="TotalBox" placeholder="TotalBox" disabled>
-  <input type="hidden"  class="form-control" id="Date" placeholder="Date" disabled>
-  <input type="hidden"  class="form-control" id="Number" placeholder="Number" disabled>
-  <input type="hidden"  class="form-control" id="TotalItem" placeholder="Total" disabled>
-  <input type="hidden"  class="form-control" id="TotalItem1" placeholder="TotalItme" disabled>
-  <input type="hidden"  class="form-control" id="AllTotalBox" placeholder="TotalItme" disabled>
-  <!--------------------------------------------------------------------->
-  <input type="hidden" style="font-weight: bold;" class="form-control" id="total" placeholder="total" >
-  <input type="hidden" style="font-weight: bold;" class="form-control" id="available" placeholder="Available" >
-  <input type="hidden" style="font-weight: bold;" class="form-control" id="notavailable" placeholder="Available" >
-  <!------------------------------------------------------------------>
-  <input type="hidden" style="font-weight: bold;" class="form-control" id="GraphRelease" >
-  <input type="hidden" style="font-weight: bold;" class="form-control" id="TotalGraph" >
+
   <!-- Main Content--->
 
 
@@ -685,34 +693,34 @@ Ready();
         var  sample = TotalQty + Number(num1);
     
 
-        document.getElementById("TotalQty").value = sample;
+        document.getElementById("TotalQty").value = sample.toFixed(0);
         //--------------------------------
     var num6 = document.getElementById('TotalQty').value;
     var num7 = document.getElementById('Total').value;
 
     var Promo = num7 - num6;
 
-    document.getElementById('TotalCalculation').value = Promo;
+    document.getElementById('TotalCalculation').value = Promo.toFixed(0);
     
     
     //-----------------------------------
-    var num8 = document.getElementById('TotalQty').value;
+       var num8 = document.getElementById('TotalQty').value;
         var num9 = document.getElementById('PerBox').value;
         var num10 = document.getElementById('TotalItem').value;
         var num11 = document.getElementById('AllTotalBox').value;
 
         var totalbox = num8 / num9;
-        var allTotal = Number(totalbox) + Number(num11)
+        var allTotal = Number(totalbox) + Number(num11);
 
 
-        document.getElementById('TotalBox').value = allTotal;
+        document.getElementById('TotalBox').value = allTotal.toFixed(2);
 
         var TotalItem2 = Number(num8) + Number(num10);
-        document.getElementById('TotalItem1').value = TotalItem2;
+        document.getElementById('TotalItem1').value = TotalItem2.toFixed(0);
       //-----------------------------
       var Graph =  Promo / num9; 
        var Graph1 = Number(GraphRelease) + Number(Graph);
-       document.getElementById('TotalGraph').value = Graph1;
+       document.getElementById('TotalGraph').value = Graph1.toFixed(0);
 //-----------------------------------------------------------------------
 }
 function Calculate1(){
@@ -728,36 +736,34 @@ Ready();
         var  sample = TotalQty + Number(num1);
     
 
-        document.getElementById("TotalQty").value = sample;
-
-    //--------------------------------
+        document.getElementById("TotalQty").value = sample.toFixed(0);
+        //--------------------------------
     var num6 = document.getElementById('TotalQty').value;
     var num7 = document.getElementById('Total').value;
 
     var Promo = num7 - num6;
 
-    document.getElementById('TotalCalculation').value = Promo;
-
-  
+    document.getElementById('TotalCalculation').value = Promo.toFixed(0);
+    
+    
     //-----------------------------------
-        var num8 = document.getElementById('TotalQty').value;
+       var num8 = document.getElementById('TotalQty').value;
         var num9 = document.getElementById('PerBox').value;
         var num10 = document.getElementById('TotalItem').value;
         var num11 = document.getElementById('AllTotalBox').value;
 
         var totalbox = num8 / num9;
-        var allTotal = Number(totalbox) + Number(num11)
+        var allTotal = Number(totalbox) + Number(num11);
 
 
-        document.getElementById('TotalBox').value = allTotal;
+        document.getElementById('TotalBox').value = allTotal.toFixed(2);
 
         var TotalItem2 = Number(num8) + Number(num10);
-        document.getElementById('TotalItem1').value = TotalItem2; 
-        
-      //----------------------------------  
-       var Graph =   Promo / num9; 
+        document.getElementById('TotalItem1').value = TotalItem2.toFixed(0);
+      //-----------------------------
+      var Graph =  Promo / num9; 
        var Graph1 = Number(GraphRelease) + Number(Graph);
-       document.getElementById('TotalGraph').value = Graph1;
+       document.getElementById('TotalGraph').value = Graph1.toFixed(0);
 }
 
 //-----------------------------------------Search Batch---------------------------------

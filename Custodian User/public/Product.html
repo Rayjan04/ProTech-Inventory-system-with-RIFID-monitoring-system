@@ -76,7 +76,7 @@
       <!-- logout Button-->
       <li class="logout">
         <a class="nav-link"   href="logout.html" role="button">
-          <button onclick="logout()" class="btn btn-default btn-sm">logout</button>
+          <i onclick="logout()" class="fas fa-power-off"></i>
         </a>
       </li>
 
@@ -224,6 +224,13 @@
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a href="Bad_Order_Report.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bad order Reports</p>
+                </a>
+              </li>
+
             </ul>
           </li>  
             <!--reports-->        
@@ -262,10 +269,10 @@
             <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Pending Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Bad Order</a>
+            <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Report Bad Order</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Status Control</a>
+            <a class="nav-link" id="custom-tabs-one-Expired-tab" data-toggle="pill" href="#custom-tabs-one-Expired" role="tab" aria-controls="custom-tabs-one-Expired" aria-selected="false">Remove/Check day to expire</a>
           </li>
 
           <li class="nav-item">
@@ -290,6 +297,7 @@
               <option value="Safety Stock">Safety Stock</option>
               <option value="Critical Stock">Critical Stock</option>
               <option value="Out of Stock">Out Of Stock</option>
+              <option value="Expired">Expired</option>
             </select>  
              <button  class="btn  bg-gradient-primary btn-sm float-right" data-toggle="modal" data-target="#add">Add New Product</button>
              <br>
@@ -393,7 +401,7 @@
                 <!-------------------------------------------------------------For Bad Orders Request-------------------->      
                 <div class="card card-default">
                   <div class="card-header">
-                    <h3 class="card-title">Report Bad Orders</h3>
+                    <h3 class="card-title"></h3>
         
                   </div>
                   <!-- /.card-header -->
@@ -451,7 +459,7 @@
                         <div class="col-2">
                         <div class="form-group">
                           <label for="exampleInputPassword1">Qty by Box</label>
-                          <input type="number" name ="" class="form-control" id="QtyBoxBo" placeholder="Box" onkeyup="BoBoxQty()">
+                          <input type="number" name ="" class="form-control" id="QtyBoxBo" placeholder="Box" onkeyup="BoBoxQty()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                         </div>
                         </div>
                      <!----------------------------------------------------->
@@ -459,7 +467,7 @@
                           <div class="form-group">
                           
                             <label for="exampleInputPassword1">Qty by Pcs</label>
-                          <input type="number" name ="" class="form-control" id="QtyPcsBo" placeholder="PCS" onkeyup="PcsBoxQty()">
+                          <input type="number" name ="" class="form-control" id="QtyPcsBo" placeholder="PCS" onkeyup="PcsBoxQty()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                            
                           </div>
                           
@@ -485,7 +493,7 @@
                       
                           <div class="card card-info">
                             <div class="card-header">
-                              
+                              <h6>Today Report</h6>
                             </div>
                             <div class="card-body">
                               
@@ -587,6 +595,40 @@
 
               <!-- /.card-body -->
             </div>
+          </div>
+            <div class="tab-pane fade" id="custom-tabs-one-Expired" role="tabpanel" aria-labelledby="custom-tabs-one-Expired-tab">
+                          <!----------------------------------------------------table for Remove out of stock------------------------------->      
+                
+                              <div class="card-body table-responsive p-0">
+                                
+                                <table class="table text-nowrap table-striped table-bordered table-sm" id="table5" width="100%">  
+                                
+                                  <thead>
+                                    <tr>
+                                        <th>Batch#</th>
+                                        <th>Category</th>
+                                        <th>Brand</th>
+                                        <th>Expiration</th>
+                                        <th>Boxes</th>
+                                        <th>Total Qty</th>
+                                        <th>Day to Expire</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                        
+                                    </tr>
+                                  </thead>
+                                  <tbody id="tbody5" class="tbody5">
+                                        
+                          
+                                  </tbody> 
+                                          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+                                          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+                                          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+                        
+                                    
+                                </table>
+                                </div>
+              </div>
           </div>
         </div>
       </div>
@@ -740,7 +782,7 @@
                 <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                   <div class="input-group-text"><i class="fas fa-boxes"></i></div>
               </div>
-            <input type="number" name="Pcs" required="" class="form-control" id="PerBox1" placeholder="0" onkeyup="Calculating2()">
+            <input type="number" name="Pcs" required="" class="form-control" id="PerBox1" placeholder="0" onkeyup="Calculating2()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
             </div>    
           </div>
           </div>
@@ -752,7 +794,7 @@
                 <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                   <div class="input-group-text"><i class="fas fa-box-open"></i></div>
               </div>
-            <input type="number" name= "Qty" required="" class="form-control" id="Box1" placeholder="0" onkeyup="Calculating3()" >  
+            <input type="number" name= "Qty" required="" class="form-control" id="Box1" placeholder="0" onkeyup="Calculating3()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">  
             </div>
               </div>
           </div>
@@ -909,7 +951,7 @@
                 <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                   <div class="input-group-text"><i class="fas fa-boxes"></i></div>
               </div>
-            <input type="number" name="Pcs" required="" class="form-control" id="PerBox" placeholder="0" onkeyup="Calculating1()">
+            <input type="number" name="Pcs" required="" class="form-control" id="PerBox" placeholder="0" onkeyup="Calculating1()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
             </div>    
           </div>
           </div>
@@ -921,7 +963,7 @@
                 <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                   <div class="input-group-text"><i class="fas fa-box-open"></i></div>
               </div>
-            <input type="number" name= "Qty" required="" class="form-control" id="Box" placeholder="0" onkeyup="Calculating()" >  
+            <input type="number" name= "Qty" required="" class="form-control" id="Box" placeholder="0" onkeyup="Calculating()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">  
             </div>
               </div>
           </div>
@@ -1192,6 +1234,8 @@
 
 <input type="hidden" name="Brand" required="" class="form-control" id="UpdateBoxR" placeholder="UpdateBoxR"> 
 <input type="hidden" name="Brand" required="" class="form-control" id="UpdateTotalR" placeholder="UpdateTotalR">
+<!--------------------------------------------------RemoveBo Calculation-------------------> 
+<input type="hidden" name="Brand" required="" class="form-control" id="DATES" placeholder="Date" >
 
 
 
@@ -1330,6 +1374,28 @@ function SelectAllData(){
       }
     );
   });
+      //-----------------------------for remove check day expired------------
+      var database = firebase.database().ref('Item/');
+      database.orderByChild('TimeStamp').once('value',function (snapshot){
+        snapshot.forEach(
+          function(CurrentRecord){
+            var batch5 = CurrentRecord.val().Batch;
+            var Category5 = CurrentRecord.val().Category;
+            var products5 = CurrentRecord.val().Brand;
+            var manufacture5 = CurrentRecord.val().Manufacture;
+            var supplydate5 = CurrentRecord.val().Date;
+            var exdate5 = CurrentRecord.val().Exdate;
+            var status5 = CurrentRecord.val().Status;
+            var PerBox5 = CurrentRecord.val().PerBox;
+            var Box5  = CurrentRecord.val().Box;
+            var Total5 = CurrentRecord.val().Total;
+
+            
+            AddItemsToTable5(batch5,Category5,products5,manufacture5,supplydate5,exdate5,status5,PerBox5,Box5,Total5);
+          }
+        );
+      });
+      
 }
 window.onload = SelectAllData;
 
@@ -1521,6 +1587,82 @@ function AddItemsToTable4(batch4,products4,exdate4){
  }
 
   trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);
+  tbody.appendChild(trow);
+}
+//------------------------------------------------------------table fo remove/check day expired----------------------------
+function AddItemsToTable5(batch5,Category5,products5,manufacture5,supplydate5,exdate5,status5,PerBox5,Box5,Total5){
+ var tbody = document.getElementById('tbody5');
+ var trow = document.createElement('tr');
+ var td1 = document.createElement('td');
+ var td2 = document.createElement('td');
+ var td3 = document.createElement('td');
+ var td4 = document.createElement('td');
+ var td5 = document.createElement('td');
+ var td6 = document.createElement('td');
+ var td7 = document.createElement('td');
+ var td8 = document.createElement('td');
+ var td9 = document.createElement('td');
+ var td10 = document.createElement('td');
+
+
+ //--------------------------Date Expiration-----------------------
+ var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+   const  Dati =  year +"-"+month+"-"+ date ;  
+   const Today = new Date(Dati);
+   const  Expired =   new Date(exdate5);
+    const oneDay = 24 * 60 * 60 * 1000;  
+    const diffDays = Math.round(((Expired - Today) / oneDay));
+
+ 
+ td1.innerHTML = batch5;
+ td2.innerHTML = Category5;
+ td3.innerHTML = products5;
+ td4.innerHTML = exdate5;
+ td5.innerHTML = Box5;
+ td6.innerHTML = Total5;
+
+
+ if(diffDays <= 0){
+ td7.innerHTML = 0;
+ }
+
+ if(diffDays >= 0){
+  td7.innerHTML = diffDays;
+ }
+
+
+
+if(diffDays < 90){
+  td8.innerHTML = '<span id=""class="badge badge-warning">' + 'Near to expiry' + '</span>';
+}
+ if(diffDays > 90){
+  td8.innerHTML = '<span id=""class="badge badge-success">' + 'Good' + '</span>';
+}
+
+if(diffDays < 30){
+td8.innerHTML = '<span id=""class="badge badge-danger">' + 'Short expiry' + '</span>';
+}
+ 
+if(new Date(exdate5) <= new Date(Dati)){
+  td8.innerHTML = '<span id=""class="badge badge-danger">' + 'Expired' + '</span>';
+  td9.innerHTML = '<button type="button" onclick="#"  class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#"><i class="fas fa-trash-alt"></i></button>'
+ }
+ if(Box5  == 0){
+  td8.innerHTML = '<span id=""class="badge badge-secondary" >' + 'Out of Stock' + '</span>';
+  td9.innerHTML = '<button type="button" onclick="#"  class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#"><i class="fas fa-trash-alt"></i></button>'
+ }
+
+ 
+ 
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);
   tbody.appendChild(trow);
 }
 
@@ -1741,19 +1883,19 @@ function BoBoxQty(){
 
      var TimesBoxBo = Number(PerBoxBo) * Number(QtyBoxBo);
      var TotalBo = Number(TimesBoxBo) + Number(QtyPcsBo); 
-     document.getElementById("BoCalculation").value = TotalBo;
+     document.getElementById("BoCalculation").value = TotalBo.toFixed(2);
 
      var TotalBoxBo = TotalBo / PerBoxBo;
      var fix = TotalBoxBo.toFixed(2)
      document.getElementById("BoBoxCalculation").value = fix;
 
      //----------update Box total---------------------
-     var MinusBox = Number(BoxBo) - Number(TotalBoxBo).toFixed(2);
-     document.getElementById("UpdateBoBoxCalculation").value = MinusBox;
+     var MinusBox = Number(BoxBo) - Number(TotalBoxBo);
+     document.getElementById("UpdateBoBoxCalculation").value = MinusBox.toFixed(2);
 
        //----------update Pcs total---------------------
-       var MinusTotal = Number(TotalBox) - Number(TotalBo).toFixed(2);
-     document.getElementById("UpdateBoCalculation").value = MinusTotal;
+       var MinusTotal = Number(TotalBox) - Number(TotalBo);
+     document.getElementById("UpdateBoCalculation").value = MinusTotal.toFixed(0);
 
      document.getElementById("QtyBoxBo").className = "form-control is-valid";
 //-------------------------------------------------------
@@ -1768,7 +1910,7 @@ function PcsBoxQty(){
 
      var TimesBoxBo = Number(PerBoxBo) * Number(QtyBoxBo);
      var TotalBo = Number(TimesBoxBo) + Number(QtyPcsBo); 
-     document.getElementById("BoCalculation").value = TotalBo;
+     document.getElementById("BoCalculation").value = TotalBo.toFixed(2);
 
    
 
@@ -1777,12 +1919,12 @@ function PcsBoxQty(){
      document.getElementById("BoBoxCalculation").value = fix;
 
      //----------update total---------------------
-    var MinusBox = Number(BoxBo) - Number(TotalBoxBo).toFixed(2);
-     document.getElementById("UpdateBoBoxCalculation").value = MinusBox;
+    var MinusBox = Number(BoxBo) - Number(TotalBoxBo)
+     document.getElementById("UpdateBoBoxCalculation").value = MinusBox.toFixed(2);;
 
     //----------update Pcs total---------------------
-    var MinusTotal = Number(TotalBox) - Number(TotalBo).toFixed(2);
-     document.getElementById("UpdateBoCalculation").value = MinusTotal;
+    var MinusTotal = Number(TotalBox) - Number(TotalBo)
+     document.getElementById("UpdateBoCalculation").value = MinusTotal.toFixed(0);;
 
      document.getElementById("QtyPcsBo").className = "form-control is-valid";
 
@@ -2324,7 +2466,7 @@ function Report(){
      monthA =  ("0" + month).slice(-2);
      date =   ("0" + date).slice(-2);
 
-    var DateBo = month+"-"+ date +"-"+ year;    
+    var DateBo = month+"-"+ date +"-"+ year;  
 
       BatchB = document.getElementById("PrductSelection").value;
       ProB = document.getElementById('ProductBO').value
@@ -2576,7 +2718,12 @@ function run1() {
      
   
   }
+
+
+
+ 
   
+
   setInterval(time1, 10);
   </script>
 
@@ -2653,6 +2800,53 @@ setTimeout(function(){
 
           });
           });  
+
+          $(document).ready(function () {
+          $('#table3').DataTable({
+            "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
+            "ordering": false, 
+            "searching": false, 
+            "lengthChange": false,
+            "info": false,     
+
+          });
+          }); 
+          //--------------------------------for hiding report not today-----------------------
+           //--------------------------Date-----------------------
+            var today = new Date();
+            month = today.getMonth();
+            year = today.getFullYear();
+            date = today.getDate();
+            
+              month = month +1;
+            monthA =  ("0" + month).slice(-2);
+            date =   ("0" + date).slice(-2);
+
+            var DateBo = month+"-"+ date +"-"+ year;  
+            document.getElementById("DATES").value = DateBo;
+          input1 = document.getElementById("DATES");  
+              filter1 = input1.value.toUpperCase();
+              table1 = document.getElementById("table3");
+              tr1 = table1.getElementsByTagName("tr");
+              
+              for (i = 0; i < tr1.length; i++) {
+                td = tr1[i].getElementsByTagName("td")[1];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter1) > -1) { 
+                  
+                    tr1[i].style.display = "";
+                    
+                    
+                  }
+                  
+                  else {
+                    tr1[i].style.display = "none";
+        
+                  } 
+                  
+                }       
+              }
 
           $('.select2').select2()
 

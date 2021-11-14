@@ -219,6 +219,13 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="Bad_Order_Report.html" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Bad order Reports</p>
+            </a>
+          </li>
+
         </ul>
       </li>  
         <!--reports-->             
@@ -362,7 +369,7 @@
                       
                           <div class="form-group">
                             <label for="exampleInputPassword1">Box Qty</label>
-                            <input type="number" name ="Qty" class="form-control" id="Qty" onkeyup="Compute()"placeholder="">
+                            <input type="number" name ="Qty" class="form-control" id="Qty" onkeyup="Compute()" data-decimal="2" oninput="enforceNumberValidation(this)" placeholder="0">
                           </div>
         
                         </div>
@@ -619,25 +626,25 @@
 <!--Expiration notification-->
 
 
-        <input type="hidden" class="form-control" id="Check"  placeholder="0">
-        <input type="hidden" class="form-control" id="Compute"  placeholder="0">
-        <input type="hidden" class="form-control" id="UpdateTotal"  placeholder="0">
-        <input type="hidden" class="form-control" id="UpdateBoxes"  placeholder="0">
-        <!------------------------------------------------------------------------->
-        <input type="hidden" class="form-control" id="Available"  placeholder="0">
-        <input type="hidden" class="form-control" id="NotAvailable"  placeholder="0">
-        <input type="hidden" class="form-control" id="Total1"  placeholder="0">
-        <!--------------------------------------------------Safety Stock--------------------------------------------------------------------->
-        <input type="hidden"  class="form-control" id="SafetyStock">
-        <input type="hidden"  class="form-control" id="MinSafetyStock">
-        <input type="hidden"  class="form-control" id="TotalSafe">
-        <!----------------------------------------------------STATUS---------------------------------------------------------------->
-        <input type="hidden" class="form-control" id="Status">
-        <!------------------------------------------------------DatePicker-------------------------------------------------------------------->
-        <input type="hidden" class="form-control" id="Date">
-        <!------------------------------------------------------DatePicker-------------------------------------------------------------------->
-        <input type="hidden" class="form-control" id="GraphRelease">
-        <input type="hidden" class="form-control" id="AddGraph">
+<input type="hidden" class="form-control" id="Check"  placeholder="0">
+<input type="hidden" class="form-control" id="Compute"  placeholder="0">
+<input type="hidden" class="form-control" id="UpdateTotal"  placeholder="0">
+<input type="hidden" class="form-control" id="UpdateBoxes"  placeholder="0">
+<!------------------------------------------------------------------------->
+<input type="hidden" class="form-control" id="Available"  placeholder="0">
+<input type="hidden" class="form-control" id="NotAvailable"  placeholder="0">
+<input type="hidden" class="form-control" id="Total1"  placeholder="0">
+<!--------------------------------------------------Safety Stock--------------------------------------------------------------------->
+<input type="hidden"  class="form-control" id="SafetyStock">
+<input type="hidden"  class="form-control" id="MinSafetyStock">
+<input type="hidden"  class="form-control" id="TotalSafe">
+<!----------------------------------------------------STATUS---------------------------------------------------------------->
+<input type="hidden" class="form-control" id="Status">
+<!------------------------------------------------------DatePicker-------------------------------------------------------------------->
+<input type="hidden" class="form-control" id="Date">
+<!------------------------------------------------------DatePicker-------------------------------------------------------------------->
+<input type="hidden" class="form-control" id="GraphRelease">
+<input type="hidden" class="form-control" id="AddGraph">
 
 
 
@@ -650,6 +657,7 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="plugins/jquery/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- jquery-validation -->
 <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="plugins/jquery-validation/additional-methods.min.js"></script>
@@ -671,6 +679,8 @@
 <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
 
 </body>
 
@@ -1022,20 +1032,20 @@ function Compute(){
 
       var total = num1 * num2;
 
-        document.getElementById('Compute').value = total;
+        document.getElementById('Compute').value = total.toFixed(0);
 
       var totalQty = num3 - total;
 
-      document.getElementById('UpdateTotal').value = totalQty;
+      document.getElementById('UpdateTotal').value = totalQty.toFixed(0);
 
       var totalBox = totalQty / num1;
 
-      document.getElementById('UpdateBoxes').value = totalBox;
+      document.getElementById('UpdateBoxes').value = totalBox.toFixed(2);
 
 
       var AddGraph = Number(num2) + Number(num4);
 
-      document.getElementById('AddGraph').value = AddGraph;
+      document.getElementById('AddGraph').value = AddGraph.toFixed(0);
 
  
 }
@@ -1511,5 +1521,29 @@ Ready();
     }
   
   });
+  </script>
+  <script>
+    //limit the decimal to 2 only thats my rules
+    function enforceNumberValidation(ele) {
+    if ($(ele).data('decimal') != null) {
+        // found valid rule for decimal
+        var decimal = parseInt($(ele).data('decimal')) || 0;
+        var val = $(ele).val();
+        if (decimal > 0) {
+            var splitVal = val.split('.');
+            if (splitVal.length == 2 && splitVal[1].length > decimal) {
+                // user entered invalid input
+                $(ele).val(splitVal[0] + '.' + splitVal[1].substr(0, decimal));
+            }
+        } else if (decimal == 0) {
+            // do not allow decimal place
+            var splitVal = val.split('.');
+            if (splitVal.length > 1) {
+                // user entered invalid input
+                $(ele).val(splitVal[0]); // always trim everything after '.'
+            }
+        }
+    }
+}
   </script>
 </html>
