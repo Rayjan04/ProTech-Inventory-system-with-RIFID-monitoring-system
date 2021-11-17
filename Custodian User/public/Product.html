@@ -4,6 +4,7 @@
   <link rel="shorcut icon" type="image" href="img/logo.jpg">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Custodian - Product</title>
  
   <!-- Select2 -->
@@ -597,13 +598,33 @@
             </div>
           </div>
             <div class="tab-pane fade" id="custom-tabs-one-Expired" role="tabpanel" aria-labelledby="custom-tabs-one-Expired-tab">
+              <!----------------------------------------------------Selection Function for tab 2------------------------------->    
+
+                    <div class="form-group">
+                      <label>Category</label>
+                      <select id="Select5" class="select1" style="width: 15%;">
+                      <option value="All">All</option>   
+                    </select> 
+                    
+                    <label>Status</label>
+                    <select id="Status5"  class="select1" style="width: 15%;">
+                      <option value="All">All</option>
+                      <option value="Expired Item">Expired</option>
+                      <option value="Out of Stock">Out of Stock</option>
+                    </select>  
+                    <button  class="btn  bg-gradient-danger btn-sm float-right" data-toggle="modal" data-target="#ExpiredOutofStock" >Delete</button>
+                    <br>
+                    </div>
+                    <section class="content-header">
+        
+                    </section>   
                           <!----------------------------------------------------table for Remove out of stock------------------------------->      
                 
                               <div class="card-body table-responsive p-0">
                                 
-                                <table class="table text-nowrap table-striped table-bordered table-sm" id="table5" width="100%">  
+                                <table class="table text-nowrap table-striped table-bordered table-sm" id="table5" width="100%" >  
                                 
-                                  <thead>
+                                  <thead class="text-center">
                                     <tr>
                                         <th>Batch#</th>
                                         <th>Category</th>
@@ -613,13 +634,12 @@
                                         <th>Total Qty</th>
                                         <th>Day to Expire</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Select</th>
                                         
                                     </tr>
                                   </thead>
-                                  <tbody id="tbody5" class="tbody5">
+                                  <tbody id="tbody5" class="text-center">
                                         
-                          
                                   </tbody> 
                                           <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
                                           <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
@@ -627,6 +647,7 @@
                         
                                     
                                 </table>
+                                
                                 </div>
               </div>
           </div>
@@ -1124,14 +1145,33 @@
             </div>       
             <div class="modal-footer justify-content-between">
               <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
-              <button onclick="RemoveBadOrder()" class="btn btn-info">Confirm</button>
+              <button value="Get Selected" onclick="RemoveBadOrder()" class="btn btn-info">Confirm</button>
             </div>
           </div>
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
       </div>
+<!------------------------------------------------------------Remove Expire/OutofStock Modal----------------------------------------------------------------------------------->
 
+<div class="modal fade" id="ExpiredOutofStock">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete?</h4> 
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to DELETE selected Item?</p>
+      </div>       
+      <div class="modal-footer justify-content-between">
+        <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button onclick="DeleteExpired()" class="btn btn-danger">Confirm</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 <!------------------------------------------------------------Expiration notification------------------------------------------------>
               <div class="modal fade" id="Notifications">
                 <div class="modal-dialog">
@@ -1239,6 +1279,7 @@
 
 
 
+
 <!-- REQUIRED SCRIPTS -->
 <!--time-->
 <script src ="time.js"></script>
@@ -1276,7 +1317,6 @@
 <script id=MainScript>
 
 
-      
 var database = firebase.database()
 //------------------------------Safety Stock value----------------
 database.ref('Safety_Stock/').on('value',function(snapshot){
@@ -1485,7 +1525,6 @@ function AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,ex
  var td12 = document.createElement('td');
 
 
-
  td1.innerHTML = batch1;
  td2.innerHTML = Category1;
  td3.innerHTML = products1;
@@ -1641,23 +1680,26 @@ function AddItemsToTable5(batch5,Category5,products5,manufacture5,supplydate5,ex
 
 
 if(diffDays < 90){
-  td8.innerHTML = '<span id=""class="badge badge-warning">' + 'Near to expiry' + '</span>';
+  td8.innerHTML = '<span id=""class="badge badge-info">' + 'Near to Expiry' + '</span>';
+  td9.innerHTML = '<input type="checkbox"  disabled/>'
 }
  if(diffDays > 90){
-  td8.innerHTML = '<span id=""class="badge badge-success">' + 'Good' + '</span>';
+  td8.innerHTML = '<span id=""class="badge badge-success">' + 'More than 90days' + '</span>';
+  td9.innerHTML = '<input type="checkbox" disabled/>'
 }
 
 if(diffDays < 30){
-td8.innerHTML = '<span id=""class="badge badge-danger">' + 'Short expiry' + '</span>';
+td8.innerHTML = '<span id=""class="badge badge-warning" >' + 'Short Expiry' + '</span>';
+td9.innerHTML = '<input type="checkbox" disabled/>'
 }
  
 if(new Date(exdate5) <= new Date(Dati)){
-  td8.innerHTML = '<span id=""class="badge badge-danger">' + 'Expired' + '</span>';
-  td9.innerHTML = '<button type="button" onclick="#"  class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#"><i class="fas fa-trash-alt"></i></button>'
+  td8.innerHTML = '<span id=""class="badge badge-danger">' + 'Expired Item' + '</span>';
+  td9.innerHTML = ' <input type="checkbox" />'
  }
  if(Box5  == 0){
   td8.innerHTML = '<span id=""class="badge badge-secondary" >' + 'Out of Stock' + '</span>';
-  td9.innerHTML = '<button type="button" onclick="#"  class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#"><i class="fas fa-trash-alt"></i></button>'
+  td9.innerHTML = ' <input type="checkbox" / >'
  }
 
  
@@ -1679,6 +1721,7 @@ database.ref('Categories').once('value', function(snapshot){
 
             $('#categories').append(vehi_list);
             $('#Select1').append(vehi_list);
+            $('#Select5').append(vehi_list);
 
 }
 });
@@ -2567,6 +2610,133 @@ function RemoveBadOrder(){
 
                       $('#RemoveBO').modal('hide');
       }
+
+//----------------------------------------------------------------------Function for Checkbox---------------------------
+
+function DeleteExpired() {
+  var timeStamp = Date.now();
+  
+   //--------------------------Date-----------------------
+   var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+    var DateEx = month+"-"+ date +"-"+ year; 
+
+        //Reference the Table.
+        var grid = document.getElementById("table5");
+ 
+        //Reference the CheckBoxes in Table.
+        var checkBoxes = grid.getElementsByTagName("INPUT");
+        var message = '';
+        var Delete = '';
+ 
+        //Loop through the CheckBoxes.
+        for (var i = 0; i < checkBoxes.length; i++) {
+            if (checkBoxes[i].checked) {
+
+                var row = checkBoxes[i].parentNode.parentNode;
+                message += database.ref('RemoveExpired/' + row.cells[0].innerHTML).set({
+                      Batch : row.cells[0].innerHTML,
+                      Category : row.cells[1].innerHTML,
+                      Brand : row.cells[2].innerHTML,
+                      Box : row.cells[4].innerHTML,
+                      TimesTamp : timeStamp, 
+                      Date: DateEx
+                       });
+
+                Delete +=  database.ref('Item/' +  row.cells[0].innerHTML).remove();  
+          
+            }
+           
+      
+
+        }
+        if (message == ""){
+          $('#ExpiredOutofStock').modal('hide');
+                       $(document).Toasts('create',{
+                      class: 'bg-warning',
+                      body: 'Checkbox is empty please select item ',
+                      title: '<h5><i class="far fa-check-circle"></i> Alert</h5>',
+                      autohide: true,
+                      delay: 4000,
+                    }) 
+        }
+        if(message != ""){
+          $('#ExpiredOutofStock').modal('hide');    
+          $(document).Toasts('create',{
+                      class: 'bg-success',
+                      body: 'Sucessfully Remove all item selected',
+                      title: '<h5><i class="icon fas fa-exclamation-triangle"></i> Alert</h5>',
+                      autohide: true,
+                      delay: 2000,
+                      }) 
+
+                      setTimeout(function(){
+                      window.location.reload();
+                      },2000)
+        }
+                
+ 
+        //Display selected Row data in Alert Box.
+     
+    }
+/*
+
+function CheckBox(checkbox) {
+
+var timeStamp = Date.now();   
+   
+  
+i
+  var table1 = document.getElementById('table5');
+            for(var i = 0; i < table1.rows.length; i++){
+            table1.rows[i].onclick = function(){
+             IdReport =  document.getElementById('IdCheckBox').value = this.cells[0].innerHTML;
+             CheckCheckBox  =  document.getElementById('CheckCheckBox').value = this.cells[8].innerHTML;
+                  database.ref('Item/'+ IdReport ).on('value',function(snapshot){
+                              Batch5 = snapshot.val().Batch;
+                              Category5 = snapshot.val().Category;
+                              Brand5 = snapshot.val().Brand;
+                              Box5 = snapshot.val().Box;
+
+                      database.ref('RemoveExpired/' + IdReport).set({
+                      Batch : Batch5,
+                      Brand : Category5,
+                      Category: Brand5,
+                      Box: Box5,
+                      TimeStamp:timeStamp,
+                        
+                       })
+                        });
+                 
+  
+
+             
+                    
+       
+            };  
+            
+            }
+  
+}
+            else{
+              alert("uncheck")
+            }
+         
+            
+           
+   
+   
+
+    }
+    */
+
 ////<!---------------------------------------------------------Select Function------------------------------------------------------------------------------------------->
 function run1() {
                         document.getElementById("Category").value = document.getElementById("categories").value;
@@ -2901,6 +3071,35 @@ $('.content-wrapper').on("change", 'select', function() {
       return false;
     }
     if (Status1 !== "all" && tds.eq(9).text().trim().toLowerCase() !== Status1) {
+      return false;
+    }
+
+    return true;
+  })
+
+  filtered.show();
+
+  if (filtered.length == 0) {
+ //   alert("No Records Found!!!");
+  }
+
+});
+//---------------------for expired and outofstock---------------
+$('.content-wrapper').on("change", 'select', function() {
+  var Category1 = $('#Select5').val().toLowerCase(),
+    Status1= $('#Status5').val().toLowerCase();
+ 
+
+  var table1 = $("#tbody5");
+  var trs = table1.find('tr');
+  trs.hide();
+
+  var filtered = trs.filter(function(index, elem) {
+    var tds = $(elem).find('td');
+    if (Category1 !== "all" && tds.eq(1).text().trim().toLowerCase() !== Category1) {
+      return false;
+    }
+    if (Status1 !== "all" && tds.eq(7).text().trim().toLowerCase() !== Status1) {
       return false;
     }
 

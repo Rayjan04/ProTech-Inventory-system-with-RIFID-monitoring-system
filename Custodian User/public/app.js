@@ -48,7 +48,7 @@ var firebaseConfig = {
     
     }
     if(Notificationadd != "0"){
-         vehi_list = '<a href="Product.html" class="dropdown-item"><i class="fas fa-box-open"></i> '+Notificationadd+'  Item expired  <span class="float-right text-muted text-sm">'+notification+'</span></a>';
+         vehi_list = '<a href="Product.html" class="dropdown-item"> <strong>Alert</strong> <span class="right badge badge-danger float-right">New</span> <br>'+Notificationadd+'  Item expired  <span class="float-right text-muted text-sm">'+notification+'</span></a>';
           $('#ShowNotification').append(vehi_list);
         } 
 

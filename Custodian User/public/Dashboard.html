@@ -69,7 +69,7 @@
       <!-- logout Button-->
       <li class="logout">
         <a class="nav-link"   href="logout.html" role="button">
-          <button  onclick="logout()" class="btn btn-default btn-sm">logout</button>
+          <i onclick="logout()" class="fas fa-power-off"></i>
         </a>
       </li>
 
@@ -528,7 +528,7 @@ database.ref('Dashboard/').on('value',function(snapshot){
        
        }
        if(Notificationadd != "0"){
-            vehi_list = '<a href="#" class="dropdown-item"><i class="fas fa-box-open"></i> '+Notificationadd+'  Item expired  <span class="float-right text-muted text-sm">'+notification+'</span></a>';
+            vehi_list = '<a href="Product.html" class="dropdown-item"><i class="fas fa-box-open"></i> '+Notificationadd+'  Item expired  <span class="float-right text-muted text-sm">'+notification+'</span></a>';
              $('#ShowNotification').append(vehi_list);
            } 
            
