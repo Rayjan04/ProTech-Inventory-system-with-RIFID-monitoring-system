@@ -58,14 +58,17 @@
 
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
-              <a class="nav-link" data-toggle="dropdown" href="#">
+              <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
                 <i class="far fa-bell"></i>
                 <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
               </a>
-              <div id="ShowNotification"class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+              <div id="ShowNotification"class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
                 <span class="dropdown-header" id="NotificationNumB">No Notification</span>
                 <div class="dropdown-divider"></div>
               
+                <div id ="ListNotification">  
+                
+                </div>
               </div>
             </li>
 
@@ -286,13 +289,20 @@
           <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
 <!----------------------------------------------------Selection Function------------------------------->              
                 <div class="form-group">
-              <label>Category</label>
-              <select id="Select" class="select1" style="width: 15%;">
-               <option value="All">All</option>
-             </select>  
 
+          <div class="row">
+        
+                   
+              <div class="col-3">
+              <label>Category</label>
+              <select id="Select" class="select1" style="width: 75%;">
+               <option value="All">All</option>
+             </select>
+             </div>  
+
+             <div class="col-3">
              <label>Status</label>
-             <select id="Status"  class="select1" style="width: 15%;">
+             <select id="Status"  class="select1" style="width: 75%;">
               <option value="All">All</option>
               <option value="In Stock">In Stock</option>
               <option value="Safety Stock">Safety Stock</option>
@@ -300,10 +310,14 @@
               <option value="Out of Stock">Out Of Stock</option>
               <option value="Expired">Expired</option>
             </select>  
+            </div>
+          </div>
+
+          
              <button  class="btn  bg-gradient-primary btn-sm float-right" data-toggle="modal" data-target="#add">Add New Product</button>
              <br>
-             </div>
-
+             
+            </div>
              <section class="content-header">
  
             </section>   
@@ -348,16 +362,26 @@
             <!----------------------------------------------------Selection Function for tab 2------------------------------->    
 
             <div class="form-group">
-              <select id="Select1" class="select1" style="width: 15%;">
+
+              <div class="row">
+        
+                   
+                <div class="col-3">
+              <label>Category</label>
+              <select id="Select1" class="select1" style="width: 75%;">
                <option value="All">All</option>   
              </select> 
+               </div>
              
+               <div class="col-3">
              <label>Status</label>
-             <select id="Status1"  class="select1" style="width: 15%;">
+             <select id="Status1"  class="select1" style="width: 75%;">
               <option value="All">All</option>
               <option value="Pending">Pending</option>
               <option value="Decline">Decline</option>
             </select>  
+            </div>
+            </div>
              <br>
              </div>
 
@@ -601,17 +625,25 @@
               <!----------------------------------------------------Selection Function for tab 2------------------------------->    
 
                     <div class="form-group">
+                      <div class="row">
+        
+                   
+                        <div class="col-3">
                       <label>Category</label>
-                      <select id="Select5" class="select1" style="width: 15%;">
+                      <select id="Select5" class="select1" style="width: 75%;">
                       <option value="All">All</option>   
                     </select> 
+                    </div>
                     
+                    <div class="col-3">
                     <label>Status</label>
-                    <select id="Status5"  class="select1" style="width: 15%;">
+                    <select id="Status5"  class="select1" style="width: 75%;">
                       <option value="All">All</option>
                       <option value="Expired Item">Expired</option>
                       <option value="Out of Stock">Out of Stock</option>
-                    </select>  
+                    </select> 
+                    </div>
+                    </div> 
                     <button  class="btn  bg-gradient-danger btn-sm float-right" data-toggle="modal" data-target="#ExpiredOutofStock" >Delete</button>
                     <br>
                     </div>
@@ -2065,6 +2097,18 @@ function PcsBoxQty(){
  
  else { 
 
+   //--------------------------Date-----------------------
+   var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+    var DateNoti = month+"-"+ date +"-"+ year; 
+
 
                   var timeStamp = Date.now();
                     database.ref('PendingItem/' + Batchv).set({
@@ -2080,6 +2124,16 @@ function PcsBoxQty(){
                       GraphRelease: 0,
                       Status:"Pending",
                       TimeStamp:timeStamp
+                    })
+                    
+                   //Notification for admin
+                   database.ref('Notification/Admin/' + Batchv).set({
+                    Date: DateNoti,
+                    Action: "New Pending Product",
+                    name:"custodian",
+                    item: "add "+Productv,
+                    Batch: Batchv,
+                    Timestamp: timeStamp,
                     })
                     
                     //add total item

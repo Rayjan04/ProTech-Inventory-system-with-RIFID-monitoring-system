@@ -48,9 +48,30 @@ var firebaseConfig = {
     
     }
     if(Notificationadd != "0"){
-         vehi_list = '<a href="Product.html" class="dropdown-item"> <strong>Alert</strong> <span class="right badge badge-danger float-right">New</span> <br>'+Notificationadd+'  Item expired  <span class="float-right text-muted text-sm">'+notification+'</span></a>';
+         vehi_list = '<a href="Product.html" class="dropdown-item"> <strong>Alert</strong> <span class="right badge badge-danger float-right">New</span> <br>'+Notificationadd+'  Item expired  <span class="float-right text-muted text-sm">'+notification+'</span></a> <div class="dropdown-divider"></div>';
           $('#ShowNotification').append(vehi_list);
         } 
 
         
       },5000)
+
+  //--------------------custodian notifiacation----------------------------------
+  function openNoti(){
+ 
+    var database = firebase.database().ref('Notification/Custodian/');
+    database.orderByChild('TimeStamp').once('value',function (snapshot){
+      if(snapshot.exists()){
+         var vehi_list = '';
+            snapshot.forEach(function(data){
+               var val = data.val();
+               
+               document.getElementById("NotificationNumB").innerHTML = " New Notification";
+               vehi_list += '<a href="Product.html" class="dropdown-item"> <strong>'+ val.Action+'</strong> <span class="right badge badge-danger float-right">New</span> <br>  '+ val.name+' '+ val.item+'<span class="float-right text-muted text-sm"> '+ val.Date+'</span></a> <div class="dropdown-divider"></div>';
+            });
+                $('#Refresh').remove();
+                $('#ListNotification').append('<div id="Refresh"> </div>');
+                $('#Refresh').append(vehi_list);
+              
+   }
+   });
+     }

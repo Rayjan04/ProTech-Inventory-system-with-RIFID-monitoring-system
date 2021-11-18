@@ -20,7 +20,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="css/adminlte.css">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ 
   
 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
@@ -51,20 +51,24 @@
     <ul class="navbar-nav ml-auto">
     
 
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span>0</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-header">No Notifications</span>
-          <div class="dropdown-divider"></div>
-        
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
+    
+             <!-- Notifications Dropdown Menu -->
+             <li class="nav-item dropdown">
+              <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
+                <i class="far fa-bell"></i>
+                <span id="NotificationNum" class="badge badge-danger navbar-badge" >0</span>
+              </a>
+              <div id="ShowNotification"class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
+               
+                <span class="dropdown-header" id="NotificationNumB">No Notification</span>
+                <div class="dropdown-divider"></div>
+
+                <div id ="ListNotification">  
+                
+                </div>
+                <div class="dropdown-divider"></div>
+              </div>
+            </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -342,6 +346,7 @@
             
             
           </select>  
+          <button type="button" onclick="AcceptOpen()"  class="btn btn-success float-right">Accept</button>
            <br>
            </div>
 
@@ -352,7 +357,7 @@
               <!--------------------------------------------Pending Table-->
               <table class="table text-nowrap table-striped table-bordered table-sm" id="table1" width="100%">  
                
-                <thead>
+                <thead class="text-center">
                   <tr>
                       
                       <th>Batch#</th>
@@ -366,10 +371,11 @@
                       <th>Total Qty</th>
                       <th>Status</th>
                       <th>Action</th>
+                      <th>Select</th>
                       
                   </tr>
                 </thead>
-                <tbody id="tbody1" class="tbody">
+                <tbody id="tbody1" class="text-center">
                       
         
                 </tbody> 
@@ -496,6 +502,7 @@
 <script src="time.js"></script>
 
 <!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- InputMask -->
 <script src="plugins/moment/moment.min.js"></script>
@@ -593,7 +600,8 @@ function AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,ex
  }
 
  if(Status == "Pending"){
-  td11.innerHTML = '<button type="button" onclick="AcceptOpen()"  class="btn btn-success">Accept</button> <button type="button" onclick="Decline()"  class="btn btn-danger" >Decline</i></button>';
+  td11.innerHTML = '<button type="button" onclick="Decline()"  class="btn btn-danger" >Decline</i></button>';
+  td12.innerHTML = '<input type="checkbox" />';
 
  }
 
@@ -602,12 +610,13 @@ function AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,ex
  }
  
  
-  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);trow.appendChild(td11);
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);trow.appendChild(td11);trow.appendChild(td12);
   tbody.appendChild(trow);
 }
 //---------------------------------------Accept Function------------------------------------>
 function AcceptOpen(){
   $('#Accept').modal('show');
+
                 var table = document.getElementById('table1');
                 for(var i = 0; i < table1.rows.length; i++){
 
@@ -628,8 +637,90 @@ function AcceptOpen(){
 }
 //---------------confirm
 function Accept(){
+  var timeStamp = Date.now();
+    //--------------------------Date-----------------------
+    var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
 
-          
+    var DateNoti = month+"-"+ date +"-"+ year;
+
+
+              //Reference the Table.
+              var grid = document.getElementById("table1");
+              
+              //Reference the CheckBoxes in Table.
+              var checkBoxes = grid.getElementsByTagName("INPUT");
+              var message = '';
+              var Delete = '';
+
+              //Loop through the CheckBoxes.
+              for (var i = 0; i < checkBoxes.length; i++) {
+                  if (checkBoxes[i].checked) {
+
+                      var row = checkBoxes[i].parentNode.parentNode;
+                      message += database.ref('Item/' + row.cells[0].innerHTML).set({
+                                  Batch : row.cells[0].innerHTML,
+                                  Brand : row.cells[2].innerHTML,
+                                  Category : row.cells[1].innerHTML,
+                                  Manufacture : row.cells[3].innerHTML,
+                                  Date : row.cells[4].innerHTML,
+                                  Exdate: row.cells[5].innerHTML,
+                                  PerBox: row.cells[6].innerHTML,
+                                  Box : row.cells[7].innerHTML,
+                                  Total : row.cells[8].innerHTML,
+                                  GraphRelease: 0,
+                                  TimeStamp:timeStamp
+                                })
+
+                    Delete +=  database.ref('PendingItem/' +  row.cells[0].innerHTML).remove();  
+                    Delete +=  database.ref('Notification/Admin/' +  row.cells[0].innerHTML).remove();  
+                               
+                  //Notification for Custodian  
+                    message +=  database.ref('Notification/Custodian/' + row.cells[0].innerHTML).set({
+                    Date: DateNoti,
+                    Action: "Accept Product",
+                    name:"Admin",
+                    item: "accept "+ row.cells[2].innerHTML,
+                    Batch: row.cells[0].innerHTML ,
+                    TimeStamp :timeStamp,
+                    });
+                  }
+                   
+
+
+              }
+              if (message == ""){
+                  $('#Accept').modal('hide');
+                              $(document).Toasts('create',{
+                            class: 'bg-warning',
+                            body: 'Checkbox is empty please select item ',
+                            title: '<h5><i class="far fa-check-circle"></i> Alert</h5>',
+                            autohide: true,
+                            delay: 4000,
+                          }) 
+              }
+              if(message != ""){
+                    $('#Accept').modal('hide');
+                        $(document).Toasts('create',{
+                        class: 'bg-success',
+                        body: 'sucessfully accept a Product',
+                        title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
+                        autohide: true,
+                        delay: 2000,
+                        }) 
+
+                            setTimeout(function(){
+                            window.location.reload();
+                          
+                            },2000)
+              }
+ /*         
   var timeStamp = Date.now();
                     database.ref('Item/' + a1).set({
                       Batch : a1,
@@ -657,7 +748,8 @@ function Accept(){
                     setTimeout(function(){
                      window.location.reload();
                      database.ref('PendingItem/' + a1).remove();
-                     },2000)
+                     },1000)
+                     */
                      
         
 
@@ -734,7 +826,7 @@ function Accept(){
      }
 //<!------------------------------------------------Select option------------------------------------->
 
-  var database = firebase.database();
+var database = firebase.database();
 database.ref('Categories').once('value', function(snapshot){
    if(snapshot.exists()){
       var vehi_list = '';

@@ -49,18 +49,22 @@
     <ul class="navbar-nav ml-auto">
       
 
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+       <!-- Notifications Dropdown Menu -->
+       <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
           <i class="far fa-bell"></i>
           <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
         </a>
-        <div id="ShowNotification"class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div id="ShowNotification"class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
           <span class="dropdown-header" id="NotificationNumB">No Notification</span>
           <div class="dropdown-divider"></div>
-         
+        
+          <div id ="ListNotification">  
+          
+          </div>
         </div>
       </li>
+
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -545,7 +549,26 @@ database.ref('Dashboard/').on('value',function(snapshot){
 
 
   
-        
+         //--------------------custodian notifiacation----------------------------------
+  function openNoti(){
+ 
+    var database = firebase.database().ref('Notification/Custodian/');
+    database.orderByChild('TimeStamp').once('value',function (snapshot){
+      if(snapshot.exists()){
+         var vehi_list = '';
+            snapshot.forEach(function(data){
+               var val = data.val();
+               
+               document.getElementById("NotificationNumB").innerHTML = " New Notification";
+               vehi_list += '<a href="Product.html" class="dropdown-item"> <strong>'+ val.Action+'</strong> <span class="right badge badge-danger float-right">New</span> <br>  '+ val.name+' '+ val.item+'<span class="float-right text-muted text-sm"> '+ val.Date+'</span></a> <div class="dropdown-divider"></div>';
+            });
+                $('#Refresh').remove();
+                $('#ListNotification').append('<div id="Refresh"> </div>');
+                $('#Refresh').append(vehi_list);
+              
+   }
+   });
+     } 
   
   </script>
 

@@ -58,16 +58,20 @@
     
        <!-- Notifications Dropdown Menu -->
        <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+        <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
           <i class="far fa-bell"></i>
           <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
         </a>
-        <div id="ShowNotification"class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div id="ShowNotification"class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
           <span class="dropdown-header" id="NotificationNumB">No Notification</span>
           <div class="dropdown-divider"></div>
-         
+        
+          <div id ="ListNotification">  
+          
+          </div>
         </div>
       </li>
+
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -76,7 +80,7 @@
       <!-- logout Button-->
       <li class="logout">
         <a class="nav-link"    href="logout.html" role="button">
-          <button onclick="logout()" class="btn btn-default btn-sm">Logout</button>
+           <i onclick="logout()" class="fas fa-power-off"></i>
         </a>
       </li>
 

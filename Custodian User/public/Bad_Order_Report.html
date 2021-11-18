@@ -53,18 +53,21 @@
     
 
      
-        <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="far fa-bell"></i>
-            <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
-          </a>
-          <div id="ShowNotification"class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-header" id="NotificationNumB">No Notification</span>
-            <div class="dropdown-divider"></div>
-           
-          </div>
-        </li>
+             <!-- Notifications Dropdown Menu -->
+             <li class="nav-item dropdown">
+              <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
+                <i class="far fa-bell"></i>
+                <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
+              </a>
+              <div id="ShowNotification"class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
+                <span class="dropdown-header" id="NotificationNumB">No Notification</span>
+                <div class="dropdown-divider"></div>
+              
+                <div id ="ListNotification">  
+                
+                </div>
+              </div>
+            </li>
 
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
