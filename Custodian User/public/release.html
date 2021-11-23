@@ -261,10 +261,10 @@
     <div class="card-header p-0 pt-1">
       <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Release Item</a>
+          <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Release Product</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Edit Release Item</a>
+          <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Edit Release Products</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Release Tools</a>
@@ -719,7 +719,8 @@
           </thead>
           <tbody id="tbody4">
                 
-  
+
+
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script></tbody>
@@ -749,6 +750,7 @@
               <tr>
                 <th ></th>
                 <th class="text-center">Tools</th>
+                <th class="text-center">Available</th> 
                 <th class="text-center">Qty Issued</th> 
                 <th class="text-center">Edit Qty</th>
               </tr>
@@ -763,11 +765,11 @@
   
               
           </table>
-  
+
         
       </div>
       <div class="modal-footer justify-content-between float-right">
-        <button type="button" class="btn bg-gradient-danger btn-xs">Delete</button>
+        <button type="button" class="btn bg-gradient-danger btn-xs" onclick="Deletetools()">Delete</button>
         <button type="button" class="btn bg-gradient-success btn-xs" onclick="SaveChage()">Save changes</button>
 
       </div>
@@ -777,6 +779,26 @@
   <!-- /.modal-dialog -->
 </div>
 
+<!------------------------------------------------------------Remove TOOLS RELEASE----------------------------------------------------------------------------------->
+
+<div class="modal fade" id="RemoveReleaseTools">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete?</h4> 
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to DELETE this Release Tools?</p>
+      </div>       
+      <div class="modal-footer justify-content-between">
+        <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button onclick="RemoveReleaseTools()" class="btn btn-danger">Confirm</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 
 <input class="form-control form-control-sm" id="search" type="hidden" placeholder="Search" aria-label="Search" >     
 <!--Expiration notification-->
@@ -801,6 +823,8 @@
 <!------------------------------------------------------DatePicker-------------------------------------------------------------------->
 <input type="hidden" class="form-control" id="GraphRelease">
 <input type="hidden" class="form-control" id="AddGraph">
+ <!------------------------------------------------------GetID-------------------------------------------------------------------->
+ <input type="text" class="form-control" id="GetID">
 
 
 
@@ -1243,6 +1267,8 @@ function Ready(){
          Location2 = document.getElementById('Location2').value;
          Projectx = document.getElementById('Project2').value;
          Reciever = document.getElementById('Reciever').value;
+
+         GetID = document.getElementById('GetID').value;
 
 }
 //=============================================================
@@ -1835,6 +1861,7 @@ Ready();
                             Tools : row.cells[1].innerHTML,
                             QtyIssued :  row.cells[3].innerHTML,     
                             TimesTamp : timeStamp, 
+                            Available: MinusI
                             });
 
                           //create Report tools
@@ -1920,8 +1947,8 @@ function ViewTools(){
   var table1 = document.getElementById('table3');
                         for(var i = 0; i < table1.rows.length; i++){
                         table1.rows[i].onclick = function(){
-                        Toolss  = this.cells[0].innerHTML; 
-
+                        Toolss  = document.getElementById('GetID').value = this.cells[0].innerHTML; 
+                        
                         $('#tbody6').remove();
                         $('#table6').append('<tbody id="tbody6" class="text-center" ></tbody>');
                           //------for tool release edit----
@@ -1934,16 +1961,17 @@ function ViewTools(){
                                 var TimeStampP = CurrentRecord.val().TimesTamp;
                                 var Tools= CurrentRecord.val().Tools;
                                 var QtyIssued = CurrentRecord.val().QtyIssued;
+                                var AvailableX = CurrentRecord.val().Available;
                                 
                                 
                                 
-                                AddItemsToTable3(TimeStampP, Tools, QtyIssued);
+                                AddItemsToTable3(TimeStampP, Tools, QtyIssued, AvailableX);
                               }
                             );
                           });
                   
                   //---------------------------------------------------------------------------Tool edit/remove---------------------------------------------------
-                  function  AddItemsToTable3(TimeStampP,Tools,QtyIssued){
+                  function  AddItemsToTable3(TimeStampP,Tools,QtyIssued,AvailableX){
                   var tbody = document.getElementById('tbody6');
                   var trow = document.createElement('tr');
                   var td1 = document.createElement('td');
@@ -1952,15 +1980,16 @@ function ViewTools(){
                   var td4 = document.createElement('td');
                   var td5 = document.createElement('td');
 
-                  td4.setAttribute("contenteditable", "true");
+                  td5.setAttribute("contenteditable", "true");
                   td1.innerHTML = '<input type="checkbox"/>';;
                   td2.innerHTML = Tools;
-                  td3.innerHTML = QtyIssued;
-                  td4.innerHTML = "";
+                  td3.innerHTML = AvailableX;
+                  td4.innerHTML = QtyIssued;
+                  td5.innerHTML = "";
                   
 
 
-                    trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);
+                    trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);
                   tbody.appendChild(trow);
                   }
                     }}
@@ -1970,7 +1999,7 @@ function ViewTools(){
 }
 //-----------------------------------------------function for edit release tools-------------------------------------->
 function SaveChage(){
-
+Ready();
   var grid = document.getElementById("table6");
 
             //Reference the CheckBoxes in Table.
@@ -1986,30 +2015,56 @@ function SaveChage(){
                     var row = checkBoxes[i].parentNode.parentNode;
                    
                     message += row.cells[1].innerHTML;
-                    issuedVal = row.cells[2].innerHTML;
+                    issuedVal = row.cells[3].innerHTML;
+                    Gettoolvalue = row.cells[2].innerHTML;
+                    Edit = row.cells[4].innerHTML;
 
-
-                   //get value of tools
-                   database.ref('Tools/'+ row.cells[1].innerHTML).on('value',function(snapshot){
-                    Gettoolvalue = snapshot.val().Value;
-                    Namevalue = snapshot.val().Name;
-
+            
+                    //calculate value 
                     Total = Number(issuedVal) + Number(Gettoolvalue);
-                    Newtotal = Number(Total) - Number(row.cells[3].innerHTML);
+                    Newtotal = Number(Total) - Number(row.cells[4].innerHTML);
 
+                    if(Newtotal != Math.floor(Newtotal)  || isNaN(Newtotal) ||  Edit == 0){
+                      
+                        $(document).Toasts('create',{
+                            class: 'bg-danger',
+                            body: 'Invalid Quantity please input whole number only. DECIMAL, ZERO, and BLANK is invalid',
+                            title: '<h5><i class="icon fas fa-ban"></i> Alert</h5>',
+                            autohide: true,
+                            delay: 4000,
+                            }) 
+
+                            return 0;
+                    }
+                    if(Newtotal < 0){
+                              $(document).Toasts('create',{
+                              class: 'bg-warning',
+                              body: 'Please Check Available Quantity you have selected',
+                              title: '<h5><i class="icon fas fa-exclamation-triangle"></i> Alert</h5>',
+                              autohide: true,
+                              delay: 4000,
+                                })  
+                                return 0;
+                           }
+                    if(Newtotal == Math.floor(Newtotal) &&  Newtotal != 0 &&   Newtotal >= 0 ){
+
+                    
+                                // TOOLS VALUE UPDATED
+                                  database.ref('Tools/' + row.cells[1].innerHTML).update({
+                                      Value: Newtotal,      
+                                  });
+                    
+                               // REPORT UPDATE TOOLS 
+                               database.ref('Realease_Item/Tools/' + GetID +'/'+ row.cells[1].innerHTML).update({
+                                    Available: Newtotal,   
+                                    QtyIssued:  Edit,   
+                                  });
+                          
+                    
+                   }
                  
-
-                 //   alert(Newtotal +" "+ Namevalue)
-                    });;
-
-                      //updateValuetools
-                      database.ref('Tools/' + row.cells[1].innerHTML).update({
-                          Value: Newtotal,      
-                       });
-
+                   
                  
-                  
-                  
 
                  
                   
@@ -2018,11 +2073,95 @@ function SaveChage(){
             }
            
             if(message == ""){
+                           $(document).Toasts('create',{
+                            class: 'bg-warning',
+                            body: 'Checkbox is empty please select tools to Edit',
+                            title: '<h5><i class="icon fas fa-exclamation-triangle"></i> Alert</h5>',
+                            autohide: true,
+                            delay: 4000,
+                              }) 
+         
+
+            }
+            if(message != ""){
+                                       $(document).Toasts('create',{
+                                        class: 'bg-success',
+                                      body: 'Sucessfully Create tool release',
+                                      title: '<h5><i class="icon fas fa-check"></i> Alert</h5>',
+                                      autohide: true,
+                                      delay: 2000,
+                                       }) 
          
 
             }
 
 }
+//--------------------------------------------------DELETE TOOL RELEASE------------------------------------->
+            function Deletetools(){
+              $('#RemoveReleaseTools').modal('show');
+     //         $('#viewTools').modal('hide');
+
+              $('input:checkbox').attr('checked','checked');
+            }
+//------------------------------confirm Delete release tools---------------------------------------------->
+       function RemoveReleaseTools(){
+        Ready();
+        $('#RemoveReleaseTools').modal('hide');
+
+        var grid = document.getElementById("table6");
+
+            //Reference the CheckBoxes in Table.
+            var checkBoxes = grid.getElementsByTagName("INPUT");
+            var message = '';
+            var value = [];
+         
+
+            //Loop through the CheckBoxes.
+            for (var i = 0; i < checkBoxes.length; i++) {
+                if (checkBoxes[i].checked) {
+
+                    var row = checkBoxes[i].parentNode.parentNode;
+                   
+                    message += row.cells[1].innerHTML;
+                    issuedVal = row.cells[3].innerHTML;
+                    Gettoolvalue = row.cells[2].innerHTML;
+                    Edit = row.cells[4].innerHTML;
+
+            
+                    //calculate value 
+                    Total = Number(issuedVal) + Number(Gettoolvalue);
+   
+                  
+                }
+                     database.ref('Tools/' + row.cells[1].innerHTML).update({
+                     Value: Total,      
+                      });
+                  
+                   
+                      //notification success Add
+                      $(document).Toasts('create',{
+                      class: 'bg-success',
+                      body: 'Sucessfully Remove Delete Release tools',
+                      title: '<h5><i class="far fa-check-circle"></i> Alert</h5>',
+                      autohide: true,
+                      delay: 2000,
+                      }) 
+
+                      setTimeout(function(){
+                      window.location.reload();
+                      database.ref('Realease_Item/Tools/' + GetID).remove();
+                      database.ref('Realease_Item/ReleaseProject/' + GetID).remove();
+                      },2000)
+
+            }
+           
+    
+            
+
+
+       
+
+       }
 //-------------------------------------------------------selection Function---------------------------------------------->
           function Project2() {
                         Project = document.getElementById("Project2").value;

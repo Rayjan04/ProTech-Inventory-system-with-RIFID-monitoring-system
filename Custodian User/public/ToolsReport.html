@@ -4,7 +4,7 @@
   <link rel="shorcut icon" type="image" href="img/logo.jpg">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Custodian - Issued/Return Reports</title>
+  <title>Custodian - Tools Reports</title>
   
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
@@ -208,13 +208,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="Report.html" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Issued/Return Reports</p>
                     </a>
                   </li>
+                
+                  
                   <li class="nav-item">
-                    <a href="ToolsReport.html" class="nav-link ">
+                    <a href="#" class="nav-link  active">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tools Reports</p>
                     </a>
@@ -261,7 +263,7 @@
 
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Issued/Return Report</h1>
+          <h1>Tools Report</h1>
         </div>
         
   </section>
@@ -298,51 +300,32 @@
              <section class="content-header">
  
             </section>   
-            <div class="card-body table-responsive p-0">
-              <!--------------------------------------------Report Table-->
-              <table class="table table-striped table-bordered table-sm" id="table" >
-                <thead>
+       
+            <div class="card-body table-responsive p-0" style="height: 480px;">
+                <table class="table table-striped table-bordered table-sm table-head-fixed text-nowrap" id="table3" width="100%">
+                  <thead>
+                    <tr>
                       <th>#</th>
                       <th>Date</th>
-                      <th>Item</th>
-                      <th>Batch</th>        
-                      <th>Category</th>
-                      <th>Recieve by</th>
-                      <th>Location</th>
-                      <th>Issued</th>
-                      <th>Return</th>
-                      <th >Total Distributed</th>                 
-                </thead>
-    
-           
-                <tbody id="tbody" >
-                                     
-          
-                </tbody>
-    
-                <tfooter>
-                  <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>        
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>Total</th>
-                   <th id ="total">0</th>
+                      <th>Project</th>  
+                      <th>Product</th>
+                      <th>Status</th>
+                      <th>Tools</th>
                   
-                  </tr>
-                </tfooter>
-              
-    
-           
-          </table>
-          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
-          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
-          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
-              </div>
+                        
+                    </tr>
+                  </thead>
+                  <tbody id="tbody3" class="tbody3">
+                        
+          
+                  </tbody> 
+                          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+                          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+                          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+        
+                    
+                </table>
+    </div>
             </div>
             <!-- /.card-body -->
           
@@ -423,28 +406,6 @@
 <!-- Page specific script -->
 
 <!-- DataTables  & Plugins -->
-
-
-
-<script type="application/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="application/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
-<!--
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="plugins/jszip/jszip.min.js"></script>
-<script src="plugins/pdfmake/pdfmake.min.js"></script>
-<script src="plugins/pdfmake/vfs_fonts.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
--->
-
-
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -467,26 +428,24 @@
 
 var database = firebase.database()
   function SelectAllData(){
-    var database = firebase.database().ref('Report/');
-    database.orderByChild('TimeStamp').once('value',function (snapshot){
-    snapshot.forEach(
-      function(CurrentRecord){
-        var Date = CurrentRecord.val().Date;
-        var Product = CurrentRecord.val().Product;
-        var Batch = CurrentRecord.val().Batch;
-        var Category = CurrentRecord.val().Category;
-        var Recipients = CurrentRecord.val().Recipients; 
-        var IssuedBox = CurrentRecord.val().IssuedBox;
-        var Return = CurrentRecord.val().Return;
-        var Total = CurrentRecord.val().Total;
-        var Location = CurrentRecord.val().Location;
-        var TimeStamp = CurrentRecord.val().TimeStamp;
+    var database = firebase.database().ref('Realease_Item/ReleaseProject/');
+       database.orderByChild('TimesTamp').once('value',function (snapshot){
+          snapshot.forEach(
 
-
-        AddItemsToTable(Date,Product,Batch,Category,Recipients,IssuedBox,Return,Total,Location,TimeStamp);
-      }
-    );
-  });
+            function(CurrentRecord){
+              
+              var TimeStampP = CurrentRecord.val().TimesTamp;
+              var DateP = CurrentRecord.val().Date;
+              var LocationP = CurrentRecord.val().Location;
+              var RecieverP = CurrentRecord.val().Reciever;
+              var ProjectP = CurrentRecord.val().Project;
+              
+              
+              
+              AddItemsToTable3(TimeStampP, DateP, RecieverP, ProjectP);
+            }
+          );
+        });
       //------notification--------
       var database = firebase.database()
       database.ref('Item').once('value',
@@ -505,39 +464,23 @@ var database = firebase.database()
       });
 }
 window.onload = SelectAllData;
-var batchNumber = 0
-function AddItemsToTable(Date,Product,Batch,Category,Recipients,IssuedBox,Return,Total,Location,TimeStamp){
- var tbody = document.getElementById('tbody');
+//---------------------------------------------------------------------------Tool edit/remove---------------------------------------------------
+function  AddItemsToTable3(TimeStampP, DateP, RecieverP, ProjectP){
+ var tbody = document.getElementById('tbody3');
  var trow = document.createElement('tr');
  var td1 = document.createElement('td');
  var td2 = document.createElement('td');
  var td3 = document.createElement('td');
  var td4 = document.createElement('td');
  var td5 = document.createElement('td');
- var td6 = document.createElement('td');
- var td7 = document.createElement('td');
- var td8 = document.createElement('td');
- var td9 = document.createElement('td');
- var td10 = document.createElement('td');
 
+ td1.innerHTML = TimeStampP;
+ td2.innerHTML = DateP;
+ td3.innerHTML = ProjectP;
+ td4.innerHTML = RecieverP;
+ td5.innerHTML = '<button type="button" onclick="ViewTools()" class="btn btn-info"><i class="far fa-clipboard"></i></button>';
 
-
-
- td1.innerHTML = TimeStamp;
- td2.innerHTML = Date;
- td3.innerHTML = Product;
- td4.innerHTML = Batch;
- td5.innerHTML = Category;
- td6.innerHTML = Recipients;
- td7.innerHTML = Location;
- td8.innerHTML = IssuedBox +" BOXES";
- td9.innerHTML = Return +" PCS";
- td10.innerHTML = Total ;
-
-
- 
- 
-  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);
   tbody.appendChild(trow);
 }
 
@@ -600,7 +543,7 @@ database.ref('Categories').once('value', function(snapshot){
  ////<!---------------------------------------------------------datatable load Function------------------------------------------------------------------------------------------->           
 setTimeout(function(){
         $(document).ready(function () {
-          $('#table').DataTable({
+          $('#table3').DataTable({
             paging: false,
             "info": false,
           searching: "true",
@@ -635,163 +578,6 @@ setTimeout(function(){
 
 
 
-
-
-$("#startdate").datepicker({
-  "dateFormat": "mm-dd-yy",
-  "onSelect": function(date) {  // This handler kicks off the filtering.
-    minDateFilter = new Date(date).getTime();
-    var myDataTable = $('#table').DataTable();  
-    myDataTable.draw(); // Redraw the table with the filtered data.
-  }
-}).keyup(function() {
-  minDateFilter = new Date(this.value).getTime();
-  var myDataTable = $('#table').DataTable();  
-  myDataTable.draw();
-});
-
-
-$("#enddate").datepicker({
-  "dateFormat": "mm-dd-yy",
-  "onSelect": function(date) {
-    maxDateFilter = new Date(date).getTime();
-    var myDataTable = $('#table').DataTable();  
-    myDataTable.draw();
-  }
-}).keyup(function() {
-  maxDateFilter = new Date(this.value).getTime();
-  var myDataTable = $('#table').DataTable();  
-  myDataTable.draw();
-
-  
-});
-
-
-// The below code actually does the date filtering.
-minDateFilter = "";
-maxDateFilter = "";
-
-$.fn.dataTableExt.afnFiltering.push(
-  function(oSettings, aData, iDataIndex) {
-
-           
-
-    if (typeof aData._date == 'undefined') {
-      aData._date = new Date(aData[1]).getTime(); // Your date column is 3, hence aData[3].
-    }
-
-    if (minDateFilter && !isNaN(minDateFilter)) {
-      if (aData._date < minDateFilter) {
-        return false;
-      }
-    }
-
-    if (maxDateFilter && !isNaN(maxDateFilter)) {
-      if (aData._date > maxDateFilter) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-);
-
-
-
-</script>
-
-<script type="text/javascript">
-
-  $(function() {
-   
-
-  
-      var start = moment().subtract(29, 'days');
-      var end = moment();
-  
-  
-
-      function cb(start, end) {
-          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-      }
-  
-      $('#reportrange').daterangepicker({
-          startDate: start,
-          endDate: end,
-          ranges: {
-             'Today': [moment(), moment()],
-             'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-             'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-             'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-             'This Month': [moment().startOf('month'), moment().endOf('month')],
-             'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-          }
-      }, cb)
-     
-      cb(start, end); 
-  
-  });
-  </script>
-
-
-<script>
-
-
-
-    function sample(){
-            document.getElementById("total").innerHTML =  0;
-           var table1 = document.getElementById("table"), sumVal = 0;
-            
-            for(var i = 1; i < table1.rows.length; i++)
-            {
-                sumVal = sumVal + parseInt(table1.rows[i].cells[9].innerHTML);
-            }
-           document.getElementById("total").innerHTML =  sumVal+ ' pcs';           
-    }
-
-
-
-    setInterval(sample, 200);
-        
-    
- 
-</script>
-<script>
-  setTimeout(function(){
-    var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementById("table");
-  switching = true;
-  /*Make a loop that will continue until
-  no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.rows;
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-      one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[0];
-      y = rows[i + 1].getElementsByTagName("TD")[0];
-      //check if the two rows should switch place:
-      if (Number(x.innerHTML) < Number(y.innerHTML)) {
-        //if so, mark as a switch and break the loop:
-        shouldSwitch = true;
-        break;
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-    }
-  }
-    },3000)
-   
 </script>
 
 
