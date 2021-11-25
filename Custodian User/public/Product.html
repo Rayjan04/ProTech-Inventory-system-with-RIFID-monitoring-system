@@ -3019,6 +3019,14 @@ setTimeout(function(){
           });
           });  
 
+           $(document).ready(function () {
+          $('#table5').DataTable({
+            "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
+            "ordering": false,  
+
+          });
+          }); 
+
           $(document).ready(function () {
           $('#table3').DataTable({
             "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
@@ -3029,6 +3037,8 @@ setTimeout(function(){
 
           });
           }); 
+
+          
           //--------------------------------for hiding report not today-----------------------
            //--------------------------Date-----------------------
             var today = new Date();

@@ -444,6 +444,30 @@
           <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
      <!--------------------------------------------------tool Retrun---------------------->
                   <div class="card-body table-responsive p-0" style="height: 480px;">
+
+
+                                  <!-----------------------select option--------------->
+                    <div class="form-group">
+                      <div class="row">
+
+                  
+                        <div class="col-3">
+                      <label>Project</label>
+                      <select id="" class="select1" style="width: 75%;">
+          
+                    </select> 
+                    </div>
+                    
+                    <div class="col-3">
+                    <label>Product</label>
+                    <select id=""  class="select1" style="width: 75%;">
+
+                    </select> 
+                    </div>
+                    </div> 
+                    <br>
+                    </div>
+
                     <table class="table table-striped table-bordered table-sm table-head-fixed text-nowrap" id="table3" width="100%">
                       <thead>
                         <tr>
@@ -726,12 +750,12 @@ function SelectAllData(){
       });
       //----------------Tool Return----------------
       var database1 = firebase.database().ref('Realease_Item/ReleaseProject');
-       database1.orderByChild('TimesTamp').once('value',function (snapshot){
+       database1.orderByChild('TimeStamp').once('value',function (snapshot){
           snapshot.forEach(
 
             function(CurrentRecord){
               
-              var TimeStampP = CurrentRecord.val().TimesTamp;
+              var TimeStampP = CurrentRecord.val().TimeStamp;
               var DateP = CurrentRecord.val().Date;
               var LocationP = CurrentRecord.val().Location;
               var RecieverP = CurrentRecord.val().Reciever;
