@@ -346,7 +346,7 @@
             
             
           </select>  
-          <button type="button" onclick="AcceptOpen()"  class="btn btn-success float-right">Accept</button>
+         
            <br>
            </div>
 
@@ -538,8 +538,12 @@
 
 <script id=MainScript>
 function SelectAllData(){
+
+ 
 var database = firebase.database().ref('PendingItem/');
-   database.orderByChild('TimeStamp').once('value',function (snapshot){
+   database.orderByChild('TimeStamp').on('value',function (snapshot){
+    $('#tbody1').remove();
+    $('#table1').append('<tbody id="tbody1" class="text-center" ></tbody>');
     snapshot.forEach(
       function(CurrentRecord){
         var batch1 = CurrentRecord.val().Batch;
@@ -601,7 +605,7 @@ function AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,ex
 
  if(Status == "Pending"){
   td11.innerHTML = '<button type="button" onclick="Decline()"  class="btn btn-danger" >Decline</i></button>';
-  td12.innerHTML = '<input type="checkbox" />';
+  td12.innerHTML = '<button type="button" onclick="AcceptOpen()"  class="btn btn-success float-right">Accept</button>';
 
  }
 
@@ -649,7 +653,7 @@ function Accept(){
      date =   ("0" + date).slice(-2);
 
     var DateNoti = month+"-"+ date +"-"+ year;
-
+/*
 
               //Reference the Table.
               var grid = document.getElementById("table1");
@@ -717,10 +721,9 @@ function Accept(){
 
                             setTimeout(function(){
                             window.location.reload();
-                          
                             },2000)
-              }
- /*         
+              }*/
+       
   var timeStamp = Date.now();
                     database.ref('Item/' + a1).set({
                       Batch : a1,
@@ -746,10 +749,20 @@ function Accept(){
                     }) 
 
                     setTimeout(function(){
-                     window.location.reload();
+              // window.location.reload();
+               //Notification for Custodian  
+                   database.ref('Notification/Custodian/' + a1).set({
+                    Date: DateNoti,
+                    Action: "Accept Product",
+                    name:"Admin",
+                    item: "accept "+  c1,
+                    Batch:  a1 ,
+                    TimeStamp :timeStamp,
+                    });             
+                    database.ref('PendingItem/' +  a1).remove();  
                      database.ref('PendingItem/' + a1).remove();
                      },1000)
-                     */
+                     
                      
         
 

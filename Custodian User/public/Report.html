@@ -56,21 +56,26 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
     
-       <!-- Notifications Dropdown Menu -->
-       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
-          <i class="far fa-bell"></i>
-          <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
-        </a>
-        <div id="ShowNotification"class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
-          <span class="dropdown-header" id="NotificationNumB">No Notification</span>
-          <div class="dropdown-divider"></div>
-        
-          <div id ="ListNotification">  
-          
-          </div>
-        </div>
-      </li>
+          <!-- Notifications Dropdown Menu -->
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
+              <i class="far fa-bell"></i>
+              <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
+            </a>
+    
+            <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
+              <span class="dropdown-header" id="NotificationNumB">No Notification</span>
+              <div class="card-body table-responsive p-0" style="height: 380px;">
+              <div class="dropdown-divider"></div>
+            
+              <div id ="ListNotification">  
+              <div id="ShowNotification">
+    
+              </div>
+              </div>
+              </div>
+            </div>
+          </li>
 
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -601,6 +606,7 @@ database.ref('Categories').once('value', function(snapshot){
 setTimeout(function(){
         $(document).ready(function () {
           $('#table').DataTable({
+            "order": [[ 0, "desc" ]],
             paging: false,
             "info": false,
           searching: "true",
@@ -700,38 +706,6 @@ $.fn.dataTableExt.afnFiltering.push(
 
 </script>
 
-<script type="text/javascript">
-
-  $(function() {
-   
-
-  
-      var start = moment().subtract(29, 'days');
-      var end = moment();
-  
-  
-
-      function cb(start, end) {
-          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-      }
-  
-      $('#reportrange').daterangepicker({
-          startDate: start,
-          endDate: end,
-          ranges: {
-             'Today': [moment(), moment()],
-             'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-             'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-             'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-             'This Month': [moment().startOf('month'), moment().endOf('month')],
-             'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-          }
-      }, cb)
-     
-      cb(start, end); 
-  
-  });
-  </script>
 
 
 <script>
@@ -756,7 +730,9 @@ $.fn.dataTableExt.afnFiltering.push(
     
  
 </script>
+<!--
 <script>
+  
   setTimeout(function(){
     var table, rows, switching, i, x, y, shouldSwitch;
   table = document.getElementById("table");
@@ -791,9 +767,10 @@ $.fn.dataTableExt.afnFiltering.push(
     }
   }
     },3000)
+    
    
 </script>
-
+-->
 
 </body>
 

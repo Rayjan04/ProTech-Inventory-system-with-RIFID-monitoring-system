@@ -49,8 +49,8 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
-       <!-- Notifications Dropdown Menu -->
-       <li class="nav-item dropdown">
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
           <i class="far fa-bell"></i>
           <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
@@ -432,7 +432,7 @@
                               
                           <div class="form-group">
                               <label>Project</label>
-                              <select id="Project" class="select" style="width: 25%;">
+                              <select id="Projectx" class="select" style="width: 25%;">
                               <option value="All">All</option>   
                             </select> 
                         
@@ -557,7 +557,7 @@
                           <th>#</th>
                           <th>Date</th>
                           <th>Project</th>  
-                          <th>Product</th>
+                          <th>Recieve By</th>
                           <th>Tools</th>
                             
                         </tr>
@@ -598,7 +598,7 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content bg-danger">
       <div class="modal-header ">
-        <h4 class="modal-title">Critical Stock Alert</h4> 
+        <h4 class="modal-title"  id="outofstock">Critical Stock Alert</h4> 
       </div>
       <div class="modal-body">
         <p id ="CriticalStockM"></p>
@@ -741,7 +741,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-info">
-        <h4 class="modal-title" style="color: red">Tool Issued *working in progress</h4>
+        <h4 class="modal-title" >Tool Issued</h4>
       </div>
       <div class="modal-body">
           <!------------------------------------table input------------->
@@ -879,7 +879,9 @@ function SafetyStockV(){
 }
 function SelectAllData(){
   var database = firebase.database().ref('Item/');
-   database.orderByChild('Batch').once('value',function (snapshot){
+   database.orderByChild('Batch').on('value',function (snapshot){
+    $('#tbody').remove();
+    $('#table').append('<tbody id="tbody" class="" ></tbody>');
     snapshot.forEach(
       function(CurrentRecord){
         var batch = CurrentRecord.val().Batch;
@@ -900,7 +902,9 @@ function SelectAllData(){
   });
       //Release table data
       var database = firebase.database().ref('Realease_Item/Product/');
-   database.orderByChild('TimeStamp').once('value',function (snapshot){
+   database.orderByChild('TimeStamp').on('value',function (snapshot){
+    $('#tbody1').remove();
+    $('#table1').append('<tbody id="tbody1" class="" ></tbody>');
     snapshot.forEach(
             function(CurrentRecord){
               var Batch1 = CurrentRecord.val().Batch;
@@ -1179,7 +1183,7 @@ database.ref('Categories').once('value', function(snapshot){
             var val = data.val();
             vehi_list += '<option value="' + val.Value + '">' + val.Value + '</option>';
          });
-            $('#Select1').append(vehi_list);
+            $('#Select').append(vehi_list);
 
 }
 });
@@ -1193,7 +1197,7 @@ database.ref('Realease_Item/Projects').once('value', function(snapshot){
             vehi_list += '<option value="' + val.ProjectName + '">' + val.ProjectName + '</option>';
          });
 
-            $('#Project').append(vehi_list);
+            $('#Projectx').append(vehi_list);
             $('#Project2').append(vehi_list);
             
 
@@ -1447,6 +1451,7 @@ Ready();
               if(Number(MinSafetyStock) >= Number(totalBox) ){
                 $('#CriticalStock').modal('show');
                 document.getElementById('CriticalStockM').innerHTML = 'No available safety stock the total Qty left is ' + totalBox + '. are you sure you want to proceed?';
+                document.getElementById('outofstock').innerHTML = 'Out of Stock Alert';
                 return 0;
               }
               if(Number(SafetyStock) >= Number(totalBox) ){
@@ -1513,7 +1518,8 @@ Ready();
                     }) 
 
                     setTimeout(function(){
-                     window.location.reload();
+                      document.getElementById("quickForm").reset();
+           //         window.location.reload();
                      },2000)
                      
                 }
@@ -1545,55 +1551,7 @@ Ready();
               }
       }
 
-      
-      /*
-      database.ref('Realease_Item/' + Batch).set({
-                          Batch : Batch,
-                          Product : Product,
-                          Category : Category,
-                          Recipients : Recipients,
-                          Box : Qty,
-                          Address : Address,
-                          Total : Total
-                          
-                        })
-                //update Qty
-                database.ref('Item/' + Batch).update({
-                      Box : totalBox ,
-                      Total : totalQty,
-                })
-
-              if(totalQty <= 0){
-
-               //update DashBoard
-                    NotAvailable = ++NotAvailable;
-                    AvailableItem = --Available;
-
-                    database.ref('Dashboard/').update({
-                    NotAvailable_Item : NotAvailable,
-                    Available_Item: AvailableItem,
-                    
-                    })
-                //update Status
-                database.ref('Item/' + Batch).update({                    
-                          Status : "Out of Stock",
-                        })
-
-                      }
-        
-                 //notification success Add
-             
-                    $(document).Toasts('create',{
-                    class: 'bg-success',
-                    body: 'sucessfully Create ',
-                    title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
-                    autohide: true,
-                    delay: 2000,
-                    }) 
-
-                    setTimeout(function(){
-                     window.location.reload();
-                     },2000)*/
+   
                      
   }
 }
@@ -1657,7 +1615,8 @@ function Proceed(){
                     }) 
 
                     setTimeout(function(){
-                     window.location.reload();
+                      document.getElementById("quickForm").reset();
+                 //    window.location.reload();
                      },2000)
  }
  //-------------------------------Proceed for critical stock-----------------------
@@ -1720,7 +1679,8 @@ function Proceed1(){
                     }) 
 
                     setTimeout(function(){
-                     window.location.reload();
+                      document.getElementById("quickForm").reset();
+            //         window.location.reload();
                      },2000)
                 }
 //--------------------------------------------------Select Function------------------------------------------------->
@@ -1869,7 +1829,7 @@ Ready();
                               Project: Projectx,
                               Location: Location2,
                               Reciever: Reciever,
-                              TimesTamp : timeStamp, 
+                              TimeStamp : timeStamp, 
                               Date: DateEx
                               });
                               
@@ -2084,14 +2044,18 @@ Ready();
 
             }
             if(message != ""){
-                                       $(document).Toasts('create',{
-                                        class: 'bg-success',
-                                      body: 'Sucessfully Create tool release',
-                                      title: '<h5><i class="icon fas fa-check"></i> Alert</h5>',
-                                      autohide: true,
-                                      delay: 2000,
-                                       }) 
-         
+                                $(document).Toasts('create',{
+                                class: 'bg-success',
+                                 body: 'Sucessfully Create tool release',
+                                 title: '<h5><i class="icon fas fa-check"></i> Alert</h5>',
+                                 autohide: true,
+                                 delay: 2000,
+                                 }) 
+
+                            setTimeout(function(){
+                            window.location.reload();
+                            },2000)
+              
 
             }
 

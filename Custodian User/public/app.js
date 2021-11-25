@@ -59,7 +59,7 @@ var firebaseConfig = {
   function openNoti(){
  
     var database = firebase.database().ref('Notification/Custodian/');
-    database.orderByChild('TimeStamp').once('value',function (snapshot){
+    database.orderByChild('Timestamp').on('value',function (snapshot){
       if(snapshot.exists()){
          var vehi_list = '';
             snapshot.forEach(function(data){

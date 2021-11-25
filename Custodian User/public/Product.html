@@ -57,20 +57,28 @@
       
 
             <!-- Notifications Dropdown Menu -->
-            <li class="nav-item dropdown">
-              <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
-                <i class="far fa-bell"></i>
-                <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
-              </a>
-              <div id="ShowNotification"class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
-                <span class="dropdown-header" id="NotificationNumB">No Notification</span>
-                <div class="dropdown-divider"></div>
-              
-                <div id ="ListNotification">  
-                
-                </div>
-              </div>
-            </li>
+            <ul class="navbar-nav ml-auto">
+
+              <!-- Notifications Dropdown Menu -->
+              <li class="nav-item dropdown">
+               <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
+                 <i class="far fa-bell"></i>
+                 <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
+               </a>
+       
+               <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
+                 <span class="dropdown-header" id="NotificationNumB">No Notification</span>
+                 <div class="card-body table-responsive p-0" style="height: 380px;">
+                 <div class="dropdown-divider"></div>
+               
+                 <div id ="ListNotification">  
+                 <div id="ShowNotification">
+       
+                 </div>
+                 </div>
+                 </div>
+               </div>
+             </li>
 
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -672,7 +680,7 @@
                                         <th>Total Qty</th>
                                         <th>Day to Expire</th>
                                         <th>Status</th>
-                                        <th>Select</th>
+                                        <th role="button" id="myCheck" onclick="SelectAll()">All</th>
                                         
                                     </tr>
                                   </thead>
@@ -928,7 +936,7 @@
             <div class="col-6">
                <div class="form-group">
                   <label class="selectpicker" for="exampleInputPassword1">Product Category</label>
-               <select id="categories" onchange="run1()" class="form-control select2" style="width: 100%;">
+               <select id="categories" onchange="run1()" class="form-control select" style="width: 100%;">
                 <option value="" selected hidden>------Select Category------</option>                   
                 </select>
 
@@ -948,7 +956,7 @@
               <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
               
             </div>
-            <select id="product" onchange="run5()" class="form-control select2" style="width: 100%;">
+            <select id="product" onchange="run5()" class="form-control select" style="width: 100%;">
               <option value="" >----Select Product Brand----</option> 
               </select>
         
@@ -962,7 +970,7 @@
             <div class="form-group">
               <label for="exampleInputPassword1">Manufacturer</label>
               <div class="input-group inputdefault">
-              <select id="manufacturer" onchange="run2()" class="form-control select2" style="width: 100%;">
+              <select id="manufacturer" onchange="run2()" class="form-control select" style="width: 100%;">
                 <option value="" >----Select Manufacturer----</option> 
              
                 </select>
@@ -1376,7 +1384,9 @@ function SafetyStockV(){
 
 function SelectAllData(){
   var database = firebase.database().ref('Item/');
-   database.orderByChild('TimeStamp').once('value',function (snapshot){
+   database.orderByChild('TimeStamp').on('value',function (snapshot){
+    $('#tbody').remove();
+    $('#table').append('<tbody id="tbody" class="" ></tbody>');
     snapshot.forEach(
       function(CurrentRecord){
         var batch = CurrentRecord.val().Batch;
@@ -1397,7 +1407,9 @@ function SelectAllData(){
   });
   //----------------------for pending Item-----------------------------
   var database = firebase.database().ref('PendingItem/');
-   database.orderByChild('TimeStamp').once('value',function (snapshot){
+   database.orderByChild('TimeStamp').on('value',function (snapshot){
+    $('#tbody1').remove();
+    $('#table1').append('<tbody id="tbody1" class="" ></tbody>');
     snapshot.forEach(
       function(CurrentRecord){
         var batch1 = CurrentRecord.val().Batch;
@@ -1455,6 +1467,8 @@ function SelectAllData(){
       //-----------------------------for remove check day expired------------
       var database = firebase.database().ref('Item/');
       database.orderByChild('TimeStamp').once('value',function (snapshot){
+        $('#tbody5').remove();
+        $('#table5').append('<tbody id="tbody5"  class="text-center" ></tbody>');
         snapshot.forEach(
           function(CurrentRecord){
             var batch5 = CurrentRecord.val().Batch;
@@ -1719,16 +1733,16 @@ function AddItemsToTable5(batch5,Category5,products5,manufacture5,supplydate5,ex
 
 if(diffDays < 90){
   td8.innerHTML = '<span id=""class="badge badge-info">' + 'Near to Expiry' + '</span>';
-  td9.innerHTML = '<input type="checkbox"  disabled/>'
+  td9.innerHTML = ''
 }
  if(diffDays > 90){
   td8.innerHTML = '<span id=""class="badge badge-success">' + 'More than 90days' + '</span>';
-  td9.innerHTML = '<input type="checkbox" disabled/>'
+  td9.innerHTML = ''
 }
 
 if(diffDays < 30){
 td8.innerHTML = '<span id=""class="badge badge-warning" >' + 'Short Expiry' + '</span>';
-td9.innerHTML = '<input type="checkbox" disabled/>'
+td9.innerHTML = ''
 }
  
 if(new Date(exdate5) <= new Date(Dati)){
@@ -2163,7 +2177,8 @@ function PcsBoxQty(){
                     }) 
 
                     setTimeout(function(){
-                     window.location.reload();
+                      document.getElementById("quickForm1").reset();
+                   //  window.location.reload();
                      },2000)
                      
 
@@ -2253,7 +2268,7 @@ function Delete(){
                     }) 
                     setTimeout(function(){
                       database.ref('PendingItem/' + a).remove();
-                     window.location.reload();
+                     //window.location.reload();
                      },2000)
 
         
@@ -2387,7 +2402,8 @@ function SaveEdit(){
                     delay: 2000,
                     })
                     setTimeout(function(){
-                     window.location.reload();
+                      document.getElementById("quickForm").reset();
+                     //window.location.reload();
                      },2000) 
 
   }  
@@ -2469,7 +2485,8 @@ function SaveStatus(){
                       }) 
 
                       setTimeout(function(){
-                      window.location.reload();
+                        $('#EditStatus').modal('hide');
+                //      window.location.reload();
                       },2000)
 
 
@@ -2743,59 +2760,30 @@ function DeleteExpired() {
         }
                 
  
-        //Display selected Row data in Alert Box.
-     
-    }
-/*
-
-function CheckBox(checkbox) {
-
-var timeStamp = Date.now();   
-   
-  
-i
-  var table1 = document.getElementById('table5');
-            for(var i = 0; i < table1.rows.length; i++){
-            table1.rows[i].onclick = function(){
-             IdReport =  document.getElementById('IdCheckBox').value = this.cells[0].innerHTML;
-             CheckCheckBox  =  document.getElementById('CheckCheckBox').value = this.cells[8].innerHTML;
-                  database.ref('Item/'+ IdReport ).on('value',function(snapshot){
-                              Batch5 = snapshot.val().Batch;
-                              Category5 = snapshot.val().Category;
-                              Brand5 = snapshot.val().Brand;
-                              Box5 = snapshot.val().Box;
-
-                      database.ref('RemoveExpired/' + IdReport).set({
-                      Batch : Batch5,
-                      Brand : Category5,
-                      Category: Brand5,
-                      Box: Box5,
-                      TimeStamp:timeStamp,
-                        
-                       })
-                        });
-                 
-  
-
-             
-                    
        
-            };  
-            
-            }
-  
-}
-            else{
-              alert("uncheck")
-            }
-         
-            
-           
-   
-   
-
     }
-    */
+
+
+
+
+function SelectAll(){ 
+
+  var all =  document.getElementById("myCheck").innerHTML;
+
+  if(all == "All"){
+      $('input:checkbox').attr('checked',true);  
+      document.getElementById("myCheck").innerHTML = "None"
+  }
+  if(all == "None"){
+    $('input:checkbox').attr('checked',false);  
+    document.getElementById("myCheck").innerHTML = "All"
+  }
+
+
+
+}
+
+    
 
 ////<!---------------------------------------------------------Select Function------------------------------------------------------------------------------------------->
 function run1() {
