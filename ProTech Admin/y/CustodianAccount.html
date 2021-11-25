@@ -7,13 +7,18 @@
   <title>Admin - Manage Account/Custodian Account</title>
  
 
+   
+     <!-- DataTables -->
+     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+     <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+     <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="css/adminlte.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
  
   <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
@@ -25,6 +30,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
 
   <script src="logout.js"></script>
+  <script src="UserManagement.js"></script>
   
 </head>
 
@@ -71,7 +77,7 @@
       <!-- logout Button-->
       <li class="logout">
         <a class="nav-link"   role="button">
-          <button onclick="logout()" class="btn btn-default btn-sm">logout</button>
+          <i onclick="logout()" class="fas fa-power-off"></i>
         </a>
       </li>
 
@@ -97,7 +103,7 @@
           <img src="img/jorge_user.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <a href="#" class="d-block" id="AdminName">Admin</a>
         </div>
       </div>
 
@@ -222,29 +228,12 @@
                
 
                  <!--Manage Account-->
-                 <li class="nav-item menu-open">
-                  <a href="#" class="nav-link active ">
-                    <i class="fas fa-user-circle"></i>
-                    <p>
-                      User Management
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="#" class="nav-link  ">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Manage User</p>
-                      </a>
-                    </li>
                     <li class="nav-item">
                       <a href="#" class="nav-link active">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="fas fa-user-circle"></i>
                         <p>Add Account</p>
                       </a>
                     </li>
-                  </ul>
-                </li>
                  <!--Manage Account-->
                  
 
@@ -285,7 +274,7 @@
 
                <!--reports-->
                <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="Records.html" class="nav-link">
                   <i class="nav-icon fas fa-copy"></i>
                   <p>Reports</p>
                 </a>
@@ -309,47 +298,74 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 style="color: red;">*work in progress.*</h1>
+          <h1>User Management</h1>
         </div>
   </section>
-              
-<!-- Main Content-->
+ <!-- Main Content-->
+
 <section class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+      
+          <div class="card card-success">
             <div class="card-header">
-            <!-- /.card-header -->
-            <table class="table table-bordered" id="table">
-                <thead>
-                      <th>Sample.</th>
-                      <th>Sample.</th>
-                      <th>Sample.</th>
-                      <th>Sample.</th>
-                      <th>Sample.</th>
-                      <th>Sample.</th>
-                      <th>Sample.</th>
-                      <th>Sample.</th>
+              
+            </div>
+            <div class="card-body">
+              
+           <!----------------------------------------------------Selection Function------------------------------->    
+    
+           <div class="form-group">
+          
+            <button  class="btn btn-success float-right" data-toggle="modal" data-target="#add">Add User</button>
+           <br>
+           </div>
+
+             <section class="content-header">
+ 
+            </section>   
+            <div class="card-body table-responsive p-0">
+              <!--------------------------------------------Table--------------------------->
+              <table class="table text-nowrap table-striped table-bordered table-sm" id="table">
+                <thead class="text-center">
+                      <th>#</th>
+                      <th>Firstname</th>
+                      <th>LastName</th>
+                      <th>Username</th>         
+                      <th>user Role</th>
+                      <th>Action </th>
                       
                 </thead>
-                <tbody id="tbody" class="tbody">
+                <tbody id="tbody" class="text-center">
                       
         
                 </tbody>
           </table>
-          
-          <button  class="btn btn-success float-right" data-toggle="modal" data-target="#add">Add</button>
+              </div>
+            </div>
             <!-- /.card-body -->
-          </div>
           
- </div>
-</div>
-</div>
-</div>      
-</section>  
-          <!-- /.card -->
-<!-- Main Content-->
+     
+          <!-- /.card-body -->
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+        </div>
+        </div>
+        
+
+          <!-- /.content-wrapper -->
+          <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+              <strong>Copyright &copy; 2021 <a href="#">ProTech</a>.</strong> All rights reserved.
+            </div>
+            <b>.</b>
+            </footer>
+
+
 
 
 
@@ -370,7 +386,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="Batcht">First Name</label>
-                <input type="text" required="" class="form-control" id="Batch2" placeholder="Enter Name" name="FirstName" >
+                <input type="text" required="" class="form-control" id="Fname" placeholder="Enter Name" name="FirstName" >
               </div>
   
               
@@ -384,39 +400,44 @@
                 <input type="email" required="" class="form-control" id="Email" placeholder="Enter Email">
               </div>
   
+
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="text" required="" class="form-control" id="Password1" placeholder="Enter Password">
+                <div class="input-group mb-3">
+                  <input type="text" required="" class="form-control" id="Password1" placeholder="Enter Password">
+                  <div class="input-group-append">
+                 <span class="input-group-text "><i class="fas fa-undo" type='button'  onclick='document.getElementById("Password1").value = Password.generate(16)'></i></span>
+               </div>
+             </div>
+             
+                
               </div>
-  
+     
+             
+
               <div class="form-group">
-                <label for="exampleInputPassword1">Retype Password</label>
-                <input type="text" required="" class="form-control" id="Password2" placeholder="Retype Password">
-              </div>            
+                <label for="exampleInputPassword1">Role</label>
+                <select id="Role"  class="form-control select" style="width: 100%;">
+                 <option value="">Select Role</option>   
+                 <option value="Admin">Admin</option> 
+                 <option value="Custodian">Inventory Custodian</option> 
+               </select> 
              </div>
             
             </form>
-            <div class="modal-footer justify-content-between">      
-              
-              <button type="button"  class="btn btn-danger" data-dismiss="modal">Back</button>
-              <button onclick="Confirm()" class="btn btn-success">Confirm</button>
-            </div>
+
+           
             
             
           <!-- /.modal-content -->
         </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-          <strong>Copyright &copy; 2021 <a href="#">ProTech</a>.</strong> All rights reserved.
+        <div class="modal-footer justify-content-between">      
+          <button type="button"  class="btn btn-danger" data-dismiss="modal">Back</button>
+          <button onclick="AddUser()" class="btn btn-success">Add</button>
         </div>
-        <b>.</b>
-        </footer>
-         
-            <!-- Add Modal -->
+      </div>
+      </div>
+    
 
 
        
@@ -438,10 +459,127 @@
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+<!----Data Tables-->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 </body>
 <script>
  
+ 
+function SelectAllData(){
+
+ 
+var database = firebase.database().ref('Account/');
+   database.orderByChild('TimeStamp').on('value',function (snapshot){
+    $('#tbody').remove();
+    $('#table').append('<tbody id="tbody" class="text-center" ></tbody>');
+    snapshot.forEach(
+      function(CurrentRecord){
+        var UsetID = CurrentRecord.val().UsetID;
+        var Email = CurrentRecord.val().Email;
+        var Fname = CurrentRecord.val().Fname;
+        var Lname = CurrentRecord.val().Lname;
+        var Contact = CurrentRecord.val().Contact;
+        var Password = CurrentRecord.val().Password;
+        var Role = CurrentRecord.val().Role;
+     
+        
+        AddItemsToTable1(UsetID, Contact, Password, Role, Email, Fname, Lname);
+      }
+    );
+  });
+}
+
+window.onload = SelectAllData;
+function  AddItemsToTable1(UsetID, Contact, Password, Role, Email, Fname, Lname){
+ var tbody = document.getElementById('tbody');
+ var trow = document.createElement('tr');
+ var td1 = document.createElement('td');
+ var td2 = document.createElement('td');
+ var td3 = document.createElement('td');
+ var td4 = document.createElement('td');
+ var td5 = document.createElement('td');
+ var td6 = document.createElement('td');
+
+
+
+ td1.innerHTML = UsetID;
+ td2.innerHTML = Fname;
+ td3.innerHTML = Lname;
+ td4.innerHTML = Email;
+ td5.innerHTML = Role;
+ td6.innerHTML = '<button type="button" onclick="EditOpen()"  class="btn btn-success" data-toggle="modal" data-target="#Edit"><i class="far fa-edit"></i></button>  <button type="button" onclick="DeleteOpen()"  class="btn btn-danger" data-toggle="modal" data-target="#Confirmation"><i class="fas fa-trash-alt"></i></button>';
+
+ 
+ 
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);
+  tbody.appendChild(trow);
+}
+//----------------------------------------------------DATA TABLE-----------------------------------------------------?
+$(document).ready(function () {
+          $('#table').DataTable({
+            "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
+            "ordering": false,  
+
+          });        
+    },3000)
+//--------------------------------------------------RANDOM GENERATE PASSWORD--------------------------------------------------->
+var Password = {
+ 
+ _pattern : /[a-zA-Z0-9_\-\+\.]/,
+ 
+ 
+ _getRandomByte : function()
+ {
+   // http://caniuse.com/#feat=getrandomvalues
+   if(window.crypto && window.crypto.getRandomValues) 
+   {
+     var result = new Uint8Array(1);
+     window.crypto.getRandomValues(result);
+     return result[0];
+   }
+   else if(window.msCrypto && window.msCrypto.getRandomValues) 
+   {
+     var result = new Uint8Array(1);
+     window.msCrypto.getRandomValues(result);
+     return result[0];
+   }
+   else
+   {
+     return Math.floor(Math.random() * 256);
+   }
+ },
+ 
+ generate : function(length)
+ {
+   return Array.apply(null, {'length': length})
+     .map(function()
+     {
+       var result;
+       while(true) 
+       {
+         result = String.fromCharCode(this._getRandomByte());
+         if(this._pattern.test(result))
+         {
+           return result;
+         }
+       }        
+     }, this)
+     .join('');  
+ }    
+   
+};
 </script>
 
   

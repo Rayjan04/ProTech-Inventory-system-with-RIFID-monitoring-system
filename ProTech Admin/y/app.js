@@ -5,9 +5,14 @@ function Login(){
 
     firebase.auth().signInWithEmailAndPassword(email, pass)
     .then((userCredential) => {
+
       // Signed in
-      var user = userCredential.user;
-      // ...
+      window.location.href = "Admin.html";
+   
+
+   
+     
+      
     })
     .catch((error) => {
       var errorCode = error.code;
@@ -18,9 +23,12 @@ function Login(){
     
   
 }
+  var  Fname;
+  var  Lname;
   firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    window.location.href = 'Admin.html'
+
+     
   } else {
     // No user is signed in.
   }
