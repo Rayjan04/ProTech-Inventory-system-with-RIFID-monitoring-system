@@ -4,14 +4,8 @@
   <link rel="shorcut icon" type="image" href="img/logo.jpg">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin - Archiving Product</title>
+  <title>Admin - Archiving User</title>
  
- <!-- DataTables -->
- <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
- <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
- <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
-
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -74,7 +68,6 @@
                   </div>
                 </div>
               </li>
-
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -251,7 +244,7 @@
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="Trash.html" class="nav-link active ">
+                      <a href="Trash.html" class="nav-link ">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Product</p>
                       </a>
@@ -269,7 +262,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="UserDelete.html" class="nav-link">
+                        <a href="#" class="nav-link active">
                           <i class="far fa-circle nav-icon"></i>
                           <p>User</p>
                         </a>
@@ -310,166 +303,91 @@
           <h1>Archive Data</h1>
         </div>
   </section>
+
+  
 <!--------------------------------------------------------------Main Content------------------------------------------------------>
  <!-- Main Content-->
 
- <section class="content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-      
-          <div class="card card-success">
-            <div class="card-header">
-              
-            </div>
-            <div class="card-body">
-              
-           <!----------------------------------------------------Selection Function------------------------------->    
-    
-          
-
-             <section class="content-header">
- 
-            </section>   
-            <div class="card-body table-responsive p-0">
-              <!--------------------------------------------Pending Table-->
-              <table class="table table-striped table-bordered table-sm" id = "table">
-                <thead>
-                      <th>No.</th>
-                      <th id="batch">Batch</th>
-                      <th>Category</th>
-                      <th>Brand</th>
-                      <th>Manufacturer</th>
-                      <th>Supply date</th>
-                      <th>Expiration</th>
-                      <th>Unit Per Box</th>
-                      <th>Boxes</th>
-                      <th>Total</th>
-                      <th>Status</th>.
-                      <th>Action</th>
-                </thead>
-                <tbody id="tbody">
-                 
-                  
-                      
-               
-                </tbody> 
-    
-          </table>
-          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
-          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
-          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
-    
-          <input type="hidden"  required=""  id="Batch" placeholder="Enter Batch number"  style="width: 30%;">
-              </div>
-            </div>
-            <!-- /.card-body -->
-          
-     
-          <!-- /.card-body -->
-        </div>
-        </div>
-        </div>
-        </div>
-        </section>
-        </div>
-        </div>
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
         
-
-          <!-- /.content-wrapper -->
-          <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-              <strong>Copyright &copy; 2021 <a href="#">ProTech</a>.</strong> All rights reserved.
-            </div>
-            <b>.</b>
-            </footer>
-
-
-
-
-
-
-
-
-   
-      
-      <!--Modals-->
-      <div class="modal fade" id="modal-danger">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Are you Sure?</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            
-            <div class="modal-footer justify-content-between">
-              <button type="button"  class="btn btn-danger" data-dismiss="modal">No</button>
-              <button onclick="Delete()" class="btn btn-success">Yes</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-
-
-      
-    </div>
-      <input type="hidden" required="" class="form-control" id="Product" placeholder="Enter Product Item">
-
-      <input type="hidden" required="" class="form-control" id="Category" placeholder="">
- 
-      <input type="hidden" required="" class="form-control" id="Manufacture" placeholder="Enter Manufacture">
-
-      <input type="hidden" required="" class="form-control" id="Date" placeholder="dd/mm/yyyy">
- 
-      <input  type="hidden" required="" type="text"class="form-control" id="Exdate" placeholder="dd/mm/yyyy">
-    
-      <input type="hidden" required="" class="form-control" id="Unit" placeholder="Unit">
-      <input type="hidden" required="" class="form-control" id="Box" placeholder="Box">
-      <input type="hidden" required="" class="form-control" id="Total1" placeholder="Total">
-    
-     <input type="hidden" style="font-weight: bold;" class="form-control" id="status" >
-
-     <input type="hidden" style="font-weight: bold;" class="form-control" id="total" placeholder="total" >
-
-     <input type="hidden" style="font-weight: bold;" class="form-control" id="available" placeholder="Available" >
-
-     <input type="hidden" style="font-weight: bold;" class="form-control" id="notavailable" placeholder="Available" >
- <!--------------------------------------------------Safety Stock--------------------------------------------------------------------->
- <input type="hidden"  class="form-control" id="SafetyStock">
- <input type="hidden"  class="form-control" id="MinSafetyStock">
- <!----------------------------------------------------------Graph--------------------------------------------->
- <input type="hidden"  class="form-control" id="Graph">
-
-
-   </select> </div>
-   
-   
-  
-  </div>
- 
-
-  
-  
- 
-
-<!-- Main Content-->
+            <div class="card card-success">
+              <div class="card-header">
                 
+              </div>
+              <div class="card-body">
+            
+  
+               <section class="content-header">
+   
+              </section>   
+              <div class="card-body table-responsive p-0">
+                <!--------------------------------------------Table Archive User----------------->
+                <table class="table table-striped table-bordered table-sm" id = "table">
+                    <thead>
+                     
+                    </thead>
+                    <tbody id="tbody">
+                        <th>#</th>
+                        <th>Firstname</th>
+                        <th>LastName</th>
+                        <th>Username</th>         
+                        <th>user Role</th>
+                        <th>Action </th>
+                      
+                          
+                   
+                    </tbody> 
+        
+              </table>
+              <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+              <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+              <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            
+       
+            <!-- /.card-body -->
+          </div>
+          </div>
+          </div>
+          </div>
+          </section>
+          </div>
+          </div>
+          
+  
+            <!-- /.content-wrapper -->
+            <footer class="main-footer">
+              <div class="float-right d-none d-sm-block">
+                <strong>Copyright &copy; 2021 <a href="#">ProTech</a>.</strong> All rights reserved.
+              </div>
+              <b>.</b>
+              </footer>
+<!------------------------------------------------------------------------------------Main----------------------------------------------------------------------->
+
+
+   
+ 
+
+  
 
 
 <!-- REQUIRED SCRIPTS -->
-
+<!--Logout-->
+<script src="logout.js"></script>
 <!--Time-->
 <script src="time.js"></script>
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<!-- InputMask -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
 <!-- DataTables  & Plugins -->
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -477,59 +395,40 @@
 <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="plugins/jszip/jszip.min.js"></script>
-<script src="plugins/pdfmake/pdfmake.min.js"></script>
-<script src="plugins/pdfmake/vfs_fonts.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-<p id="info"></p>
-</body>
-<!--Manufacture Script-->
 
-<!--product Script-->
 <script>
   
   var database = firebase.database()
 
-  //------------------------------Safety Stock value----------------
-database.ref('Safety_Stock/').on('value',function(snapshot){
-document.getElementById('SafetyStock').value = snapshot.val().SafetyStock;
-document.getElementById('MinSafetyStock').value = snapshot.val().MinSafetyStock;
-});
 //-------------------------------------------------------------
-function SafetyStockV(){
-  SafetyStock = document.getElementById('SafetyStock').value;
-  MinSafetyStock = document.getElementById('MinSafetyStock').value;
-}
-
     function SelectAllData(){
-      database.ref('Deleted_Item').once('value',
+      database.ref('AccountDeleted/').on('value',
       function(AllRecord){
         AllRecord.forEach(
           function(CurrentRecord){
-            var batch = CurrentRecord.val().Batch;
-            var Category = CurrentRecord.val().Category;
-            var products = CurrentRecord.val().Brand;
-            var manufacture = CurrentRecord.val().Manufacture;
-            var supplydate = CurrentRecord.val().Date;
-            var exdate = CurrentRecord.val().Exdate;
-            var PerBox = CurrentRecord.val().PerBox;
-            var Box = CurrentRecord.val().Box;
-            var Total = CurrentRecord.val().Total;
-            var status = CurrentRecord.val().Status;
-            
-            AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,status,PerBox,Box,Total);
+            var IDnum = CurrentRecord.val().IDnum;
+            var Fname = CurrentRecord.val().Fname;
+            var Lname = CurrentRecord.val().Lname;
+            var Email = CurrentRecord.val().Email;
+            var Password = CurrentRecord.val().Password;
+            var Role = CurrentRecord.val().Role;
+           
+            AddItemsToTable(IDnum,Fname,Lname,Email,Password,Role);
           }
         );
       });
     }
    window.onload = SelectAllData;
-   var batchNumber = 0
+
    
-   function AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,status,PerBox,Box,Total){
+   function AddItemsToTable(IDnum,Fname,Lname,Email,Password,Role){
      var tbody = document.getElementById('tbody');
      var trow = document.createElement('tr');
      var td1 = document.createElement('td');
@@ -538,177 +437,84 @@ function SafetyStockV(){
      var td4 = document.createElement('td');
      var td5 = document.createElement('td');
      var td6 = document.createElement('td');
-     var td7 = document.createElement('td');
-     var td8 = document.createElement('td');
-     var td9 = document.createElement('td');
-     var td10 = document.createElement('td');
-     var td11 = document.createElement('td');
-     var td12 = document.createElement('td');
-     var td13 = document.createElement('td');
+
+  
      
      
   
-     td1.innerHTML = ++ batchNumber;
-     td2.innerHTML = batch;
-     td3.innerHTML = Category;
-     td4.innerHTML = products;
-     td5.innerHTML = manufacture;
-     td6.innerHTML = supplydate;
-     td7.innerHTML = exdate;
-     td8.innerHTML = PerBox;
-     td9.innerHTML = Box;
-     td10.innerHTML = Total;
-    //------------------------------Status-----------------------------
- SafetyStockV();
- if(Number(SafetyStock) <= Number(Box) ){
-  td11.innerHTML = '<span id=""class="badge badge-success">' + 'In Stock' + '</span>';
- }
-
- if(Number(SafetyStock) >= Number(Box) ){
-  td11.innerHTML = '<span id=""class="badge badge-info">' + 'Safety Stock' + '</span>';
- }
-
- if(Number(MinSafetyStock) >= Number(Box) ){
-  td11.innerHTML = '<span id=""class="badge badge-warning">' + 'Critical Stock' + '</span>';
- }
-
- if(Box  == 0){
-  td11.innerHTML = '<span id=""class="badge badge-danger" >' + 'Out of Stock' + '</span>';
- }
-     td12.innerHTML = '<button  onclick="Restore()"  class="btn btn-success"><i class="fas fa-undo"></i></button>';
-    // td13.innerHTML = '<button type="button" onclick="Open()"  class="btn btn-danger" data-toggle="modal" data-target="#modal-danger"><i class="fas fa-trash-alt"></i></button>';
-        
+     td1.innerHTML = IDnum;
+     td2.innerHTML = Fname;
+     td3.innerHTML = Lname;
+     td4.innerHTML = Email;
+     td5.innerHTML = Role;
+     td6.innerHTML = '<button  onclick="Restore()"  class="btn btn-block bg-gradient-success btn-xs"><i class="fas fa-undo"></i></button>';
      
-     
-      trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);trow.appendChild(td11);;trow.appendChild(td12);
+      trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);
       tbody.appendChild(trow);
 
 
    }
 
-   database.ref('Dashboard/').on('value',function(snapshot){
-                   total = document.getElementById('total').value= snapshot.val().Total_Item;
-                   available = document.getElementById('available').value= snapshot.val().Available_Item;
-                   notavailable = document.getElementById('notavailable').value= snapshot.val().NotAvailable_Item;
-                    });
-   //READY 
-function Ready(){
-  var BatchV, productV, ManufactureV, DateV, Exdate, StatusV;        
-          BatchV = document.getElementById("Batch").value;
-          ProductV = document.getElementById("Product").value;
-          ManufactureV = document.getElementById("Manufacture").value;
-          DateV = document.getElementById("Date").value;
-          ExdateV = document.getElementById("Exdate").value;
-          StatusV = document.getElementById("status").value;
-         
+//-----------------------------------RESTORE FUNCTION-------------------------
 
-  }
-    
-
-//Delete
-function Open(){
-
-   var table1 = document.getElementById('table');
-       for(var i = 0; i < table1.rows.length; i++){
-
-        table1.rows[i].onclick = function(){
-
-        a = document.getElementById('Batch').value = this.cells[1].innerHTML;
-      
-      };
-    }
-
-}
-  function Delete(){
-  Ready();
-   database.ref('Deleted_Item/' + a).remove();
-   window.location.reload();
-     
-  
-  }
-  
-
-  
-//Restore
- function Restore(){
-   Ready();
+    function Restore(){
+   var timeStamp = Date.now();
 
     var table1 = document.getElementById('table');
     for(var i = 0; i < table1.rows.length; i++){
 
     table1.rows[i].onclick = function(){
 
-                  a = document.getElementById('Batch').value = this.cells[1].innerHTML;
-                  b = document.getElementById('Category').value = this.cells[2].innerHTML;
-                  c = document.getElementById('Product').value = this.cells[3].innerHTML;
-                  d = document.getElementById('Manufacture').value= this.cells[4].innerHTML;
-                  e = document.getElementById('Date').value= this.cells[5].innerHTML;
-                  f = document.getElementById('Exdate').value= this.cells[6].innerHTML;
-                  g = document.getElementById('Unit').value= this.cells[7].innerHTML;
-                  ii = document.getElementById('Box').value= this.cells[8].innerHTML;
-                  j = document.getElementById('Total1').value= this.cells[9].innerHTML;
-                  h = document.getElementById('status').value= this.cells[10].innerHTML;
-                  database.ref('Deleted_Item/'+ a ).on('value',function(snapshot){
-                 R = document.getElementById('Graph').value= snapshot.val().GraphRelease;
+                  a = this.cells[0].innerHTML;
+                  b = this.cells[1].innerHTML;
+                  c = this.cells[2].innerHTML;
+                  d = this.cells[3].innerHTML;
+                  e = this.cells[4].innerHTML;
+                 
+                  database.ref('AccountDeleted/'+ a ).on('value',function(snapshot){
+                  x =  snapshot.val().Password;
                        
-                  database.ref('Item/' + a).set({
-                          Batch : a,
-                          Category : b,
-                          Brand : c,
-                          Manufacture : d,
-                          Date : e,
-                          Exdate: f,     
-                          PerBox : g,
-                          Box : ii,
-                          Total: j,
-                          GraphRelease : R 
+                  database.ref('Account/' + a).set({
+                    Email:d,
+                    Fname:b,
+                    Lname:c,
+                    Password:x,
+                    Role:e,
+                    TimeStamp:timeStamp,
+                    UsetID:a,
+                    
+                        
                          
              }); 
              });      
-                            //Restore Total Dashboard
-                        
-                            if(h == '<span id="" class="badge badge-info">Safety Stock</span>' || h== '<span id="" class="badge badge-warning">Critical Stock</span>' || h == '<span id="" class="badge badge-success">In Stock</span>'){
-                        TotalItem =  ++total;
-                        AvailableItem = ++available;
-
-                        database.ref('Dashboard/').update({
-                        Total_Item : TotalItem,
-                        Available_Item: AvailableItem
-                        })
-
-                        }
-                        if(h == '<span id="" class="badge badge-danger">Out of Stock</span>'){
-                        TotalItem = ++total;
-                        NotavailableItem = ++notavailable;
-
-                        database.ref('Dashboard/').update({
-                          Total_Item : TotalItem,
-                          NotAvailable_Item: NotavailableItem
-                          })
-                        }
-
+                            
              
             
                    // notification 
                      $(document).Toasts('create', {
                     class: 'bg-success',
-                    body: '',
+                    body: 'Successfully Restore in your user',
                     title: '<h5><i class="far fa-check-circle"></i> Success </h5>',
                     autohide: true,
                     delay: 2000,
                     })
                     setTimeout(function(){
                      window.location.reload();
-                     database.ref('Deleted_Item/' + a).remove() 
+                   database.ref('AccountDeleted/' + a).remove() 
                      },2000) 
     };
   }
         
-} 
+
+         
+
+  }
+    
+
 ////<!---------------------------------------------------------datatable load Function------------------------------------------------------------------------------------------->           
 setTimeout(function(){      
           $(document).ready(function () {
-          $('#table').DataTable({
+          $('#table1').DataTable({
             "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
             "ordering": false,  
 

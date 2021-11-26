@@ -1322,7 +1322,10 @@
 <input type="hidden" name="Brand" required="" class="form-control" id="UpdateTotalR" placeholder="UpdateTotalR">
 <!--------------------------------------------------RemoveBo Calculation-------------------> 
 <input type="hidden" name="Brand" required="" class="form-control" id="DATES" placeholder="Date" >
-
+ <!--------------------------------------------------Dashboard--------------------------------------------------------------------->
+ <input type="hidden"  id="totalx" placeholder="total" >
+ <input type="hidden"  id="availablex" placeholder="Available" >
+ <input type="hidden"  id="notavailablex" placeholder="Available" >
 
 
 
@@ -1364,6 +1367,12 @@
 
 
 var database = firebase.database()
+//------------------Dashboard----------------------
+database.ref('Dashboard/').on('value',function(snapshot){
+      totalx = document.getElementById('totalx').value= snapshot.val().Total_Item;
+      availablex = document.getElementById('availablex').value= snapshot.val().Available_Item;
+      notavailablex = document.getElementById('notavailablex').value= snapshot.val().NotAvailable_Item;
+  });
 //------------------------------Safety Stock value----------------
 database.ref('Safety_Stock/').on('value',function(snapshot){
 document.getElementById('SafetyStock1').value = snapshot.val().SafetyStock +" Boxes";
@@ -1871,12 +1880,7 @@ database.ref('Item').once('value', function(snapshot){
 //<!---------------------------------------------------------------------------------------------------------------------------------------------------->
 
 
-//start load
-                    database.ref('Dashboard/').on('value',function(snapshot){
-          //         total = document.getElementById('total').value= snapshot.val().Total_Item;
-       //            available = document.getElementById('available').value= snapshot.val().Available_Item;
-        //           notavailable = document.getElementById('notavailable').value= snapshot.val().NotAvailable_Item;
-                    });
+
 
 var BatchV, productV, ManufactureV, DateV, Exdate;
 
@@ -2622,9 +2626,15 @@ function Report(){
                       autohide: true,
                       delay: 2000,
                       }) 
-
+                      if(UpdateBoBoxCalculation == 0){
+                              //dashboad update
+                        NotAvailableA = ++notavailablex;
+                        database.ref('Dashboard/').update({
+                          NotAvailable_Item: NotAvailableA,
+                        })
+                      }
                       setTimeout(function(){
-                      window.location.reload();
+                //     window.location.reload();
                       },2000)
                      $('#Report').modal('hide');
 }
@@ -2712,6 +2722,7 @@ function DeleteExpired() {
         var checkBoxes = grid.getElementsByTagName("INPUT");
         var message = '';
         var Delete = '';
+        var number = 0;
  
         //Loop through the CheckBoxes.
         for (var i = 0; i < checkBoxes.length; i++) {
@@ -2727,6 +2738,8 @@ function DeleteExpired() {
                       Date: DateEx
                        });
 
+                       test = ++number;
+                        
                 Delete +=  database.ref('Item/' +  row.cells[0].innerHTML).remove();  
           
             }
@@ -2759,7 +2772,14 @@ function DeleteExpired() {
                       },2000)
         }
                 
- 
+    
+                        TotalIT = Number(totalx) - Number(number) ;
+                        database.ref('Dashboard/').update({
+                        Total_Item: TotalIT,
+                        
+                        })
+      
+              
        
     }
 

@@ -52,23 +52,27 @@
     
 
     
-             <!-- Notifications Dropdown Menu -->
-             <li class="nav-item dropdown">
-              <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
-                <i class="far fa-bell"></i>
-                <span id="NotificationNum" class="badge badge-danger navbar-badge" >0</span>
-              </a>
-              <div id="ShowNotification"class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
-               
-                <span class="dropdown-header" id="NotificationNumB">No Notification</span>
-                <div class="dropdown-divider"></div>
-
-                <div id ="ListNotification">  
+              <!-- Notifications Dropdown Menu -->
+              <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
+                  <i class="far fa-bell"></i>
+                  <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
+                </a>
+        
+                <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
+                  <span class="dropdown-header" id="NotificationNumB">No Notification</span>
+                  <div class="card-body table-responsive p-0" style="height: 380px;">
+                  <div class="dropdown-divider"></div>
                 
+                  <div id ="ListNotification">  
+                  <div id="ShowNotification">
+        
+                  </div>
+                  </div>
+                  </div>
                 </div>
-                <div class="dropdown-divider"></div>
-              </div>
-            </li>
+              </li>
+
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -229,7 +233,7 @@
        <li class="nav-item">
         <a href="CustodianAccount.html" class="nav-link ">
           <i class="fas fa-user-circle"></i>
-          <p>Add Account</p>
+          <p>User Management</p>
         </a>
       </li>
                
@@ -259,6 +263,12 @@
                               <a href="Archive_Employee.html" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Employee</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="UserDelete.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>User</p>
                               </a>
                             </li>
                         </ul>
@@ -364,7 +374,8 @@
                         <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
                         <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
        
-                  
+                                         
+
               </table>
               </div>
             </div>
@@ -379,7 +390,7 @@
         </section>
         </div>
         </div>
-        
+
 
           <!-- /.content-wrapper -->
           <footer class="main-footer">
@@ -471,8 +482,10 @@
 <!-- /.modal -->
    
 
-               
-      
+ <!--------------------------------------------------Dashboard--------------------------------------------------------------------->
+ <input type="hidden"  id="total" placeholder="total" >
+ <input type="hidden"  id="available" placeholder="Available" >
+ <input type="hidden"  id="notavailable" placeholder="Available" >
 
         
 
@@ -491,10 +504,6 @@
 <!-- date-range-picker -->
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
 <!-- DataTables  & Plugins -->
-
-
-
-
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -518,9 +527,16 @@
 <!--Button Script-->
 
 <script id=MainScript>
-function SelectAllData(){
+    var database = firebase.database()
+//------------------Dashboard----------------------
+  database.ref('Dashboard/').on('value',function(snapshot){
+      total = document.getElementById('total').value= snapshot.val().Total_Item;
+      available = document.getElementById('available').value= snapshot.val().Available_Item;
+      notavailable = document.getElementById('notavailable').value= snapshot.val().NotAvailable_Item;
+  });
 
- 
+
+function SelectAllData(){
 var database = firebase.database().ref('PendingItem/');
    database.orderByChild('TimeStamp').on('value',function (snapshot){
     $('#tbody1').remove();
@@ -602,7 +618,7 @@ function AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,ex
 function AcceptOpen(){
   $('#Accept').modal('show');
 
-                var table = document.getElementById('table1');
+                var table1 = document.getElementById('table1');
                 for(var i = 0; i < table1.rows.length; i++){
 
                   table1.rows[i].onclick = function(){
@@ -744,8 +760,14 @@ function Accept(){
                      database.ref('PendingItem/' + a1).remove();
                      },1000)
                      
-                     
-        
+                     //dashboad update
+                        TotalItem =  ++total;
+                        AvailableItem = ++available;
+
+                        database.ref('Dashboard/').update({
+                        Total_Item : TotalItem,
+                        Available_Item: AvailableItem
+                        })
 
 }
 //-----------------------------------------function for Decline-------------------------------------->

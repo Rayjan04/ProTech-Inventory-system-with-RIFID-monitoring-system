@@ -48,16 +48,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
       
 
-//for notification for admin
-
-//setTimeout(function(){
   function openNoti(){
- //   setTimeout(function(){
-    
-//  },5000)
 
- // vehi_list = '<a href="Product.html" class="dropdown-item"> <strong>Alert</strong> <span class="right badge badge-danger float-right">New</span> <br>  Item expired  <span class="float-right text-muted text-sm"> </span></a>';
-//  $('#ShowNotification').append(vehi_list);
 var database = firebase.database();
 database.ref('Notification/Admin').once('value', function(snapshot){
    if(snapshot.exists()){
@@ -75,4 +67,3 @@ database.ref('Notification/Admin').once('value', function(snapshot){
 }
 });
   }
-//},5000)

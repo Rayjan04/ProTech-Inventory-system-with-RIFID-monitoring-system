@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="css/adminlte.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
 <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -45,20 +44,26 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span >0</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-header">No Notifications</span>
-          <div class="dropdown-divider"></div>
+              <!-- Notifications Dropdown Menu -->
+              <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
+                  <i class="far fa-bell"></i>
+                  <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
+                </a>
         
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
+                <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
+                  <span class="dropdown-header" id="NotificationNumB">No Notification</span>
+                  <div class="card-body table-responsive p-0" style="height: 380px;">
+                  <div class="dropdown-divider"></div>
+                
+                  <div id ="ListNotification">  
+                  <div id="ShowNotification">
+        
+                  </div>
+                  </div>
+                  </div>
+                </div>
+              </li>
 
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -219,7 +224,7 @@
        <li class="nav-item">
         <a href="CustodianAccount.html" class="nav-link ">
           <i class="fas fa-user-circle"></i>
-          <p>Add Account</p>
+          <p>User Management</p>
         </a>
       </li>
 
@@ -240,7 +245,7 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="#" class="nav-link">
+                      <a href="Trash_Manufacture.html" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Client</p>
                       </a>
@@ -249,6 +254,12 @@
                         <a href="Archive_Employee.html" class="nav-link ">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Employee</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="UserDelete.html" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>User</p>
                         </a>
                       </li>
                   </ul>
@@ -286,69 +297,78 @@
               
 <!-- Main Content-->
 
-<!-- Main Content-->
-<section class="content">
+<!--------------------------------------------------------------Main Content------------------------------------------------------>
+ <!-- Main Content-->
+
+ <section class="content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <div class="card">
-          <div class="card-header">
-          <!-- /.card-header -->
-          
-
+      
+          <div class="card card-success">
+            <div class="card-header">
+              
+            </div>
             <div class="card-body">
-             <form id="quickForm">
-              <div class="form-group">
-                <label for="exampleInputPassword1">Name</label>
-                <div class="input-group inputdefault">
-                  <input type="text" name="name" class="form-control" id="Name" placeholder="Enter Name" >
-                  </div> 
-              </div>
               
-              <div class="form-group">
-
-                <label for="Company">Company Name</label>
-                <input type="text" name="CompanyName" class="form-control" id="Company" placeholder="Enter Company Name" name="Company">
-              </div>
-      
-              <div class="form-group">
-                <label for="exampleInputPassword1">Company Address</label>
-                <input type="text" name="CompanyAddress" class="form-control" id="Address" placeholder="Enter Company Address">
-              </div>
-      
-              
-      
-              <div class="form-group">
-                <label for="exampleInputPassword1">Company Position</label>
-                <input type="text" name="Position"class="form-control" id="Position" placeholder="Enter Company Position">
-              </div>
-      
-              <div class="form-group">
-                <label for="exampleInputPassword1">Contact number</label>
-                <input type="number" name="Number"class="form-control" id="number" placeholder="Enter Contact number">
-              </div>
-      
-              <div class="form-group">
-                <label for="exampleInputPassword1">Email</label>
-                <input type="email" name="email" class="form-control" id="Email" placeholder="Email@">
-              </div>
-      
-            <!-- /.card-body -->
-      
-           <!--buttons-->
-           <div class="card-footer">
-          <button type="submit"onclick="add()" class="btn btn-success float-right" >Add</button>
-        </div>
-          </form>  
-        </div>
-      
+           <!----------------------------------------------------Selection Function------------------------------->    
+    
           
 
-          <!-- /.card-body -->
-        </div>
+             <section class="content-header">
+ 
+            </section>   
+            <div class="card-body table-responsive p-0">
+              <!--------------------------------------------Pending Table-->
+              <form id="quickForm">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Name</label>
+                  <div class="input-group inputdefault">
+                    <input type="text" name="name" class="form-control" id="Name" placeholder="Enter Name" >
+                    </div> 
+                </div>
+                
+                <div class="form-group">
+  
+                  <label for="Company">Company Name</label>
+                  <input type="text" name="CompanyName" class="form-control" id="Company" placeholder="Enter Company Name" name="Company">
+                </div>
         
-       
-        <!-- /.card -->
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Company Address</label>
+                  <input type="text" name="CompanyAddress" class="form-control" id="Address" placeholder="Enter Company Address">
+                </div>
+        
+                
+        
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Company Position</label>
+                  <input type="text" name="Position"class="form-control" id="Position" placeholder="Enter Company Position">
+                </div>
+        
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Contact number</label>
+                  <input type="number" name="Number"class="form-control" id="number" placeholder="Enter Contact number">
+                </div>
+        
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Email</label>
+                  <input type="email" name="email" class="form-control" id="Email" placeholder="Email@">
+                </div>
+        
+              <!-- /.card-body -->
+        
+             <!--buttons-->
+             <div class="card-footer">
+            <button type="submit"onclick="add()" class="btn btn-success float-right" >Add</button>
+          </div>
+            </form>  
+              </div>
+            </div>
+            <!-- /.card-body -->
+          
+     
+          <!-- /.card-body -->
         </div>
         </div>
         </div>
@@ -356,12 +376,15 @@
         </section>
         </div>
         </div>
-        <footer class="main-footer">
-          <div class="float-right d-none d-sm-block">
-            <strong>Copyright &copy; 2021 <a href="#">ProTech</a>.</strong> All rights reserved.
-          </div>
-          <b>.</b>
-          </footer>
+        
+
+          <!-- /.content-wrapper -->
+          <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+              <strong>Copyright &copy; 2021 <a href="#">ProTech</a>.</strong> All rights reserved.
+            </div>
+            <b>.</b>
+            </footer>
 
 
 
@@ -479,7 +502,7 @@ function add(){
              
                     $(document).Toasts('create',{
                     class: 'bg-success',
-                    body: 'sucessfully Added in your Client Info',
+                    body:  Name + ' Sucessfully Added ',
                     title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
                     autohide: true,
                     delay: 2000,

@@ -6,7 +6,7 @@ function AddUser(){
   var  password = document.getElementById('Password1').value;
  
 
-firebase.auth().createUserWithEmailAndPassword(email, password )
+firebaseConfigCs.auth().createUserWithEmailAndPassword(email, password )
 .then((userCredential) => {
   // Signed in 
  var database = firebase.database()
@@ -29,6 +29,15 @@ firebase.auth().createUserWithEmailAndPassword(email, password )
 
 
     $('#add').modal('hide');
+
+            //notification success Add
+            $(document).Toasts('create',{
+            class: 'bg-success',
+            body: 'Sucessfully add account',
+            title: '<h5><i class="far fa-check-circle"></i> Alert</h5>',
+            autohide: true,
+            delay: 2000,
+            }) 
 
 
 })

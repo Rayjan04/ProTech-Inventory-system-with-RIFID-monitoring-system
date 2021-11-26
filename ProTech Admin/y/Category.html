@@ -52,20 +52,27 @@
     <ul class="navbar-nav ml-auto">
      
 
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="fas fa-bell"></i>
-          <span>0</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-header">No Notifications</span>
-          <div class="dropdown-divider"></div>
+               <!-- Notifications Dropdown Menu -->
+               <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
+                  <i class="far fa-bell"></i>
+                  <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
+                </a>
         
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
+                <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
+                  <span class="dropdown-header" id="NotificationNumB">No Notification</span>
+                  <div class="card-body table-responsive p-0" style="height: 380px;">
+                  <div class="dropdown-divider"></div>
+                
+                  <div id ="ListNotification">  
+                  <div id="ShowNotification">
+        
+                  </div>
+                  </div>
+                  </div>
+                </div>
+              </li>
+              
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -228,7 +235,7 @@
                <li class="nav-item">
                 <a href="CustodianAccount.html" class="nav-link ">
                   <i class="fas fa-user-circle"></i>
-                  <p>Add Account</p>
+                  <p>User Management</p>
                 </a>
               </li>
 
@@ -258,6 +265,12 @@
                             <a href="Archive_Employee.html" class="nav-link ">
                               <i class="far fa-circle nav-icon"></i>
                               <p>Employee</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="UserDelete.html" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>User</p>
                             </a>
                           </li>
                       </ul>

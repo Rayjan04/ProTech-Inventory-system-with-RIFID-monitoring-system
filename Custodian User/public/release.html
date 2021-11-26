@@ -409,7 +409,7 @@
         
                
         
-        
+
         
                       <div class="card-footer">
             
@@ -817,10 +817,7 @@
 <input type="hidden" class="form-control" id="Compute"  placeholder="0">
 <input type="hidden" class="form-control" id="UpdateTotal"  placeholder="0">
 <input type="hidden" class="form-control" id="UpdateBoxes"  placeholder="0">
-<!------------------------------------------------------------------------->
-<input type="hidden" class="form-control" id="Available"  placeholder="0">
-<input type="hidden" class="form-control" id="NotAvailable"  placeholder="0">
-<input type="hidden" class="form-control" id="Total1"  placeholder="0">
+
 <!--------------------------------------------------Safety Stock--------------------------------------------------------------------->
 <input type="hidden"  class="form-control" id="SafetyStock">
 <input type="hidden"  class="form-control" id="MinSafetyStock">
@@ -833,8 +830,11 @@
 <input type="hidden" class="form-control" id="GraphRelease">
 <input type="hidden" class="form-control" id="AddGraph">
  <!------------------------------------------------------GetID-------------------------------------------------------------------->
- <input type="text" class="form-control" id="GetID">
-
+ <input type="hidden" class="form-control" id="GetID">
+<!---------------------------------------------------------Dashboard-->
+<input type="hidden" class="form-control" id="Available"  placeholder="0">
+<input type="hidden" class="form-control" id="NotAvailable"  placeholder="0">
+<input type="hidden" class="form-control" id="total1"  placeholder="0">
 
 
 
@@ -875,7 +875,12 @@
 
 <script>
 var database = firebase.database()
-
+//------------------Dashboard----------------------
+database.ref('Dashboard/').on('value',function(snapshot){
+  document.getElementById('total1').value= snapshot.val().Total_Item;
+  document.getElementById('Available').value= snapshot.val().Available_Item;
+  document.getElementById('NotAvailable').value= snapshot.val().NotAvailable_Item;
+  });
 //------------------------------Safety Stock value----------------
 database.ref('Safety_Stock/').on('value',function(snapshot){
 document.getElementById('SafetyStock').value = snapshot.val().SafetyStock;
@@ -1274,7 +1279,7 @@ function Ready(){
         //-----------------------------------------------
          Available = document.getElementById('Available').value;
          NotAvailable = document.getElementById('NotAvailable').value;
-         Total1= document.getElementById('Total1').value;
+         Total1= document.getElementById('total1').value;
          //----------------------------------------------
          Status = document.getElementById('Status').value;
          //-----------------------------------------------
@@ -1511,7 +1516,7 @@ Ready();
                                             TimeStamp:timeStamp,
                                             Date:Date1,
                                             Return: 0
-                                                
+
                                               })
                                 
                              //update Qty
@@ -1627,7 +1632,14 @@ function Proceed(){
                     autohide: true,
                     delay: 2000,
                     }) 
-
+                    
+                    if(totalBox == 0){
+                        //dashboad update
+                        NotAvailableA = ++NotAvailable;
+                        database.ref('Dashboard/').update({
+                          NotAvailable_Item: NotAvailableA,
+                        })
+                    }
                     setTimeout(function(){
                       document.getElementById("quickForm").reset();
                  //    window.location.reload();
@@ -1691,6 +1703,14 @@ function Proceed1(){
                     autohide: true,
                     delay: 2000,
                     }) 
+
+                    if(totalBox == 0){
+                        //dashboad update
+                        NotAvailableA = ++NotAvailable;
+                        database.ref('Dashboard/').update({
+                          NotAvailable_Item: NotAvailableA,
+                        })
+                    }
 
                     setTimeout(function(){
                       document.getElementById("quickForm").reset();
