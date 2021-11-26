@@ -1326,6 +1326,7 @@
  <input type="hidden"  id="totalx" placeholder="total" >
  <input type="hidden"  id="availablex" placeholder="Available" >
  <input type="hidden"  id="notavailablex" placeholder="Available" >
+ <input type="hidden"  id="Pending" placeholder="Available" >
 
 
 
@@ -1372,6 +1373,9 @@ database.ref('Dashboard/').on('value',function(snapshot){
       totalx = document.getElementById('totalx').value= snapshot.val().Total_Item;
       availablex = document.getElementById('availablex').value= snapshot.val().Available_Item;
       notavailablex = document.getElementById('notavailablex').value= snapshot.val().NotAvailable_Item;
+      Pending = document.getElementById('Pending').value= snapshot.val().Pending;
+      
+
   });
 //------------------------------Safety Stock value----------------
 database.ref('Safety_Stock/').on('value',function(snapshot){
@@ -2160,15 +2164,13 @@ function PcsBoxQty(){
                     Timestamp: timeStamp,
                     })
                     
-                    //add total item
-                /*    TotalItem =  ++total;
-                    AvailableItem = ++available;
-
+                    //add Pending
+                     PendingItem =  ++Pending;
                     database.ref('Dashboard/').update({
-                    Total_Item : TotalItem,
-                    Available_Item: AvailableItem,
+                    Pending:  PendingItem
+             
                     
-                    })*/
+                    })
 
                     //notification success Add
                     $('#add').modal('hide');

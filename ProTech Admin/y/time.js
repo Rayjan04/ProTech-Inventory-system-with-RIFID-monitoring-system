@@ -23,7 +23,7 @@ function time() {
 
     
      Time = document.getElementById("Time").innerHTML = months[month]+" "+ date +", "+ year+" "+" " + hours + ":" + minutes + " " + AmPm;
- 
+     notification =  month +"/"+ date +"/"+ year;
 }
 
 setInterval(time, 200);
