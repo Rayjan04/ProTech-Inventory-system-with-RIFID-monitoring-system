@@ -312,7 +312,7 @@
                     <div class="col-2">
                    
                       <div class="form-group">
-                        <label for="exampleInputPassword1">Returned Box</label>
+                        <label for="exampleInputPassword1">Return by Box</label>
                         <input type="number" name="ReturnedQty" class="form-control" onkeyup="Calculate()"id="ReturnBox" placeholder="0" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
 
                         
@@ -336,8 +336,8 @@
                       <div class="col-2">
                    
                           <div class="form-group">
-                              <label for="exampleInputPassword1">TotalQty</label>
-                              <input type="number" name="ReturnedBox" class="form-control"  id="TotalQty" placeholder="0" disabled>
+                          <label for="exampleInputPassword1">Return Total Qty</label>
+                          <input type="number" name="ReturnedBox" class="form-control"  id="TotalQty" placeholder="0" disabled>
                              
                                 
                             
@@ -383,15 +383,16 @@
          
               <div class="col-3">
             <label>Project</label>
-            <select id="" class="select1" style="width: 75%;">
+            <select id="Project2" class="select1" style="width: 75%;">
+            <option value="all">All</option>
  
           </select> 
           </div>
           
           <div class="col-3">
           <label>Product</label>
-          <select id=""  class="select1" style="width: 75%;">
-
+          <select id="product"  class="select1" style="width: 75%;">
+            <option value="all">All</option>
           </select> 
           </div>
           </div> 
@@ -453,8 +454,8 @@
                   
                         <div class="col-3">
                       <label>Project</label>
-                      <select id="" class="select1" style="width: 75%;">
-          
+                      <select id="Projects" class="select1" style="width: 75%;">
+                      <option value="all">All</option>
                     </select> 
                     </div>
                     
@@ -865,6 +866,36 @@ function  AddItemsToTable3(TimeStampP, DateP, RecieverP, ProjectP,LocationP){
   trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);
   tbody.appendChild(trow);
 }
+
+//<!------------------------------------------------Select option for project------------------------------------->
+database.ref('Realease_Item/Projects').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list = '';
+         snapshot.forEach(function(data){
+            var val = data.val();
+            vehi_list += '<option value="' + val.ProjectName + '">' + val.ProjectName + '</option>';
+         });
+
+            $('#Projects').append(vehi_list);
+            $('#Project2').append(vehi_list);
+
+
+}
+});
+
+//------------------------------------------------------Select option for product-------------------------------------
+database.ref('ClientOfferd').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list2 = '';
+         snapshot.forEach(function(data){
+            var val2 = data.val();
+            vehi_list2 += '<option value="' + val2.value + '">' + val2.value + '</option>';
+         });
+
+            $('#product').append(vehi_list2);
+
+}
+});
 
 //start load
 database.ref('Dashboard/').on('value',function(snapshot){
@@ -1631,5 +1662,34 @@ setTimeout(function(){
 
    
     },3000)
+//---------------------------------------------filter function------------------------------------------------------------------------------------>
+$('.content-wrapper').on("change", 'select', function() {
+  var Category = $('#Project2').val().toLowerCase(),
+    Status = $('#product').val().toLowerCase();
+ 
+
+  var table = $("#tbody");
+  var trs = table.find('tr');
+  trs.hide();
+
+  var filtered = trs.filter(function(index, elem) {
+    var tds = $(elem).find('td');
+    if (Category !== "all" && tds.eq(2).text().trim().toLowerCase() !== Category) {
+      return false;
+    }
+    if (Status !== "all" && tds.eq(3).text().trim().toLowerCase() !== Status) {
+      return false;
+    }
+
+    return true;
+  })
+
+  filtered.show();
+
+  if (filtered.length == 0) {
+   // alert("No Records Found!!!");
+  }
+
+});
     </script>
 </html>

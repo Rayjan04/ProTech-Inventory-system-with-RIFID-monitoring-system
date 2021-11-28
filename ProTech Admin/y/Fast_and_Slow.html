@@ -294,7 +294,18 @@
                     <p>Issued/Return Reports</p>
                   </a>
                 </li>
-
+                <li class="nav-item">
+                  <a href="ToolsReport.html" class="nav-link">
+                    <i class="far fa-circle nav-icon "></i>
+                    <p>Tools Reports</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="BadOrderReport.html" class="nav-link">
+                    <i class="far fa-circle nav-icon "></i>
+                    <p>Bad Orders Reports</p>
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a href="Stock_Report.html" class="nav-link ">
                     <i class="far fa-circle nav-icon"></i>
@@ -305,7 +316,7 @@
                 <li class="nav-item">
                   <a href="#" class="nav-link active">
                     <i class="far fa-circle nav-icon "></i>
-                    <p>Fast and Slow-moving Item Reports</p>
+                    <p>Fast and Slow-moving Item</p>
                   </a>
                 </li>
 
@@ -572,7 +583,40 @@
         
         });
       },3000)
-    
+      setTimeout(function(){
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("table");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[2];
+      y = rows[i + 1].getElementsByTagName("TD")[2];
+      //check if the two rows should switch place:
+      if (Number(x.innerHTML) < Number(y.innerHTML)) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+    },2000)
     
      </script>
 

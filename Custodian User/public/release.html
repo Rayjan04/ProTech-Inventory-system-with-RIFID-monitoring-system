@@ -212,7 +212,12 @@
               <p>Issued/Return Reports</p>
             </a>
           </li>
-
+          <li class="nav-item">
+            <a href="ToolsReport.html" class="nav-link ">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Tools Reports</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="Stock_Report.html" class="nav-link ">
               <i class="far fa-circle nav-icon"></i>
@@ -264,13 +269,13 @@
           <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Release Product</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Edit Release Products</a>
+          <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Edit Release Products Today</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Release Tools</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Edit Release Tools</a>
+          <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Edit Release Tools Today</a>
         </li>
       </ul>
     </div>
@@ -554,7 +559,7 @@
                     <!-------------------select------------->
                     <div class="form-group">
                       <label>Project</label>
-                      <select id="Projectx" class="select" style="width: 25%;">
+                      <select id="Projectxx" class="select" style="width: 25%;">
                       <option value="All">All</option>   
                     </select> 
                 
@@ -1085,7 +1090,7 @@ function AddItemsToTable1(Batch1,Address1,Product1,Category1,Recipient1,Box1,Tot
  td7.innerHTML = Recipient1;
  td8.innerHTML = Box1;
  td9.innerHTML = Total1;
- td10.innerHTML = '<button type="button"><i class="fas fa-edit"></i></button> <button type="button" ><i class="fas fa-trash-alt"></i></button>'
+ td10.innerHTML = '<button type="button" class="btn  btn-success btn-sm"><i class="fas fa-edit"></i></button> <button type="button" class="btn  btn-danger btn-sm" ><i class="fas fa-trash-alt"></i></button>'
 
  
  
@@ -1212,6 +1217,7 @@ database.ref('Realease_Item/Projects').once('value', function(snapshot){
          });
 
             $('#Projectx').append(vehi_list);
+            $('#Projectxx').append(vehi_list);
             $('#Project2').append(vehi_list);
             
 
@@ -1236,6 +1242,14 @@ database.ref('Realease_Item/Projects').once('value', function(snapshot){
 
 ////<!---------------------------------------------------------datatable load Function---------------------------------------------------------->           
 setTimeout(function(){
+
+          $(document).ready(function () {
+          $('#table').DataTable({
+            "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
+            "order": [[ 4, "asc" ]], 
+          });
+          });   
+
         $(document).ready(function () {
           $('#table1').DataTable({
             "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
@@ -1637,8 +1651,25 @@ function Proceed(){
                         //dashboad update
                         NotAvailableA = ++NotAvailable;
                         database.ref('Dashboard/').update({
-                          NotAvailable_Item: NotAvailableA,
+                        NotAvailable_Item: NotAvailableA,
                         })
+                   //Notification for admin
+                   database.ref('Notification/Admin/' + Batch).set({
+                    Date: Date1,
+                    Action: "Out of Stock",
+                    name:"No available",
+                    item: "Product for"+ Product,
+                    Batch: Batch,
+                    Timestamp: timeStamp,
+                    })
+                    database.ref('Notification/Custodian/' + Batch).set({
+                    Date: Date1,
+                    Action: "Out of Stock",
+                    name:"No available",
+                    item: "Product for"+ Product,
+                    Batch: Batch,
+                    Timestamp: timeStamp,
+                    })
                     }
                     setTimeout(function(){
                       document.getElementById("quickForm").reset();
@@ -1710,6 +1741,24 @@ function Proceed1(){
                         database.ref('Dashboard/').update({
                           NotAvailable_Item: NotAvailableA,
                         })
+                   //Notification for admin
+                   database.ref('Notification/Admin/' + Batch).set({
+                    Date: Date1,
+                    Action: "Out of Stock",
+                    name:"No available",
+                    item: "Product for"+ Product,
+                    Batch: Batch,
+                    Timestamp: timeStamp,
+                    })
+
+                    database.ref('Notification/Custodian/' + Batch).set({
+                    Date: Date1,
+                    Action: "Out of Stock",
+                    name:"No available",
+                    item: "Product for"+ Product,
+                    Batch: Batch,
+                    Timestamp: timeStamp,
+                    })
                     }
 
                     setTimeout(function(){
@@ -2296,5 +2345,87 @@ Ready();
         }
     }
 }
+
+//-------------------------------------------Function for select filters--------------------
+function time2() {
+ //--------------------------Date-----------------------
+ var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+    var DateEx1 = month+"-"+ date +"-"+ year; 
+
+var Category1 = $('#Projectx').val().toLowerCase(),
+    Status1 = DateEx1;
+ 
+
+  var table1 = $("#tbody1");
+  var trs = table1.find('tr');
+  trs.hide();
+
+  var filtered = trs.filter(function(index, elem) {
+    var tds = $(elem).find('td');
+    if (Category1 !== "all" && tds.eq(2).text().trim().toLowerCase() !== Category1) {
+      return false;
+    }
+    if (Status1 !== "all" && tds.eq(1).text().trim().toLowerCase() !== Status1) {
+      return false;
+    }
+
+    return true;
+  })
+
+  filtered.show();
+
+  if (filtered.length == 0) {
+ //   alert("No Records Found!!!");
+  }
+}  setInterval(time2, 10);  
+
+function time1() {
+ //--------------------------Date-----------------------
+ var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+    var DateEx = month+"-"+ date +"-"+ year; 
+
+var Category1 = $('#Projectxx').val().toLowerCase(),
+    Status1 = DateEx;
+ 
+
+  var table1 = $("#tbody3");
+  var trs = table1.find('tr');
+  trs.hide();
+
+  var filtered = trs.filter(function(index, elem) {
+    var tds = $(elem).find('td');
+    if (Category1 !== "all" && tds.eq(2).text().trim().toLowerCase() !== Category1) {
+      return false;
+    }
+    if (Status1 !== "all" && tds.eq(1).text().trim().toLowerCase() !== Status1) {
+      return false;
+    }
+
+    return true;
+  })
+
+  filtered.show();
+
+  if (filtered.length == 0) {
+ //   alert("No Records Found!!!");
+  }
+}  setInterval(time1, 10);  
+
   </script>
 </html>

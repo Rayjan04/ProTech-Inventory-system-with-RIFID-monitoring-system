@@ -262,52 +262,64 @@
         </div>
   </section>
               
-<!-- Main Content-->
+
+
+
+
+
+
+
 
 <!-- Main Content-->
 <section class="content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <div class="card">
-          <div class="card-header">
-          <!-- /.card-header -->
-          <div class="card-body table-responsive p-0" style="height: 480px;">
-          <table class="table table-striped table-bordered table-sm" id = "table">
-            <thead>
-                  <th>No.</th>
-                  <th id="batch">Batch</th>
-                  <th>Category</th>
-                  <th>Brand</th>
-                  <th>Manufacturer</th>
-                  <th>Supply date</th>
-                  <th>Expiration</th>
-                  <th>Unit Per Box</th>
-                  <th>Boxes</th>
-                  <th>Total Qty</th>
-                  <th>Action</th>
-                  
-            </thead>
-            <tbody id="tbody">
-             
+      
+          <div class="card card-success">
+            <div class="card-header">
               
-                  
-           
-            </tbody> 
-            
-      </table>
-      </div>
-      <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+            </div>
+            <div class="card-body">
+              
+           <!----------------------------------------------------Selection Function------------------------------->    
 
-      <input type="hidden"  required=""  id="Batch" placeholder="Enter Batch number" >
 
-          <!-- /.card-body -->
-        </div>
-        
+             <section class="content-header">
+ 
+            </section>   
        
-        <!-- /.card -->
+            <div class="card-body table-responsive p-0" style="height: 480px;">
+              <table class="table table-striped table-bordered table-sm" id = "table">
+                <thead>
+                      <th>No.</th>
+                      <th id="batch">Batch</th>
+                      <th>Category</th>
+                      <th>Brand</th>
+                      <th>Manufacturer</th>
+                      <th>Supply date</th>
+                      <th>Expiration</th>
+                      <th>Unit Per Box</th>
+                      <th>Boxes</th>
+                      <th>Total Qty</th>
+                      <th>Action</th>
+                      
+                </thead>
+                <tbody id="tbody">
+                 
+                  
+                      
+               
+                </tbody> 
+                
+          </table>
+
+              </div>
+            </div>
+            <!-- /.card-body -->
+          
+     
+          <!-- /.card-body -->
         </div>
         </div>
         </div>
@@ -321,7 +333,9 @@
           </div>
           <b>.</b>
           </footer>
-<!-- Main Content--->
+
+
+
 
 
         
@@ -393,7 +407,7 @@
             <input class="form-control form-control-sm" id="search" type="hidden" placeholder="Search" aria-label="Search" >     
        <!--Expiration notification-->
 
-    
+       <input type="hidden"  required=""  id="Batch" placeholder="Enter Batch number" >
       <input type="hidden" required="" class="form-control" id="Product" placeholder="Enter Product Item">
 
       <input type="hidden" required="" class="form-control" id="Category" placeholder="">
@@ -424,7 +438,12 @@
     <!--------------------------------------------------Time Stamp--------------------------------------------------------------------->
     <input type="hidden"  class="form-control" id="TimeStamp">
    </select> </div>
-   
+    <!--------------------------------------------------Dashboard--------------------------------------------------------------------->
+ <input type="hidden"  id="totalx" placeholder="total" >
+ <input type="hidden"  id="availablex" placeholder="Available" >
+ <input type="hidden"  id="notavailablex" placeholder="Available" >
+ <input type="hidden"  id="Pending" placeholder="Available" >
+
    
   
   </div>
@@ -457,7 +476,15 @@
 <script>
    var database = firebase.database()
  
+//------------------Dashboard----------------------
+database.ref('Dashboard/').on('value',function(snapshot){
+      totalx = document.getElementById('totalx').value= snapshot.val().Total_Item;
+      availablex = document.getElementById('availablex').value= snapshot.val().Available_Item;
+      notavailablex = document.getElementById('notavailablex').value= snapshot.val().NotAvailable_Item;
+      Pending = document.getElementById('Pending').value= snapshot.val().Pending;
+      
 
+  });
 
   function SelectAllData(){
     database.ref('PendingItemDelete/').once('value',
@@ -662,6 +689,13 @@ function Restore(){
                           })
                         }
              */
+                   //add Pending
+                   PendingItem =  ++Pending;
+                    database.ref('Dashboard/').update({
+                    Pending:  PendingItem
+             
+                    
+                    })
            $(document).Toasts('create', {
                       class: 'bg-success',
                     body: 'The batch '+ a +' Product '+ c + ' is sucessfully Restored',

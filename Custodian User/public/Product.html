@@ -290,7 +290,7 @@
             <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Report Bad Order</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="custom-tabs-one-Expired-tab" data-toggle="pill" href="#custom-tabs-one-Expired" role="tab" aria-controls="custom-tabs-one-Expired" aria-selected="false">Remove/Check day to expire</a>
+            <a class="nav-link" id="custom-tabs-one-Expired-tab" data-toggle="pill" href="#custom-tabs-one-Expired" role="tab" aria-controls="custom-tabs-one-Expired" aria-selected="false">Remove/Check days to expire</a>
           </li>
 
           <li class="nav-item">
@@ -343,7 +343,7 @@
               
             <table class="table text-nowrap table-striped table-bordered table-sm" id="table" width="100%">  
              
-              <thead>
+              <thead class="text-center" >
                 <tr>
                     <th> Batch#</th>
                     <th>Category</th>
@@ -358,7 +358,7 @@
                     
                 </tr>
               </thead>
-              <tbody id="tbody" class="tbody">
+              <tbody id="tbody" class="text-center" >
                     
       
               </tbody> 
@@ -532,7 +532,7 @@
                       
                           <div class="card card-info">
                             <div class="card-header">
-                              <h6>Today Report</h6>
+                              <h6>Today's Report</h6>
                             </div>
                             <div class="card-body">
                               
@@ -678,7 +678,7 @@
                                         <th>Expiration</th>
                                         <th>Boxes</th>
                                         <th>Total Qty</th>
-                                        <th>Day to Expire</th>
+                                        <th>Day's to Expire</th>
                                         <th>Status</th>
                                         <th role="button" id="myCheck" onclick="SelectAll()">All</th>
                                         
@@ -1399,7 +1399,7 @@ function SelectAllData(){
   var database = firebase.database().ref('Item/');
    database.orderByChild('TimeStamp').on('value',function (snapshot){
     $('#tbody').remove();
-    $('#table').append('<tbody id="tbody" class="" ></tbody>');
+    $('#table').append('<tbody id="tbody" class="text-center" ></tbody>');
     snapshot.forEach(
       function(CurrentRecord){
         var batch = CurrentRecord.val().Batch;
@@ -1563,7 +1563,7 @@ function AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,s
   td10.innerHTML = '<span id=""class="badge badge-danger">' + 'Expired' + '</span>';
  }
  if(Box  == 0){
-  td10.innerHTML = '<span id=""class="badge badge-danger" >' + 'Out of Stock' + '</span>';
+  td10.innerHTML = '<span id=""class="badge badge-secondary" >' + 'Out of Stock' + '</span>';
  }
  //td12.innerHTML = '<button type="button" onclick="Edit()"  class="btn btn-primary" data-toggle="modal" data-target="#Edit"><i class="fas fa-edit"></i></button> <button type="button" onclick="Open()"  class="btn btn-danger" data-toggle="modal" data-target="#modal-danger"><i class="fas fa-trash-alt"></i></button>'
  
@@ -2262,7 +2262,11 @@ function Delete(){
                      }
                    */
 
-       
+                    //addecrease Pending
+                     PendingItem =  --Pending;
+                    database.ref('Dashboard/').update({
+                    Pending:  PendingItem
+                    })
           //notification success Delete
                      $('#modal-danger').modal('hide');
                     $(document).Toasts('create', {
@@ -2492,7 +2496,7 @@ function SaveStatus(){
 
                       setTimeout(function(){
                         $('#EditStatus').modal('hide');
-                //      window.location.reload();
+                     window.location.reload();
                       },2000)
 
 
@@ -2628,15 +2632,24 @@ function Report(){
                       autohide: true,
                       delay: 2000,
                       }) 
+                  //Notification for admin
+                   database.ref('Notification/Admin/' + BatchB).set({
+                    Date: DateBo,
+                    Action: "Report BO",
+                    name:"Custodian",
+                    item: "Reports for "+ ProB,
+                    Batch:  BatchB,
+                    Timestamp: timeStamp,
+                    })
                       if(UpdateBoBoxCalculation == 0){
-                              //dashboad update
+                        //dashboad update
                         NotAvailableA = ++notavailablex;
                         database.ref('Dashboard/').update({
                           NotAvailable_Item: NotAvailableA,
                         })
                       }
                       setTimeout(function(){
-                //     window.location.reload();
+                     window.location.reload();
                       },2000)
                      $('#Report').modal('hide');
 }
@@ -3029,6 +3042,7 @@ setTimeout(function(){
           $('#table').DataTable({
             "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
             "ordering": false,  
+            
 
           });
           }); 

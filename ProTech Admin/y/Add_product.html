@@ -361,8 +361,8 @@
                       <th>Boxes</th>
                       <th>Total Qty</th>
                       <th>Status</th>
-                      <th>Action</th>
-                      <th>Select</th>
+                      <th>Decline</th>
+                      <th>Acccept</th>
                       
                   </tr>
                 </thead>
@@ -658,7 +658,7 @@ function AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,ex
 
  if(Status == "Pending"){
   td11.innerHTML = '<button type="button" onclick="Decline()"  class="btn btn-danger" >Decline</i></button>';
-  td12.innerHTML = '<button type="button" onclick="AcceptOpen()"  class="btn btn-success float-right">Accept</button>';
+  td12.innerHTML ='<button type="button" onclick="AcceptOpen()"  class="btn btn-success float-right">Accept</button>'
 
  }
 

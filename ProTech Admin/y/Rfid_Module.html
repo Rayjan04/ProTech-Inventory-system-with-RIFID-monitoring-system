@@ -56,7 +56,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-       <h1 style="color: red;  ">*Scan your Rfid*</h1>
+       <h1 style="color: red;  ">Scan your Rfid</h1>
         </div>
   </section>
               <!-- Main Content-->
@@ -274,15 +274,17 @@ setInterval(auto, 200);
                               
 
                       setTimeout(function(){
+                        var timeStamp = Date.now(); 
                    
                                 if(Status == "undefined" && RFID == CheckRFID){   
-                                  var   Add = ++Number1;                     
+                                  //var   Add = ++Number1;   
+                                                     
                                   database.ref('RFID/'+ RFID).update({
                                       Status: "LogIn",
-                                      Current: Add
+                                      Current: timeStamp
                                       })
                                      //-------------------------
-                                     database.ref('Records/'+ Number1).set({
+                                     database.ref('Records/'+ timeStamp).set({
                                         Date: Date1,
                                         FullName: FirstName + " " +LastName,
                                         ID:CheckRFID,
@@ -292,10 +294,10 @@ setInterval(auto, 200);
                                         })
                                                                     
                                     //AutoLoad
-                                   var up = ++Load;
-                                    database.ref('Autoload/').set({
-                                      load: up
-                                      })
+                                 //  var up = ++Load;
+                                   // database.ref('Autoload/').set({
+                                  //    load: up
+                                   //   })
                                   }
                                   if(Status == "LogIn" && RFID == CheckRFID){
                                     database.ref('RFID/'+ RFID).update({
@@ -306,28 +308,32 @@ setInterval(auto, 200);
 
                                        database.ref('Records/'+ Current).update({
                                         Logout: Time1,
+                                        Date: Date1,
+                                        FullName: FirstName + " " +LastName,
+                                        ID:CheckRFID,
+                                        Position: Position,
                                         })
                                   //AutoLoad
-                                   var up = ++Load;
-                                    database.ref('Autoload/').set({
-                                      load: up
-                                      })
+                                //   var up = ++Load;
+                                //   database.ref('Autoload/').set({
+                               //       load: up
+                             //         })
                                   }
                                   if(Status == "LogOut" && RFID == CheckRFID){
-                                    var   Add = ++Number1;
+                                //    var   Add = ++Number1;
                                     database.ref('RFID/'+ RFID).update({
                                       Status: "LogIn",
-                                      Current: Add
+                                      Current: timeStamp
                                       })
                                       
                                       //----------------------------
-                                      database.ref('Record_Num/').update({
-                                        Number: Add
-                                      })
+                              //        database.ref('Record_Num/').update({
+                              //          Number: Add
+                             //         })
                                         
                                        //-------------------------
-                                       database.ref('Records/'+ Add).set({
-                                        Num: Add,
+                                       database.ref('Records/'+ timeStamp).set({
+                                        Num: timeStamp,
                                         Date: Date1,
                                         FullName: FirstName + " " +LastName,
                                         ID:CheckRFID,
@@ -337,10 +343,10 @@ setInterval(auto, 200);
                                         })
 
                                     //AutoLoad
-                                    var up = ++Load;
-                                    database.ref('Autoload/').set({
-                                    load: up
-                                    })
+                               //     var up = ++Load;
+                              //      database.ref('Autoload/').set({
+                             //      load: up
+                                  //  })
                                   }
                                   },999)
                     }

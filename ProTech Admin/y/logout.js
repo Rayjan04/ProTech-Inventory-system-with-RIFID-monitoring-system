@@ -105,7 +105,7 @@ setTimeout(function(){
   
   }
   if(Notificationadd != "0"){
-       vehi_list = '<a href="Product.html" class="dropdown-item"> <strong>Alert</strong> <span class="right badge badge-danger float-right">New</span> <br>'+Notificationadd+'  Item expired  <span class="float-right text-muted text-sm">'+notification+'</span></a> <div class="dropdown-divider"></div>';
+       vehi_list = '<a href="Manage_Product.html" class="dropdown-item"> <strong>Alert</strong> <span class="right badge badge-danger float-right">New</span> <br>'+Notificationadd+'  Item expired  <span class="float-right text-muted text-sm">'+notification+'</span></a> <div class="dropdown-divider"></div>';
         $('#ShowNotification').append(vehi_list);
       } 
 
@@ -115,7 +115,7 @@ setTimeout(function(){
 //--------------------custodian notifiacation----------------------------------
 function openNoti(){
 
-  var database = firebase.database().ref('Notification/Custodian/');
+  var database = firebase.database().ref('Notification/Admin/');
   database.orderByChild('Timestamp').on('value',function (snapshot){
     if(snapshot.exists()){
        var vehi_list = '';
@@ -123,7 +123,7 @@ function openNoti(){
              var val = data.val();
              
              document.getElementById("NotificationNumB").innerHTML = " New Notification";
-             vehi_list += '<a href="Product.html" class="dropdown-item"> <strong>'+ val.Action+'</strong> <span class="right badge badge-danger float-right">New</span> <br>  '+ val.name+' '+ val.item+'<span class="float-right text-muted text-sm"> '+ val.Date+'</span></a> <div class="dropdown-divider"></div>';
+             vehi_list += '<a href="Add_product.html" class="dropdown-item"> <strong>'+ val.Action+'</strong> <span class="right badge badge-danger float-right">New</span> <br>  '+ val.name+' '+ val.item+'<span class="float-right text-muted text-sm"> '+ val.Date+'</span></a> <div class="dropdown-divider"></div>';
           });
               $('#Refresh').remove();
               $('#ListNotification').append('<div id="Refresh"> </div>');
