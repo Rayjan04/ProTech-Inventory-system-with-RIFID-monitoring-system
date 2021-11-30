@@ -704,12 +704,17 @@ function run1(){
                     { extend: 'pdf',
                     className: 'btn btn-danger glyphicon glyphicon-file',
                     footer: true,
-                    messageTop: 'Report by: Admin    Date: '+ Time,
+                    messageBottom: '\n'+
+                    ' \n \nReport by:                                                                                                                                        Date: '+ Time +
+                    '\n \n___________________________________\n.         Accounting Head Name \n.     Sinature over Printed Name',
                     },
                     { extend: 'print',
                     className: 'btn btn-secondary glyphicon glyphicon-print',
+                    title: '<center>Issued/Return Reports</center>',
                      footer: true,
-                     messageBottom: '<br><h4>Report by:<strong> Admin</strong></h4> </n> <h5>Date: '+ Time+'</h5>'
+                     messageTop:'<center><h5>Date: '+ Time+'</h5></center>',
+                     messageBottom: '<br><center style="text-align: justify;"> <h5>Report by:</h5>    <br>'+
+                      '<strong>___________________________________</strong> <br> <strong >Accounting Head Name</strong>  <br>Sinature over Printed Name</center>',
                     }
           ],
 

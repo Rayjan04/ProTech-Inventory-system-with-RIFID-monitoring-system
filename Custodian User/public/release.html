@@ -840,6 +840,8 @@
 <input type="hidden" class="form-control" id="Available"  placeholder="0">
 <input type="hidden" class="form-control" id="NotAvailable"  placeholder="0">
 <input type="hidden" class="form-control" id="total1"  placeholder="0">
+  <!----------------------------------------------------NotiNum----------------------------------------->
+  <input type="text"  id="NotiNum"  disabled>
 
 
 
@@ -896,6 +898,10 @@ function SafetyStockV(){
   SafetyStock = document.getElementById('SafetyStock').value;
   MinSafetyStock = document.getElementById('MinSafetyStock').value;
 }
+//----------------NotificationNumPicker----------------
+database.ref('NotificationNumber/').on('value',function(snapshot){
+      NotiNumX = document.getElementById('NotiNum').value= snapshot.val().Number;
+  });
 function SelectAllData(){
   var database = firebase.database().ref('Item/');
    database.orderByChild('Batch').on('value',function (snapshot){
@@ -1660,7 +1666,7 @@ function Proceed(){
                     name:"No available",
                     item: "Product for"+ Product,
                     Batch: Batch,
-                    Timestamp: timeStamp,
+                    Timestamp: NotiNumX,
                     })
                     database.ref('Notification/Custodian/' + Batch).set({
                     Date: Date1,
@@ -1668,9 +1674,14 @@ function Proceed(){
                     name:"No available",
                     item: "Product for"+ Product,
                     Batch: Batch,
-                    Timestamp: timeStamp,
+                    Timestamp: NotiNumX,
                     })
                     }
+                    //updateNotiNum
+                    NumNo = --NotiNumX;
+                    database.ref('NotificationNumber/').update({
+                    Number : NumNo,
+                        })
                     setTimeout(function(){
                       document.getElementById("quickForm").reset();
                  //    window.location.reload();
@@ -1748,7 +1759,7 @@ function Proceed1(){
                     name:"No available",
                     item: "Product for"+ Product,
                     Batch: Batch,
-                    Timestamp: timeStamp,
+                    Timestamp: NotiNumX,
                     })
 
                     database.ref('Notification/Custodian/' + Batch).set({
@@ -1757,10 +1768,14 @@ function Proceed1(){
                     name:"No available",
                     item: "Product for"+ Product,
                     Batch: Batch,
-                    Timestamp: timeStamp,
+                    Timestamp: NotiNumX,
                     })
                     }
-
+                    //updateNotiNum
+                    NumNo = --NotiNumX;
+                    database.ref('NotificationNumber/').update({
+                    Number : NumNo,
+                  })
                     setTimeout(function(){
                       document.getElementById("quickForm").reset();
             //         window.location.reload();

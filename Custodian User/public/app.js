@@ -56,6 +56,18 @@ var firebaseConfig = {
       },5000)
 
   //--------------------custodian notifiacation----------------------------------
+   //--------------------------Date-----------------------
+   var today = new Date();
+   month = today.getMonth();
+   year = today.getFullYear();
+   date = today.getDate();
+   
+    month = month +1;
+   monthA =  ("0" + month).slice(-2);
+   date =   ("0" + date).slice(-2);
+
+  var DateNoTI= month+"-"+ date +"-"+ year;  
+
   function openNoti(){
  
     var database = firebase.database().ref('Notification/Custodian/');
@@ -64,10 +76,9 @@ var firebaseConfig = {
          var vehi_list = '';
             snapshot.forEach(function(data){
                var val = data.val();
-               
-               document.getElementById("NotificationNumB").innerHTML = " New Notification";
+               document.getElementById("NotificationNumB").innerHTML = " New Notification";        
                vehi_list += '<a href="Product.html" class="dropdown-item"> <strong>'+ val.Action+'</strong> <span class="right badge badge-danger float-right">New</span> <br>  '+ val.name+' '+ val.item+'<span class="float-right text-muted text-sm"> '+ val.Date+'</span></a> <div class="dropdown-divider"></div>';
-            });
+               });
                 $('#Refresh').remove();
                 $('#ListNotification').append('<div id="Refresh"> </div>');
                 $('#Refresh').append(vehi_list);

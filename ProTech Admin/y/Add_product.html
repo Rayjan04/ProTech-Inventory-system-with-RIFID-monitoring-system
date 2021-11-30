@@ -337,7 +337,7 @@
             
             
           </select>  
-         
+
            <br>
            </div>
 
@@ -523,6 +523,8 @@
  <input type="hidden"  id="available" placeholder="Available" >
  <input type="hidden"  id="notavailable" placeholder="Available" >
  <input type="hidden"  id="Pending" placeholder="Available" >
+ <!----------------------------------------------------NotiNum----------------------------------------->
+ <input type="text"  id="NotiNum"  disabled>
 
         
 
@@ -571,6 +573,10 @@
       available = document.getElementById('available').value= snapshot.val().Available_Item;
       notavailable = document.getElementById('notavailable').value= snapshot.val().NotAvailable_Item;
       Pending = document.getElementById('Pending').value= snapshot.val().Pending;
+  });
+//----------------NotificationNumPicker----------------
+database.ref('NotificationNumber/').on('value',function(snapshot){
+      NotiNumX = document.getElementById('NotiNum').value= snapshot.val().Number;
   });
 
 
@@ -744,76 +750,7 @@ function Accept(){
      date =   ("0" + date).slice(-2);
 
     var DateNoti = month+"-"+ date +"-"+ year;
-/*
 
-              //Reference the Table.
-              var grid = document.getElementById("table1");
-              
-              //Reference the CheckBoxes in Table.
-              var checkBoxes = grid.getElementsByTagName("INPUT");
-              var message = '';
-              var Delete = '';
-
-              //Loop through the CheckBoxes.
-              for (var i = 0; i < checkBoxes.length; i++) {
-                  if (checkBoxes[i].checked) {
-
-                      var row = checkBoxes[i].parentNode.parentNode;
-                      message += database.ref('Item/' + row.cells[0].innerHTML).set({
-                                  Batch : row.cells[0].innerHTML,
-                                  Brand : row.cells[2].innerHTML,
-                                  Category : row.cells[1].innerHTML,
-                                  Manufacture : row.cells[3].innerHTML,
-                                  Date : row.cells[4].innerHTML,
-                                  Exdate: row.cells[5].innerHTML,
-                                  PerBox: row.cells[6].innerHTML,
-                                  Box : row.cells[7].innerHTML,
-                                  Total : row.cells[8].innerHTML,
-                                  GraphRelease: 0,
-                                  TimeStamp:timeStamp
-                                })
-
-                    Delete +=  database.ref('PendingItem/' +  row.cells[0].innerHTML).remove();  
-                    Delete +=  database.ref('Notification/Admin/' +  row.cells[0].innerHTML).remove();  
-                               
-                  //Notification for Custodian  
-                    message +=  database.ref('Notification/Custodian/' + row.cells[0].innerHTML).set({
-                    Date: DateNoti,
-                    Action: "Accept Product",
-                    name:"Admin",
-                    item: "accept "+ row.cells[2].innerHTML,
-                    Batch: row.cells[0].innerHTML ,
-                    TimeStamp :timeStamp,
-                    });
-                  }
-                   
-
-
-              }
-              if (message == ""){
-                  $('#Accept').modal('hide');
-                              $(document).Toasts('create',{
-                            class: 'bg-warning',
-                            body: 'Checkbox is empty please select item ',
-                            title: '<h5><i class="far fa-check-circle"></i> Alert</h5>',
-                            autohide: true,
-                            delay: 4000,
-                          }) 
-              }
-              if(message != ""){
-                    $('#Accept').modal('hide');
-                        $(document).Toasts('create',{
-                        class: 'bg-success',
-                        body: 'sucessfully accept a Product',
-                        title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
-                        autohide: true,
-                        delay: 2000,
-                        }) 
-
-                            setTimeout(function(){
-                            window.location.reload();
-                            },2000)
-              }*/
        
   var timeStamp = Date.now();
                     database.ref('Item/' + a1).set({
@@ -840,20 +777,26 @@ function Accept(){
                     }) 
 
                     setTimeout(function(){
-              // window.location.reload();
-               //Notification for Custodian  
+                   // window.location.reload();
+                   //Notification for Custodian  
+                  
                    database.ref('Notification/Custodian/' + a1).set({
                     Date: DateNoti,
                     Action: "Accept Product",
                     name:"Admin",
                     item: "accept "+  c1,
                     Batch:  a1 ,
-                    TimeStamp :timeStamp,
+                    Timestamp : NotiNumX,
                     });             
                     database.ref('PendingItem/' +  a1).remove();  
-                     database.ref('PendingItem/' + a1).remove();
+                    database.ref('Notification/Admin/' +  a1).remove();  
                      },1000)
-                     
+
+                     //updateNotiNum
+                      NumNo = --NotiNumX;
+                      database.ref('NotificationNumber/').update({
+                       Number : NumNo,
+                        })
                      //dashboad update
                         TotalItem =  ++total;
                         AvailableItem = ++available;

@@ -1327,6 +1327,8 @@
  <input type="hidden"  id="availablex" placeholder="Available" >
  <input type="hidden"  id="notavailablex" placeholder="Available" >
  <input type="hidden"  id="Pending" placeholder="Available" >
+  <!----------------------------------------------------NotiNum----------------------------------------->
+  <input type="text"  id="NotiNum"  disabled>
 
 
 
@@ -1393,7 +1395,10 @@ function SafetyStockV(){
   SafetyStock = document.getElementById('SafetyStock').value;
   MinSafetyStock = document.getElementById('MinSafetyStock').value;
 }
-
+//----------------NotificationNumPicker----------------
+database.ref('NotificationNumber/').on('value',function(snapshot){
+      NotiNumX = document.getElementById('NotiNum').value= snapshot.val().Number;
+  });
 
 function SelectAllData(){
   var database = firebase.database().ref('Item/');
@@ -2161,8 +2166,13 @@ function PcsBoxQty(){
                     name:"custodian",
                     item: "add "+Productv,
                     Batch: Batchv,
-                    Timestamp: timeStamp,
+                    Timestamp: NotiNumX,
                     })
+                     //updateNotiNum
+                    NumNo = --NotiNumX;
+                    database.ref('NotificationNumber/').update({
+                    Number : NumNo,
+                        })
                     
                     //add Pending
                      PendingItem =  ++Pending;
@@ -2392,7 +2402,7 @@ function SaveEdit(){
             
             })
              //update dashboard
-                     NotavailableItem = --notavailable;
+                    NotavailableItem = --notavailable;
                     AvailableItem = ++available;
 
                     database.ref('Dashboard/').update({
@@ -2639,8 +2649,13 @@ function Report(){
                     name:"Custodian",
                     item: "Reports for "+ ProB,
                     Batch:  BatchB,
-                    Timestamp: timeStamp,
+                    Timestamp: NotiNumX,
                     })
+                    //updateNotiNum
+                    NumNo = --NotiNumX;
+                    database.ref('NotificationNumber/').update({
+                    Number : NumNo,
+                        })
                       if(UpdateBoBoxCalculation == 0){
                         //dashboad update
                         NotAvailableA = ++notavailablex;
@@ -3058,7 +3073,7 @@ setTimeout(function(){
            $(document).ready(function () {
           $('#table5').DataTable({
             "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
-            "ordering": false,  
+            "order": [[ 6, "asc" ]],  
 
           });
           }); 

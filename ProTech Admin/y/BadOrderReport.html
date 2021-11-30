@@ -667,19 +667,24 @@
                         { extend: 'excel',
                         footer: true,
                         className: 'btn btn-success glyphicon glyphicon-list-alt',
-                        messageTop: 'Report by: Inventory Custodian    Date: '+ Time,
+                        messageTop: 'Report by: Accounting Head    Date: '+ Time,
                       
                         
                         },
                         { extend: 'pdf',
                         className: 'btn btn-danger glyphicon glyphicon-file',
                         footer: true,
-                        messageTop: 'Report by: Inventory Custodian    Date: '+ Time,
+                        messageBottom: '\n'+
+                       ' \n \nReport by:                                                                                                                                        Date: '+ Time +
+                        '\n \n___________________________________\n.         Accounting Head Name \n.     Sinature over Printed Name',
                         },
                         { extend: 'print',
                         className: 'btn btn-secondary glyphicon glyphicon-print',
                          footer: true,
-                         messageBottom: '<br><h4>Report by:<strong> Inventory Custodian</strong></h4> </n> <h5>Date: '+ Time+'</h5>'
+                         title: '<center>Bad Orders Reports</center>',
+                         messageTop:'<center><h5>Date: '+ Time+'</h5></center>',
+                         messageBottom: '<br><center style="text-align: justify;"> <h5>Report by:</h5>    <br>'+
+                        '<strong>___________________________________</strong> <br> <strong >Accounting Head Name</strong>  <br>Sinature over Printed Name</center>',
                         }
               ],
     
