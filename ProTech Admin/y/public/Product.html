@@ -1,0 +1,3228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shorcut icon" type="image" href="img/logo.jpg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Custodian - Product</title>
+ 
+  <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+   <!-- DataTables -->
+   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="css/adminlte.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+
+
+  <script src="app.js"></script>
+  <script src="logout.js"></script>
+</head>
+
+
+<body class="control-sidebar-slide-open text-sm sidebar-mini layout-fixed layout-navbar-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <h5 id="Time" class="nav-link"></h5>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      
+
+            <!-- Notifications Dropdown Menu -->
+            <ul class="navbar-nav ml-auto">
+
+              <!-- Notifications Dropdown Menu -->
+              <li class="nav-item dropdown">
+               <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
+                 <i class="far fa-bell"></i>
+                 <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
+               </a>
+       
+               <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
+                 <span class="dropdown-header" id="NotificationNumB">No Notification</span>
+                 <div class="card-body table-responsive p-0" style="height: 380px;">
+                 <div class="dropdown-divider"></div>
+               
+                 <div id ="ListNotification">  
+                 <div id="ShowNotification">
+       
+                 </div>
+                 </div>
+                 </div>
+               </div>
+             </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <!-- logout Button-->
+      <li class="logout">
+        <a class="nav-link"   href="logout.html" role="button">
+          <i onclick="logout()" class="fas fa-power-off"></i>
+        </a>
+      </li>
+
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="img/logo.jpg" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Inventory Custodian</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="img/Custodian_profile.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Custodian</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Dashboard.html" class="nav-link">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              </ul>
+              
+                 <!--Category-->
+                 <li class="nav-item">
+                  <a href="Category.html" class="nav-link ">
+                      <i class="fas fa-list"></i>
+                    <p>Category</p>
+                  </a>
+                </li>
+
+                
+              <!--Product-->
+              <li class="nav-item ">
+                <a href="#" class="nav-link active">
+                  <i class="fas fa-boxes"></i>
+                  <p>Product</p>
+                </a>
+              </li>
+              <!--Product-->
+             
+                 <!--Item-->
+                 <li class="nav-item menu">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-dolly"></i>
+                    <p>
+                      Issued/Return
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="release.html" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Release Item</p>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="Return_Item.html" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Return Item</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>       
+                <!--Item-->
+
+                 <!--Trash-->
+                 <li class="nav-item">
+                  <a href="product_deleted.html" class="nav-link ">
+                    <i class="fas fa-trash"></i>
+                    <p>Archiving</p>
+                  </a>
+                </li>
+                   
+            <!--Trash-->
+
+
+
+
+           <!--reports-->
+           <li class="nav-item menu">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Reports
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Report.html" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Issued/Return Reports</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="ToolsReport.html" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tools Reports</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="Stock_Report.html" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Stock Reports</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="Fast_and slow-moving_Item.html" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Fast and Slow-moving Item Reports</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="Bad_Order_Report.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bad order Reports</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>  
+            <!--reports-->        
+                <!--reports-->        
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+      <!--sidemenu-->
+
+
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+      
+    <div class="container-fluid">
+    
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Product</h1>
+        </div>
+   
+  </section>   
+               
+  <div class="col-12 col-sm-12">
+    <div class="card card-success card-tabs">
+      <div class="card-header p-0 pt-1">
+        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Pending Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Report Bad Order</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="custom-tabs-one-Expired-tab" data-toggle="pill" href="#custom-tabs-one-Expired" role="tab" aria-controls="custom-tabs-one-Expired" aria-selected="false">Remove/Check days to expire</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Status Control</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content" id="custom-tabs-one-tabContent">
+          <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+<!----------------------------------------------------Selection Function------------------------------->              
+                <div class="form-group">
+
+          <div class="row">
+        
+                   
+              <div class="col-3">
+              <label>Category</label>
+              <select id="Select" class="select1" style="width: 75%;">
+               <option value="All">All</option>
+             </select>
+             </div>  
+
+             <div class="col-3">
+             <label>Status</label>
+             <select id="Status"  class="select1" style="width: 75%;">
+              <option value="All">All</option>
+              <option value="In Stock">In Stock</option>
+              <option value="Safety Stock">Safety Stock</option>
+              <option value="Critical Stock">Critical Stock</option>
+              <option value="Out of Stock">Out Of Stock</option>
+              <option value="Expired">Expired</option>
+            </select>  
+            </div>
+          </div>
+
+          
+             <button  class="btn  bg-gradient-primary btn-sm float-right" data-toggle="modal" data-target="#add">Add New Product</button>
+             <br>
+             
+            </div>
+             <section class="content-header">
+ 
+            </section>   
+            
+             
+<!----------------------------------------------------table tab1------------------------------->      
+                
+            <div class="card-body table-responsive p-0">
+              
+            <table class="table text-nowrap table-striped table-bordered table-sm" id="table" width="100%">  
+             
+              <thead class="text-center" >
+                <tr>
+                    <th> Batch#</th>
+                    <th>Category</th>
+                    <th>Brand</th>
+                    <th>Manufacturer</th>
+                    <th>Supply date</th>
+                    <th>Expiration</th>
+                    <th>Unit Per Box</th>
+                    <th>Boxes</th>
+                    <th>Total Qty</th>
+                    <th>Status</th>
+                    
+                </tr>
+              </thead>
+              <tbody id="tbody" class="text-center" >
+                    
+      
+              </tbody> 
+                      <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+                      <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+                      <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+     
+                
+            </table>
+            </div>
+          </div>
+        
+        
+          <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+            <!----------------------------------------------------Selection Function for tab 2------------------------------->    
+
+            <div class="form-group">
+
+              <div class="row">
+        
+                   
+                <div class="col-3">
+              <label>Category</label>
+              <select id="Select1" class="select1" style="width: 75%;">
+               <option value="All">All</option>   
+             </select> 
+               </div>
+             
+               <div class="col-3">
+             <label>Status</label>
+             <select id="Status1"  class="select1" style="width: 75%;">
+              <option value="All">All</option>
+              <option value="Pending">Pending</option>
+              <option value="Decline">Decline</option>
+            </select>  
+            </div>
+            </div>
+             <br>
+             </div>
+
+             <section class="content-header">
+ 
+            </section>   
+            <div class="card-body table-responsive p-0">
+              <!--------------------------------------------Pending Table-->
+              <table class="table text-nowrap table-striped table-bordered table-sm" id="table1" width="100%">  
+               
+                <thead>
+                  <tr>
+                      
+                      <th> Batch#</th>
+                      <th>Category</th>
+                      <th>Brand</th>
+                      <th>Manufacturer</th>
+                      <th>Supply date</th>
+                      <th>Expiration</th>
+                      <th>Unit Per Box</th>
+                      <th>Boxes</th>
+                      <th>Total Qty</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                      
+                  </tr>
+                </thead>
+                <tbody id="tbody1" class="tbody1">
+                      
+        
+                </tbody> 
+                        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+       
+                  
+              </table>
+             
+          </div>
+          </div>
+          <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                <!-------------------------------------------------------------For Bad Orders Request-------------------->      
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title"></h3>
+        
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label>Select Batch Product</label>
+                          <select id="PrductSelection" class="form-control select2" style="width: 100%;" onchange="Product()">
+                            <option value="">--Select Batch---</option>
+                           
+                          </select>
+                        </div>
+                        
+                      <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <!------------------------------------------------->
+                    <div class="col-4">
+                 
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Product Name</label>
+                        <input type="text" class="form-control" id="ProductBO" placeholder="" disabled>
+                      </div>
+                      
+                      </div>
+
+                      <div class="col-4">
+                 
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Manufacturer</label>
+                          <input type="text" class="form-control" id="ManufactureBO" placeholder="" disabled>
+                        </div>
+                        
+                        </div>
+
+                    
+                    </div>
+
+                    <!----------------------------------------------------->
+
+                    <div class="row">
+        
+                      <div class="col-4">
+                        
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Description</label>
+                          <textarea class="form-control" rows="3" id="Desciption" placeholder="Enter Description..."></textarea>
+                        </div>
+            
+                        </div>
+                        <!----------------------------------------------------->
+                        
+                        <div class="col-2">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Qty by Box</label>
+                          <input type="number" name ="" class="form-control" id="QtyBoxBo" placeholder="Box" onkeyup="BoBoxQty()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
+                        </div>
+                        </div>
+                     <!----------------------------------------------------->
+                        <div class="col-2">
+                          <div class="form-group">
+                          
+                            <label for="exampleInputPassword1">Qty by Pcs</label>
+                          <input type="number" name ="" class="form-control" id="QtyPcsBo" placeholder="PCS" onkeyup="PcsBoxQty()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
+                           
+                          </div>
+                          
+                        <!-- /.col -->
+                      </div>
+
+                  
+
+                        </div>
+                        <div class="card-footer">
+                          <button   type="submit" class="btn btn-success float-right" data-toggle="modal" data-target="" onclick="ReportBO()">Report</button>
+                        </div>
+                  </div>
+                  <!-- /.card-body -->
+           
+                </div>
+                <!---------------------------------------------------table for bad orders--------------------------->
+
+                <section class="content">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-12">
+                      
+                          <div class="card card-info">
+                            <div class="card-header">
+                              <h6>Today's Report</h6>
+                            </div>
+                            <div class="card-body">
+                              
+ 
+            
+                            <div class="card-body table-responsive p-0">
+                              <table class="table text-nowrap table-striped table-bordered table-sm" id="table3" width="100%">  
+                   
+                                <thead>
+                                  <tr>
+                                      <th>#</th>
+                                      <th>Date</th>
+                                      <th>Product</th>
+                                      <th>Batch</th>
+                                      <th>Category</th>
+                                      <th>Description</th>
+                                      <th>Total Pcs</th>
+                                      <th>Action</th>
+                                  
+                                      
+                                  </tr>
+                                </thead>
+                                <tbody id="tbody3" class="tbody3">
+                                      
+                        
+                                </tbody> 
+                                        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+                                        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+                                        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+                       
+                                  
+                              </table>
+                    
+                              </div>
+                            </div>
+                            <!-- /.card-body -->
+
+                     
+                          <!-- /.card-body -->
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </section>
+     
+                </div>
+          
+          <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+                 <!----------------------------------------------------------Status Control---------------------------->
+                 <div class="col-md-5">
+                        
+                  <div class="card card-success ">
+                      <div class="card-header">
+                     
+                      </div>
+                      <!-- /.card-header -->
+                      <!-- form start -->
+                      <form id="quickForm3">
+                        <div class="card-body">
+                            <div class="form-group">
+                                
+                                <div class="row">
+
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Safety Stock</label>
+                                            <input type="text" class="form-control" id="SafetyStock1" placeholder="0" disabled>
+                                          </div>                      
+                                      </div>
+
+                                      <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Critical stock</label>
+                                            <input type="text" class="form-control" id="MinSafetyStock1" placeholder="0" disabled>
+                                          </div>                      
+                                      </div>
+                                      
+                                  
+                          
+                                      </div>
+
+                          
+                          
+                        </div>
+
+                      </form>
+
+                    </div>
+                <!-- /.card-body --> 
+              
+                        <div class="card-footer">
+                          <button   type="submit" class="btn btn-info float-right" data-toggle="modal" data-target="#EditStatus" onclick="EditStatus()">Edit</button>
+                        </div>
+              
+                </div>
+          
+      
+
+
+              <!-- /.card-body -->
+            </div>
+          </div>
+            <div class="tab-pane fade" id="custom-tabs-one-Expired" role="tabpanel" aria-labelledby="custom-tabs-one-Expired-tab">
+              <!----------------------------------------------------Selection Function for tab 2------------------------------->    
+
+                    <div class="form-group">
+                      <div class="row">
+        
+                   
+                        <div class="col-3">
+                      <label>Category</label>
+                      <select id="Select5" class="select1" style="width: 75%;">
+                      <option value="All">All</option>   
+                    </select> 
+                    </div>
+                    
+                    <div class="col-3">
+                    <label>Status</label>
+                    <select id="Status5"  class="select1" style="width: 75%;">
+                      <option value="All">All</option>
+                      <option value="Expired Item">Expired</option>
+                      <option value="Out of Stock">Out of Stock</option>
+                    </select> 
+                    </div>
+                    </div> 
+                    <button  class="btn  bg-gradient-danger btn-sm float-right" data-toggle="modal" data-target="#ExpiredOutofStock" >Delete</button>
+                    <br>
+                    </div>
+                    <section class="content-header">
+        
+                    </section>   
+                          <!----------------------------------------------------table for Remove out of stock------------------------------->      
+                
+                              <div class="card-body table-responsive p-0">
+                                
+                                <table class="table text-nowrap table-striped table-bordered table-sm" id="table5" width="100%" >  
+                                
+                                  <thead class="text-center">
+                                    <tr>
+                                        <th>Batch#</th>
+                                        <th>Category</th>
+                                        <th>Brand</th>
+                                        <th>Expiration</th>
+                                        <th>Boxes</th>
+                                        <th>Total Qty</th>
+                                        <th>Day's to Expire</th>
+                                        <th>Status</th>
+                                        <th role="button" id="myCheck" onclick="SelectAll()">All</th>
+                                        
+                                    </tr>
+                                  </thead>
+                                  <tbody id="tbody5" class="text-center">
+                                        
+                                  </tbody> 
+                                          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+                                          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+                                          <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+                        
+                                    
+                                </table>
+                                
+                                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+<footer class="main-footer">
+  <div class="float-right d-none d-sm-block">
+    <strong>Copyright &copy; 2021 <a href="#">ProTech</a>.</strong> All rights reserved.
+  </div>
+  <b>.</b>
+  </footer>
+
+
+     
+<!------------------------------------------------------------Delete Modal----------------------------------------------------------------------------------->
+
+<div class="modal fade" id="modal-danger">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete</h4> 
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this item ?</p>
+      </div>       
+      <div class="modal-footer justify-content-between">
+        <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button onclick="Delete()" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!-------------------------------------------------------------Edit Modal-------------------------------------------------------------------------------->  
+
+<div class="modal fade" id="Edit">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Products</h4>
+      </div>
+      
+      <div class="card-body">
+        <form id="quickForm" >
+
+          <div class="row">
+
+          <div class="col-6">
+            <div class="form-group">  
+              <label for="Batch">Batch number</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker" >
+                  <div class="input-group-text"><i class="fas fa-hashtag"></i></div>
+              </div>
+                <input type="number" name="Batch1" class="form-control" id="Batch1"  disabled >
+                </div> 
+            </div>
+            </div>
+            
+             
+            <div class="col-6">
+               <div class="form-group">
+                  <label class="selectpicker" for="exampleInputPassword1">Product Category</label>
+               <select id="category1" onchange="run3()" class="form-control select" style="width: 100%;">
+                         
+                </select>
+
+            </div>
+              </div>
+         
+
+            </div>
+        
+          <!---------------------------------------------------------------------------------------------------->  
+
+         <div class="row">  
+             <div class="col-6">
+               <div class="form-group">
+            <label for="exampleInputPassword1">Product Brand</label>
+            <div class="input-group inputdefault">
+              <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+            </div>
+            <select id="product1" onchange="run6()" class="form-control select" style="width: 100%;">
+              </select>
+          
+            <datalist id="browsers"></datalist>
+          </div>
+          </div>
+          </div>
+
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Manufacturer</label>
+              <div class="input-group inputdefault">
+              <select id="manufacturer1" onchange="run4()" class="form-control select" style="width: 100%;">
+             
+                </select>
+            </div>               
+          </div>
+          </div>
+          </div>
+       <!---------------------------------------------------------------------------------------------------->
+          
+       <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+              <label for="exampleInputPassword1">Supply Date</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+              </div>
+            <input type="date" required=""  class="form-control" id="Date1" >
+          </div>
+           </div>
+
+        </div>
+
+        <div class="col-6">
+          <div class="form-group">
+           <label for="exampleInputPassword1">Expiration Date</label>
+            <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+              </div>
+            <input  type="date" name="Exdate"required="" type="text"class="form-control" id="Exdate1" placeholder="dd/mm/yyyy"> 
+          </div>
+        </div>
+        </div>
+        </div>
+
+        
+        <!---------------------------------------------------------------------------------------------------->
+             
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Pcs per Box</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fas fa-boxes"></i></div>
+              </div>
+            <input type="number" name="Pcs" required="" class="form-control" id="PerBox1" placeholder="0" onkeyup="Calculating2()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
+            </div>    
+          </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Number of Boxes</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fas fa-box-open"></i></div>
+              </div>
+            <input type="number" name= "Qty" required="" class="form-control" id="Box1" placeholder="0" onkeyup="Calculating3()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">  
+            </div>
+              </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Total Quantity</label>
+              
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fas fa-equals"></i></div>
+              </div>
+            <input type="number" name= "Qty" required="" class="form-control" id="Total1" placeholder="0" disabled>  
+            </div>
+              </div>
+          </div>
+
+          </div>
+
+          
+          
+         
+            <div class="modal-footer justify-content-between">
+              <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              <button onclick="SaveEdit()" class="btn btn-success" >Save Change</button>
+            </div>
+     
+
+
+     
+        <!-- /.card-body -->
+   </form>
+  </div>
+
+      
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal --> 
+
+
+
+<!-----------------------------------------------------Add Modal----------------------------------------------------------------------------------------->  
+
+<div class="modal fade" id="add">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Create Products</h4>
+      </div>
+      
+      <div class="card-body">
+        <form id="quickForm1" >
+
+          <div class="row">
+
+          <div class="col-6">
+            <div class="form-group">  
+              <label for="Batch">Batch number</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fas fa-hashtag"></i></div>
+              </div>
+                <input type="number" name="Batch" class="form-control" id="Batch" placeholder="Enter Batch Number" onkeyup="Checking()" >
+                </div> 
+            </div>
+            </div>
+            
+             
+            <div class="col-6">
+               <div class="form-group">
+                  <label class="selectpicker" for="exampleInputPassword1">Product Category</label>
+               <select id="categories" onchange="run1()" class="form-control select" style="width: 100%;">
+                <option value="" selected hidden>------Select Category------</option>                   
+                </select>
+
+            </div>
+              </div>
+         
+
+            </div>
+        
+          <!---------------------------------------------------------------------------------------------------->  
+
+         <div class="row">  
+             <div class="col-6">
+               <div class="form-group">
+            <label for="exampleInputPassword1">Product Brand</label>
+            <div class="input-group inputdefault">
+              <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+              
+            </div>
+            <select id="product" onchange="run5()" class="form-control select" style="width: 100%;">
+              <option value="" >----Select Product Brand----</option> 
+              </select>
+        
+            <datalist id="browsers"></datalist>
+          </div>
+          </div>
+          </div>
+
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Manufacturer</label>
+              <div class="input-group inputdefault">
+              <select id="manufacturer" onchange="run2()" class="form-control select" style="width: 100%;">
+                <option value="" >----Select Manufacturer----</option> 
+             
+                </select>
+            </div>               
+          </div>
+          </div>
+          </div>
+       <!---------------------------------------------------------------------------------------------------->
+          
+       <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+              <label for="exampleInputPassword1">Supply Date</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+              </div>
+            <input type="date" required=""  class="form-control" id="Date" >
+          </div>
+           </div>
+
+        </div>
+
+        <div class="col-6">
+          <div class="form-group">
+           <label for="exampleInputPassword1">Expiration Date</label>
+            <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+              </div>
+            <input  type="date" name="Exdate"required="" type="text"class="form-control" id="Exdate" placeholder="dd/mm/yyyy"> 
+          </div>
+        </div>
+        </div>
+        </div>
+
+        
+        <!---------------------------------------------------------------------------------------------------->
+             
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Pcs per Box</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fas fa-boxes"></i></div>
+              </div>
+            <input type="number" name="Pcs" required="" class="form-control" id="PerBox" placeholder="0" onkeyup="Calculating1()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
+            </div>    
+          </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Number of Boxes</label>
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fas fa-box-open"></i></div>
+              </div>
+            <input type="number" name= "Qty" required="" class="form-control" id="Box" placeholder="0" onkeyup="Calculating()" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">  
+            </div>
+              </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Total Quantity</label>
+              
+              <div class="input-group inputdefault">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fas fa-equals"></i></div>
+              </div>
+            <input type="number" name= "Qty" required="" class="form-control" id="Total" placeholder="0" disabled>  
+            </div>
+              </div>
+          </div>
+
+          </div>
+
+          
+          
+         
+        <div class="card-footer">
+
+      <button  onclick="Add()" class="btn btn-primary float-right" >Add</button>
+      </div> 
+
+     
+
+
+     
+        <!-- /.card-body -->
+   </form>
+  </div>
+
+      
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal --> 
+
+<!----------------------------------------------------------------------------------------------------------------->
+
+  <!-- /.modal-dialog -->
+       <!--Success-->
+       <div class="modal fade" id="modal-success">
+        <div class="modal-dialog">
+          <div class="modal-content bg-success">
+            <div class="modal-body">
+              <h4 class="modal-title">Success </h4>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+       <!--Success-->
+       
+      </div>
+
+<!-- /.modal -->
+
+<!-----------------------------------------------------------------Read------------------------------------------------------>
+<div class="modal fade" id="Read">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="text-align: center;">Reason Note</h4>
+        
+      </div>
+            <div class="modal-body">
+              <textarea id="Readnote" class="form-control" rows="3" placeholder="" disabled></textarea>
+            </div>
+
+      <div class="modal-footer">
+        <button type="button"  class="btn bg-gradient-danger btn-xs float-right" data-dismiss="modal" onclick="DeleteRead()">Delete</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+       <!-----------------------------------------------------------------Edit modal--------------------------------------->
+        
+       <div class="modal fade" id="EditStatus">
+        <div class="modal-dialog modal-default">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit</h4> 
+            </div>
+            <div class="modal-body">
+            
+                <div class="row">
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Safety Stock</label>
+                            <input type="number" class="form-control" id="SafetyStock2">
+                          </div>                      
+                      </div>
+
+                      <div class="col-6">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Critical stock</label>
+                            <input type="number" class="form-control" id="MinSafetyStock2"  >
+                          </div>                      
+                      </div>
+                      
+                   
+          
+                      </div>
+
+            </div>       
+            <div class="modal-footer justify-content-between">
+              <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button onclick="SaveStatus()" class="btn btn-success">Save Change</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+      <!------------------------------------------------------------Report Modal----------------------------------------------------------------------------------->
+
+<div class="modal fade" id="Report">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Report</h4> 
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to REPORT this item as a BAD ORDER?</p>
+      </div>       
+      <div class="modal-footer justify-content-between">
+        <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button onclick="Report()" class="btn btn-info">Confirm</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!------------------------------------------------------------RemoveBo Modal----------------------------------------------------------------------------------->
+
+      <div class="modal fade" id="RemoveBO">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Remove?</h4> 
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to REMOVE this Report. It will return all total Pcs of bad order ?</p>
+            </div>       
+            <div class="modal-footer justify-content-between">
+              <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button value="Get Selected" onclick="RemoveBadOrder()" class="btn btn-info">Confirm</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+<!------------------------------------------------------------Remove Expire/OutofStock Modal----------------------------------------------------------------------------------->
+
+<div class="modal fade" id="ExpiredOutofStock">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete?</h4> 
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to DELETE selected Item?</p>
+      </div>       
+      <div class="modal-footer justify-content-between">
+        <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button onclick="DeleteExpired()" class="btn btn-danger">Confirm</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!------------------------------------------------------------Expiration notification------------------------------------------------>
+              <div class="modal fade" id="Notifications">
+                <div class="modal-dialog">
+                  <div class="modal-content bg-danger">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Expired Product</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <table class="table table-striped table-bordered table-sm" id="table4">
+                        <thead>
+                              <th>Batch</th>
+                              <th>product</th>
+                              <th>Expiration</th>
+                              <th>Status</th>
+                            
+                              
+                        </thead>
+                        <tbody id="tbody4">
+                              
+                
+                         <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+                  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+                  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script></tbody>
+                        
+                  </table>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+              <input class="form-control form-control-sm" id="search" type="hidden" placeholder="Search" aria-label="Search" >     
+         <!--Expiration notification-->
+<!---------------------------------------------------------------------------------------------------------------------------------------------------->
+<input type="hidden"   class="form-control" id="Category" placeholder="">
+<input type="hidden"  class="form-control" id="Manufacture">
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+    <input type="hidden"   class="form-control" id="Category1" placeholder="">
+    <input type="hidden"  class="form-control" id="Manufacture1" >
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<input type="hidden"  class="form-control" id="CheckBatch" value="Undefined">
+<!-------------------------------------------------------------------------------------------------------------------------------------------->
+<input type="hidden"  class="form-control" id="Batch3">
+<input type="hidden"  class="form-control" id="Batch2">
+<input type="hidden"  class="form-control" id="Category2">
+<input type="hidden"  class="form-control" id="Product2">
+<input type="hidden"  class="form-control" id="Manufacture2">
+<input type="hidden"  class="form-control" id="Date2">
+<input type="hidden"  class="form-control" id="Exdate2">
+<input type="hidden"  class="form-control" id="Unit2">
+<input type="hidden"  class="form-control" id="Box2">
+<input type="hidden"  class="form-control" id="Total2">
+<input type="hidden"  class="form-control" id="status">
+<input type="hidden"  class="form-control" id="Graph">
+<input type="hidden"  class="form-control" id="Status1">
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<input type="hidden"  class="form-control" id="Category3">
+<input type="hidden"  class="form-control" id="Product3">
+<input type="hidden"  class="form-control" id="Manufacture3">
+<input type="hidden"  class="form-control" id="Date3">
+<input type="hidden"  class="form-control" id="Exdate3">
+<input type="hidden"  class="form-control" id="Unit3">
+<input type="hidden"  class="form-control" id="Box3">
+<input type="hidden"  class="form-control" id="Total3">
+<!--------------------------------------------------Safety Stock--------------------------------------------------------------------->
+<input type="hidden"  class="form-control" id="SafetyStock">
+<input type="hidden"  class="form-control" id="MinSafetyStock">
+
+<!--------------------------------------------------Product select add------------------->
+<input type="hidden" name="Brand" required="" class="form-control" id="Product" placeholder="Enter Product Item" list="browsers"> 
+<input type="hidden" name="Brand" required="" class="form-control" id="Product1" placeholder="Enter Product Item" list="browsers"> 
+<!-- Main Content-->
+<input type="hidden" name="Manufacture" required="" class="form-control" id="Batch" placeholder="Enter Manufacturer">
+ <!--------------------------------------------------TimeStamp------------------->
+<input type="hidden" name="Brand" required="" class="form-control" id="TimeStamp"> 
+<!--------------------------------------------------Bo Calculation-------------------> 
+<input type="hidden" name="Brand" required="" class="form-control" id="UpdateBoBoxCalculation"> 
+<input type="hidden" name="Brand" required="" class="form-control" id="UpdateBoCalculation">                        
+<input type="hidden" name="Brand" required="" class="form-control" id="CategoryBo"> 
+<input type="hidden" name="Brand" required="" class="form-control" id="BoBoxCalculation"> 
+<input type="hidden" name="Brand" required="" class="form-control" id="BoCalculation"> 
+<input type="hidden" name="Brand" required="" class="form-control" id="PerBoxBo" placeholder="Perbox"> 
+<input type="hidden" name="Brand" required="" class="form-control" id="BoxBo" placeholder="Box"> 
+<input type="hidden" name="Brand" required="" class="form-control" id="TotalBo" placeholder="Total">
+<!--------------------------------------------------RemoveBo Calculation-------------------> 
+<input type="hidden" name="Brand" required="" class="form-control" id="IdReport" placeholder="#ID Report">
+<input type="hidden" name="Brand" required="" class="form-control" id="BatchRev" placeholder="#ID Batch">
+
+<input type="hidden" name="Brand" required="" class="form-control" id="UpdateBox" placeholder="UpdateBox">
+<input type="hidden" name="Brand" required="" class="form-control" id="UpdateTotal" placeholder="UpdateTotal">
+
+<input type="hidden" name="Brand" required="" class="form-control" id="TotalBoR" placeholder="TotalR">
+<input type="hidden" name="Brand" required="" class="form-control" id="BoxBoR" placeholder="BoxR"> 
+
+<input type="hidden" name="Brand" required="" class="form-control" id="UpdateBoxR" placeholder="UpdateBoxR"> 
+<input type="hidden" name="Brand" required="" class="form-control" id="UpdateTotalR" placeholder="UpdateTotalR">
+<!--------------------------------------------------RemoveBo Calculation-------------------> 
+<input type="hidden" name="Brand" required="" class="form-control" id="DATES" placeholder="Date" >
+ <!--------------------------------------------------Dashboard--------------------------------------------------------------------->
+ <input type="hidden"  id="totalx" placeholder="total" >
+ <input type="hidden"  id="availablex" placeholder="Available" >
+ <input type="hidden"  id="notavailablex" placeholder="Available" >
+ <input type="hidden"  id="Pending" placeholder="Available" >
+  <!----------------------------------------------------NotiNum----------------------------------------->
+  <input type="text"  id="NotiNum"  disabled>
+
+
+
+<!-- REQUIRED SCRIPTS -->
+<!--time-->
+<script src ="time.js"></script>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
+<!-- jquery-validation -->
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="plugins/jquery-validation/additional-methods.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- Toastr -->
+<script src="plugins/toastr/toastr.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+</body>
+
+<script id=MainScript>
+
+
+var database = firebase.database()
+//------------------Dashboard----------------------
+database.ref('Dashboard/').on('value',function(snapshot){
+      totalx = document.getElementById('totalx').value= snapshot.val().Total_Item;
+      availablex = document.getElementById('availablex').value= snapshot.val().Available_Item;
+      notavailablex = document.getElementById('notavailablex').value= snapshot.val().NotAvailable_Item;
+      Pending = document.getElementById('Pending').value= snapshot.val().Pending;
+      
+
+  });
+//------------------------------Safety Stock value----------------
+database.ref('Safety_Stock/').on('value',function(snapshot){
+document.getElementById('SafetyStock1').value = snapshot.val().SafetyStock +" Boxes";
+document.getElementById('MinSafetyStock1').value = snapshot.val().MinSafetyStock + " Boxes";
+ });
+
+//------------------------------Safety Stock value----------------
+database.ref('Safety_Stock/').on('value',function(snapshot){
+document.getElementById('SafetyStock').value = snapshot.val().SafetyStock;
+document.getElementById('MinSafetyStock').value = snapshot.val().MinSafetyStock;
+});
+//-------------------------------------------------------------
+function SafetyStockV(){
+  SafetyStock = document.getElementById('SafetyStock').value;
+  MinSafetyStock = document.getElementById('MinSafetyStock').value;
+}
+//----------------NotificationNumPicker----------------
+database.ref('NotificationNumber/').on('value',function(snapshot){
+      NotiNumX = document.getElementById('NotiNum').value= snapshot.val().Number;
+  });
+
+function SelectAllData(){
+  var database = firebase.database().ref('Item/');
+   database.orderByChild('TimeStamp').on('value',function (snapshot){
+    $('#tbody').remove();
+    $('#table').append('<tbody id="tbody" class="text-center" ></tbody>');
+    snapshot.forEach(
+      function(CurrentRecord){
+        var batch = CurrentRecord.val().Batch;
+        var Category = CurrentRecord.val().Category;
+        var products = CurrentRecord.val().Brand;
+        var manufacture = CurrentRecord.val().Manufacture;
+        var supplydate = CurrentRecord.val().Date;
+        var exdate = CurrentRecord.val().Exdate;
+        var status = CurrentRecord.val().Status;
+        var PerBox = CurrentRecord.val().PerBox;
+        var Box  = CurrentRecord.val().Box;
+        var Total = CurrentRecord.val().Total;
+
+        
+        AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,status,PerBox,Box,Total);
+      }
+    );
+  });
+  //----------------------for pending Item-----------------------------
+  var database = firebase.database().ref('PendingItem/');
+   database.orderByChild('TimeStamp').on('value',function (snapshot){
+    $('#tbody1').remove();
+    $('#table1').append('<tbody id="tbody1" class="" ></tbody>');
+    snapshot.forEach(
+      function(CurrentRecord){
+        var batch1 = CurrentRecord.val().Batch;
+        var Category1 = CurrentRecord.val().Category;
+        var products1 = CurrentRecord.val().Brand;
+        var manufacture1 = CurrentRecord.val().Manufacture;
+        var supplydate1 = CurrentRecord.val().Date;
+        var exdate1 = CurrentRecord.val().Exdate;
+        var status1 = CurrentRecord.val().Status;
+        var PerBox1 = CurrentRecord.val().PerBox;
+        var Box1  = CurrentRecord.val().Box;
+        var Total1 = CurrentRecord.val().Total;
+        var Status = CurrentRecord.val().Status;
+
+        
+        AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,exdate1,status1,PerBox1,Box1,Total1,Status);
+      }
+    );
+      //------notification--------
+      var database = firebase.database()
+  database.ref('Item').once('value',
+  function(AllRecord){
+    AllRecord.forEach(
+      function(CurrentRecord){
+        
+        var batch4 = CurrentRecord.val().Batch;
+        var products4 = CurrentRecord.val().Brand;
+        var exdate4 = CurrentRecord.val().Exdate;
+        
+        
+        AddItemsToTable4(batch4,products4,exdate4);
+      }
+    );
+  });
+  });
+
+    //----------------------for pending Reports-----------------------------
+    var database = firebase.database().ref('ReportBO/');
+   database.orderByChild('TimeStamp').once('value',function (snapshot){
+    snapshot.forEach(
+      function(CurrentRecord){
+        var Date2 = CurrentRecord.val().Date;
+        var Brand2 = CurrentRecord.val().Brand;
+        var Batch2= CurrentRecord.val().Batch;
+        var Category2 = CurrentRecord.val().Category;
+        var Description2 = CurrentRecord.val().Desciption;
+        var Total2 = CurrentRecord.val().Total;
+        var TimeStamp2 = CurrentRecord.val().TimeStamp;
+     
+        
+        AddItemsToTable2(Date2,Brand2,Batch2,Category2,Description2,Total2,TimeStamp2);
+      }
+    );
+  });
+      //-----------------------------for remove check day expired------------
+      var database = firebase.database().ref('Item/');
+      database.orderByChild('TimeStamp').once('value',function (snapshot){
+        $('#tbody5').remove();
+        $('#table5').append('<tbody id="tbody5"  class="text-center" ></tbody>');
+        snapshot.forEach(
+          function(CurrentRecord){
+            var batch5 = CurrentRecord.val().Batch;
+            var Category5 = CurrentRecord.val().Category;
+            var products5 = CurrentRecord.val().Brand;
+            var manufacture5 = CurrentRecord.val().Manufacture;
+            var supplydate5 = CurrentRecord.val().Date;
+            var exdate5 = CurrentRecord.val().Exdate;
+            var status5 = CurrentRecord.val().Status;
+            var PerBox5 = CurrentRecord.val().PerBox;
+            var Box5  = CurrentRecord.val().Box;
+            var Total5 = CurrentRecord.val().Total;
+
+            
+            AddItemsToTable5(batch5,Category5,products5,manufacture5,supplydate5,exdate5,status5,PerBox5,Box5,Total5);
+          }
+        );
+      });
+      
+}
+window.onload = SelectAllData;
+
+function AddItemsToTable(batch,Category,products,manufacture,supplydate,exdate,status,PerBox,Box,Total){
+ var tbody = document.getElementById('tbody');
+ var trow = document.createElement('tr');
+ var td1 = document.createElement('td');
+ var td2 = document.createElement('td');
+ var td3 = document.createElement('td');
+ var td4 = document.createElement('td');
+ var td5 = document.createElement('td');
+ var td6 = document.createElement('td');
+ var td7 = document.createElement('td');
+ var td8 = document.createElement('td');
+ var td9 = document.createElement('td');
+ var td10 = document.createElement('td');
+
+
+ //--------------------------Date Expiration-----------------------
+ var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+   const  Dati =  year +"-"+month+"-"+ date ;  
+   const Today = new Date(Dati);
+   const  Expired =   new Date(exdate);
+    const oneDay = 24 * 60 * 60 * 1000;  
+    const diffDays = Math.round(((Expired - Today) / oneDay));
+
+ 
+ td1.innerHTML = batch;
+ td2.innerHTML = Category;
+ td3.innerHTML = products;
+ td4.innerHTML = manufacture;
+ td5.innerHTML = supplydate;
+ td6.innerHTML = exdate;
+ td7.innerHTML = PerBox;
+ td8.innerHTML = Box;
+ td9.innerHTML = Total;
+
+ //------------------------------Status-----------------------------
+ SafetyStockV();
+ if(Number(SafetyStock) <= Number(Box) ){
+  td10.innerHTML = '<span id=""class="badge badge-success">' + 'In Stock' + '</span>';
+ }
+
+ if(Number(SafetyStock) >= Number(Box) ){
+  td10.innerHTML = '<span id=""class="badge badge-info">' + 'Safety Stock' + '</span>';
+ }
+
+ if(Number(MinSafetyStock) >= Number(Box) ){
+  td10.innerHTML = '<span id=""class="badge badge-warning">' + 'Critical Stock' + '</span>';
+ }
+ if(new Date(exdate) <= new Date(Dati)){
+  td10.innerHTML = '<span id=""class="badge badge-danger">' + 'Expired' + '</span>';
+ }
+ if(Box  == 0){
+  td10.innerHTML = '<span id=""class="badge badge-secondary" >' + 'Out of Stock' + '</span>';
+ }
+ //td12.innerHTML = '<button type="button" onclick="Edit()"  class="btn btn-primary" data-toggle="modal" data-target="#Edit"><i class="fas fa-edit"></i></button> <button type="button" onclick="Open()"  class="btn btn-danger" data-toggle="modal" data-target="#modal-danger"><i class="fas fa-trash-alt"></i></button>'
+ 
+ 
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);
+  tbody.appendChild(trow);
+}
+
+//--------------------------------------Pending Item------------------------------------------------->
+function AddItemsToTable1(batch1,Category1,products1,manufacture1,supplydate1,exdate1,status1,PerBox1,Box1,Total1,Status){
+ var tbody = document.getElementById('tbody1');
+ var trow = document.createElement('tr');
+ var td1 = document.createElement('td');
+ var td2 = document.createElement('td');
+ var td3 = document.createElement('td');
+ var td4 = document.createElement('td');
+ var td5 = document.createElement('td');
+ var td6 = document.createElement('td');
+ var td7 = document.createElement('td');
+ var td8 = document.createElement('td');
+ var td9 = document.createElement('td');
+ var td10 = document.createElement('td');
+ var td11 = document.createElement('td');
+ var td12 = document.createElement('td');
+
+
+ td1.innerHTML = batch1;
+ td2.innerHTML = Category1;
+ td3.innerHTML = products1;
+ td4.innerHTML = manufacture1;
+ td5.innerHTML = supplydate1;
+ td6.innerHTML = exdate1;
+ td7.innerHTML = PerBox1;
+ td8.innerHTML = Box1;
+ td9.innerHTML = Total1;
+
+ //------------------------------Status-----------------------------
+
+ if(Status == "Pending"){
+  td10.innerHTML = '<span id=""class="badge badge-info">Pending</span>';
+ }
+
+ if(Status == "Decline" ){
+  td10.innerHTML = '<span id=""class="badge badge-danger">Declined</span>';
+ }
+
+ if(Status == "Pending"){
+  td11.innerHTML = '<button type="button" onclick="Edit()"  class="btn btn-primary" data-toggle="modal" data-target="#Edit"><i class="fas fa-edit"></i></button> <button type="button" onclick="Open()"  class="btn btn-danger" data-toggle="modal" data-target="#modal-danger"><i class="fas fa-trash-alt"></i></button>';
+
+ }
+
+ if(Status == "Decline" ){
+  td11.innerHTML = '<button type="button" onclick="Read()"  class="btn btn-info" ><i class="far fa-clipboard"></i></button>';
+ }
+ 
+ 
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);trow.appendChild(td11);
+  tbody.appendChild(trow);
+}
+
+
+//--------------------------------------BO Reports------------------------------------------------->
+function AddItemsToTable2(Date2,Brand2,Batch2,Category2,Description2,Total2,TimeStamp2){
+ var tbody = document.getElementById('tbody3');
+ var trow = document.createElement('tr');
+ var td1 = document.createElement('td');
+ var td2 = document.createElement('td');
+ var td3 = document.createElement('td');
+ var td4 = document.createElement('td');
+ var td5 = document.createElement('td');
+ var td6 = document.createElement('td');
+ var td7 = document.createElement('td');
+ var td8 = document.createElement('td');
+
+
+
+ td1.innerHTML = TimeStamp2;
+ td2.innerHTML = Date2;
+ td3.innerHTML = Brand2;
+ td4.innerHTML = Batch2;
+ td5.innerHTML = Category2;
+ td6.innerHTML = Description2;
+ td7.innerHTML = Total2;
+
+
+ td8.innerHTML = '<button type="button" onclick="RemoveBo()"  class="btn btn-danger" data-toggle="modal" data-target="#RemoveBO"><i class="fas fa-trash-alt"></i></button>';
+
+ 
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);
+  tbody.appendChild(trow);
+}
+//---------------------------------------------------------------------------notification table---------------------------------------------------
+function AddItemsToTable4(batch4,products4,exdate4){
+ var tbody = document.getElementById('tbody4');
+ var trow = document.createElement('tr');
+ var td1 = document.createElement('td');
+ var td2 = document.createElement('td');
+ var td3 = document.createElement('td');
+ var td4 = document.createElement('td');
+
+
+  //--------------------------Date Expiration-----------------------
+  var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+   const  Dati =  year +"-"+month+"-"+ date ;  
+   const Today = new Date(Dati);
+   const  Expired =   new Date(exdate4);
+    const oneDay = 24 * 60 * 60 * 1000;  
+    const diffDays = Math.round(((Expired - Today) / oneDay));
+
+
+
+ td1.innerHTML = batch4;
+ td2.innerHTML = products4;
+ td3.innerHTML = exdate4;
+ if(new Date(exdate4) <= new Date(Dati)){
+  td4.innerHTML = '<span id=""class="badge badge-danger">' + 'Expired' + '</span>';
+ }
+
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);
+  tbody.appendChild(trow);
+}
+//------------------------------------------------------------table fo remove/check day expired----------------------------
+function AddItemsToTable5(batch5,Category5,products5,manufacture5,supplydate5,exdate5,status5,PerBox5,Box5,Total5){
+ var tbody = document.getElementById('tbody5');
+ var trow = document.createElement('tr');
+ var td1 = document.createElement('td');
+ var td2 = document.createElement('td');
+ var td3 = document.createElement('td');
+ var td4 = document.createElement('td');
+ var td5 = document.createElement('td');
+ var td6 = document.createElement('td');
+ var td7 = document.createElement('td');
+ var td8 = document.createElement('td');
+ var td9 = document.createElement('td');
+ var td10 = document.createElement('td');
+
+
+ //--------------------------Date Expiration-----------------------
+ var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+   const  Dati =  year +"-"+month+"-"+ date ;  
+   const Today = new Date(Dati);
+   const  Expired =   new Date(exdate5);
+    const oneDay = 24 * 60 * 60 * 1000;  
+    const diffDays = Math.round(((Expired - Today) / oneDay));
+
+ 
+ td1.innerHTML = batch5;
+ td2.innerHTML = Category5;
+ td3.innerHTML = products5;
+ td4.innerHTML = exdate5;
+ td5.innerHTML = Box5;
+ td6.innerHTML = Total5;
+
+
+ if(diffDays <= 0){
+ td7.innerHTML = 0;
+ }
+
+ if(diffDays >= 0){
+  td7.innerHTML = diffDays;
+ }
+
+
+
+if(diffDays < 90){
+  td8.innerHTML = '<span id=""class="badge badge-info">' + 'Near to Expiry' + '</span>';
+  td9.innerHTML = ''
+}
+ if(diffDays > 90){
+  td8.innerHTML = '<span id=""class="badge badge-success">' + 'More than 90days' + '</span>';
+  td9.innerHTML = ''
+}
+
+if(diffDays < 30){
+td8.innerHTML = '<span id=""class="badge badge-warning" >' + 'Short Expiry' + '</span>';
+td9.innerHTML = ''
+}
+ 
+if(new Date(exdate5) <= new Date(Dati)){
+  td8.innerHTML = '<span id=""class="badge badge-danger">' + 'Expired Item' + '</span>';
+  td9.innerHTML = ' <input type="checkbox" />'
+ }
+ if(Box5  == 0){
+  td8.innerHTML = '<span id=""class="badge badge-secondary" >' + 'Out of Stock' + '</span>';
+  td9.innerHTML = ' <input type="checkbox" / >'
+ }
+
+ 
+ 
+  trow.appendChild(td1);trow.appendChild(td2);trow.appendChild(td3);trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);
+  tbody.appendChild(trow);
+}
+
+//<!------------------------------------------------Select option------------------------------------->
+
+
+database.ref('Categories').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list = '';
+         snapshot.forEach(function(data){
+            var val = data.val();
+            vehi_list += '<option value="' + val.Value + '">' + val.Value + '</option>';
+         });
+
+            $('#categories').append(vehi_list);
+            $('#Select1').append(vehi_list);
+            $('#Select5').append(vehi_list);
+
+}
+});
+
+database.ref('Manufacture').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list1 = '';
+         snapshot.forEach(function(data){
+            var val1 = data.val();
+            vehi_list1 += '<option value="' + val1.Company_Name + '">' + val1.Company_Name + '</option>';
+         });
+
+            $('#manufacturer').append(vehi_list1);
+
+}
+});
+//-----------------------------------------------------------
+database.ref('Categories').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list2 = '';
+         snapshot.forEach(function(data){
+            var val2 = data.val();
+            vehi_list2 += '<option value="' + val2.Value + '">' + val2.Value + '</option>';
+         });
+
+            $('#category1').append(vehi_list2);
+
+}
+});
+
+database.ref('Manufacture').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list3 = '';
+         snapshot.forEach(function(data){
+            var val3 = data.val();
+            vehi_list3 += '<option value="' + val3.Company_Name + '">' + val3.Company_Name + '</option>';
+         });
+
+            $('#manufacturer1').append(vehi_list3);
+
+}
+});
+//----------------------------------------------------------
+database.ref('Categories').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list3 = '';
+         snapshot.forEach(function(data){
+            var val3 = data.val();
+            vehi_list3 += '<option value="' + val3.Value + '">' + val3.Value + '</option>';
+         });
+
+            $('#Select').append(vehi_list3);
+
+}
+});
+//-----------------------------Product select add------------------------------------------
+database.ref('ClientOfferd').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list2 = '';
+         snapshot.forEach(function(data){
+            var val2 = data.val();
+            vehi_list2 += '<option value="' + val2.value + '">' + val2.value + '</option>';
+         });
+
+            $('#product').append(vehi_list2);
+
+}
+});
+//--------------------------------Product edit select-----------------------
+database.ref('ClientOfferd').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list2 = '';
+         snapshot.forEach(function(data){
+            var val2 = data.val();
+            vehi_list2 += '<option value="' + val2.value + '">' + val2.value + '</option>';
+         });
+
+            $('#product1').append(vehi_list2);
+
+}
+});
+//--------------------------------Badorders edit select-----------------------
+database.ref('Item').once('value', function(snapshot){
+   if(snapshot.exists()){
+      var vehi_list2 = '';
+         snapshot.forEach(function(data){
+            var val2 = data.val();
+            vehi_list2 += '<option value="' + val2.Batch + '">'+'#' + val2.Batch +' '+ val2.Brand+ '</option>';
+         });
+
+            $('#PrductSelection').append(vehi_list2);
+
+}
+});
+//<!---------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+
+var BatchV, productV, ManufactureV, DateV, Exdate;
+
+function Ready1(){
+            Batchv = document.getElementById("Batch1").value;
+            Categoryv = document.getElementById("Category1").value;
+            Productv = document.getElementById("Product1").value;
+            Manufacturev = document.getElementById("Manufacture1").value;    
+            Datev = document.getElementById("Date1").value;
+            Exdatev = document.getElementById("Exdate1").value;
+            Perbox = document.getElementById("PerBox1").value;
+            Box = document.getElementById("Box1").value;
+            Total1 = document.getElementById("Total1").value;
+            status = document.getElementById("status").value;
+          
+}
+function Ready(){
+          BatchV = document.getElementById("Batch").value;
+          ProductV = document.getElementById("Product").value;
+          ManufactureV = document.getElementById("Manufacture").value;
+          DateV = document.getElementById("Date").value;
+          ExdateV = document.getElementById("Exdate").value;         
+          Check  = document.getElementById("CheckBatch").value;
+          Status1  = document.getElementById("Status1").value;
+          SafetyStock1 = document.getElementById('SafetyStock2').value; 
+          MinSafetyStock1 = document.getElementById('MinSafetyStock2').value;
+
+          Desciption = document.getElementById('Desciption').value;
+          QtyBoxBo = document.getElementById('QtyBoxBo').value;
+          QtyPcsBo = document.getElementById('QtyPcsBo').value;
+
+          UpdateBoBoxCalculation = document.getElementById('UpdateBoBoxCalculation').value;
+          UpdateBoCalculation = document.getElementById('UpdateBoCalculation').value;
+
+
+
+
+}
+
+function LastInfo(){
+
+
+            Category3 = document.getElementById("Category3").value;
+            Product3 = document.getElementById("Product3").value;
+            Manufacture3 = document.getElementById("Manufacture3").value;    
+            Date3 = document.getElementById("Date3").value;
+            Exdate3 = document.getElementById("Exdate3").value;
+            Perbox3 = document.getElementById("Unit3").value;
+            Box3 = document.getElementById("Box3").value;
+            Total3 = document.getElementById("Total3").value;
+
+}
+  //----------------------------------Auto Total Quantity----------------------------------------------
+  function Calculating(){
+
+ 
+
+var num1 =   document.getElementById("PerBox").value;
+var num2 = document.getElementById("Box").value;  
+var total = num1 * num2;
+document.getElementById('Total').value = total;
+
+}
+function Calculating1(){
+
+var num1 =   document.getElementById("PerBox").value;
+var num2 = document.getElementById("Box").value;  
+var total = num1 * num2;
+document.getElementById('Total').value = total;
+
+}
+//-------------------------------------------
+function Calculating2(){
+
+ 
+
+var num1 =   document.getElementById("PerBox1").value;
+var num2 = document.getElementById("Box1").value;  
+var total = num1 * num2;
+document.getElementById('Total1').value = total;
+
+}
+function Calculating3(){
+
+var num1 =   document.getElementById("PerBox1").value;
+var num2 = document.getElementById("Box1").value;  
+var total = num1 * num2;
+document.getElementById('Total1').value = total;
+
+}
+//-----------------------------------Calculation for Bad orders Quantity-------------------->
+function BoBoxQty(){
+    var TotalBox =document.getElementById('TotalBo').value;
+    var BoxBo = document.getElementById("BoxBo").value;
+    var PerBoxBo = document.getElementById("PerBoxBo").value;
+    var QtyBoxBo = document.getElementById("QtyBoxBo").value;
+    var QtyPcsBo = document.getElementById("QtyPcsBo").value;
+    
+
+     var TimesBoxBo = Number(PerBoxBo) * Number(QtyBoxBo);
+     var TotalBo = Number(TimesBoxBo) + Number(QtyPcsBo); 
+     document.getElementById("BoCalculation").value = TotalBo.toFixed(2);
+
+     var TotalBoxBo = TotalBo / PerBoxBo;
+     var fix = TotalBoxBo.toFixed(2)
+     document.getElementById("BoBoxCalculation").value = fix;
+
+     //----------update Box total---------------------
+     var MinusBox = Number(BoxBo) - Number(TotalBoxBo);
+     document.getElementById("UpdateBoBoxCalculation").value = MinusBox.toFixed(2);
+
+       //----------update Pcs total---------------------
+       var MinusTotal = Number(TotalBox) - Number(TotalBo);
+     document.getElementById("UpdateBoCalculation").value = MinusTotal.toFixed(0);
+
+     document.getElementById("QtyBoxBo").className = "form-control is-valid";
+//-------------------------------------------------------
+}
+function PcsBoxQty(){
+  var TotalBox =document.getElementById('TotalBo').value;
+  var BoxBo = document.getElementById("BoxBo").value;
+    var PerBoxBo = document.getElementById("PerBoxBo").value;
+    var QtyBoxBo = document.getElementById("QtyBoxBo").value;
+    var QtyPcsBo = document.getElementById("QtyPcsBo").value;
+    
+
+     var TimesBoxBo = Number(PerBoxBo) * Number(QtyBoxBo);
+     var TotalBo = Number(TimesBoxBo) + Number(QtyPcsBo); 
+     document.getElementById("BoCalculation").value = TotalBo.toFixed(2);
+
+   
+
+     var TotalBoxBo = TotalBo / PerBoxBo;
+     var fix = TotalBoxBo.toFixed(2)
+     document.getElementById("BoBoxCalculation").value = fix;
+
+     //----------update total---------------------
+    var MinusBox = Number(BoxBo) - Number(TotalBoxBo)
+     document.getElementById("UpdateBoBoxCalculation").value = MinusBox.toFixed(2);;
+
+    //----------update Pcs total---------------------
+    var MinusTotal = Number(TotalBox) - Number(TotalBo)
+     document.getElementById("UpdateBoCalculation").value = MinusTotal.toFixed(0);;
+
+     document.getElementById("QtyPcsBo").className = "form-control is-valid";
+
+}
+  //-----------------------------------Auto Checking--------------------------------------------------
+ 
+  function Checking(){
+   
+   Ready();   
+
+               database.ref('Item/'+BatchV ).on('value',function(snapshot){
+               document.getElementById('CheckBatch').value= snapshot.val().Batch;
+               });
+
+
+
+      
+}
+
+////<!---------------------------------------------------------Add Function------------------------------------------------------------------------------------------->
+            function Add(){
+
+            Batchv = document.getElementById("Batch").value;
+            Categoryv = document.getElementById("Category").value;
+            Productv = document.getElementById("Product").value;
+            Manufacturev = document.getElementById("Manufacture").value;    
+            Datev = document.getElementById("Date").value;
+            Exdatev = document.getElementById("Exdate").value;
+            Perbox = document.getElementById("PerBox").value;
+            Box = document.getElementById("Box").value;
+            Total = document.getElementById("Total").value;
+//-----------------------------------------------------------------            
+            if(Categoryv == ""){
+                    document.getElementById("categories").className = "form-control is-invalid";
+                    
+                  }
+                
+                  if ( Manufacturev == ""  ){
+                    document.getElementById("manufacturer").className = "form-control is-invalid";
+                  }
+              
+//--------------------------------------------------------------
+ if ( BatchV == Check || Batchv =="" || Categoryv == "" || Productv == "" || Manufacturev == "" || Datev == "" || Exdatev == "" || Perbox == "" || Box == "" || Total == 0){
+
+                  if (BatchV == Check){
+                    $(document).Toasts('create',{
+                    class: 'bg-danger',
+                    body: 'Cannot add this batch because it is existing',
+                    title: '<h5><i class="fas fa-times"></i> Error  </h5>',
+                    autohide: true,
+                    delay: 5000,
+                    })          
+                  }
+                  if(Batchv == ""){          
+                     
+                  }
+                  if(Categoryv == ""){
+               
+                    
+                  }
+                  if(Productv == ""){
+                   
+                  }
+                  if ( Manufacturev == ""  ){
+               
+                  }
+                              
+                  if (Datev ==""){
+                  
+                  }
+                  if(Exdatev == ""){
+                  
+                  }
+                  if(Perbox == ""){
+                  
+                  }
+                  if(Box == ""){
+                
+                  }
+                  if(Total == 0){
+                      // Danger  notification
+                      $('#modal-danger').modal('hide');
+                      $(document).Toasts('create',{
+                              class: 'bg-danger',
+                              body: 'Cannot add the product because the Qunatity is 0',
+                              title: '<h5><i class="fas fa-times"></i> Error Invalid Value </h5>',
+                              autohide: true,
+                              delay: 5000,
+                              })   
+                  }
+                  
+                    return 0;
+                  }
+  
+ 
+ else { 
+
+   //--------------------------Date-----------------------
+   var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+    var DateNoti = month+"-"+ date +"-"+ year; 
+
+
+                  var timeStamp = Date.now();
+                    database.ref('PendingItem/' + Batchv).set({
+                      Batch : Batchv,
+                      Brand : Productv,
+                      Category : Categoryv,
+                      Manufacture : Manufacturev,
+                      Date : Datev,
+                      Exdate: Exdatev,
+                      PerBox: Perbox,
+                      Box : Box,
+                      Total : Total,
+                      GraphRelease: 0,
+                      Status:"Pending",
+                      TimeStamp:timeStamp
+                    })
+                    
+                   //Notification for admin
+                   database.ref('Notification/Admin/' + Batchv).set({
+                    Date: DateNoti,
+                    Action: "New Pending Product",
+                    name:"custodian",
+                    item: "add "+Productv,
+                    Batch: Batchv,
+                    Timestamp: NotiNumX,
+                    })
+                     //updateNotiNum
+                    NumNo = --NotiNumX;
+                    database.ref('NotificationNumber/').update({
+                    Number : NumNo,
+                        })
+                    
+                    //add Pending
+                     PendingItem =  ++Pending;
+                    database.ref('Dashboard/').update({
+                    Pending:  PendingItem
+             
+                    
+                    })
+
+                    //notification success Add
+                    $('#add').modal('hide');
+                    $(document).Toasts('create',{
+                    class: 'bg-success',
+                    body: 'sucessfully Create Product Please check in Pending Tab for status',
+                    title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    }) 
+
+                    setTimeout(function(){
+                      document.getElementById("quickForm1").reset();
+                   //  window.location.reload();
+                     },2000)
+                     
+
+
+ 
+            }
+
+          }
+
+
+////<!---------------------------------------------------------Delete Function------------------------------------------------------------------------------------------->
+function Open(){
+                    Ready();
+
+                    var table = document.getElementById('table1');
+                    for(var x = 0; x < table.rows.length; x++){
+
+                    table.rows[x].onclick = function(){
+      
+                      a = document.getElementById('Batch2').value = this.cells[0].innerHTML;
+                      b = document.getElementById('Category2').value= this.cells[1].innerHTML;
+                      c = document.getElementById('Product2').value= this.cells[2].innerHTML;
+                      d = document.getElementById('Manufacture2').value= this.cells[3].innerHTML;
+                      e = document.getElementById('Date2').value= this.cells[4].innerHTML;
+                      f = document.getElementById('Exdate2').value= this.cells[5].innerHTML;
+                      g = document.getElementById('Unit2').value= this.cells[6].innerHTML;
+                      h = document.getElementById('Box2').value= this.cells[7].innerHTML;
+                      ii = document.getElementById('Total2').value= this.cells[8].innerHTML;
+                     j =  document.getElementById('status').value= this.cells[9].innerHTML;
+                    database.ref('PendingItem/'+ a ).on('value',function(snapshot){
+                 r = document.getElementById('Graph').value= snapshot.val().GraphRelease;
+                 r1 = document.getElementById('TimeStamp').value= snapshot.val().TimeStamp;
+                        });
+
+                    };
+                    }
+
+}
+function Delete(){
+
+          database.ref('PendingItemDelete/' + a).set({
+                          Batch : a,
+                          Category : b,
+                          Brand : c,
+                          Manufacture : d,
+                          Date : e,
+                          Exdate: f,     
+                          PerBox : g,
+                          Box : h,
+                          Total: ii,
+                          GraphRelease : r,
+                          TimeStamp: r1,
+                          Status:"Pending",
+          });  
+                    //Delete total item
+                    /*
+                    if(j == '<span id="" class="badge badge-info">Safety Stock</span>' || j== '<span id="" class="badge badge-warning">Critical Stock</span>' || j == '<span id="" class="badge badge-success">In Stock</span>'){
+                    TotalItem =  --total;
+                    AvailableItem = --available;
+
+                    database.ref('Dashboard/').update({
+                    Total_Item : TotalItem,
+                    Available_Item: AvailableItem
+                    })
+                    
+                    }
+                    if(j == '<span id="" class="badge badge-danger">Out of Stock</span>'){
+                     TotalItem = --total;
+                     NotavailableItem = --notavailable;
+
+                     database.ref('Dashboard/').update({
+                      Total_Item : TotalItem,
+                      NotAvailable_Item: NotavailableItem
+                       })
+                     }
+                   */
+
+                    //addecrease Pending
+                     PendingItem =  --Pending;
+                    database.ref('Dashboard/').update({
+                    Pending:  PendingItem
+                    })
+          //notification success Delete
+                     $('#modal-danger').modal('hide');
+                    $(document).Toasts('create', {
+                      class: 'bg-success',
+                    body: 'The batch '+ a +' Product '+ c + ' is sucessfully Deleted',
+                    title: '<h5><i class="fas fa-trash-alt"></i> Deleted </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    }) 
+                    setTimeout(function(){
+                      database.ref('PendingItem/' + a).remove();
+                     //window.location.reload();
+                     },2000)
+
+        
+} 
+
+
+////<!---------------------------------------------------------Edit Function------------------------------------------------------------------------------------------->
+function Edit(){
+Ready1();
+LastInfo();
+            var table1 = document.getElementById('table1');
+            for(var i = 0; i < table1.rows.length; i++){
+
+            table1.rows[i].onclick = function(){
+       a1  = document.getElementById('Batch1').value = this.cells[0].innerHTML;
+       b1 =  document.getElementById('Category1').value= this.cells[1].innerHTML;
+       c1  = document.getElementById('Product1').value= this.cells[2].innerHTML;
+       d1 =  document.getElementById('Manufacture1').value= this.cells[3].innerHTML;
+             document.getElementById('Date1').value= this.cells[4].innerHTML;
+             document.getElementById('Exdate1').value= this.cells[5].innerHTML;
+             document.getElementById('PerBox1').value= this.cells[6].innerHTML;
+             document.getElementById('Box1').value= this.cells[7].innerHTML;
+             document.getElementById('Total1').value= this.cells[8].innerHTML;
+             document.getElementById('status').value= this.cells[9].innerHTML;
+            
+            database.ref('Item/'+ a1 ).on('value',function(snapshot){
+               document.getElementById('Status1').value= snapshot.val().Status;
+            });
+            $("#category1").val(b1);
+            $("#manufacturer1").val(d1);
+            $("#product1").val(c1);
+              
+            
+             document.getElementById('Category3').value= this.cells[1].innerHTML;
+             document.getElementById('Product3').value= this.cells[2].innerHTML;
+             document.getElementById('Manufacture3').value= this.cells[3].innerHTML;
+             document.getElementById('Date3').value= this.cells[4].innerHTML;
+             document.getElementById('Exdate3').value= this.cells[5].innerHTML;
+             document.getElementById('Unit3').value= this.cells[6].innerHTML;
+             document.getElementById('Box3').value= this.cells[7].innerHTML;
+             document.getElementById('Total3').value= this.cells[8].innerHTML;
+            };
+
+            }
+
+          
+
+}
+//-----------------------------------------------------Save Edit---------------------------------------------------------------------------------------------------------->
+function SaveEdit(){
+  Ready1();
+  LastInfo();
+
+  if( Productv == "" || Datev == "" || Exdate == "" || Perbox == "" ||  Box == "" || Total1 == 0 || Category3 ==  Categoryv && Product3 == Productv && Manufacture3 == Manufacturev && Date3 == Datev && Exdate3 == Exdatev && Perbox3 == Perbox && Box3 == Box && Total3 == Total1 ){
+    
+    if(Productv == "" ){
+     
+    }
+    if(Datev == ""){
+      
+    }
+    if(Exdatev == ""){
+     
+    }
+    if(Perbox == ""){
+     
+    }
+    if(Box == ""){
+      
+    }
+    if(Total1 == 0){
+      $(document).Toasts('create',{
+                              class: 'bg-danger',
+                              body: 'Cannot add the product because the Qunatity is 0',
+                              title: '<h5><i class="fas fa-times"></i> Error  </h5>',
+                              autohide: true,
+                              delay: 5000,
+                              })   
+    }
+
+
+  }
+
+  
+  else{
+    $('#Edit').modal('hide');
+
+    if(status != '<span id="" class="badge badge-danger">Out of Stock</span>'){
+         database.ref('PendingItem/' + Batchv).update({
+            Brand : Productv,
+            Category : Categoryv,
+            Manufacture : Manufacturev,
+            Date : Datev,
+            Exdate: Exdatev,
+            PerBox: Perbox,
+            Box : Box,
+            Total : Total1,
+            })
+    }
+ 
+    if(status == '<span id="" class="badge badge-danger">Out of Stock</span>'){
+            database.ref('PendingItem/' + Batchv).update({
+            Brand : Productv,
+            Category : Categoryv,
+            Manufacture : Manufacturev,
+            Date : Datev,
+            Exdate: Exdatev,
+            PerBox: Perbox,
+            Box : Box,
+            Total : Total1,
+            
+            })
+             //update dashboard
+                    NotavailableItem = --notavailable;
+                    AvailableItem = ++available;
+
+                    database.ref('Dashboard/').update({
+                    NotAvailable_Item: NotavailableItem,
+                    Available_Item: AvailableItem
+                    })
+              
+           
+    }
+
+           // notification 
+           $(document).Toasts('create', {
+                      class: 'bg-success',
+                    body: 'The Batch '+ Batch1 +' has been successfuly Change',
+                    title: '<h5><i class="far fa-check-circle"></i> Success </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    })
+                    setTimeout(function(){
+                      document.getElementById("quickForm").reset();
+                     //window.location.reload();
+                     },2000) 
+
+  }  
+}
+//-------------------------------------------read note function ---------------------------------------------------
+//------------------------------read
+function Read(){
+      $('#Read').modal('show');
+
+              var table3 = document.getElementById('table1');
+                for(var i = 0; i < table3.rows.length; i++){
+
+                  table3.rows[i].onclick = function(){
+                  ax  = document.getElementById('Batch3').value = this.cells[0].innerHTML;
+                  database.ref('PendingItem/'+ ax ).on('value',function(snapshot){
+                   document.getElementById('Readnote').innerHTML= snapshot.val().Notes;
+                        });
+                      
+                  };
+
+                  }
+              
+     }
+//---------------------------------------function for delete read-------------------------------------------->
+function DeleteRead(){
+  $('#Read').modal('hide');
+          //notification success Delete
+          $('#modal-danger').modal('hide');
+                    $(document).Toasts('create', {
+                      class: 'bg-success',
+                    body: 'The batch '+ ax +'  is sucessfully Deleted',
+                    title: '<h5><i class="fas fa-trash-alt"></i> Deleted </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    }) 
+                    setTimeout(function(){
+                      database.ref('PendingItem/' + ax).remove();
+                     window.location.reload();
+                     },2000)
+}
+
+//------------------------------------------Fuction for edit status control--------------------------------------------------------------------------------------->
+function EditStatus(){
+      document.getElementById('MinSafetyStock2').value = document.getElementById('MinSafetyStock').value;
+      document.getElementById('SafetyStock2').value = document.getElementById('SafetyStock').value;
+
+}
+//-----------------------------------------------save edit for status control---------------------------------------------------------------------------->
+function SaveStatus(){
+        Ready();
+ 
+          if(Number(SafetyStock1) <  Number(MinSafetyStock1) || SafetyStock1 == "" || MinSafetyStock1 == ""){
+            $(document).Toasts('create',{
+          class: 'bg-danger',
+          body: 'Invalid Input the value of Critical stock is greater than to  Safety Stock',
+          title: '<h5><i class="fas fa-times"></i> Error Invalid Input  </h5>',
+          autohide: true,
+          delay: 5000,
+          }) 
+          return 0;
+          }
+          
+          else{
+
+
+              database.ref('Safety_Stock/').update({
+                            SafetyStock : SafetyStock1,
+                            MinSafetyStock : MinSafetyStock1,                       
+                          })
+
+                      //notification success Add
+                      $('#Edit').modal('hide');
+                      $(document).Toasts('create',{
+                      class: 'bg-success',
+                      body: 'sucessfully Save Change',
+                      title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
+                      autohide: true,
+                      delay: 2000,
+                      }) 
+
+                      setTimeout(function(){
+                        $('#EditStatus').modal('hide');
+                     window.location.reload();
+                      },2000)
+
+
+          }
+    }
+
+//---------------------------------------Function for Reporting Bad Orders---------------------------------------------->
+    function ReportBO(){
+
+                document.getElementById("Desciption").className ="form-control is-valid";
+                document.getElementById("QtyBoxBo").className = "form-control is-valid";
+                document.getElementById("QtyPcsBo").className = "form-control is-valid";
+      Ready();    
+      //varible Created  
+          BatchB = document.getElementById("PrductSelection").value;
+          PerBoxB  =document.getElementById('PerBoxBo').value
+          ProB = document.getElementById('ProductBO').value
+          BoxB = document.getElementById('BoxBo').value 
+          TotlaB =   document.getElementById('TotalBo').value
+
+          if(BatchB == ""){
+                 //notification fow warning Select
+                 $(document).Toasts('create',{
+                  class: 'bg-danger',
+                  body: 'Error: Please select a Batch Product you want to Report',
+                  title: '<h5><i class="icon fas fa-exclamation-triangle"></i> Alert</h5>',
+                  autohide: true,
+                  delay: 5000,
+                    })  
+                return 0;
+              }
+
+          if(Number(QtyPcsBo) >= Number(PerBoxB)){
+
+                  //notification fow warning Select
+                  $(document).Toasts('create',{
+                  class: 'bg-danger',
+                  body: 'Error: Invalid value for '+ ProB +' have ' + PerBoxB + ' Pcs per box only',
+                  title: '<h5><i class="icon fas fa-exclamation-triangle"></i> Alert</h5>',
+                  autohide: true,
+                  delay: 5000,
+                    })    
+
+                  document.getElementById("QtyPcsBo").className = "form-control is-invalid";
+                  return 0;
+                  }
+           if(Number(QtyBoxBo) > Number(BoxB) ){
+
+                  //notification fow warning Select
+                  $(document).Toasts('create',{
+                  class: 'bg-danger',
+                  body: 'Error: Invalid value for '+ ProB +' have ' + BoxB + ' Boxes only',
+                  title: '<h5><i class="icon fas fa-exclamation-triangle"></i> Alert</h5>',
+                  autohide: true,
+                  delay: 5000,
+                    })          
+
+                  document.getElementById("QtyBoxBo").className = "form-control is-invalid";
+                  return 0;
+                  }
+              
+              if(Desciption == ""){
+
+                document.getElementById("Desciption").className = "form-control is-invalid";
+                return 0;
+              }
+               if(QtyBoxBo  == ""){
+
+                document.getElementById("QtyBoxBo").className = "form-control is-invalid";
+                return 0;
+              }
+              if(QtyPcsBo  == ""){
+
+                document.getElementById("QtyPcsBo").className = "form-control is-invalid";
+                return 0;
+              }
+     
+
+                
+              else{
+               
+                $('#Report').modal('show');
+              }
+              
+    }
+//-----------------------------------------------------------Report-------------------------------------->
+function Report(){
+  
+  var timeStamp = Date.now();   
+ //--------------------------Date-----------------------
+      var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+    var DateBo = month+"-"+ date +"-"+ year;  
+
+      BatchB = document.getElementById("PrductSelection").value;
+      ProB = document.getElementById('ProductBO').value
+      CategoryBo = document.getElementById('CategoryBo').value
+      BoBoxCalculation = document.getElementById('BoBoxCalculation').value
+      BoCalculation = document.getElementById('BoCalculation').value
+      
+    
+      //Create Bad Order Report
+      database.ref('ReportBO/' + timeStamp).set({
+                Batch : BatchB,
+                Brand : ProB,
+                Category: CategoryBo,
+                Date:DateBo,
+                Desciption: Desciption ,
+                Total: BoCalculation,
+                UpdateBox: BoBoxCalculation,
+                UpdateTotal: BoCalculation, 
+                TimeStamp: timeStamp,      
+            })
+                     //update Qty
+                     database.ref('Item/' + BatchB).update({
+                              Box : UpdateBoBoxCalculation,
+                              Total : UpdateBoCalculation,                           
+                               })      
+
+                  //notification success Add
+                  $('#Edit').modal('hide');
+                      $(document).Toasts('create',{
+                      class: 'bg-success',
+                      body: 'Sucessfully Report Bad Orders',
+                      title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
+                      autohide: true,
+                      delay: 2000,
+                      }) 
+                  //Notification for admin
+                   database.ref('Notification/Admin/' + BatchB).set({
+                    Date: DateBo,
+                    Action: "Report BO",
+                    name:"Custodian",
+                    item: "Reports for "+ ProB,
+                    Batch:  BatchB,
+                    Timestamp: NotiNumX,
+                    })
+                    //updateNotiNum
+                    NumNo = --NotiNumX;
+                    database.ref('NotificationNumber/').update({
+                    Number : NumNo,
+                        })
+                      if(UpdateBoBoxCalculation == 0){
+                        //dashboad update
+                        NotAvailableA = ++notavailablex;
+                        database.ref('Dashboard/').update({
+                          NotAvailable_Item: NotAvailableA,
+                        })
+                      }
+                      setTimeout(function(){
+                     window.location.reload();
+                      },2000)
+                     $('#Report').modal('hide');
+}
+
+//---------------------------------------------------function for remove Bo Report------------------------------------>
+function RemoveBo(){
+          
+  var table1 = document.getElementById('table3');
+            for(var i = 0; i < table1.rows.length; i++){
+
+            table1.rows[i].onclick = function(){
+            IdReport =  document.getElementById('IdReport').value = this.cells[0].innerHTML;
+            BatchRev  =  document.getElementById('BatchRev').value= this.cells[3].innerHTML;
+
+            database.ref('ReportBO/'+ IdReport ).on('value',function(snapshot){
+              UpdateBox = document.getElementById('UpdateBox').value = snapshot.val().UpdateBox;
+              UpdateTotal = document.getElementById('UpdateTotal').value = snapshot.val().UpdateTotal;                    
+                        });
+
+             database.ref('Item/'+ BatchRev ).on('value',function(snapshot){
+                  BoxBoCR = document.getElementById('BoxBoR').value = snapshot.val().Box;
+                  TotlaBoCR = document.getElementById('TotalBoR').value = snapshot.val().Total;
+                        });
+                      
+                  
+            };  
+
+            }
+
+}
+//-------------------------------------   
+function RemoveBadOrder(){
+
+                   var UpdateBoxR = Number(UpdateBox) + Number(BoxBoCR);
+                   document.getElementById('UpdateBoxR').value = UpdateBoxR;
+
+                   var UpdateTotalR = Number(UpdateTotal) + Number(TotlaBoCR);
+                   document.getElementById('UpdateTotalR').value = UpdateTotalR;
+                  
+                       //update Qty
+                       database.ref('Item/' + BatchRev).update({
+                              Box : UpdateBoxR,
+                              Total : UpdateTotalR,                           
+                               })  
+
+                 //notification success Add
+                  $('#Edit').modal('hide');
+                      $(document).Toasts('create',{
+                      class: 'bg-success',
+                      body: 'Sucessfully Remove all totalQty will return in your inventory',
+                      title: '<h5><i class="far fa-check-circle"></i> Alert</h5>',
+                      autohide: true,
+                      delay: 2000,
+                      }) 
+
+                      setTimeout(function(){
+                      window.location.reload();
+                      database.ref('ReportBO/' + IdReport).remove();
+                      },2000)
+
+                      $('#RemoveBO').modal('hide');
+      }
+
+//----------------------------------------------------------------------Function for Checkbox---------------------------
+
+function DeleteExpired() {
+  var timeStamp = Date.now();
+  
+   //--------------------------Date-----------------------
+   var today = new Date();
+     month = today.getMonth();
+     year = today.getFullYear();
+     date = today.getDate();
+     
+      month = month +1;
+     monthA =  ("0" + month).slice(-2);
+     date =   ("0" + date).slice(-2);
+
+    var DateEx = month+"-"+ date +"-"+ year; 
+
+        //Reference the Table.
+        var grid = document.getElementById("table5");
+ 
+        //Reference the CheckBoxes in Table.
+        var checkBoxes = grid.getElementsByTagName("INPUT");
+        var message = '';
+        var Delete = '';
+        var number = 0;
+ 
+        //Loop through the CheckBoxes.
+        for (var i = 0; i < checkBoxes.length; i++) {
+            if (checkBoxes[i].checked) {
+
+                var row = checkBoxes[i].parentNode.parentNode;
+                message += database.ref('RemoveExpired/' + row.cells[0].innerHTML).set({
+                      Batch : row.cells[0].innerHTML,
+                      Category : row.cells[1].innerHTML,
+                      Brand : row.cells[2].innerHTML,
+                      Box : row.cells[4].innerHTML,
+                      TimesTamp : timeStamp, 
+                      Date: DateEx
+                       });
+
+                       test = ++number;
+                        
+                Delete +=  database.ref('Item/' +  row.cells[0].innerHTML).remove();  
+          
+            }
+           
+      
+
+        }
+        if (message == ""){
+          $('#ExpiredOutofStock').modal('hide');
+                       $(document).Toasts('create',{
+                      class: 'bg-warning',
+                      body: 'Checkbox is empty please select item ',
+                      title: '<h5><i class="far fa-check-circle"></i> Alert</h5>',
+                      autohide: true,
+                      delay: 4000,
+                    }) 
+        }
+        if(message != ""){
+          $('#ExpiredOutofStock').modal('hide');    
+          $(document).Toasts('create',{
+                      class: 'bg-success',
+                      body: 'Sucessfully Remove all item selected',
+                      title: '<h5><i class="icon fas fa-exclamation-triangle"></i> Alert</h5>',
+                      autohide: true,
+                      delay: 2000,
+                      }) 
+
+                      setTimeout(function(){
+                      window.location.reload();
+                      },2000)
+        }
+                
+    
+                        TotalIT = Number(totalx) - Number(number) ;
+                        database.ref('Dashboard/').update({
+                        Total_Item: TotalIT,
+                        
+                        })
+      
+              
+       
+    }
+
+
+
+
+function SelectAll(){ 
+
+  var all =  document.getElementById("myCheck").innerHTML;
+
+  if(all == "All"){
+      $('input:checkbox').attr('checked',true);  
+      document.getElementById("myCheck").innerHTML = "None"
+  }
+  if(all == "None"){
+    $('input:checkbox').attr('checked',false);  
+    document.getElementById("myCheck").innerHTML = "All"
+  }
+
+
+
+}
+
+    
+
+////<!---------------------------------------------------------Select Function------------------------------------------------------------------------------------------->
+function run1() {
+                        document.getElementById("Category").value = document.getElementById("categories").value;
+                
+                                  
+              }
+              function run2() {
+                        document.getElementById("Manufacture").value = document.getElementById("manufacturer").value;
+                        
+              }    
+
+              function run3() {
+                        document.getElementById("Category1").value = document.getElementById("category1").value;
+                      
+                
+                                  
+              }
+              function run4() {
+                        document.getElementById("Manufacture1").value = document.getElementById("manufacturer1").value;
+                       
+              }    
+              function run5() {
+                        document.getElementById("Product").value = document.getElementById("product").value;
+                       
+              }   
+              function run6() {
+                        document.getElementById("Product1").value = document.getElementById("product1").value;
+                       
+              } 
+              function Product(){
+
+                
+                                document.getElementById('QtyPcsBo').value ="";
+                                document.getElementById('QtyBoxBo').value = "";
+
+                        var BatchBO = document.getElementById("PrductSelection").value;
+
+                        database.ref('Item/'+ BatchBO).on('value',function(snapshot){
+                         document.getElementById('ManufactureBO').value = snapshot.val().Manufacture;
+                         document.getElementById('ProductBO').value = snapshot.val().Brand;
+                         document.getElementById('PerBoxBo').value = snapshot.val().PerBox;
+                         document.getElementById('CategoryBo').value = snapshot.val().Category;
+                    BoxBoC =   document.getElementById('BoxBo').value = snapshot.val().Box;
+                  TotlaBoC =   document.getElementById('TotalBo').value = snapshot.val().Total;
+                              
+
+
+                         if(TotlaBoC == 0|| BoxBoC == 0){
+
+                              //notification fow warning Select
+                                $(document).Toasts('create',{
+                                class: 'bg-warning',
+                                body: 'Warning This Product is already out of Stock. Please choose other Product',
+                                title: '<h5><i class="icon fas fa-exclamation-triangle"></i> Alert</h5>',
+                                autohide: true,
+                                delay: 5000,
+                                }) 
+
+                              
+                                $("#QtyPcsBo").attr("disabled", true);
+                                $("#QtyBoxBo").attr("disabled", true);
+                                $("#Desciption").attr("disabled", true);
+
+                                
+                                
+                         }
+                         else{
+                                $("#QtyPcsBo").attr("disabled", false);
+                                $("#QtyBoxBo").attr("disabled", false);
+                                $("#Desciption").attr("disabled", false);
+                         }  
+                        });
+
+  
+              }
+              
+</script>
+<script>
+
+
+//<----------------------------------------------Validation Input------------------------------------------------------->
+    $(function () {
+      $.validator.setDefaults({
+        submitHandler: function () {
+       
+          if(Total == 0 ){
+
+              document.getElementById("PerBox").className = "form-control is-invalid";
+              document.getElementById("Box").className = "form-control is-invalid";
+                
+
+              }
+        }
+      });
+      $('#quickForm1').validate({
+        //rules
+        rules: {
+          Batch: {
+            required: true,
+            minlength: 5,
+          
+          },
+        
+  
+  
+         
+        },
+        //message
+        messages: {
+          Batch: {
+            required: "Please enter a Batch number",
+            minlength:"Please enter at least 5 Digit long",
+          
+          },
+         
+        
+        },
+        //error
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+    });
+
+    
+    
+  //-------------------------------------------------------------------------------------------
+    function time1() {
+      Ready();
+  
+      
+      if (BatchV == Check){
+            
+              document.getElementById("Batch").className = "form-control is-invalid";
+        
+      } 
+        if (BatchV != Check){
+          $("#Batch").removeClass('is-invalid');
+     }
+     
+     
+  
+  }
+
+
+
+ 
+  
+
+  setInterval(time1, 10);
+  </script>
+
+<script>
+//------------------------------------------------------------Validation Input
+$(function () {
+      $.validator.setDefaults({
+        submitHandler: function () {
+       
+          if(Total == 0 ){
+
+              document.getElementById("PerBox1").className = "form-control is-invalid";
+              document.getElementById("Box1").className = "form-control is-invalid";
+                
+
+              }
+        }
+      });
+      $('#quickForm').validate({
+        //rules
+        rules: {
+          Batch1: {
+            required: true,
+            minlength: 5,
+          
+          },
+        
+  
+  
+         
+        },
+        //message
+        messages: {
+          Batch1: {
+            required: "Please enter a Batch number",
+            minlength:"Please enter at least 5 Digit long",
+          
+          },
+         
+        
+        },
+        //error
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+    });
+</script>
+<script>
+
+
+////<!---------------------------------------------------------datatable load Function------------------------------------------------------------------------------------------->           
+setTimeout(function(){
+        $(document).ready(function () {
+          $('#table').DataTable({
+            "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
+            "ordering": false,  
+            
+
+          });
+          }); 
+          
+          $(document).ready(function () {
+          $('#table1').DataTable({
+            "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
+            "ordering": false,  
+
+          });
+          });  
+
+           $(document).ready(function () {
+          $('#table5').DataTable({
+            "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
+            "order": [[ 6, "asc" ]],  
+
+          });
+          }); 
+
+          $(document).ready(function () {
+          $('#table3').DataTable({
+            "lengthMenu": [[-1 ,10, 25, 50, ], ["All" ,10, 25, 50 ]],
+            "ordering": false, 
+            "searching": false, 
+            "lengthChange": false,
+            "info": false,     
+
+          });
+          }); 
+
+          
+          //--------------------------------for hiding report not today-----------------------
+           //--------------------------Date-----------------------
+            var today = new Date();
+            month = today.getMonth();
+            year = today.getFullYear();
+            date = today.getDate();
+            
+              month = month +1;
+            monthA =  ("0" + month).slice(-2);
+            date =   ("0" + date).slice(-2);
+
+            var DateBo = month+"-"+ date +"-"+ year;  
+            document.getElementById("DATES").value = DateBo;
+          input1 = document.getElementById("DATES");  
+              filter1 = input1.value.toUpperCase();
+              table1 = document.getElementById("table3");
+              tr1 = table1.getElementsByTagName("tr");
+              
+              for (i = 0; i < tr1.length; i++) {
+                td = tr1[i].getElementsByTagName("td")[1];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter1) > -1) { 
+                  
+                    tr1[i].style.display = "";
+                    
+                    
+                  }
+                  
+                  else {
+                    tr1[i].style.display = "none";
+        
+                  } 
+                  
+                }       
+              }
+
+          $('.select2').select2()
+
+   
+    },3000)
+
+</script>
+<!-------------------------------------------Filter select funstion-------------->
+<script>
+$('.content-wrapper').on("change", 'select', function() {
+  var Category = $('#Select').val().toLowerCase(),
+    Status = $('#Status').val().toLowerCase();
+ 
+
+  var table = $("#tbody");
+  var trs = table.find('tr');
+  trs.hide();
+
+  var filtered = trs.filter(function(index, elem) {
+    var tds = $(elem).find('td');
+    if (Category !== "all" && tds.eq(1).text().trim().toLowerCase() !== Category) {
+      return false;
+    }
+    if (Status !== "all" && tds.eq(9).text().trim().toLowerCase() !== Status) {
+      return false;
+    }
+
+    return true;
+  })
+
+  filtered.show();
+
+  if (filtered.length == 0) {
+   // alert("No Records Found!!!");
+  }
+
+});
+//-------------------------for select tab 2 pending item-------------------
+
+$('.content-wrapper').on("change", 'select', function() {
+  var Category1 = $('#Select1').val().toLowerCase(),
+    Status1= $('#Status1').val().toLowerCase();
+ 
+
+  var table1 = $("#tbody1");
+  var trs = table1.find('tr');
+  trs.hide();
+
+  var filtered = trs.filter(function(index, elem) {
+    var tds = $(elem).find('td');
+    if (Category1 !== "all" && tds.eq(1).text().trim().toLowerCase() !== Category1) {
+      return false;
+    }
+    if (Status1 !== "all" && tds.eq(9).text().trim().toLowerCase() !== Status1) {
+      return false;
+    }
+
+    return true;
+  })
+
+  filtered.show();
+
+  if (filtered.length == 0) {
+ //   alert("No Records Found!!!");
+  }
+
+});
+//---------------------for expired and outofstock---------------
+$('.content-wrapper').on("change", 'select', function() {
+  var Category1 = $('#Select5').val().toLowerCase(),
+    Status1= $('#Status5').val().toLowerCase();
+ 
+
+  var table1 = $("#tbody5");
+  var trs = table1.find('tr');
+  trs.hide();
+
+  var filtered = trs.filter(function(index, elem) {
+    var tds = $(elem).find('td');
+    if (Category1 !== "all" && tds.eq(1).text().trim().toLowerCase() !== Category1) {
+      return false;
+    }
+    if (Status1 !== "all" && tds.eq(7).text().trim().toLowerCase() !== Status1) {
+      return false;
+    }
+
+    return true;
+  })
+
+  filtered.show();
+
+  if (filtered.length == 0) {
+ //   alert("No Records Found!!!");
+  }
+
+});
+</script>
+
+
+</html>

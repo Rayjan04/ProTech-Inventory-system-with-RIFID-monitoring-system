@@ -6,7 +6,7 @@ function AddUser(){
   var  password = document.getElementById('Password1').value;
  
 
-firebaseConfigCs.auth().createUserWithEmailAndPassword(email, password )
+firebase.auth().createUserWithEmailAndPassword(email, password )
 .then((userCredential) => {
   // Signed in 
  var database = firebase.database()

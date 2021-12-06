@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shorcut icon" type="image" href="img/logo.jpg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Custodian - Safety Stock</title>
+  
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   <!-- DataTables -->
+   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="css/adminlte.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+
+  <script src="app.js"></script>
+</head>
+
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <h5 id="Time" class="nav-link"></h5>
+      </li>
+   
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+   
+
+       <!-- Notifications Dropdown Menu -->
+       <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#" onclick="openNoti()">
+          <i class="far fa-bell"></i>
+          <span id="NotificationNum" class="badge badge-danger navbar-badge">0</span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
+          <span class="dropdown-header" id="NotificationNumB">No Notification</span>
+          <div class="card-body table-responsive p-0" style="height: 380px;">
+          <div class="dropdown-divider"></div>
+        
+          <div id ="ListNotification">  
+          <div id="ShowNotification">
+
+          </div>
+          </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <!-- logout Button-->
+      <li class="logout">
+        <a class="nav-link"    href="logout.html" role="button">
+           <i onclick="logout()" class="fas fa-power-off"></i>
+        </a>
+      </li>
+
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="img/logo.jpg"  class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Inventory Custodian</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="img/Custodian_profile.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Custodian</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Dashboard.html" class="nav-link">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              </ul>
+
+                 <!--Category-->
+                 <li class="nav-item">
+                  <a href="Category.html" class="nav-link ">
+                      <i class="fas fa-list"></i>
+                    <p>Category</p>
+                  </a>
+                </li>
+  
+              <!--Product-->
+              <li class="nav-item ">
+                <a href="Product.html" class="nav-link ">
+                  <i class="fas fa-boxes"></i>
+                  <p>Product</p>
+                </a>
+              </li>
+              <!--Product-->
+             
+                 <!--Item-->
+                 <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-dolly"></i>
+                    <p>
+                      Issued/Return
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="release.html" class="nav-link  ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Release Item</p>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="Return_Item.html" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Return Item</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>       
+                <!--Item-->
+
+                 <!--Trash-->
+                 <li class="nav-item">
+                  <a href="product_deleted.html" class="nav-link ">
+                    <i class="fas fa-trash"></i>
+                    <p>Archiving</p>
+                  </a>
+                </li>
+                   
+            <!--Trash-->
+
+   
+
+                <!--Safety Stock Module-->
+                <li class="nav-item">
+                  <a href="#" class="nav-link active">
+                    <i class="fas fa-cubes"></i>
+                    <p>Safety Stock</p>
+                  </a>
+                </li>
+                <!--Safety Stock Module-->
+
+
+               <!--reports-->
+               <li class="nav-item menu">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    Reports
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="Report.html" class="nav-link ">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Issued/Return Reports</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="Stock_Report.html" class="nav-link ">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Stock Reports</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="Fast_and slow-moving_Item.html" class="nav-link ">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Fast and Slow-moving Item Reports</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="Bad_Order_Report.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Bad order Reports</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>  
+                <!--reports-->        
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+      <!--sidemenu-->
+      
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Safety Stock</h1>
+        </div>
+        
+  </section>
+              
+<!-- Main Content-->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+          <!-- /.card-header -->
+
+
+          <div class="row"> 
+            <!---------------------------------------------------------------------row 1---------------------------->
+            <div class="col-md-5">
+          
+              <div class="card card-success ">
+                  <div class="card-header">
+                    <h3 class="card-title"></h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                  <form id="quickForm1">
+                    <div class="card-body">
+                        <div class="form-group">
+                            
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Safety Stock</label>
+                                        <input type="text" class="form-control" id="SafetyStock" placeholder="0" disabled>
+                                      </div>                      
+                                  </div>
+
+                                  <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Min safety stock</label>
+                                        <input type="text" class="form-control" id="MinSafetyStock" placeholder="0" disabled>
+                                      </div>                      
+                                  </div>
+                                  
+                               
+                      
+                                  </div>
+
+                       
+                      
+                    </div>
+
+                   </form>
+
+                 
+                  
+                  
+                </div>
+             <!-- /.card-body --> 
+          
+                     <div class="card-footer">
+                      <button   type="submit" class="btn btn-info float-right" data-toggle="modal" data-target="#Edit" onclick="Edit()">Edit</button>
+                    </div>
+          
+            </div>
+       
+  
+
+
+          <!-- /.card-body -->
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+
+        <!-- /.card -->
+
+        <!-----------------------------------------------------------------Edit modal--------------------------------------->
+        
+        <div class="modal fade" id="Edit">
+            <div class="modal-dialog modal-default">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Edit</h4> 
+                </div>
+                <div class="modal-body">
+                
+                    <div class="row">
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Safety Stock</label>
+                                <input type="number" class="form-control" id="SafetyStock1"  >
+                              </div>                      
+                          </div>
+
+                          <div class="col-6">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Min safety stock</label>
+                                <input type="number" class="form-control" id="MinSafetyStock1"  >
+                              </div>                      
+                          </div>
+                          
+                       
+              
+                          </div>
+
+                </div>       
+                <div class="modal-footer justify-content-between">
+                  <button type="button"  class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button onclick="Save()" class="btn btn-success">Save Change</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+
+<!-- REQUIRED SCRIPTS -->
+<!--tiem-->
+<script src="time.js"></script>
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+<script>
+var database = firebase.database()
+
+//------------------------------Safety Stock value----------------
+database.ref('Safety_Stock/').on('value',function(snapshot){
+document.getElementById('SafetyStock').value = snapshot.val().SafetyStock;
+document.getElementById('MinSafetyStock').value = snapshot.val().MinSafetyStock;
+        });
+
+//-------------------Create Variable------------------
+function Ready(){
+     SafetyStock1 = document.getElementById('SafetyStock1').value; 
+     MinSafetyStock1 = document.getElementById('MinSafetyStock1').value;
+
+
+
+}
+//------------------------------------Edit functoin------------------------------
+function Edit(){
+      document.getElementById('MinSafetyStock1').value = document.getElementById('MinSafetyStock').value;
+      document.getElementById('SafetyStock1').value = document.getElementById('SafetyStock').value;
+}
+//---------------------------Function Save-------------------    
+    function Save(){
+        Ready();
+ 
+
+        if(Number(SafetyStock1) <=  Number(MinSafetyStock1) || SafetyStock1 == "" || MinSafetyStock1 == ""){
+          $(document).Toasts('create',{
+         class: 'bg-danger',
+         body: 'Invalid Input',
+         title: '<h5><i class="fas fa-times"></i> Error  </h5>',
+         autohide: true,
+         delay: 5000,
+         }) 
+        }
+
+        else{
+
+
+            database.ref('Safety_Stock/').update({
+                          SafetyStock : SafetyStock1,
+                          MinSafetyStock : MinSafetyStock1,                       
+                        })
+
+                    //notification success Add
+                    $('#Edit').modal('hide');
+                    $(document).Toasts('create',{
+                    class: 'bg-success',
+                    body: 'sucessfully Save Change',
+                    title: '<h5><i class="far fa-check-circle"></i> Success  </h5>',
+                    autohide: true,
+                    delay: 2000,
+                    }) 
+
+                    setTimeout(function(){
+                     window.location.reload();
+                     },2000)
+
+        }
+
+    }
+
+</script>
+
+
+
+</body>
+
+
+</html>

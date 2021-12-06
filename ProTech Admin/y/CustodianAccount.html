@@ -429,7 +429,7 @@
               <div class="form-group">
                 <label for="exampleInputPassword1">Role</label>
                 <select id="Role"  class="form-control select" style="width: 100%;">
-                 <option value="">Select Role</option>   
+                 <option value="" selected hidden>Select Role</option>   
                  <option value="Admin">Admin</option> 
                  <option value="Custodian">Inventory Custodian</option> 
                </select> 
@@ -476,15 +476,15 @@
                   <input type="email" required="" class="form-control" id="Email1" placeholder="Enter Email">
                 </div>
     
-  
+
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
                   <div class="input-group mb-3">
-                    <input type="text" required="" class="form-control" id="Password2" placeholder="Enter Password">
-        
+                    <input type="password" required="" class="form-control" id="Password2" placeholder="">
+                    <div class="input-group-append">
+                   <span class="input-group-text"type='button' onclick="ShowPassword()"><div class="sim-row-edit-icon"><i class="far fa-eye-slash" ></i></div></span>
+                 </div>
                </div>
-               
-                  
                 </div>
        
                
@@ -492,7 +492,7 @@
                 <div class="form-group">
                   <label for="exampleInputPassword1">Role</label>
                   <select id="Role1"  class="form-control select" style="width: 100%;">
-                   <option value="">Select Role</option>   
+                   <option value="" selected hidden>Select Role</option>   
                    <option value="Admin">Admin</option> 
                    <option value="Custodian">Inventory Custodian</option> 
                  </select> 
@@ -557,7 +557,7 @@
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-<!----Data Tables-->
+<!----Data Tables---->
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -632,6 +632,7 @@ function Ready(){
             Email2 = document.getElementById('Email2').value;
             Role2 = document.getElementById('Role2').value;
             Password3 = document.getElementById('Password3').value;
+           
 }
 //----------------------------------------------------DATA TABLE---------------------------------------------------------->
 setTimeout(function(){      
@@ -756,6 +757,25 @@ Ready();
                     delay: 2000,
                     })
 
+}
+//--------------------------------------------------SHOW PASSWORD----------------------------------------------------------->
+function ShowPassword(){
+
+  var type = $("#Password2").attr('type');
+    switch (type) {
+        case 'password':
+        {
+            $("#Password2").attr('type', 'text');
+            $(".sim-row-edit-icon > i").removeClass('far fa-eye-slash').addClass('far fa-eye');
+            return;
+        }
+        case 'text':
+        {
+            $("#Password2").attr('type', 'password');
+            $(".sim-row-edit-icon > i").removeClass('far fa-eye').addClass('far fa-eye-slash');
+            return;
+        }
+    }
 }
 //------------------------------------------RANDOM GENERATE PASSWORD----------------------------------------------------------->
 var Password = {
