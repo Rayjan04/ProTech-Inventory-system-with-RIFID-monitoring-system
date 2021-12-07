@@ -10,16 +10,35 @@ function Login(){
       var user = userCredential.user.uid;
 
             database.ref('Account/'+ user).on('value',function(snapshot){
-              var  Rolex = snapshot.val().Role;
-      
-              if(Rolex == "Admin"){
-                window.location.href = "Admin.html";
+
+              if(snapshot.exists()){
+                 var  Rolex = snapshot.val().Role;
+                 var  Status = snapshot.val().Status;
+
+                 if(Rolex == "Admin" && Status == "Active"){
+                  database.ref('Account/' + user).update({
+                    Password : pass,
+                   })
+                  window.location.href = "Admin.html";
+               
+                }
+                if(Rolex == "Custodian" && Status == "Active"){
+                  database.ref('Account/' + user).update({
+                    Password : pass,
+                   })
+                  window.location.href = "public/Dashboard.html"; 
+  
+                }
+                if(Status == "Disabled"){
+                  alert("The user account has been disabled by an administrator.")
+                }
               }
-              if(Rolex == "Custodian"){
-                window.location.href = "public/Dashboard.html";
-              
-              
+             
+             else{
+              alert("There is no user record corresponding to this identifier. The user has been deleted by an administrator.")
               }
+              
+            
          });
 
 

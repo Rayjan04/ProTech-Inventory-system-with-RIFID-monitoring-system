@@ -106,7 +106,7 @@
           <img src="img/jorge_user.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <a href="#" class="d-block" id = "UserName">Admin Name</a>
         </div>
       </div>
 
@@ -623,8 +623,11 @@ $.fn.dataTableExt.afnFiltering.push(
                     },
                     { extend: 'print',
                     className: 'btn btn-secondary glyphicon glyphicon-print',
+                    title: '<center>Issued/Return Reports</center>',
                      footer: true,
-                     messageBottom: '<br><h4>Report by:<strong> Admin</strong></h4> </n> <h5>Date: '+ Time+'</h5>'
+                     messageTop:'<center><h5>Date: '+ Time+'</h5></center>',
+                     messageBottom: '<br><center style="text-align: justify;"> <h5>Report by:</h5>    <br>'+
+                      '<strong>___________________________________</strong> <br> <strong >Accounting Head Name</strong>  <br>Sinature over Printed Name</center>',
                     }
           ],
 

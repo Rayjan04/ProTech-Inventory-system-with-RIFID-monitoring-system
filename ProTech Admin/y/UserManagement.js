@@ -25,6 +25,7 @@ firebase.auth().createUserWithEmailAndPassword(email, password )
         Lname: Lname,
         Role: Role,
         TimeStamp:timeStamp,
+        Status: "Active"
     }) 
 
 

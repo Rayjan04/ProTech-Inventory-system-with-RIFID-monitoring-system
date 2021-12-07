@@ -98,6 +98,7 @@ var firebaseConfig = {
     
     
     }
+
     firebase.auth().onAuthStateChanged(function(user) {
         var Not =document.getElementById("not-login")
         var yes =document.getElementById("login")
@@ -110,6 +111,35 @@ var firebaseConfig = {
     
                document.getElementById("UserName").innerHTML = Fname + " "+Lname;
           });
+        
+          database.ref('Account/'+ uid).on('value',function(snapshot){
+            if(snapshot.exists()){
+              var  Status = snapshot.val().Status;
+
+              if(Status == "Disabled"){
+                alert("The user account has been disabled by an administrator.")
+                window.location.href ="../index.html";
+  
+                firebase.auth().signOut().then(() => {
+                  // Sign-out successful.
+                }).catch((error) => {
+                  // An error happened.
+                });
+              }
+            }
+          
+          else{
+           alert("There is no user record corresponding to this identifier. The user has been deleted by an administrator.")
+           firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+          }).catch((error) => {
+            // An error happened.
+          });
+           
+           }
+        
+       });
+
     
           
         }

@@ -31,6 +31,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
 
       var uid = user.uid;
+
       database.ref('Account/'+ uid ).on('value',function(snapshot){
            var  Fname = snapshot.val().Fname;
            var  Lname = snapshot.val().Lname;

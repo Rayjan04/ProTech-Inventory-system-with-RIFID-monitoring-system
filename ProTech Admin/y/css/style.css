@@ -8,7 +8,7 @@ body{
  
  .loginbox{
      width: 380px;
-     height: 350px;
+     height: 375px;
      background:#f5f5f5D9;
      top: 50%;
      left: 50%;
@@ -39,7 +39,7 @@ body{
  .loginbox p{
      margin: 0;
      padding:0;
-     font-weight: bold;
+     font-weight: '';
     
  }
  
