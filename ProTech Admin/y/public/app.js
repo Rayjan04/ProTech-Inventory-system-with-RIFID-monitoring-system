@@ -108,7 +108,9 @@ var firebaseConfig = {
           database.ref('Account/'+ uid ).on('value',function(snapshot){
                var  Fname = snapshot.val().Fname;
                var  Lname = snapshot.val().Lname;
-    
+               var  Picture = snapshot.val().ProfilePicURL;
+
+               document.getElementById("Profile").src = Picture;
                document.getElementById("UserName").innerHTML = Fname + " "+Lname;
           });
         
