@@ -95,7 +95,17 @@ var firebaseConfig = {
       }).catch((error) => {
         // An error happened.
       });
-    
+      firebase.auth().onAuthStateChanged(function(user) {
+        var Not =document.getElementById("not-login")
+        var yes =document.getElementById("login")
+        if (user) {
+           
+        }
+        else{
+            window.location.href ="../index.html";
+        }
+        
+      });
     
     }
 

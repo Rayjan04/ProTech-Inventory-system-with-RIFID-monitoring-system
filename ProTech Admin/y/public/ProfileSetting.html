@@ -861,7 +861,15 @@ function Upload(){
       },2000)
       }
     
-
+                       //notification success Add
+                       $('#SetProfile').modal('hide');
+                       $(document).Toasts('create',{
+                      class: 'bg-success',
+                      body: 'Sucessfully Update Profile',
+                      title: '<h5><i class="far fa-check-circle"></i> Alert</h5>',
+                      autohide: true,
+                      delay: 2000,
+                      })
       
 
 

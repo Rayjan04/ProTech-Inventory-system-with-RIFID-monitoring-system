@@ -25,7 +25,8 @@ firebase.auth().createUserWithEmailAndPassword(email, password )
         Lname: Lname,
         Role: Role,
         TimeStamp:timeStamp,
-        Status: "Active"
+        Status: "Active",
+        ProfilePicURL:"https://firebasestorage.googleapis.com/v0/b/protech-project-aef56.appspot.com/o/Custodian_profile.jpg?alt=media&token=fc17c6a7-cfd2-4d2c-89f8-91ee791f6838"
     }) 
 
 
