@@ -75,7 +75,7 @@
       </li>
       <!-- logout Button-->
       <li class="logout">
-        <a class="nav-link"    href="logout.html" role="button">
+        <a class="nav-link"    href="#" role="button">
           <i onclick="logout()" class="fas fa-power-off"></i>
         </a>
       </li>
@@ -459,12 +459,7 @@
                     </select> 
                     </div>
                     
-                    <div class="col-3">
-                    <label>Product</label>
-                    <select id=""  class="select1" style="width: 75%;">
-
-                    </select> 
-                    </div>
+ 
                     </div> 
                     <br>
                     </div>
@@ -893,6 +888,7 @@ database.ref('ClientOfferd').once('value', function(snapshot){
          });
 
             $('#product').append(vehi_list2);
+            $('#Products').append(vehi_list2);
 
 }
 });
@@ -1208,7 +1204,7 @@ var timeStamp = Date.now();
                     
         //--------------------delete release---------------------------
          database.ref('Realease_Item/Product/' + Batch).remove();
-        
+          document.getElementById("quickForm").reset();
                  //    window.location.reload();
                      },2000)
     
@@ -1680,6 +1676,32 @@ $('.content-wrapper').on("change", 'select', function() {
     if (Status !== "all" && tds.eq(3).text().trim().toLowerCase() !== Status) {
       return false;
     }
+
+    return true;
+  })
+
+  filtered.show();
+
+  if (filtered.length == 0) {
+   // alert("No Records Found!!!");
+  }
+
+});
+//-------------------------------------------------------------------------------------------------->
+$('.content-wrapper').on("change", 'select', function() {
+  var Category = $('#Projects').val().toLowerCase();
+
+
+  var table = $("#tbody3");
+  var trs = table.find('tr');
+  trs.hide();
+
+  var filtered = trs.filter(function(index, elem) {
+    var tds = $(elem).find('td');
+    if (Category !== "all" && tds.eq(2).text().trim().toLowerCase() !== Category) {
+      return false;
+    }
+
 
     return true;
   })
