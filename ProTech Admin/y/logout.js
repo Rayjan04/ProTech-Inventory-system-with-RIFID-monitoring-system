@@ -13,7 +13,29 @@ firebase.initializeApp(firebaseConfig);
 
 //Data ready
 
+firebase.auth().onAuthStateChanged(function(user) {
+    var Not =document.getElementById("not-login")
+    var yes =document.getElementById("login")
+    if (user) {
 
+      var uid = user.uid;
+
+      database.ref('Account/'+ uid ).on('value',function(snapshot){
+           var  Fname = snapshot.val().Fname;
+           var  Lname = snapshot.val().Lname;
+           var  Picture = snapshot.val().ProfilePicURL;
+
+           document.getElementById("Profile").src = Picture;
+           document.getElementById("UserName").innerHTML = Fname + " "+Lname;
+      });
+
+      
+    }
+     else {
+       window.location.href ="index.html";
+   
+    }
+  });
 
 function logout()
 {
@@ -25,27 +47,7 @@ function logout()
 
 
 }
-firebase.auth().onAuthStateChanged(function(user) {
-    var Not =document.getElementById("not-login")
-    var yes =document.getElementById("login")
-    if (user) {
 
-      var uid = user.uid;
-
-      database.ref('Account/'+ uid ).on('value',function(snapshot){
-           var  Fname = snapshot.val().Fname;
-           var  Lname = snapshot.val().Lname;
-
-           document.getElementById("UserName").innerHTML = Fname + " "+Lname;
-      });
-
-      
-    }
-     else {
-       window.location.href ="index.html";
-   
-    }
-  });
 
   function run() {
     document.getElementById("status").value = document.getElementById("Ultra").value;  
